@@ -11,7 +11,7 @@
 * A user can be created (first name, last name, password, email, photo, role, enabled) and a role can be assigned to him.
 * All CRUD operations are enabled.
 * Pagination and Sorting are implemented.
-* Table content of the users can be expored & downloaded in CSV, Excel and PDF.
+* Table content of the users can be exported & downloaded in CSV, Excel and PDF.
 
 ## Some Images
 
