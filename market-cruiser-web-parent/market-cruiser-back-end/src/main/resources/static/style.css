@@ -1,0 +1,133 @@
+*.icon-green {
+    color:green
+}
+
+*.icon-dark {
+    color:gray
+}
+
+*.icon-orange {
+    color: darkorange;
+}
+
+*.icon-red {
+    color: red
+}
+
+*.text-black {
+    color: black
+}
+
+a.css-sorting:link {
+    transition: all 0.3s linear;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+a.css-sorting:hover {
+    transform: scale(1.5);
+    color: green;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+a.css-icon-sandybrown {
+    transition: all 0.3s linear;
+}
+
+a.css-icon-sandybrown:hover {
+    transform: scale(1.5);
+    color: sandybrown;
+
+}
+
+a.css-icon-lightgreen {
+    transition: all 0.3s linear;
+}
+
+a.css-icon-lightgreen:hover {
+    transform: scale(1.5);
+    color: lightgreen;
+}
+
+*.btn-orange {
+    transition: all 0.3s linear;
+    color: black;
+    background-color: darkorange;
+}
+
+*.btn-orange:hover {
+    transform: scale(1.2);
+    color: black;
+    background-color: darkorange;
+    font-weight: bold;
+}
+
+*.btn-grey {
+    transition: all 0.3s linear;
+    color: white;
+    background-color: dimgrey;
+}
+
+*.btn-grey:hover {
+    transform: scale(1.2);
+    color: white;
+    background-color: dimgray;
+    font-weight: bold;
+}
+
+*.btn-red {
+    transition: all 0.3s linear;
+    color: black;
+    background-color: red;
+}
+
+*.btn-red:hover {
+    transform: scale(1.2);
+    color: black;
+    background-color: red;
+    font-weight: bold;
+}
+
+*.btn-lightgreen {
+    color: darkgreen;
+    background-color: lightgreen;
+}
+
+*.btn-lightgreen:hover {
+    color: darkgreen;
+    background-color: lightgreen;
+    font-weight: bold;
+}
+
+
+
+
+@media screen and (max-width: 768px){
+    /* small screen */
+    div.full-details {
+        display: none;
+    }
+    div.less-details {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    /* medium screen */
+    div.full-details {
+        display: block;
+    }
+    div.less-details {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    /* big screen */
+    div.less-details {
+        display: none;
+    }
+}

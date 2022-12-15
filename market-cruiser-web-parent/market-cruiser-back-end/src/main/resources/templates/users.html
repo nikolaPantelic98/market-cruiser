@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Home - Market Cruiser Admin</title>
+
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <style>
+        .navbar-custom {
+            background-color: lightgreen;
+        }
+
+        .navbar-custom .navbar-brand,
+        .navbar-custom .nav-link,
+        .navbar-custom {
+            color: green;
+        }
+
+        .thead-custom {
+            background-color: sandybrown;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div>
+        <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
+            <a class="navbar-brand" th:href="@{/}">
+                <img th:src="@{/images/MarketCruiser.png}" alt="logo" style="width: 80px; height: 40px">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="topNavbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/users}">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/categories}">Categories</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/brands}">Brands</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/products}">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/customers}">Customers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/orders}">Orders</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/report}">Sales Report</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/articles}">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/menus}">Menus</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/settings}">Settings</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <br/>
+    <div>
+        <h2>Manage Users</h2>
+        <br/>
+        <a th:href="@{/users/new}" class="css-icon-lightgreen fa-solid fa-person-circle-plus fa-2x icon-orange" title="Create New User"></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{/users/export/csv}" class="css-icon-lightgreen fas fa-file-csv fa-2x icon-orange" title="Export to CSV"></a>
+        &nbsp;&nbsp;
+        <a th:href="@{/users/export/excel}" class="css-icon-lightgreen fas fa-file-excel fa-2x icon-orange" title="Export to Excel"></a>
+        &nbsp;&nbsp;
+        <a th:href="@{/users/export/pdf}" class="css-icon-lightgreen fas fa-file-pdf fa-2x icon-orange" title="Export to PDF"></a>
+    </div>
+
+    <div th:if="${message != null}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+
+    <div>
+        <form th:action="@{/users/page/1}" class="form-inline m-3">
+            <input type="hidden" name="sortField" th:value="${sortField}" />
+            <input type="hidden" name="sortDir" th:value="${sortDir}" />
+
+            Filter:&nbsp;
+            <input type="search" name="keyword" th:value="${keyword}" class="form-control" required />
+            &nbsp;&nbsp;
+            <button type="submit" value="Search" class="btn btn-orange" >
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+            &nbsp;&nbsp;
+            <input type="button" value="Clear" class="btn btn-grey" onclick="clearFilter()" />
+        </form>
+    </div>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="thead-custom">
+                <tr>
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        <a class="css-sorting text-black" th:if="${sortField != 'userId'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=userId&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By User ID">
+                            User ID
+                        </a>
+                        <a class="css-sorting text-black" th:if="${sortField == 'userId'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=userId&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By User ID">
+                            User ID
+                        </a>
+                        <span th:if="${sortField == 'userId'}" title="Sort By User ID"
+                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        Photos
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        <a class="css-sorting text-black" th:if="${sortField != 'emailAddress'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=emailAddress&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Email Address">
+                            Email Address
+                        </a>
+                        <a class="css-sorting text-black" th:if="${sortField == 'emailAddress'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=emailAddress&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Email Address">
+                            Email Address
+                        </a>
+                        <span th:if="${sortField == 'emailAddress'}" title="Sort By Email Address"
+                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        <a class="css-sorting text-black" th:if="${sortField != 'firstName'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By First Name">
+                            First Name
+                        </a>
+                        <a class="css-sorting text-black" th:if="${sortField == 'firstName'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By First Name">
+                            First Name
+                        </a>
+                        <span th:if="${sortField == 'firstName'}" title="Sort By First Name"
+                            th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        <a class="css-sorting text-black" th:if="${sortField != 'lastName'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Last Name">
+                            Last Name
+                        </a>
+                        <a class="css-sorting text-black" th:if="${sortField == 'lastName'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Last Name">
+                            Last Name
+                        </a>
+                        <span th:if="${sortField == 'lastName'}" title="Sort By Last Name"
+                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        Roles
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                        <a class="css-sorting text-black" th:if="${sortField != 'enabled'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Enabled/Disabled">
+                            Enabled
+                        </a>
+                        <a class="css-sorting text-black" th:if="${sortField == 'enabled'}"
+                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Enabled/Disabled">
+                            Enabled
+                        </a>
+                        <span th:if="${sortField == 'enabled'}" title="Sort By Enabled/Disabled"
+                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="user: ${listUsers}">
+                    <td style="text-align: center; vertical-align: middle">[[${user.userId}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <span th:if="${user.photo == null}" class="fas fa-portrait fa-3x icon-orange"></span>
+                        <img th:if="${user.photo != null}" th:src="@{${user.photosImagePath}}" style="width: 66px" />
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">[[${user.emailAddress}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${user.firstName}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${user.lastName}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${user.roles}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a th:if="${user.enabled == true}" class="css-icon-sandybrown fas fa-check-circle fa-2x icon-green"
+                           th:href="@{'/users/' + ${user.userId} + '/enabled/false'}"
+                           title="Disable User"
+                        ></a>
+                        <a th:if="${user.enabled == false}" class="css-icon-sandybrown fas fa-circle fa-2x icon-dark"
+                           th:href="@{'/users/' + ${user.userId} + '/enabled/true'}"
+                           title="Enable User"
+                        ></a>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="css-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.userId}}" title="Edit User"></a>
+                        &nbsp;&nbsp;
+                        <a class="css-icon-sandybrown fas fa-trash fa-2x icon-red link-delete"
+                           th:href="@{'/users/delete/' + ${user.userId}}"
+                           th:userIdNew = "${user.userId}"
+                           title="Delete User"></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="less-details">
+        <div th:each="user: ${listUsers}" class="row m-1">
+            <div class="col-4">
+                <span th:if="${user.photo == null}" class="fas fa-portrait fa-3x icon-orange"></span>
+                <img th:if="${user.photo != null}" th:src="@{${user.photosImagePath}}" style="width: 66px" />
+            </div>
+            <div class="col-8">
+                <div>[[${user.fullName}]]</div>
+                <div>[[${user.roles}]]</div>
+                <div class="mt-2">
+                    <a th:if="${user.enabled == true}" class="css-icon-sandybrown fas fa-check-circle fa-2x icon-green"
+                       th:href="@{'/users/' + ${user.userId} + '/enabled/false'}"
+                       title="Disable User"
+                    ></a>
+                    &nbsp;
+                    <a th:if="${user.enabled == false}" class="css-icon-sandybrown fas fa-circle fa-2x icon-dark"
+                       th:href="@{'/users/' + ${user.userId} + '/enabled/true'}"
+                       title="Enable User"
+                    ></a>
+                    &nbsp;
+                    <a class="css-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.userId}}" title="Edit User"></a>
+                    &nbsp;&nbsp;
+                    <a class="css-icon-sandybrown fas fa-trash fa-2x icon-red link-delete"
+                       th:href="@{'/users/delete/' + ${user.userId}}"
+                       th:userIdNew = "${user.userId}"
+                       title="Delete User"></a>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
+    <div class="text-center m-1" th:if="${totalItems > 0}">
+        <span>Showing users # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+    </div>
+    <div class="text-center m-1" th:unless="${totalItems > 0}">
+        <span>No users found</span>
+    </div>
+
+    <div th:if="${totalPages > 1}">
+        <nav>
+            <ul class="pagination justify-content-center flex-wrap">
+                <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/users/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
+                </li>
+                <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Previous</a>
+                </li>
+                <li th:class="${currentPage != i ? 'page-item': 'page-item active'}" th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <a class="page-link" th:href="@{'/users/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Next</a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                    <a class="page-link" th:href="@{'/users/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <button type="button" class="close" data-dismiss = "modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <span id="confirmText"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-red" href="" id="yesButton">Yes</a>
+                    <button type="button" class="btn btn-grey" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="text-center">
+        <p>Market Cruiser Control Panel - Copyright &copy; Market Cruiser</p>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".link-delete").on("click", function (e) {
+            e.preventDefault();
+            link = $(this);
+           // alert($(this).attr("href"));
+            userIdNew = link.attr("userIdNew");
+            $("#yesButton").attr("href", link.attr("href"));
+            $("#confirmText").text("Are you sure you want to delete this user with ID " + userIdNew + "?");
+            $("#confirmModal").modal();
+        });
+    });
+
+    function clearFilter() {
+        window.location = "[[@{/users}]]";
+    }
+</script>
+</body>
+</html>

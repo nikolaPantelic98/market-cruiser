@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="market-cruiser-front-end" />
+        <module name="market-cruiser-common" />
+        <module name="market-cruiser-back-end" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="market-cruiser-back-end" options="-parameters" />
+      <module name="market-cruiser-common" options="-parameters" />
+      <module name="market-cruiser-front-end" options="-parameters" />
+      <module name="market-cruiser-web-parent" options="-parameters" />
+    </option>
+  </component>
+</project>
