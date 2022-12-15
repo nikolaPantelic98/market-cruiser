@@ -2,6 +2,7 @@
 
 * MarketCruiser is an online eCommerce marketplace.
 * Backend using Spring Boot and frontend using Thymeleaf, Bootstrap and JQuery.
+* MySQL
 
 ## Info: What we have done so far
 
