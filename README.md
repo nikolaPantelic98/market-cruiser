@@ -6,7 +6,7 @@
 ## Info: What we have done so far
 
 * The project is divided into two parts: market-cruiser-backend & market-cruiser-frontend.
-* In the market=cruiser-backend we made User Management Module - a module that manages users.
+* In the market-cruiser-backend we made User Management Module - a module that manages users.
 * There are 5 roles: Admin, Salesperson, Editor, Assistant, Shipper.
 * A user can be created (first name, last name, password, email, photo, role, enabled) and a role can be assigned to him.
 * All CRUD operations are enabled.
