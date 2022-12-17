@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/common.js}"></script>
     <style>
         .navbar-custom {
             background-color: lightgreen;
@@ -30,6 +31,9 @@
 <body>
 <div class="container-fluid">
     <div>
+        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+            <input type="submit" />
+        </form>
         <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
             <a class="navbar-brand" th:href="@{/}">
                 <img th:src="@{/images/MarketCruiser.png}" alt="logo" style="width: 80px; height: 40px">
@@ -39,38 +43,48 @@
             </button>
             <div class="collapse navbar-collapse" id="topNavbar">
                 <ul class="navbar-nav">
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/users}">Users</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/categories}">Categories</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/brands}">Brands</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/products}">Products</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/customers}">Customers</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/shipping}">Shipping</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/orders}">Orders</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/report}">Sales Report</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/articles}">Articles</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/menus}">Menus</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="li-green nav-item">
                         <a class="nav-link" th:href="@{/settings}">Settings</a>
+                    </li>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <li class="nav-item">
+                        <span class="fas fa-user fa-2x icon-green"></span>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}" sec:authentication="principal.fullName"></a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" id="logoutLink" href="">Logout</a>
+                        </div>
                     </li>
                 </ul>
             </div>
@@ -80,13 +94,13 @@
     <div>
         <h2>Manage Users</h2>
         <br/>
-        <a th:href="@{/users/new}" class="css-icon-lightgreen fa-solid fa-person-circle-plus fa-2x icon-orange" title="Create New User"></a>
+        <a th:href="@{/users/new}" class="a-icon-lightgreen fa-solid fa-person-circle-plus fa-2x icon-orange" title="Create New User"></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a th:href="@{/users/export/csv}" class="css-icon-lightgreen fas fa-file-csv fa-2x icon-orange" title="Export to CSV"></a>
+        <a th:href="@{/users/export/csv}" class="a-icon-lightgreen fas fa-file-csv fa-2x icon-orange" title="Export to CSV"></a>
         &nbsp;&nbsp;
-        <a th:href="@{/users/export/excel}" class="css-icon-lightgreen fas fa-file-excel fa-2x icon-orange" title="Export to Excel"></a>
+        <a th:href="@{/users/export/excel}" class="a-icon-lightgreen fas fa-file-excel fa-2x icon-orange" title="Export to Excel"></a>
         &nbsp;&nbsp;
-        <a th:href="@{/users/export/pdf}" class="css-icon-lightgreen fas fa-file-pdf fa-2x icon-orange" title="Export to PDF"></a>
+        <a th:href="@{/users/export/pdf}" class="a-icon-lightgreen fas fa-file-pdf fa-2x icon-orange" title="Export to PDF"></a>
     </div>
 
     <div th:if="${message != null}" class="alert alert-success text-center">
@@ -114,11 +128,11 @@
             <thead class="thead-custom">
                 <tr>
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="css-sorting text-black" th:if="${sortField != 'userId'}"
+                        <a class="a-sorting text-black" th:if="${sortField != 'userId'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=userId&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By User ID">
                             User ID
                         </a>
-                        <a class="css-sorting text-black" th:if="${sortField == 'userId'}"
+                        <a class="a-sorting text-black" th:if="${sortField == 'userId'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=userId&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By User ID">
                             User ID
                         </a>
@@ -131,11 +145,11 @@
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="css-sorting text-black" th:if="${sortField != 'emailAddress'}"
+                        <a class="a-sorting text-black" th:if="${sortField != 'emailAddress'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=emailAddress&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Email Address">
                             Email Address
                         </a>
-                        <a class="css-sorting text-black" th:if="${sortField == 'emailAddress'}"
+                        <a class="a-sorting text-black" th:if="${sortField == 'emailAddress'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=emailAddress&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Email Address">
                             Email Address
                         </a>
@@ -144,11 +158,11 @@
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="css-sorting text-black" th:if="${sortField != 'firstName'}"
+                        <a class="a-sorting text-black" th:if="${sortField != 'firstName'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By First Name">
                             First Name
                         </a>
-                        <a class="css-sorting text-black" th:if="${sortField == 'firstName'}"
+                        <a class="a-sorting text-black" th:if="${sortField == 'firstName'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By First Name">
                             First Name
                         </a>
@@ -157,11 +171,11 @@
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="css-sorting text-black" th:if="${sortField != 'lastName'}"
+                        <a class="a-sorting text-black" th:if="${sortField != 'lastName'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Last Name">
                             Last Name
                         </a>
-                        <a class="css-sorting text-black" th:if="${sortField == 'lastName'}"
+                        <a class="a-sorting text-black" th:if="${sortField == 'lastName'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Last Name">
                             Last Name
                         </a>
@@ -174,11 +188,11 @@
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="css-sorting text-black" th:if="${sortField != 'enabled'}"
+                        <a class="a-sorting text-black" th:if="${sortField != 'enabled'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Enabled/Disabled">
                             Enabled
                         </a>
-                        <a class="css-sorting text-black" th:if="${sortField == 'enabled'}"
+                        <a class="a-sorting text-black" th:if="${sortField == 'enabled'}"
                            th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Enabled/Disabled">
                             Enabled
                         </a>
@@ -200,19 +214,19 @@
                     <td style="text-align: center; vertical-align: middle">[[${user.lastName}]]</td>
                     <td style="text-align: center; vertical-align: middle">[[${user.roles}]]</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a th:if="${user.enabled == true}" class="css-icon-sandybrown fas fa-check-circle fa-2x icon-green"
+                        <a th:if="${user.enabled == true}" class="a-icon-sandybrown fas fa-check-circle fa-2x icon-green"
                            th:href="@{'/users/' + ${user.userId} + '/enabled/false'}"
                            title="Disable User"
                         ></a>
-                        <a th:if="${user.enabled == false}" class="css-icon-sandybrown fas fa-circle fa-2x icon-dark"
+                        <a th:if="${user.enabled == false}" class="a-icon-sandybrown fas fa-circle fa-2x icon-dark"
                            th:href="@{'/users/' + ${user.userId} + '/enabled/true'}"
                            title="Enable User"
                         ></a>
                     </td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="css-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.userId}}" title="Edit User"></a>
+                        <a class="a-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.userId}}" title="Edit User"></a>
                         &nbsp;&nbsp;
-                        <a class="css-icon-sandybrown fas fa-trash fa-2x icon-red link-delete"
+                        <a class="a-icon-sandybrown fas fa-trash fa-2x icon-red link-delete"
                            th:href="@{'/users/delete/' + ${user.userId}}"
                            th:userIdNew = "${user.userId}"
                            title="Delete User"></a>
@@ -232,19 +246,19 @@
                 <div>[[${user.fullName}]]</div>
                 <div>[[${user.roles}]]</div>
                 <div class="mt-2">
-                    <a th:if="${user.enabled == true}" class="css-icon-sandybrown fas fa-check-circle fa-2x icon-green"
+                    <a th:if="${user.enabled == true}" class="a-icon-sandybrown fas fa-check-circle fa-2x icon-green"
                        th:href="@{'/users/' + ${user.userId} + '/enabled/false'}"
                        title="Disable User"
                     ></a>
                     &nbsp;
-                    <a th:if="${user.enabled == false}" class="css-icon-sandybrown fas fa-circle fa-2x icon-dark"
+                    <a th:if="${user.enabled == false}" class="a-icon-sandybrown fas fa-circle fa-2x icon-dark"
                        th:href="@{'/users/' + ${user.userId} + '/enabled/true'}"
                        title="Enable User"
                     ></a>
                     &nbsp;
-                    <a class="css-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.userId}}" title="Edit User"></a>
+                    <a class="a-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/users/edit/' + ${user.userId}}" title="Edit User"></a>
                     &nbsp;&nbsp;
-                    <a class="css-icon-sandybrown fas fa-trash fa-2x icon-red link-delete"
+                    <a class="a-icon-sandybrown fas fa-trash fa-2x icon-red link-delete"
                        th:href="@{'/users/delete/' + ${user.userId}}"
                        th:userIdNew = "${user.userId}"
                        title="Delete User"></a>

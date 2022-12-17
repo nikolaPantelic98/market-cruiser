@@ -1,3 +1,6 @@
+
+/* icons */
+
 *.icon-green {
     color:green
 }
@@ -14,18 +17,22 @@
     color: red
 }
 
+/* text */
+
 *.text-black {
     color: black
 }
 
-a.css-sorting:link {
+/* a */
+
+a.a-sorting:link {
     transition: all 0.3s linear;
     color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
-a.css-sorting:hover {
+a.a-sorting:hover {
     transform: scale(1.5);
     color: green;
     background-color: transparent;
@@ -33,24 +40,36 @@ a.css-sorting:hover {
     font-size: 18px;
 }
 
-a.css-icon-sandybrown {
+a.a-icon-sandybrown {
     transition: all 0.3s linear;
 }
 
-a.css-icon-sandybrown:hover {
+a.a-icon-sandybrown:hover {
     transform: scale(1.5);
     color: sandybrown;
-
 }
 
-a.css-icon-lightgreen {
+a.a-icon-lightgreen {
     transition: all 0.3s linear;
 }
 
-a.css-icon-lightgreen:hover {
+a.a-icon-lightgreen:hover {
     transform: scale(1.5);
     color: lightgreen;
 }
+
+/* span */
+
+span.span-icon-orange {
+    transition: all 0.3s linear;
+}
+
+span.span-icon-orange:hover {
+    transform: scale(1.5);
+    color: darkorange;
+}
+
+/* buttons */
 
 *.btn-orange {
     transition: all 0.3s linear;
@@ -100,6 +119,22 @@ a.css-icon-lightgreen:hover {
     color: darkgreen;
     background-color: lightgreen;
     font-weight: bold;
+}
+
+/* lists */
+
+li.li-green {
+    transition: all 0.3s linear;
+    color: green;
+}
+
+li.li-green:hover {
+    transform: scale(1.5);
+    color: green;
+    font-size: 11px;
+    font-weight: bold;
+    background-color: lightgreen;
+    padding: 5px;
 }
 
 

@@ -32,6 +32,12 @@ public class UserServiceImpl implements UserService{
     }
 
 
+    // returns the user with the given email address
+    @Override
+    public User getUserByEmailAddress(String emailAddress) {
+        return userRepository.getUserByEmailAddress(emailAddress);
+    }
+
     // returns a list of all users, sorted by first name in ascending order
     @Override
     public List<User> getAllUsersSortedByFirstName() {
@@ -77,6 +83,26 @@ public class UserServiceImpl implements UserService{
             encodePassword(user);
         }
         return userRepository.save(user);
+    }
+
+    // updates the user's account details in the database
+    @Override
+    public User updateAccount(User userInForm) {
+        User userInDB = userRepository.findById(userInForm.getUserId()).get();
+
+        if (!userInForm.getPassword().isEmpty()) {
+            userInDB.setPassword(userInForm.getPassword());
+            encodePassword(userInDB);
+        }
+
+        if (userInForm.getPhoto() != null) {
+            userInDB.setPhoto(userInForm.getPhoto());
+        }
+
+        userInDB.setFirstName(userInForm.getFirstName());
+        userInDB.setLastName(userInForm.getLastName());
+
+        return userRepository.save(userInDB);
     }
 
     // encodes a user's password
