@@ -1,94 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Home - Market Cruiser Admin</title>
+<head th:replace="fragments :: page_head('Users - Market Cruiser Admin')">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/common.js}"></script>
-    <style>
-        .navbar-custom {
-            background-color: lightgreen;
-        }
-
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link,
-        .navbar-custom {
-            color: green;
-        }
-
-        .thead-custom {
-            background-color: sandybrown;
-        }
-
-    </style>
 </head>
 <body>
 <div class="container-fluid">
-    <div>
-        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-            <input type="submit" />
-        </form>
-        <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/MarketCruiser.png}" alt="logo" style="width: 80px; height: 40px">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="topNavbar">
-                <ul class="navbar-nav">
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/users}">Users</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/categories}">Categories</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/brands}">Brands</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/products}">Products</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/customers}">Customers</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/orders}">Orders</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/report}">Sales Report</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/articles}">Articles</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/menus}">Menus</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/settings}">Settings</a>
-                    </li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <li class="nav-item">
-                        <span class="fas fa-user fa-2x icon-green"></span>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}" sec:authentication="principal.fullName"></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" id="logoutLink" href="">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <div th:replace="fragment_navigation :: menu">
+
     </div>
     <br/>
     <div>
@@ -127,78 +45,24 @@
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="thead-custom">
                 <tr>
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:if="${sortField != 'userId'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=userId&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By User ID">
-                            User ID
-                        </a>
-                        <a class="a-sorting text-black" th:if="${sortField == 'userId'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=userId&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By User ID">
-                            User ID
-                        </a>
-                        <span th:if="${sortField == 'userId'}" title="Sort By User ID"
-                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('userId', 'User ID')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
                         Photos
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:if="${sortField != 'emailAddress'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=emailAddress&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Email Address">
-                            Email Address
-                        </a>
-                        <a class="a-sorting text-black" th:if="${sortField == 'emailAddress'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=emailAddress&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Email Address">
-                            Email Address
-                        </a>
-                        <span th:if="${sortField == 'emailAddress'}" title="Sort By Email Address"
-                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('emailAddress', 'Email Address')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:if="${sortField != 'firstName'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By First Name">
-                            First Name
-                        </a>
-                        <a class="a-sorting text-black" th:if="${sortField == 'firstName'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By First Name">
-                            First Name
-                        </a>
-                        <span th:if="${sortField == 'firstName'}" title="Sort By First Name"
-                            th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('firstName', 'First Name')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:if="${sortField != 'lastName'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Last Name">
-                            Last Name
-                        </a>
-                        <a class="a-sorting text-black" th:if="${sortField == 'lastName'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Last Name">
-                            Last Name
-                        </a>
-                        <span th:if="${sortField == 'lastName'}" title="Sort By Last Name"
-                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('lastName', 'Last Name')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
                         Roles
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:if="${sortField != 'enabled'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Enabled/Disabled">
-                            Enabled
-                        </a>
-                        <a class="a-sorting text-black" th:if="${sortField == 'enabled'}"
-                           th:href="@{'/users/page/' + ${currentPage} + '?sortField=enabled&sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}" title="Sort By Enabled/Disabled">
-                            Enabled
-                        </a>
-                        <span th:if="${sortField == 'enabled'}" title="Sort By Enabled/Disabled"
-                              th:class="${sortDir == 'asc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('enabled', 'Enabled')"></th>
+
                     <th></th>
                 </tr>
             </thead>
@@ -279,19 +143,20 @@
         <nav>
             <ul class="pagination justify-content-center flex-wrap">
                 <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                    <a class="page-link" th:href="@{'/users/page/1?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">First</a>
+                    <a th:replace="fragments :: page_link(1, 'First')"></a>
                 </li>
                 <li th:class="${currentPage > 1 ? 'page-item' : 'page-item disabled'}">
-                    <a class="page-link" th:href="@{'/users/page/' + ${currentPage - 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Previous</a>
+                    <a th:replace="fragments :: page_link(${currentPage - 1}, 'Previous')"></a>
                 </li>
-                <li th:class="${currentPage != i ? 'page-item': 'page-item active'}" th:each="i : ${#numbers.sequence(1, totalPages)}">
-                    <a class="page-link" th:href="@{'/users/page/' + ${i} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${i}]]</a>
-                </li>
-                <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                    <a class="page-link" th:href="@{'/users/page/' + ${currentPage + 1} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Next</a>
+                <li th:class="${currentPage != i ? 'page-item': 'page-item active'}"
+                    th:each="i : ${#numbers.sequence(1, totalPages)}">
+                    <a th:replace="fragments :: page_link(${i}, ${i})"></a>
                 </li>
                 <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
-                    <a class="page-link" th:href="@{'/users/page/' + ${totalPages} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Last</a>
+                    <a th:replace="fragments :: page_link(${currentPage + 1}, 'Next')"></a>
+                </li>
+                <li th:class="${currentPage < totalPages ? 'page-item' : 'page-item disabled'}">
+                    <a th:replace="fragments :: page_link(${totalPages}, 'Last')"></a>
                 </li>
             </ul>
         </nav>

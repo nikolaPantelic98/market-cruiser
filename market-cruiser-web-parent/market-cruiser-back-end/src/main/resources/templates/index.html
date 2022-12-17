@@ -1,97 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>Home - Market Cruiser Admin</title>
+<head th:replace="fragments :: page_head('Home - Market Cruiser Admin')">
 
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
-    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script type="text/javascript" th:src="@{/js/common.js}"></script>
-    <style>
-        .navbar-custom {
-            background-color: lightgreen;
-        }
-
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link,
-        .navbar-custom {
-            color: green;
-        }
-
-    </style>
 </head>
 <body>
 <div class="container-fluid">
-    <div>
-        <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
-            <input type="submit" />
-        </form>
-        <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/MarketCruiser.png}" alt="logo" style="width: 80px; height: 40px">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="topNavbar">
-                <ul class="navbar-nav">
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/users}">Users</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/categories}">Categories</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/brands}">Brands</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/products}">Products</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/customers}">Customers</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/orders}">Orders</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/report}">Sales Report</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/articles}">Articles</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/menus}">Menus</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/settings}">Settings</a>
-                    </li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <li class="nav-item">
-                        <span class="fas fa-user fa-2x icon-green"></span>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}" sec:authentication="principal.fullName"></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" id="logoutLink" href="">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <div th:replace="fragment_navigation :: menu">
+
     </div>
     <div>
         <h1>Market Cruiser Control Panel</h1>
     </div>
 
-    <div>
+    <div class="text-center">
         <p>Market Cruiser Control Panel - Copyright &copy; Market Cruiser</p>
     </div>
 </div>
