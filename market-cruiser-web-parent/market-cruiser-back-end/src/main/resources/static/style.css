@@ -23,6 +23,10 @@
     color: black
 }
 
+*.text-orange {
+    color: darkorange;
+}
+
 /* a */
 
 a.a-sorting:link {
@@ -38,6 +42,7 @@ a.a-sorting:hover {
     background-color: transparent;
     text-decoration: none;
     font-size: 18px;
+    font-weight: bold;
 }
 
 a.a-icon-sandybrown {
