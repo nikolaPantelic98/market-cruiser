@@ -1,7 +1,8 @@
-package com.marketcruiser.admin.user;
+package com.marketcruiser.admin.user.controller;
 
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.admin.security.MarketCruiserUserDetails;
+import com.marketcruiser.admin.user.UserServiceImpl;
 import com.marketcruiser.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,7 +36,7 @@ public class AccountController {
 
         model.addAttribute("user", user);
 
-        return "account_form";
+        return "users/account_form";
     }
 
     // this method updates the user's account details in the database and handles the uploading of the user's profile photo

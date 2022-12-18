@@ -1,9 +1,11 @@
-package com.marketcruiser.admin.user;
+package com.marketcruiser.admin.user.controller;
 
 import com.marketcruiser.admin.FileUploadUtil;
-import com.marketcruiser.admin.export.UserCsvExporter;
-import com.marketcruiser.admin.export.UserExcelExporter;
-import com.marketcruiser.admin.export.UserPdfExporter;
+import com.marketcruiser.admin.user.UserNotFoundException;
+import com.marketcruiser.admin.user.UserServiceImpl;
+import com.marketcruiser.admin.user.export.UserCsvExporter;
+import com.marketcruiser.admin.user.export.UserExcelExporter;
+import com.marketcruiser.admin.user.export.UserPdfExporter;
 import com.marketcruiser.common.entity.Role;
 import com.marketcruiser.common.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +71,7 @@ public class UserController {
         model.addAttribute("reverseSortDir", reverseSortDir);
         model.addAttribute("keyword", keyword);
 
-        return "users";
+        return "users/users";
     }
 
     // form for creating a new user
@@ -84,7 +86,7 @@ public class UserController {
         model.addAttribute("listRoles", listRoles);
         model.addAttribute("pageTitle", "Create New User");
 
-        return "user_form";
+        return "users/user_form";
     }
 
     // create new user with image file
@@ -127,7 +129,7 @@ public class UserController {
             model.addAttribute("pageTitle", "Edit User (ID: " + userId + ")");
             model.addAttribute("listRoles", listRoles);
 
-            return "user_form";
+            return "users/user_form";
         } catch (UserNotFoundException exception) {
             redirectAttributes.addFlashAttribute("message", exception.getMessage());
             return "redirect:/users";
