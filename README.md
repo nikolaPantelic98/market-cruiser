@@ -17,6 +17,7 @@
 * The login page has been created. User can now log in and log out.
 * The user can change his data now (excluding email and roles).
 * From now on, each user can access links only with permission, depending on the role.
+* Custom Error pages added (403, 404 and 500)
 
 ## Some Images
 
