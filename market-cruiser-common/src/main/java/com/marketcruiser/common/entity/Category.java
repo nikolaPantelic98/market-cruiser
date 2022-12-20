@@ -55,5 +55,22 @@ public class Category {
     private Category parent;
 
     @OneToMany(mappedBy = "parent")
+    @ToString.Exclude
     private Set<Category> children = new HashSet<>();
+
+
+    public Category(String name) {
+        this.name = name;
+        this.alias = name;
+        this.image = "default.png";
+    }
+
+    public Category(String name, Category parent) {
+        this(name);
+        this.parent = parent;
+    }
+
+    public Category(Long categoryId) {
+        this.categoryId = categoryId;
+    }
 }
