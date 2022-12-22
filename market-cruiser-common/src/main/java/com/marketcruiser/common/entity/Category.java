@@ -73,4 +73,21 @@ public class Category {
     public Category(Long categoryId) {
         this.categoryId = categoryId;
     }
+
+
+    public static Category copyCategoryIdAndName(Category category) {
+        Category copyCategory = new Category();
+        copyCategory.setCategoryId(category.getCategoryId());
+        copyCategory.setName(category.getName());
+
+        return copyCategory;
+    }
+
+    public static Category copyCategoryIdAndName(Long categoryId, String name) {
+        Category copyCategory = new Category();
+        copyCategory.setCategoryId(categoryId);
+        copyCategory.setName(name);
+
+        return copyCategory;
+    }
 }

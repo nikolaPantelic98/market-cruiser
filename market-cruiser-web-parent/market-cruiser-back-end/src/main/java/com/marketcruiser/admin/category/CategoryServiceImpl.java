@@ -26,6 +26,12 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.findAll();
     }
 
+    // saves category
+    @Override
+    public Category saveCategory(Category category) {
+        return categoryRepository.save(category);
+    }
+
     // returns a list of categories in the database which includes all top-level categories and their children, with each subcategory
     @Override
     public List<Category> listCategoriesUsedInForm() {
@@ -34,13 +40,13 @@ public class CategoryServiceImpl implements CategoryService{
 
         for (Category category : categoriesInDB) {
             if (category.getParent() == null) {
-                categoriesUsedInForm.add(new Category(category.getName()));
+                categoriesUsedInForm.add(Category.copyCategoryIdAndName(category));
 
                 Set<Category> children = category.getChildren();
 
                 for (Category subCategory : children) {
                     String name = "--" + subCategory.getName();
-                    categoriesUsedInForm.add(new Category(name));
+                    categoriesUsedInForm.add(Category.copyCategoryIdAndName(subCategory.getCategoryId(), name));
 
                     listChildren(categoriesUsedInForm, subCategory, 1);
                 }
@@ -63,7 +69,7 @@ public class CategoryServiceImpl implements CategoryService{
             }
 
             name += subCategory.getName();
-            categoriesUsedInForm.add(new Category(name));
+            categoriesUsedInForm.add(Category.copyCategoryIdAndName(subCategory.getCategoryId(), name));
 
             listChildren(categoriesUsedInForm, subCategory, newSubLevel);
         }

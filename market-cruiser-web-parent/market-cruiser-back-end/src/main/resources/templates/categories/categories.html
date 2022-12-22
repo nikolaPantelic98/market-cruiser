@@ -21,6 +21,10 @@
         <a th:href="@{/categories/export/pdf}" class="a-icon-lightgreen fas fa-file-pdf fa-2x icon-orange" title="Export to PDF"></a>
     </div>
 
+    <div th:if="${message != null}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+
     <div>
         <form th:action="@{/categories/page/1}" class="form-inline m-3">
             <input type="hidden" name="sortField" th:value="${sortField}" />
