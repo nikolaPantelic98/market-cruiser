@@ -6,9 +6,6 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/market-cruiser-common/pom.xml" />
-        <option value="$PROJECT_DIR$/market-cruiser-web-parent/pom.xml" />
-        <option value="$PROJECT_DIR$/market-cruiser-web-parent/market-cruiser-back-end/pom.xml" />
-        <option value="$PROJECT_DIR$/market-cruiser-web-parent/market-cruiser-front-end/pom.xml" />
       </list>
     </option>
   </component>

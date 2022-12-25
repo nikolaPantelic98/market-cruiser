@@ -59,6 +59,7 @@ public class Category {
     private Set<Category> children = new HashSet<>();
 
 
+
     public Category(String name) {
         this.name = name;
         this.alias = name;
@@ -89,5 +90,29 @@ public class Category {
         copyCategory.setName(name);
 
         return copyCategory;
+    }
+
+    public static Category copyFull(Category category) {
+        Category copyCategory = new Category();
+        copyCategory.setCategoryId(category.getCategoryId());
+        copyCategory.setName(category.getName());
+        copyCategory.setImage(category.getImage());
+        copyCategory.setAlias(category.getAlias());
+        copyCategory.setEnabled(category.isEnabled());
+
+        return copyCategory;
+    }
+
+    public static Category copyFull(Category category, String name) {
+        Category copyCategory = Category.copyFull(category);
+        copyCategory.setName(name);
+
+        return copyCategory;
+    }
+
+    // getter method used in categories.html to show image of the category
+    @Transient
+    public String getImagePath() {
+        return "/category-images/" + this.categoryId + "/" + this.image;
     }
 }
