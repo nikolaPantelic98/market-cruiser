@@ -18,6 +18,7 @@
 * The user can change his data now (excluding email and roles).
 * From now on, each user can access links only with permission, depending on the role.
 * Custom Error pages added (403, 404 and 500)
+* Category Module added. Categories now can be created, as well as subcategories under the parent category.
 
 ## Some Images
 
