@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Set;
 
 @Service
@@ -27,6 +28,8 @@ public class CategoryServiceImpl implements CategoryService{
         return listHierarchicalCategories(rootCategories);
     }
 
+    // returns a list of categories in a hierarchical structure
+    // root categories at the top and child categories indented beneath their parent categories
     private List<Category> listHierarchicalCategories(List<Category> rootCategories) {
         List<Category> hierarchicalCategories = new ArrayList<>();
 
@@ -46,6 +49,7 @@ public class CategoryServiceImpl implements CategoryService{
         return hierarchicalCategories;
     }
 
+    // Recursively adds subcategories of a given parent category to a list of categories in a hierarchical structure
     private void listSubHierarchicalCategories(List<Category> hierarchicalCategories, Category parent, int subLevel) {
         Set<Category> children = parent.getChildren();
         int newSubLevel = subLevel + 1;
@@ -95,6 +99,7 @@ public class CategoryServiceImpl implements CategoryService{
         return categoriesUsedInForm;
     }
 
+
     // adds the children of a given category to a list of categories used in a form
     // the subcategories are indented by a number of hyphens to indicate their level in the hierarchy
     private void listSubCategoriesUsedInForm(List<Category> categoriesUsedInForm, Category parent, int subLevel) {
@@ -111,6 +116,16 @@ public class CategoryServiceImpl implements CategoryService{
             categoriesUsedInForm.add(Category.copyCategoryIdAndName(subCategory.getCategoryId(), name));
 
             listSubCategoriesUsedInForm(categoriesUsedInForm, subCategory, newSubLevel);
+        }
+    }
+
+    // gets a category by category id
+    @Override
+    public Category getCategoryById(Long categoryId) throws CategoryNotFoundException {
+        try {
+            return categoryRepository.findById(categoryId).get();
+        } catch (NoSuchElementException exception) {
+            throw new CategoryNotFoundException("Could not find any category with ID " + categoryId);
         }
     }
 }

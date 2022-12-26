@@ -9,4 +9,5 @@ public interface CategoryService {
     List<Category> getAllCategories();
     Category saveCategory(Category category);
     List<Category> listCategoriesUsedInForm();
+    Category getCategoryById(Long categoryId) throws CategoryNotFoundException;
 }

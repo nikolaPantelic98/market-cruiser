@@ -89,9 +89,9 @@ public class UserController {
         return "users/user_form";
     }
 
-    // create new user with image file
+    // saves a new user with image file or updates an existing one
     @PostMapping("/users/save")
-    public String saveNewUser(User user, RedirectAttributes redirectAttributes, @RequestParam("image")MultipartFile multipartFile) throws IOException {
+    public String saveUser(User user, RedirectAttributes redirectAttributes, @RequestParam("image")MultipartFile multipartFile) throws IOException {
         if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             user.setPhoto(fileName);

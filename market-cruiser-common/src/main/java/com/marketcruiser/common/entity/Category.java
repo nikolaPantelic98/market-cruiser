@@ -113,6 +113,8 @@ public class Category {
     // getter method used in categories.html to show image of the category
     @Transient
     public String getImagePath() {
+        if (this.categoryId == null) return "/images/image-thumbnail.png";
+
         return "/category-images/" + this.categoryId + "/" + this.image;
     }
 }
