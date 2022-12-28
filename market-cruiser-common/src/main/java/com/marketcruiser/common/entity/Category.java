@@ -75,6 +75,11 @@ public class Category {
         this.categoryId = categoryId;
     }
 
+    public Category(Long categoryId, String name, String alias) {
+        this.categoryId = categoryId;
+        this.name = name;
+        this.alias = alias;
+    }
 
     public static Category copyCategoryIdAndName(Category category) {
         Category copyCategory = new Category();

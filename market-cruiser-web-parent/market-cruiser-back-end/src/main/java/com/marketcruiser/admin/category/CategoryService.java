@@ -10,4 +10,5 @@ public interface CategoryService {
     Category saveCategory(Category category);
     List<Category> listCategoriesUsedInForm();
     Category getCategoryById(Long categoryId) throws CategoryNotFoundException;
+    String checkUnique(Long categoryId, String name, String alias);
 }
