@@ -2,12 +2,10 @@ package com.marketcruiser.admin.category;
 
 import com.marketcruiser.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{
@@ -23,26 +21,34 @@ public class CategoryServiceImpl implements CategoryService{
 
     // returns a list of categories in the database
     @Override
-    public List<Category> getAllCategories() {
-        List<Category> rootCategories = categoryRepository.findRootCategories();
-        return listHierarchicalCategories(rootCategories);
+    public List<Category> getAllCategories(String sortDir) {
+        Sort sort = Sort.by("name");
+
+        if (sortDir.equals("asc")) {
+            sort = sort.ascending();
+        } else if (sortDir.equals("desc")) {
+            sort = sort.descending();
+        }
+
+        List<Category> rootCategories = categoryRepository.findRootCategories(sort);
+        return listHierarchicalCategories(rootCategories, sortDir);
     }
 
     // returns a list of categories in a hierarchical structure
     // root categories at the top and child categories indented beneath their parent categories
-    private List<Category> listHierarchicalCategories(List<Category> rootCategories) {
+    private List<Category> listHierarchicalCategories(List<Category> rootCategories, String sortDir) {
         List<Category> hierarchicalCategories = new ArrayList<>();
 
         for (Category rootCategory : rootCategories) {
             hierarchicalCategories.add(Category.copyFull(rootCategory));
 
-            Set<Category> children = rootCategory.getChildren();
+            Set<Category> children = sortSubCategories(rootCategory.getChildren(), sortDir);
 
             for (Category subCategory : children) {
                 String name = "--" + subCategory.getName();
                 hierarchicalCategories.add(Category.copyFull(subCategory, name));
 
-                listSubHierarchicalCategories(hierarchicalCategories, subCategory, 1);
+                listSubHierarchicalCategories(hierarchicalCategories, subCategory, 1, sortDir);
             }
         }
 
@@ -50,8 +56,8 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
     // Recursively adds subcategories of a given parent category to a list of categories in a hierarchical structure
-    private void listSubHierarchicalCategories(List<Category> hierarchicalCategories, Category parent, int subLevel) {
-        Set<Category> children = parent.getChildren();
+    private void listSubHierarchicalCategories(List<Category> hierarchicalCategories, Category parent, int subLevel, String sortDir) {
+        Set<Category> children = sortSubCategories(parent.getChildren(), sortDir);
         int newSubLevel = subLevel + 1;
 
         for (Category subCategory : children) {
@@ -64,7 +70,7 @@ public class CategoryServiceImpl implements CategoryService{
 
             hierarchicalCategories.add(Category.copyFull(subCategory, name));
 
-            listSubHierarchicalCategories(hierarchicalCategories, subCategory, newSubLevel);
+            listSubHierarchicalCategories(hierarchicalCategories, subCategory, newSubLevel, sortDir);
         }
 
     }
@@ -79,13 +85,13 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     public List<Category> listCategoriesUsedInForm() {
         List<Category> categoriesUsedInForm = new ArrayList<>();
-        List<Category> categoriesInDB = categoryRepository.findAll();
+        Iterable<Category> categoriesInDB = categoryRepository.findRootCategories(Sort.by("name").ascending());
 
         for (Category category : categoriesInDB) {
             if (category.getParent() == null) {
                 categoriesUsedInForm.add(Category.copyCategoryIdAndName(category));
 
-                Set<Category> children = category.getChildren();
+                Set<Category> children = sortSubCategories(category.getChildren());
 
                 for (Category subCategory : children) {
                     String name = "--" + subCategory.getName();
@@ -104,7 +110,7 @@ public class CategoryServiceImpl implements CategoryService{
     // the subcategories are indented by a number of hyphens to indicate their level in the hierarchy
     private void listSubCategoriesUsedInForm(List<Category> categoriesUsedInForm, Category parent, int subLevel) {
         int newSubLevel = subLevel + 1;
-        Set<Category> children = parent.getChildren();
+        Set<Category> children = sortSubCategories(parent.getChildren());
 
         for (Category subCategory : children) {
             String name = "";
@@ -157,5 +163,29 @@ public class CategoryServiceImpl implements CategoryService{
         }
 
         return "OK";
+    }
+
+    // sorts the subcategories of a parent category in ascending order by name
+    private SortedSet<Category> sortSubCategories(Set<Category> children) {
+        return sortSubCategories(children, "asc");
+    }
+
+    // sorts the subcategories of a parent category by name in the specified direction
+    private SortedSet<Category> sortSubCategories(Set<Category> children, String sortDir) {
+        SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
+
+            @Override
+            public int compare(Category category1, Category category2) {
+                if (sortDir.equals("asc")) {
+                    return category1.getName().compareTo(category2.getName());
+                } else {
+                    return category2.getName().compareTo(category1.getName());
+                }
+            }
+        });
+
+        sortedChildren.addAll(children);
+
+        return sortedChildren;
     }
 }

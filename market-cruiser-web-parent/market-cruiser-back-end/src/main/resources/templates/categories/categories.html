@@ -54,7 +54,8 @@
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        Category Name
+                        <a class="a-sorting text-black" th:href="@{'/categories?sortDir=' + ${reverseSortDir}}">Category Name</a>
+                        <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">

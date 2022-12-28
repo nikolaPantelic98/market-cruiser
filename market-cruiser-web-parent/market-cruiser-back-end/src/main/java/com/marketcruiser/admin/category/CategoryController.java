@@ -3,6 +3,7 @@ package com.marketcruiser.admin.category;
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -28,9 +29,16 @@ public class CategoryController {
 
     // shows a list of categories
     @GetMapping("/categories")
-    public String showCategories(Model model) {
-        List<Category> listCategories = categoryService.getAllCategories();
+    public String showCategories(@Param("sortDir") String sortDir, Model model) {
+        if (sortDir == null || sortDir.isEmpty()) {
+            sortDir = "asc";
+        }
+
+        List<Category> listCategories = categoryService.getAllCategories(sortDir);
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
         model.addAttribute("listCategories", listCategories);
+        model.addAttribute("reverseSortDir", reverseSortDir);
 
         return "categories/categories";
     }
