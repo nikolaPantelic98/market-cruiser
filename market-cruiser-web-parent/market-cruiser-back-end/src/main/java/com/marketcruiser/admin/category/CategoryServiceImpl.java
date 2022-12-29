@@ -2,6 +2,9 @@ package com.marketcruiser.admin.category;
 
 import com.marketcruiser.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,8 @@ import java.util.*;
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService{
+
+    private static final int ROOT_CATEGORIES_PER_PAGE = 4;
 
     private final CategoryRepository categoryRepository;
 
@@ -23,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService{
 
     // returns a list of categories in the database
     @Override
-    public List<Category> getAllCategories(String sortDir) {
+    public List<Category> listCategoriesByPage(CategoryPageInfo pageInfo, int pageNum, String sortDir) {
         Sort sort = Sort.by("name");
 
         if (sortDir.equals("asc")) {
@@ -32,7 +37,14 @@ public class CategoryServiceImpl implements CategoryService{
             sort = sort.descending();
         }
 
-        List<Category> rootCategories = categoryRepository.findRootCategories(sort);
+        Pageable pageable = PageRequest.of(pageNum - 1, ROOT_CATEGORIES_PER_PAGE, sort);
+
+        Page<Category> pageCategories = categoryRepository.findRootCategories(pageable);
+        List<Category> rootCategories = pageCategories.getContent();
+
+        pageInfo.setTotalElements(pageCategories.getTotalElements());
+        pageInfo.setTotalPages(pageCategories.getTotalPages());
+
         return listHierarchicalCategories(rootCategories, sortDir);
     }
 

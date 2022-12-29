@@ -19,7 +19,6 @@ import java.util.List;
 
 @Controller
 public class CategoryController {
-
     private final CategoryServiceImpl categoryService;
 
     @Autowired
@@ -27,15 +26,29 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    // shows a list of categories
+    // shows a first page of categories
     @GetMapping("/categories")
-    public String showCategories(@Param("sortDir") String sortDir, Model model) {
+    public String showFirstPageOfCategories(@Param("sortDir") String sortDir, Model model) {
+        return showPageOfCategories(1, sortDir, model);
+    }
+
+    // shows a list of all categories using pagination
+    @GetMapping("/categories/page/{pageNum}")
+    public String showPageOfCategories(@PathVariable int pageNum, @Param("sortDir") String sortDir, Model model) {
         if (sortDir == null || sortDir.isEmpty()) {
             sortDir = "asc";
         }
 
-        List<Category> listCategories = categoryService.getAllCategories(sortDir);
+        CategoryPageInfo pageInfo = new CategoryPageInfo();
+        List<Category> listCategories = categoryService.listCategoriesByPage(pageInfo, pageNum, sortDir);
+
         String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("totalPages", pageInfo.getTotalPages());
+        model.addAttribute("totalItems", pageInfo.getTotalElements());
+        model.addAttribute("currentPage", pageNum);
+        model.addAttribute("sortField", "name");
+        model.addAttribute("sortDir", sortDir);
 
         model.addAttribute("listCategories", listCategories);
         model.addAttribute("reverseSortDir", reverseSortDir);

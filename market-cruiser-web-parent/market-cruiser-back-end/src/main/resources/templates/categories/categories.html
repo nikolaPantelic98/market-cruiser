@@ -54,7 +54,7 @@
                     </th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:href="@{'/categories?sortDir=' + ${reverseSortDir}}">Category Name</a>
+                        <a class="a-sorting text-black" th:href="@{'/categories/page/' + ${pageNum} + '?sortDir=' + ${reverseSortDir}}">Category Name</a>
                         <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
                     </th>
 
@@ -92,6 +92,8 @@
             </tbody>
         </table>
     </div>
+
+    <div th:replace="fragments :: pagination('/categories', 'top-level categories')"></div>
 
     <div class="modal fade text-center" id="confirmModal">
         <div class="modal-dialog">
