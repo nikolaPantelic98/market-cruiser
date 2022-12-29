@@ -12,6 +12,7 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
 
     @Query("SELECT c FROM Category c WHERE c.parent.categoryId is NULL")
     List<Category> findRootCategories(Sort sort);
+    Long countByCategoryId(Long categoryId);
     Category findByName(String name);
     Category findByAlias(String alias);
     @Query("UPDATE Category c SET c.enabled = ?2 WHERE c.categoryId = ?1")

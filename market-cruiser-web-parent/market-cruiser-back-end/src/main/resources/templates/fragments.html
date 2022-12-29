@@ -49,13 +49,26 @@
     <div th:fragment="category_status" th:remove="tag">
         <a th:if="${category.enabled == true}" class="a-icon-sandybrown fas fa-check-circle fa-2x icon-green"
         th:href="@{'/categories/' + ${category.categoryId} + '/enabled/false'}"
-        title="Disable This Category">
+        title="Disable Category">
         </a>
 
         <a th:if="${category.enabled == false}" class="a-icon-sandybrown fas fa-circle fa-2x icon-dark"
            th:href="@{'/categories/' + ${category.categoryId} + '/enabled/true'}"
-           title="Enable This Category">
+           title="Enable Category">
         </a>
     </div>
+
+    <div th:fragment="category_actions" th:remove="tag">
+        <a class="a-icon-sandybrown fas fa-edit fa-2x icon-green" th:href="@{'/categories/edit/' + ${category.categoryId}}"
+        title="Edit Category"></a>
+        &nbsp;
+        <th:block th:if="${category.hasChildren == false}">
+        <a class="a-icon-sandybrown fas fa-trash fa-2x icon-red link-delete" th:href="@{'/categories/delete/' + ${category.categoryId}}"
+        th:entityId="${category.categoryId}"
+        title="Delete Category">
+        </a>
+        </th:block>
+    </div>
+
 </body>
 </html>
