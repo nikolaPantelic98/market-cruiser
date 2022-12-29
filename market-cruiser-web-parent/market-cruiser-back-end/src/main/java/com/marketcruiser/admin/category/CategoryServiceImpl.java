@@ -5,9 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService{
 
     private final CategoryRepository categoryRepository;
@@ -187,5 +189,11 @@ public class CategoryServiceImpl implements CategoryService{
         sortedChildren.addAll(children);
 
         return sortedChildren;
+    }
+
+
+    @Override
+    public void updateCategoryEnabledStatus(Long categoryId, boolean enabled) {
+        categoryRepository.updateEnabledStatus(categoryId, enabled);
     }
 }
