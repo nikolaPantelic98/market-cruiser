@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
@@ -143,5 +144,13 @@ public class CategoryController {
         }
 
         return "redirect:/categories";
+    }
+
+    // method that exports the entire table of categories to a CSV file
+    @GetMapping("/categories/export/csv")
+    public void exportToCSV(HttpServletResponse response) throws IOException {
+        List<Category> listCategories = categoryService.listCategoriesUsedInForm();
+        CategoryCsvExporter exporter = new CategoryCsvExporter();
+        exporter.export(listCategories, response);
     }
 }

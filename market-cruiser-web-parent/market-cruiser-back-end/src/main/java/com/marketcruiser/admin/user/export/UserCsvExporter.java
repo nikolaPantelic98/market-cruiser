@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.user.export;
 
+import com.marketcruiser.admin.AbstractExporter;
 import com.marketcruiser.common.entity.User;
 import org.supercsv.io.CsvBeanWriter;
 import org.supercsv.io.ICsvBeanWriter;
@@ -13,7 +14,7 @@ public class UserCsvExporter extends AbstractExporter {
 
     // method that exports a list of users to a CSV file and sends it to the client
     public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
-        super.setResponseHeader(response, "text/csv", ".csv");
+        super.setResponseHeader(response, "text/csv", ".csv", "users_");
 
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
 

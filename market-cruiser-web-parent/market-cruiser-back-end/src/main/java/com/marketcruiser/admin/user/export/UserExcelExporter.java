@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.user.export;
 
+import com.marketcruiser.admin.AbstractExporter;
 import com.marketcruiser.common.entity.User;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.xssf.usermodel.*;
@@ -58,7 +59,7 @@ public class UserExcelExporter extends AbstractExporter {
 
     // method that exports the given list of users to an Excel file
     public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
-        super.setResponseHeader(response, "application/octet-stream", ".xlsx");
+        super.setResponseHeader(response, "application/octet-stream", ".xlsx", "users_");
 
         writeHeaderLine();
         writeDataLines(listUsers);
