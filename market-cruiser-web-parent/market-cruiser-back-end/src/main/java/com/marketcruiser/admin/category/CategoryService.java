@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CategoryService {
 
-    List<Category> listCategoriesByPage(CategoryPageInfo pageInfo, int pageNumber, String sortDir);
+    List<Category> listCategoriesByPage(CategoryPageInfo pageInfo, int pageNumber, String sortDir, String keyword);
     Category saveCategory(Category category);
     List<Category> listCategoriesUsedInForm();
     Category getCategoryById(Long categoryId) throws CategoryNotFoundException;
