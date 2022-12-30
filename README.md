@@ -10,8 +10,9 @@
 * In the market-cruiser-backend we made User Management Module - a module that manages users.
 * There are 5 roles: Admin, Salesperson, Editor, Assistant, Shipper.
 * A user can be created (first name, last name, password, email, photo, role, enabled) and a role can be assigned to him.
-* All CRUD operations are enabled.
-* Pagination and Sorting are implemented.
+* All CRUD operations for Users are enabled.
+* Pagination and Sorting for Users are implemented.
+* Filter Function for Users is implemented.
 * Table content of the users can be exported & downloaded in CSV, Excel and PDF.
 * Spring Security is implemented.
 * The login page has been created. User can now log in and log out.
@@ -19,6 +20,9 @@
 * From now on, each user can access links only with permission, depending on the role.
 * Custom Error pages added (403, 404 and 500)
 * Category Module added. Categories now can be created, as well as subcategories under the parent category.
+* All CRUD operations for Categories are enabled.
+* Pagination and Sorting for Categories are implemented.
+* Filter Function for Categories is implemented.
 
 ## Some Images
 
