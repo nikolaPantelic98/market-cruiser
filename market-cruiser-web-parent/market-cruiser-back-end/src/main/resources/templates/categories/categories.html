@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="fragments :: page_head('Categories - Market Cruiser Admin')">
-
 </head>
 <body>
 <div class="container-fluid">
-    <div th:replace="fragment_navigation :: menu">
 
-    </div>
+    <div th:replace="fragment_navigation :: menu"></div>
+
     <br/>
     <div>
         <h2>Manage Categories</h2>
@@ -17,11 +16,7 @@
         <a th:href="@{/categories/export/csv}" class="a-icon-lightgreen fas fa-file-csv fa-2x icon-orange" title="Export to CSV"></a>
     </div>
 
-    <div th:if="${message != null}" class="alert alert-success text-center">
-        [[${message}]]
-    </div>
-
-    <div th:replace="fragments :: search_form('/categories/page/1')"></div>
+    <div th:replace="fragments :: search_form_and_message('/categories/page/1')"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -35,10 +30,7 @@
                         Category Image
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black" th:href="@{'/categories/page/' + ${pageNum} + '?sortDir=' + ${reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">Category Name</a>
-                        <span th:class="${reverseSortDir == 'desc' ? 'fas fa-sort-up' : 'fas fa-sort-down'}" ></span>
-                    </th>
+                    <th th:replace="fragments :: column_link('/categories', 'name', 'Category Name')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle">
                         Alias
@@ -64,11 +56,13 @@
                     <td style="text-align: center; vertical-align: middle">[[${category.alias}]]</td>
 
                     <td style="text-align: center; vertical-align: middle">
-                        <div th:replace="fragments :: category_status"></div>
+                        <div th:replace="fragments :: status(${category.enabled}, 'category', '/categories/' + ${category.categoryId})"></div>
                     </td>
 
                     <td style="text-align: center; vertical-align: middle">
-                        <div th:replace="fragments :: category_actions"></div>
+                        <div th:replace="fragments :: edit('category', '/categories/edit/' + ${category.categoryId})"></div>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: delete('category', ${category.categoryId}, '/categories/delete/' + ${category.categoryId}, ${!category.hasChildren})"></div>
                     </td>
                 </tr>
             </tbody>
@@ -83,9 +77,11 @@
             <div class="col-8">
                 <div>[[${category.name}]]</div>
                 <div class="mt-2">
-                    <div th:replace="fragments :: category_status"></div>
+                    <div th:replace="fragments :: status(${category.enabled}, 'category', '/categories/' + ${category.categoryId})"></div>
                     &nbsp;
-                    <div th:replace="fragments :: category_actions"></div>
+                    <div th:replace="fragments :: edit('category', '/categories/edit/' + ${category.categoryId})"></div>
+                    &nbsp;
+                    <div th:replace="fragments :: delete('category', ${category.categoryId}, '/categories/delete/' + ${category.categoryId}, ${!category.hasChildren})"></div>
                 </div>
             </div>
             <div>&nbsp;</div>
@@ -99,32 +95,15 @@
 
     <th:block th:unless="${keyword != null}">
     <div th:replace="fragments :: pagination('/categories', 'top-level categories')"></div>
+    </th:block>
 
-    <div class="modal fade text-center" id="confirmModal">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Delete Confirmation</h4>
-                    <button type="button" class="close" data-dismiss = "modal">&times;</button>
-                </div>
-
-                <div class="modal-body">
-                    <span id="confirmText"></span>
-                </div>
-
-                <div class="modal-footer">
-                    <a class="btn btn-red" href="" id="yesButton">Yes</a>
-                    <button type="button" class="btn btn-grey" data-dismiss="modal">No</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <div th:replace="fragments_modal :: confirm_modal"></div>
 
     <br>
     <br>
-    <div class="text-center">
-        <p>Market Cruiser Control Panel - Copyright &copy; Market Cruiser</p>
-    </div>
+
+    <div th:replace="fragments :: footer"></div>
+
 </div>
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
