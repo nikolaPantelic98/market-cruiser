@@ -49,4 +49,16 @@ public class Brand {
     )
     @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
+
+
+    public Brand(String name) {
+        this.name = name;
+        this.logo = "brand-logo.png";
+    }
+
+
+    @Override
+    public String toString() {
+        return "Brand [brandId = " + brandId + ", name = " + name + ", categories = " + categories + "]";
+    }
 }
