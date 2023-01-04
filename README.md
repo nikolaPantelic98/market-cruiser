@@ -1,28 +1,33 @@
 # MarketCruiser (project in progress)
 
 * MarketCruiser is an online eCommerce marketplace.
-* Backend using Spring Boot and frontend using Thymeleaf, Bootstrap and JQuery.
-* MySQL
+* Backend using Spring Boot and frontend using Thymeleaf, Bootstrap, and JQuery.
+* MySQL.
 
 ## Info: What we have done so far
 
-* The project is divided into two parts: market-cruiser-backend & market-cruiser-frontend.
+* This is a multi-module Maven project
+* The project is divided into two parts: market-cruiser-backend (server side) & market-cruiser-frontend (client side). Both exist under the market-cruiser-web-parent.
+
 * In the market-cruiser-backend we made User Management Module - a module that manages users.
-* There are 5 roles: Admin, Salesperson, Editor, Assistant, Shipper.
+* There are 5 roles: Admin, Salesperson, Editor, Assistant, and Shipper.
 * A user can be created (first name, last name, password, email, photo, role, enabled) and a role can be assigned to him.
-* All CRUD operations for Users are enabled.
-* Pagination and Sorting for Users are implemented.
-* Filter Function for Users is implemented.
+* All CRUD operations for users are enabled.
+* Pagination and sorting for users are implemented.
+* Filter function for user is implemented.
 * Table content of the users can be exported & downloaded in CSV, Excel and PDF.
+
 * Spring Security is implemented.
-* The login page has been created. User can now log in and log out.
+* The login page has been created. The user can now log in and log out.
 * The user can change his data now (excluding email and roles).
 * From now on, each user can access links only with permission, depending on the role.
-* Custom Error pages added (403, 404 and 500)
-* Category Module added. Categories now can be created, as well as subcategories under the parent category.
-* All CRUD operations for Categories are enabled.
-* Pagination and Sorting for Categories are implemented.
-* Filter Function for Categories is implemented.
+* Custom Error pages added (403, 404, and 500)
+
+* Category Module added. categories now can be created, as well as subcategories under the parent category.
+* All CRUD operations for categories are enabled.
+* Pagination and Sorting for categories are implemented.
+* Filter function for categories is implemented.
+* Table content of the categories can be exported & downloaded in CSV.
 
 ## Some Images
 
