@@ -61,4 +61,11 @@ public class Brand {
     public String toString() {
         return "Brand [brandId = " + brandId + ", name = " + name + ", categories = " + categories + "]";
     }
+
+    @Transient
+    public String getLogoPath() {
+        if (this.brandId == null) return "/images/image-thumbnail.png";
+
+        return "/brand-logos" + this.brandId + "/" + this.logo;
+    }
 }
