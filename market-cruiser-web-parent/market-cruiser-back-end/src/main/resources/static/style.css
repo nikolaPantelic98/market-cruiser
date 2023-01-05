@@ -17,6 +17,11 @@
     color: red
 }
 
+*.badge-lightgreen {
+    color: black;
+    background-color: lightgreen;
+}
+
 /* text */
 
 *.text-black {
