@@ -7,17 +7,27 @@
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
     <style>
-        .btn-orange {
-            transition: all 0.3s linear;
-            color: black;
-            background-color: darkorange;
+        .btn {
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border-radius: 6px;
+            background-size: 400% 400%;
+            color: #FFF;
+            border: 0;
+            padding: 8px 20px;
+            font-size: 13px;
+            animation: Gradient 10s ease infinite;
+        }
+        .btn:hover {
+            transform: scale(1.2);
+            background-size: 150% 150%;
+            font-weight: bold;
         }
 
-        .btn-orange:hover {
-            transform: scale(1.2);
-            color: black;
-            background-color: darkorange;
-            font-weight: bold;
+        .btn-blue {
+            background: linear-gradient(-45deg, #104c52, #104c52, #27bdcc);
         }
     </style>
 </head>
@@ -25,7 +35,7 @@
 <div class="container-fluid text-center">
     <br>
     <div>
-        <img th:src="@{/images/MarketCruiser.png}" style="width: 450px; height: 225px"/>
+        <img th:src="@{/images/MarketCruiserTr.png}" style="width: 450px; height: 225px"/>
     </div>
     <br>
 
@@ -34,7 +44,7 @@
             <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
         </div>
         <div th:if="${param.logout}">
-            <p class="text-warning">You have been logged out.</p>
+            <p class="text-primary">You have been logged out.</p>
         </div>
 
         <div class="border border-secondary rounded p-3">
@@ -49,7 +59,7 @@
                 <input type="checkbox" name="remember-me" />&nbsp;Remember me
             </p>
             <p>
-                <input type="submit" value="Login" class="btn btn-orange" />
+                <input type="submit" value="Login" class="btn btn-blue" />
             </p>
         </div>
     </form>

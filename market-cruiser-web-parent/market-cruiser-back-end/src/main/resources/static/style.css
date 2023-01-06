@@ -9,17 +9,17 @@
     color:gray
 }
 
-*.icon-orange {
-    color: darkorange;
+*.icon-darkblue {
+    color: #104c52;
 }
 
 *.icon-red {
     color: red
 }
 
-*.badge-lightgreen {
+*.badge-blue {
     color: black;
-    background-color: lightgreen;
+    background-color: #48dbe8;
 }
 
 /* text */
@@ -28,113 +28,83 @@
     color: black
 }
 
-*.text-orange {
-    color: darkorange;
+*.text-white {
+    color: white;
 }
 
 /* a */
 
 a.a-sorting:link {
-    transition: all 0.3s linear;
+    transition: all 0.3s ease;
     color: black;
     background-color: transparent;
     text-decoration: none;
 }
 
 a.a-sorting:hover {
-    transform: scale(1.5);
-    color: green;
+    transform: scale(1.2);
+    color: #104c52;
     background-color: transparent;
     text-decoration: none;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: bold;
 }
 
-a.a-icon-sandybrown {
-    transition: all 0.3s linear;
+a.a-icon-darkblue {
+    transition: all 0.3s ease;
 }
 
-a.a-icon-sandybrown:hover {
+a.a-icon-darkblue:hover {
     transform: scale(1.5);
-    color: sandybrown;
+    color: #104c52;
 }
 
-a.a-icon-lightgreen {
-    transition: all 0.3s linear;
+a.a-icon-darkgreen {
+    transition: all 0.3s ease;
 }
 
-a.a-icon-lightgreen:hover {
+a.a-icon-darkgreen:hover {
     transform: scale(1.5);
-    color: lightgreen;
-}
-
-/* span */
-
-span.span-icon-orange {
-    transition: all 0.3s linear;
-}
-
-span.span-icon-orange:hover {
-    transform: scale(1.5);
-    color: darkorange;
+    color: #0d402a;
 }
 
 /* buttons */
 
-*.btn-orange {
-    transition: all 0.3s linear;
-    color: black;
-    background-color: darkorange;
+.btn {
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 6px;
+    background-size: 400% 400%;
+    color: #FFF;
+    border: 0;
+    padding: 8px 20px;
+    font-size: 13px;
+    animation: Gradient 10s ease infinite;
+}
+.btn:hover {
+    transform: scale(1.2);
+    background-size: 150% 150%;
+    font-weight: bold;
 }
 
-*.btn-orange:hover {
-    transform: scale(1.2);
-    color: black;
-    background-color: darkorange;
-    font-weight: bold;
+*.btn-blue {
+    background: linear-gradient(-45deg, #104c52, #104c52, #27bdcc);
 }
 
 *.btn-grey {
-    transition: all 0.3s linear;
-    color: white;
-    background-color: dimgrey;
-}
-
-*.btn-grey:hover {
-    transform: scale(1.2);
-    color: white;
-    background-color: dimgray;
-    font-weight: bold;
+    background: linear-gradient(-45deg, #b3b3b3, #737373, #454545);
 }
 
 *.btn-red {
-    transition: all 0.3s linear;
-    color: black;
-    background-color: red;
-}
-
-*.btn-red:hover {
-    transform: scale(1.2);
-    color: black;
-    background-color: red;
-    font-weight: bold;
-}
-
-*.btn-lightgreen {
-    color: darkgreen;
-    background-color: lightgreen;
-}
-
-*.btn-lightgreen:hover {
-    color: darkgreen;
-    background-color: lightgreen;
-    font-weight: bold;
+    background: linear-gradient(-45deg, #fc7c7c, #fc0000, #ad0000);
 }
 
 /* lists */
 
 li.li-green {
-    transition: all 0.3s linear;
+    transition: all 0.3s ease;
     color: green;
 }
 
@@ -143,7 +113,7 @@ li.li-green:hover {
     color: green;
     font-size: 11px;
     font-weight: bold;
-    background-color: lightgreen;
+    background-color: #25c481;
     padding: 5px;
 }
 

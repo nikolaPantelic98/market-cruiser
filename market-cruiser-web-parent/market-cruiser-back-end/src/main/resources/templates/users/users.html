@@ -11,24 +11,24 @@
     <div>
         <h2>Manage Users</h2>
         <br/>
-        <a th:href="@{/users/new}" class="a-icon-lightgreen fa-solid fa-person-circle-plus fa-2x icon-orange" title="Create New User"></a>
+        <a th:href="@{/users/new}" class="a-icon-darkgreen fa-solid fa-person-circle-plus fa-2x icon-darkblue" title="Create New User"></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a th:href="@{/users/export/csv}" class="a-icon-lightgreen fas fa-file-csv fa-2x icon-orange" title="Export to CSV"></a>
+        <a th:href="@{/users/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
         &nbsp;&nbsp;
-        <a th:href="@{/users/export/excel}" class="a-icon-lightgreen fas fa-file-excel fa-2x icon-orange" title="Export to Excel"></a>
+        <a th:href="@{/users/export/excel}" class="a-icon-darkgreen fas fa-file-excel fa-2x icon-darkblue" title="Export to Excel"></a>
         &nbsp;&nbsp;
-        <a th:href="@{/users/export/pdf}" class="a-icon-lightgreen fas fa-file-pdf fa-2x icon-orange" title="Export to PDF"></a>
+        <a th:href="@{/users/export/pdf}" class="a-icon-darkgreen fas fa-file-pdf fa-2x icon-darkblue" title="Export to PDF"></a>
     </div>
 
     <div th:replace="fragments :: search_form_and_message('/users/page/1')"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
-            <thead class="thead-custom">
+            <thead class="tbl-header">
                 <tr>
                     <th th:replace="fragments :: column_link('/users', 'userId', 'User ID')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black">
                         Photos
                     </th>
 
@@ -38,7 +38,7 @@
 
                     <th th:replace="fragments :: column_link('/users', 'lastName', 'Last Name')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black">
                         Roles
                     </th>
 
@@ -51,7 +51,7 @@
                 <tr th:each="user: ${listUsers}">
                     <td style="text-align: center; vertical-align: middle">[[${user.userId}]]</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <span th:if="${user.photo == null}" class="fas fa-portrait fa-3x icon-orange"></span>
+                        <span th:if="${user.photo == null}" class="fas fa-portrait fa-3x icon-darkblue"></span>
                         <img th:if="${user.photo != null}" th:src="@{${user.photosImagePath}}" style="width: 66px" />
                     </td>
                     <td style="text-align: center; vertical-align: middle">[[${user.emailAddress}]]</td>
@@ -71,10 +71,14 @@
         </table>
     </div>
 
+    <div>
+
+    </div>
+
     <div class="less-details">
         <div th:each="user: ${listUsers}" class="row m-1">
             <div class="col-4">
-                <span th:if="${user.photo == null}" class="fas fa-portrait fa-3x icon-orange"></span>
+                <span th:if="${user.photo == null}" class="fas fa-portrait fa-3x icon-darkblue"></span>
                 <img th:if="${user.photo != null}" th:src="@{${user.photosImagePath}}" style="width: 66px" />
             </div>
             <div class="col-8">

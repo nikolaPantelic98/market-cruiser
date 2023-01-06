@@ -7,7 +7,7 @@
         </form>
         <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
             <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/MarketCruiser.png}" alt="logo" style="width: 80px; height: 40px">
+                <img th:src="@{/images/MarketCruiserTr.png}" alt="logo" style="width: 80px; height: 40px">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
                 <span class="navbar-toggler-icon"></span>
@@ -83,12 +83,12 @@
 
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <li class="nav-item">
-                        <span class="fas fa-user fa-2x icon-green"></span>
+                        <span class="fas fa-user fa-2x icon-darkblue"></span>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}" sec:authentication="principal.fullName"></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" id="logoutLink" href="">Logout</a>
+                        <div class="dropdown-menu" style="background-color: #25c481">
+                            <a class="dropdown-item" id="logoutLink" href="" style="background-color: #25c481">Logout</a>
                         </div>
                     </li>
                 </ul>

@@ -11,30 +11,30 @@
     <div>
         <h2>Manage Categories</h2>
         <br/>
-        <a th:href="@{/brands/new}" class="a-icon-lightgreen fas fa-folder-plus fa-2x icon-orange" title="Create New Brand"></a>
+        <a th:href="@{/brands/new}" class="a-icon-darkgreen fas fa-folder-plus fa-2x icon-darkblue" title="Create New Brand"></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a th:href="@{/brands/export/csv}" class="a-icon-lightgreen fas fa-file-csv fa-2x icon-orange" title="Export to CSV"></a>
+        <a th:href="@{/brands/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
     </div>
 
     <div th:replace="fragments :: search_form_and_message('/brands/page/1')"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
-            <thead class="thead-custom">
+            <thead class="tbl-header">
                 <tr>
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black">
                         Brand ID
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black">
                         Logo
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black">
                         Brand Name
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black">
                         Categories
                     </th>
 
@@ -51,7 +51,7 @@
 
                     <td style="text-align: center; vertical-align: middle">
                         <th:block th:each="category : ${brand.categories}">
-                            <span class="badge badge-lightgreen" th:text="${category.name}"></span>
+                            <span class="badge badge-blue" th:text="${category.name}"></span>
                         </th:block>
                     </td>
 
