@@ -9,21 +9,11 @@
     <link rel="stylesheet" type="text/css" th:href="@{/fontawesome/all.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/style.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/table.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/menu.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
-    <style>
-        .navbar-custom {
-            background-color: #25b7c4;
-        }
 
-        .navbar-custom .navbar-brand,
-        .navbar-custom .nav-link,
-        .navbar-custom {
-            color: green;
-        }
-
-    </style>
 </head>
 <body>
 <div class="container-fluid">
@@ -31,60 +21,96 @@
         <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
             <input type="submit" />
         </form>
-        <nav class="navbar navbar-expand-lg navbar-custom navbar-light">
-            <a class="navbar-brand" th:href="@{/}">
-                <img th:src="@{/images/MarketCruiserTr.png}" alt="logo" style="width: 80px; height: 40px">
-            </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="topNavbar">
-                <ul class="navbar-nav">
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/users}">Users</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/categories}">Categories</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/brands}">Brands</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/products}">Products</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/customers}">Customers</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/shipping}">Shipping</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/orders}">Orders</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/report}">Sales Report</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/articles}">Articles</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/menus}">Menus</a>
-                    </li>
-                    <li class="li-green nav-item">
-                        <a class="nav-link" th:href="@{/settings}">Settings</a>
-                    </li>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <li class="nav-item">
-                        <span class="fas fa-user fa-2x icon-green"></span>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" th:href="@{/account}" sec:authentication="principal.fullName"></a>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" id="logoutLink" href="">Logout</a>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+        <nav class="menu">
+            <ol>
+                <li class="menu-item active">
+                    <a th:href="@{/}">Home</a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#0">Menu</a>
+                    <ol class="sub-menu">
+
+                        <th:block sec:authorize="hasAuthority('Admin')">
+                            <li class="menu-item">
+                                <a th:href="@{/users}">Users</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <li class="menu-item">
+                                <a th:href="@{/categories}">Categories</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <li class="menu-item">
+                                <a th:href="@{/brands}">Brands</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Editor', 'Shipper')">
+                            <li class="menu-item">
+                                <a th:href="@{/products}">Products</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                            <li class="menu-item">
+                                <a th:href="@{/customers}">Customers</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                            <li class="menu-item">
+                                <a th:href="@{/shipping}">Shipping</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson', 'Shipper')">
+                            <li class="menu-item">
+                                <a th:href="@{/orders}">Orders</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Salesperson')">
+                            <li class="menu-item">
+                                <a th:href="@{/report}">Sales Report</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <li class="menu-item">
+                                <a th:href="@{/articles}">Articles</a>
+                            </li>
+                        </th:block>
+
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                            <li class="menu-item">
+                                <a th:href="@{/menus}">Menus</a>
+                            </li>
+                        </th:block>
+
+                    </ol>
+                </li>
+
+                <li class="menu-item">
+                    <a th:href="@{/settings}">Settings</a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#0">Account</a>
+                    <ol class="sub-menu">
+                        <li class="menu-item">
+                            <a th:href="@{/account}">Account</a>
+                        </li>
+                        <li class="menu-item">
+                            <a id="logoutLink" href="">Logout</a>
+                        </li>
+                    </ol>
+                </li>
+
+            </ol>
         </nav>
     </div>
     <br/>
