@@ -45,7 +45,7 @@
 * Apply the changes and close the dialog.
 * Download MySQL Workbench.
 * Create new database - `CREATE database market_cruiser_db;`
-* Modify `application.properties` under the `market-cruiser-back-end` **(market-cruiser-back-end | src | main | resources | application.properties)** if needed - `spring.datasource.username` and `spring.datasource.password` with your username and password from MySQL Workbench.
+* Modify `application.properties` under the `market-cruiser-back-end` **(market-cruiser-web-parent | market-cruiser-back-end | src | main | resources | application.properties)** if needed - `spring.datasource.username` and `spring.datasource.password` with your username and password from MySQL Workbench.
 * Run the application on localhost:8080 - `MarketCruiserBackEnd`.
 * Go to **market-cruiser-web-parent | market-cruiser-back-end | src | test | MainTest** and run the method `testCreateFirstUserAdmin()`.
 * Run the application on localhost:8080 - `MarketCruiserBackEnd` again and log in (email: admin@gmail.com; password: admin123).
