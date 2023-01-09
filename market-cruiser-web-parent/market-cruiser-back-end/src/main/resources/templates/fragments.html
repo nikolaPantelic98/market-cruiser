@@ -62,7 +62,7 @@
         <th:block th:if="${visible}">
         <a class="a-icon-darkblue fas fa-trash fa-2x icon-red link-delete"
            th:href="@{${deleteURL}}"
-           th:userIdNew = "${entityId}"
+           th:entityId = "${entityId}"
            th:title="'Delete ' + ${entityName}"></a>
         </a>
         </th:block>

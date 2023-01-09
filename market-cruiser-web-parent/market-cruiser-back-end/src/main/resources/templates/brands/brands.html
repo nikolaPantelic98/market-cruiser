@@ -9,7 +9,7 @@
 
     <br/>
     <div>
-        <h2>Manage Categories</h2>
+        <h2>Manage Brands</h2>
         <br/>
         <a th:href="@{/brands/new}" class="a-icon-darkgreen fas fa-folder-plus fa-2x icon-darkblue" title="Create New Brand"></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -45,7 +45,9 @@
                 <tr th:each="brand: ${listBrands}">
                     <td style="text-align: center; vertical-align: middle">[[${brand.brandId}]]</td>
 
-                    <td></td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <img th:src="@{${brand.logoPath}}" style="width: 66px" class="img-fluid" />
+                    </td>
 
                     <td style="text-align: left; vertical-align: middle">[[${brand.name}]]</td>
 
