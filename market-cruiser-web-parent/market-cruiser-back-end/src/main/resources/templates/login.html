@@ -6,6 +6,7 @@
     <title>Login - Market Cruiser Admin</title>
 
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+
     <style>
         .btn {
             font-weight: 400;
@@ -29,6 +30,12 @@
         .btn-blue {
             background: linear-gradient(-45deg, #104c52, #104c52, #27bdcc);
         }
+
+        body{
+            background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+            background: linear-gradient(to right, #25c481, #25b7c4);
+            font-family: 'Roboto', sans-serif;
+        }
     </style>
 </head>
 <body>
@@ -44,7 +51,7 @@
             <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
         </div>
         <div th:if="${param.logout}">
-            <p class="text-primary">You have been logged out.</p>
+            <p class="text-secondary">You have been logged out.</p>
         </div>
 
         <div class="border border-secondary rounded p-3">

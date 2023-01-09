@@ -16,7 +16,7 @@
     <br/>
 
     <form th:action="@{/brands/save}" method="post" style="max-width: 500px; margin: 0 auto"
-          enctype="multipart/form-data"
+          enctype="multipart/form-data" onsubmit="return checkUnique(this)"
           th:object="${brand}">
         <input type="hidden" th:field="*{brandId}"/>
     <div class="border border-round-secondary rounded p-3">
@@ -96,6 +96,32 @@
 
             divChosenCategories.append("<span class='badge badge-blue m-1'>" + categoryName + "</span>");
         });
+    }
+
+    function checkUnique(form) {
+        brandNewId = $("#brandId").val();
+        brandNewName = $("#name").val();
+
+        csrfValue = $("input[name = '_csrf']").val();
+
+        url = "[[@{/brands/check-unique}]]";
+
+        params = {brandId: brandNewId, name: brandNewName, _csrf: csrfValue};
+
+        $.post(url, params, function (response) {
+            if (response == "OK") {
+                form.submit();
+            } else if (response == "Duplicate") {
+                showWarningModal("There is another brand having the same name " + brandNewName);
+            } else {
+                showErrorModal("Unknown response from server");
+            }
+
+        }).fail(function () {
+            showErrorModal("Could not connect to the server");
+        });
+
+        return false;
     }
 
 </script>

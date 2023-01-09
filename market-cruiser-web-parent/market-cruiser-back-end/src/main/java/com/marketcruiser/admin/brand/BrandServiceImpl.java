@@ -50,4 +50,21 @@ public class BrandServiceImpl implements BrandService{
 
         brandRepository.deleteById(brandId);
     }
+
+    // checks if the given brand ID and name are unique
+    @Override
+    public String checkUnique(Long brandId, String name) {
+        boolean isCreatingNew = (brandId == null || brandId == 0);
+        Brand brandByName = brandRepository.findByName(name);
+
+        if (isCreatingNew) {
+            if (brandByName != null) return "Duplicate";
+        } else {
+            if (brandByName != null && brandByName.getBrandId() != brandId) {
+                return "Duplicate";
+            }
+        }
+
+        return "OK";
+    }
 }

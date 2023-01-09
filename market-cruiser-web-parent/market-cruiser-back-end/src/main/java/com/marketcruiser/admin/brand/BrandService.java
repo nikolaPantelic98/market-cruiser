@@ -10,4 +10,5 @@ public interface BrandService {
     Brand saveBrand(Brand brand);
     Brand getBrandById(Long brandId) throws BrandNotFoundException;
     void deleteBrand(Long brandId) throws BrandNotFoundException;
+    String checkUnique(Long brandId, String name);
 }

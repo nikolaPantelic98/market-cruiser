@@ -56,6 +56,11 @@ public class Brand {
         this.logo = "brand-logo.png";
     }
 
+    public Brand(Long brandId, String name) {
+        this.brandId = brandId;
+        this.name = name;
+    }
+
 
     @Override
     public String toString() {
