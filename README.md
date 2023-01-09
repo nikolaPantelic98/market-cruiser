@@ -29,6 +29,27 @@
 * Filter function for categories is implemented.
 * Table content of the categories can be exported & downloaded in CSV.
 
+## Requirements
+
+* [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
+* [Java IDE (IntelliJ Ultimate preferred)](https://www.jetbrains.com/idea/download/#section=windows)
+* [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+
+### Launching a web application step by step
+
+* Download JDK.
+* Download IntelliJ IDEA.
+* From the main menu, select **File | Project Structure | Project Settings | Project**.
+* If the necessary JDK is already defined in IntelliJ IDEA, select it from the **SDK** list.
+* If the JDK is installed on your computer, but not defined in the IDE, select **Add SDK | JDK**, and specify the path to the JDK home directory (for example,  **/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk**).
+* Apply the changes and close the dialog.
+* Download MySQL Workbench.
+* Create new database - `CREATE database market_cruiser_db;`
+* Modify `application.properties` if needed - `spring.datasource.username` and `spring.datasource.password` with your username and password from MySQL Workbench.
+* Run the application on localhost:8080 - `MarketCruiserBackEnd`.
+* Go to **market-cruiser-web-parent | market-cruiser-back-end | src | test | MainTest** and run the method `testCreateFirstUserAdmin()`.
+* Run the application on localhost:8080 - `MarketCruiserBackEnd` again and log in (email: admin@gmail.com; password: admin123).
+
 ## Some Images
 
 ![01](https://user-images.githubusercontent.com/109813536/207864751-1d6c7086-52ad-44da-98c5-bfe30c66fe62.png)
