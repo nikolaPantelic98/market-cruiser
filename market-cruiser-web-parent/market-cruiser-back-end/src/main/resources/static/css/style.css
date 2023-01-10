@@ -10,7 +10,7 @@
 }
 
 *.icon-darkblue {
-    color: #104c52;
+    color: #223775;
 }
 
 *.icon-red {
@@ -39,11 +39,12 @@ a.a-sorting:link {
     color: black;
     background-color: transparent;
     text-decoration: none;
+    font-weight: bold;
 }
 
 a.a-sorting:hover {
     transform: scale(1.2);
-    color: #104c52;
+    color: #223775;
     background-color: transparent;
     text-decoration: none;
     font-size: 15px;
@@ -56,7 +57,7 @@ a.a-icon-darkblue {
 
 a.a-icon-darkblue:hover {
     transform: scale(1.5);
-    color: #104c52;
+    color: #223775;
 }
 
 a.a-icon-darkgreen {
@@ -65,7 +66,7 @@ a.a-icon-darkgreen {
 
 a.a-icon-darkgreen:hover {
     transform: scale(1.5);
-    color: #0d402a;
+    color: #15234a;
 }
 
 /* buttons */
@@ -90,7 +91,7 @@ a.a-icon-darkgreen:hover {
 }
 
 *.btn-blue {
-    background: linear-gradient(-45deg, #104c52, #104c52, #27bdcc);
+    background: linear-gradient(-45deg, #101452, #272ccc, #24edd9);
 }
 
 *.btn-grey {

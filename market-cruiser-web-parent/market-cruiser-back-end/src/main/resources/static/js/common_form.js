@@ -40,3 +40,9 @@ function showErrorModal(message) {
 function showWarningModal(message) {
     showModalDialog("Warning", message);
 }
+
+function updateEnabledField() {
+    var checkbox = document.getElementById("checkbox");
+    var hiddenField = document.getElementById("enabled");
+    hiddenField.value = checkbox.checked;
+}
