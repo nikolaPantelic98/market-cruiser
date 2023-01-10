@@ -79,6 +79,14 @@ public class User {
         this.lastName = lastName;
     }
 
+    public User(String emailAddress, String password, String firstName, String lastName, boolean enabled) {
+        this.emailAddress = emailAddress;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.enabled = enabled;
+    }
+
     public void addRole(Role role) {
         this.roles.add(role);
     }
