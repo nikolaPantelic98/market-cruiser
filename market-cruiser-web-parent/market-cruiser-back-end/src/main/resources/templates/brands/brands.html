@@ -65,6 +65,27 @@
         </table>
     </div>
 
+    <div>
+
+    </div>
+
+    <div class="less-details">
+        <div th:each="brand : ${listBrands}" class="row m-1">
+            <div class="col-4">
+                <img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid" />
+            </div>
+            <div class="col-8">
+                <div>[[${brand.name}]]</div>
+                <div class="mt-2">
+                    <div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.brandId})"></div>
+                    &nbsp;
+                    <div th:replace="fragments :: delete('brand', ${brand.brandId}, '/brands/delete/' + ${brand.brandId}, true)"></div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
     <div th:replace="fragments :: pagination('/brands', 'brands')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
