@@ -30,9 +30,7 @@
                         Logo
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
-                        Brand Name
-                    </th>
+                    <th th:replace="fragments :: column_link('/brands', 'name', 'Brand Name')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Categories
@@ -66,6 +64,8 @@
             </tbody>
         </table>
     </div>
+
+    <div th:replace="fragments :: pagination('/brands', 'brands')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 

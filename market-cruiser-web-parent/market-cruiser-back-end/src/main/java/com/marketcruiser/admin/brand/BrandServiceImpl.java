@@ -2,6 +2,10 @@ package com.marketcruiser.admin.brand;
 
 import com.marketcruiser.common.entity.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +13,8 @@ import java.util.NoSuchElementException;
 
 @Service
 public class BrandServiceImpl implements BrandService{
+
+    public static final int BRANDS_PER_PAGE = 10;
 
     private final BrandRepository brandRepository;
 
@@ -21,6 +27,22 @@ public class BrandServiceImpl implements BrandService{
     @Override
     public List<Brand> getAllBrands() {
         return brandRepository.findAll();
+    }
+
+    // returns a page of brands sorted by the specified field and direction
+    @Override
+    public Page<Brand> listBrandsByPage(int pageNumber, String sortField, String sortDir, String keyword) {
+        Sort sort = Sort.by(sortField);
+
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        Pageable pageable = PageRequest.of(pageNumber - 1, BRANDS_PER_PAGE, sort);
+
+        if (keyword != null) {
+            return brandRepository.findAllBrands(keyword, pageable);
+        }
+
+        return brandRepository.findAll(pageable);
     }
 
     // saves brand

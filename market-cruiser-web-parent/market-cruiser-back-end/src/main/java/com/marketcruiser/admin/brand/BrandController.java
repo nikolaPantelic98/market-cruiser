@@ -5,6 +5,8 @@ import com.marketcruiser.admin.category.CategoryServiceImpl;
 import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Category;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -31,10 +33,38 @@ public class BrandController {
     }
 
 
+    // shows a first page of brands
     @GetMapping("/brands")
-    public String listAllBrands(Model model) {
-        List<Brand> listBrands = brandService.getAllBrands();
+    public String showFirstPageOfBrands(Model model) {
+        return showPageOfBrands(1, model, "name", "asc", null);
+    }
+
+    // shows a list of all brands using pagination
+    @GetMapping("/brands/page/{pageNumber}")
+    public String showPageOfBrands(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
+                                  @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
+        Page<Brand> page = brandService.listBrandsByPage(pageNumber, sortField, sortDir, keyword);
+        List<Brand> listBrands = page.getContent();
+
+        long startCount = (long) (pageNumber - 1) * BrandServiceImpl.BRANDS_PER_PAGE + 1;
+        long endCount = startCount + BrandServiceImpl.BRANDS_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            endCount = page.getTotalElements();
+        }
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listBrands", listBrands);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("keyword", keyword);
 
         return "brands/brands";
     }

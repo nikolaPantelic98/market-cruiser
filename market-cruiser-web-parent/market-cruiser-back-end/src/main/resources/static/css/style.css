@@ -102,22 +102,6 @@ a.a-icon-darkgreen:hover {
     background: linear-gradient(-45deg, #fc7c7c, #fc0000, #ad0000);
 }
 
-/* lists */
-
-li.li-green {
-    transition: all 0.3s ease;
-    color: green;
-}
-
-li.li-green:hover {
-    transform: scale(1.5);
-    color: green;
-    font-size: 11px;
-    font-weight: bold;
-    background-color: #25c481;
-    padding: 5px;
-}
-
 /*pagination*/
 
 .pagination {
