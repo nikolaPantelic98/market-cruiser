@@ -12,6 +12,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/table.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/menu.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/checkbox.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/search.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
@@ -113,17 +114,20 @@
             <input type="hidden" name="sortField" th:value="${sortField}" />
             <input type="hidden" name="sortDir" th:value="${sortDir}" />
 
-            Filter:&nbsp;
-            <input type="search" name="keyword" th:value="${keyword}" class="form-control" required />
-            &nbsp;&nbsp;
-            <button type="submit" value="Search" class="btn btn-blue" >
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </button>
-            &nbsp;&nbsp;
+            <div class="search">
+                <input type="search" name="keyword" th:value="${keyword}" class="search-box" required />
+                <span class="search-button">
+                    <span class="search-icon"></span>
+                </span>
+            </div>
+<!--            <input type="search" name="keyword" th:value="${keyword}" class="form-control" required />-->
+<!--            &nbsp;&nbsp;-->
+<!--            <button type="submit" value="Search" class="btn btn-blue" >-->
+<!--                <i class="fa-solid fa-magnifying-glass"></i>-->
+<!--            </button>-->
+            &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="button" value="Clear" class="btn btn-grey" onclick="clearFilter()" />
         </form>
     </div>
-
-
 </body>
 </html>

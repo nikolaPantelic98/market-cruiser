@@ -9,3 +9,7 @@ function showDeleteConfirmModal(link, entityName) {
     $("#confirmText").text("Are you sure you want to delete this " + entityName + " with ID " + entityId + "?");
     $("#confirmModal").modal();
 }
+
+$('.search-button').click(function(){
+    $(this).parent().toggleClass('open');
+});
