@@ -10,7 +10,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Table(
         name = "products"
@@ -108,4 +107,13 @@ public class Product {
             name = "brand_id"
     )
     private Brand brand;
+
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productId=" + productId +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
