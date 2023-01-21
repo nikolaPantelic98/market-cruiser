@@ -9,6 +9,7 @@ h1{
 table{
     width:100%;
     table-layout: fixed;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .tbl-header{
     background-color: rgba(255,255,255,0.3);

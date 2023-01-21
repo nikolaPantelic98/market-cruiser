@@ -46,3 +46,9 @@ function updateEnabledField() {
     var hiddenField = document.getElementById("enabled");
     hiddenField.value = checkbox.checked;
 }
+
+function updateInStockField() {
+    var checkbox = document.getElementById("checkbox-instock");
+    var hiddenField = document.getElementById("inStock");
+    hiddenField.value = checkbox.checked;
+}
