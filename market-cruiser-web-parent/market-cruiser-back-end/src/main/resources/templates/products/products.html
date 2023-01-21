@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Products - Market Cruiser Admin')">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragment_navigation :: menu"></div>
+
+    <br/>
+    <div>
+        <h2>Manage Products</h2>
+        <br/>
+        <a th:href="@{/products/new}" class="a-icon-darkgreen fas fa-folder-plus fa-2x icon-darkblue" title="Create New Product"></a>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <a th:href="@{/products/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
+    </div>
+
+    <div th:replace="fragments :: search_form_and_message('/products/page/1')"></div>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="tbl-header">
+                <tr>
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
+                        Product ID
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
+                        Main Image
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
+                        Product Name
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
+                        Brand
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
+                        Category
+                    </th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
+                        Enabled
+                    </th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product: ${listProducts}">
+                    <td style="text-align: center; vertical-align: middle">[[${product.productId}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">
+
+                    </td>
+
+                    <td style="text-align: left; vertical-align: middle">[[${product.name}]]</td>
+
+                    <td style="text-align: left; vertical-align: middle">[[${product.brand.name}]]</td>
+
+                    <td style="text-align: left; vertical-align: middle">[[${product.category.name}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.productId})"></div>
+                    </td>
+
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green"
+                            th:href="@{'/products/details/' + ${product.productId}}"
+                            title="View Details of This Product"></a>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: edit('product', '/products/edit/' + ${product.productId})"></div>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: delete('product', ${product.productId}, '/products/delete/' + ${product.productId}, true)"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div th:replace="fragments_modal :: confirm_modal"></div>
+
+    <br>
+    <br>
+
+    <div th:replace="fragments :: footer"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/brands}]]";
+
+    $(document).ready(function () {
+        $(".link-delete").on("click", function (e) {
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'brand');
+        });
+    });
+
+</script>
+</body>
+</html>
