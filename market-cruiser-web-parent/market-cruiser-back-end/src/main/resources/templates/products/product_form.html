@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="fragments :: page_head(${pageTitle})">
 
+<head>
+    <head th:replace="fragments :: page_head(${pageTitle}, 'tag')"/>
+    <link rel="stylesheet" th:href="@{/richtext/richtext.min.css}"/>
+    <script th:src="@{/richtext/jquery.richtext.min.js}"></script>
 </head>
+
 <body>
 <div class="container-fluid">
     <div th:replace="fragment_navigation :: menu">
@@ -26,6 +30,7 @@
                 <input type="radio" id="tab2" name="tab-control">
                 <input type="radio" id="tab3" name="tab-control">
                 <input type="radio" id="tab4" name="tab-control">
+                <input type="radio" id="tab5" name="tab-control">
                 <ul>
                     <li title="Overview">
                         <label for="tab1" role="button">
@@ -63,33 +68,49 @@
                             <span>Details</span>
                         </label>
                     </li>
+                    <li title="Shipping">
+                        <label for="tab5" role="button">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M3,4A2,2 0 0,0 1,6V17H3A3,3 0 0,0 6,20A3,3 0 0,0 9,17H15A3,3 0 0,0 18,20A3,3 0 0,0 21,17H23V12L20,8H17V4M10,6L14,10L10,14V11H4V9H10M17,9.5H19.5L21.47,12H17M6,15.5A1.5,1.5 0 0,1 7.5,17A1.5,1.5 0 0,1 6,18.5A1.5,1.5 0 0,1 4.5,17A1.5,1.5 0 0,1 6,15.5M18,15.5A1.5,1.5 0 0,1 19.5,17A1.5,1.5 0 0,1 18,18.5A1.5,1.5 0 0,1 16.5,17A1.5,1.5 0 0,1 18,15.5Z" />
+                            </svg>
+                            <br>
+                            <span>Shipping</span>
+                        </label>
+                    </li>
                 </ul>
                 <div class="slider">
                     <div class="indicator"></div>
                 </div>
                 <div class="content">
                     <section>
-                        <h2>Features</h2>
-                        <div th:replace="products/product_overview :: content"></div>
+                        <h2>Overview</h2>
+                        <div th:replace="products/fragment_product_overview :: content"></div>
+                    </section>
 
-                        <div class="text-center">
-                            <input type="submit" value="Save" class="btn btn-blue m-3"/>
-                            <input type="button" value="Cancel" class="btn btn-grey" id="buttonCancel" />
-                        </div>
-                    </section>
                     <section>
-                        <h2>Delivery Contents</h2>
-                        Drugi tab
+                        <h2>Description</h2>
+                        <div th:replace="products/fragment_product_description :: content"></div>
                     </section>
+
                     <section>
-                        <h2>Shipping</h2>
+                        <h2>Images</h2>
                         Treci tab
                     </section>
+
                     <section>
-                        <h2>Returns</h2>
+                        <h2>Details</h2>
                         Cetvrti tab
                     </section>
+
+                    <section>
+                        <h2>Shipping</h2>
+                        <div th:replace="products/fragment_product_shipping :: content"></div>
+                    </section>
                 </div>
+            </div>
+            <div class="text-center">
+                <input type="submit" value="Save" class="btn btn-blue m-3"/>
+                <input type="button" value="Cancel" class="btn btn-grey" id="buttonCancel" />
             </div>
         </div>
 
@@ -108,6 +129,10 @@
     dropdownCategories = $("#category");
 
     $(document).ready(function () {
+
+        $("#shortDescription").richText();
+        $("#fullDescription").richText();
+
         dropdownBrands.change(function () {
             dropdownCategories.empty();
             getCategories();

@@ -80,7 +80,7 @@ body h1 {
 }
 .tabs .slider {
     position: relative;
-    width: 25%;
+    width: 20%;
     transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
 }
 .tabs .slider .indicator {
@@ -193,6 +193,25 @@ body h1 {
     transform: translateX(300%);
 }
 .tabs input[name=tab-control]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
+    display: block;
+}
+
+.tabs input[name=tab-control]:nth-of-type(5):checked ~ ul > li:nth-child(5) > label {
+    cursor: default;
+    color: #223775;
+}
+.tabs input[name=tab-control]:nth-of-type(5):checked ~ ul > li:nth-child(5) > label svg {
+    fill: #223775;
+}
+@media (max-width: 600px) {
+    .tabs input[name=tab-control]:nth-of-type(5):checked ~ ul > li:nth-child(5) > label {
+        background: rgba(0, 0, 0, 0.08);
+    }
+}
+.tabs input[name=tab-control]:nth-of-type(5):checked ~ .slider {
+    transform: translateX(400%);
+}
+.tabs input[name=tab-control]:nth-of-type(5):checked ~ .content > section:nth-child(5) {
     display: block;
 }
 @-webkit-keyframes content {
