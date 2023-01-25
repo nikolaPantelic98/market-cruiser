@@ -30,22 +30,22 @@ public class ProductRepositoryTest {
     @Test
     @Disabled
     public void testCreateProduct() {
-        Brand brand = entityManager.find(Brand.class, 1L);
-        Category category = entityManager.find(Category.class, 36L);
+        Brand brand = entityManager.find(Brand.class, 7L);
+        Category category = entityManager.find(Category.class, 180L);
 
         Product product = new Product();
-        product.setName("Acer QHD");
-        product.setAlias("acer_qhd");
-        product.setShortDescription("A good webcam from Acer");
+        product.setName("Canon Camera");
+        product.setAlias("canon_camera");
+        product.setShortDescription("A good webcam from Canon");
         product.setFullDescription("This is a very good webcam full description");
 
         product.setBrand(brand);
         product.setCategory(category);
 
-        product.setPrice(456);
-        product.setCost(400);
+        product.setPrice(300);
+        product.setCost(250);
         product.setEnabled(true);
-        product.setInStock(true);
+        product.setInStock(false);
         product.setCreatedTime(new Date());
         product.setUpdatedTime(new Date());
 

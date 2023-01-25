@@ -1,16 +1,32 @@
 package com.marketcruiser.admin.brand;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
 public class CategoryDTO {
 
-    private Long id;
+    private Long categoryId;
     private String name;
+
+
+    public CategoryDTO() {
+    }
+
+    public CategoryDTO(Long id, String name) {
+        this.categoryId = id;
+        this.name = name;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

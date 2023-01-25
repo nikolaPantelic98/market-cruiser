@@ -11,7 +11,6 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Builder
 @Table(
         name = "brands"
@@ -47,7 +46,6 @@ public class Brand {
                     name = "category_id"
             )
     )
-    @ToString.Exclude
     private Set<Category> categories = new HashSet<>();
 
 
@@ -61,11 +59,11 @@ public class Brand {
         this.name = name;
     }
 
-
     @Override
     public String toString() {
-        return this.name;
+        return "Brand [id=" + brandId + ", name=" + name + ", categories=" + categories + "]";
     }
+
 
     @Transient
     public String getLogoPath() {

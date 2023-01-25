@@ -36,6 +36,7 @@ public class BrandRestController {
         try {
             Brand brand = brandService.getBrandById(brandId);
             Set<Category> categories = brand.getCategories();
+
             for (Category category : categories) {
                 CategoryDTO dto = new CategoryDTO(category.getCategoryId(), category.getName());
                 listCategories.add(dto);

@@ -1,13 +1,16 @@
 package com.marketcruiser.admin.product;
 
 import com.marketcruiser.admin.brand.BrandServiceImpl;
+import com.marketcruiser.admin.category.CategoryServiceImpl;
 import com.marketcruiser.common.entity.Brand;
+import com.marketcruiser.common.entity.Category;
 import com.marketcruiser.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -42,8 +45,8 @@ public class ProductController {
         product.setEnabled(true);
         product.setInStock(true);
 
-        model.addAttribute("listBrands", listBrands);
         model.addAttribute("product", product);
+        model.addAttribute("listBrands", listBrands);
         model.addAttribute("pageTitle", "Create New Product");
 
         return "products/product_form";
@@ -51,11 +54,9 @@ public class ProductController {
 
     // saves a new product
     @PostMapping("/products/save")
-    public String saveProduct(Product product) {
-
-        System.out.println("Product Name: " + product.getName());
-        System.out.println("Brand ID: " + product.getBrand().getBrandId());
-        System.out.println("Category Name: " + product.getCategory().getName());
+    public String saveProduct(Product product, RedirectAttributes redirectAttributes) {
+        productService.saveProduct(product);
+        redirectAttributes.addFlashAttribute("message", "The product has been saved successfully.");
 
         return "redirect:/products";
     }

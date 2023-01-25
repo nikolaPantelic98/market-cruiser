@@ -22,6 +22,8 @@
     <form th:action="@{/products/save}" method="post"
           th:object="${product}">
         <input type="hidden" th:field="*{productId}"/>
+        <input type="hidden" id="enabled" th:field="*{enabled}"/>
+        <input type="hidden" id="inStock" th:field="*{inStock}"/>
 
         <div>
             <div class="tabs">
@@ -137,6 +139,7 @@
             dropdownCategories.empty();
             getCategories();
         });
+
         getCategories();
     });
 
@@ -148,7 +151,7 @@
             $.each(responseJson, function (index, category) {
                 $("<option>").val(category.categoryId).text(category.name).appendTo(dropdownCategories);
             });
-        })
+        });
     }
 
 </script>
