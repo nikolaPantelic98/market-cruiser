@@ -8,4 +8,5 @@ public interface ProductService {
 
     List<Product> getAllProducts();
     Product saveProduct(Product product);
+    String checkUnique(Long productId, String name);
 }

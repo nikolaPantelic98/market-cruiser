@@ -19,7 +19,7 @@
 
     <br/>
 
-    <form th:action="@{/products/save}" method="post"
+    <form th:action="@{/products/save}" method="post" onsubmit="return checkUnique(this)"
           th:object="${product}">
         <input type="hidden" th:field="*{productId}"/>
         <input type="hidden" id="enabled" th:field="*{enabled}"/>
@@ -152,6 +152,32 @@
                 $("<option>").val(category.categoryId).text(category.name).appendTo(dropdownCategories);
             });
         });
+    }
+
+    function checkUnique(form) {
+        productNewId = $("#productId").val();
+        productNewName = $("#name").val();
+
+        csrfValue = $("input[name = '_csrf']").val();
+
+        url = "[[@{/products/check-unique}]]";
+
+        params = {productId: productNewId, name: productNewName, _csrf: csrfValue};
+
+        $.post(url, params, function (response) {
+            if (response == "OK") {
+                form.submit();
+            } else if (response == "Duplicate") {
+                showWarningModal("There is another brand having the same name " + productNewName);
+            } else {
+                showErrorModal("Unknown response from server");
+            }
+
+        }).fail(function () {
+            showErrorModal("Could not connect to the server");
+        });
+
+        return false;
     }
 
 </script>

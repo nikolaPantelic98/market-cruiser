@@ -23,6 +23,7 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+    // saves product and overwrite alias of the saved product
     @Override
     public Product saveProduct(Product product) {
         if (product.getProductId() == null) {
@@ -39,5 +40,22 @@ public class ProductServiceImpl implements ProductService {
         product.setUpdatedTime(new Date());
 
         return productRepository.save(product);
+    }
+
+    // checks if the given product ID and name are unique
+    @Override
+    public String checkUnique(Long productId, String name) {
+        boolean isCreatingNew = (productId == null || productId == 0);
+        Product productByName = productRepository.findProductByName(name);
+
+        if (isCreatingNew) {
+            if (productByName != null) return "Duplicate";
+        } else {
+            if (productByName != null && productByName.getProductId() != productId) {
+                return "Duplicate";
+            }
+        }
+
+        return "Ok";
     }
 }

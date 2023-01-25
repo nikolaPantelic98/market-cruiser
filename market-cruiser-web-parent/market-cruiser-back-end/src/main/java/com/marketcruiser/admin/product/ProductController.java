@@ -1,9 +1,7 @@
 package com.marketcruiser.admin.product;
 
 import com.marketcruiser.admin.brand.BrandServiceImpl;
-import com.marketcruiser.admin.category.CategoryServiceImpl;
 import com.marketcruiser.common.entity.Brand;
-import com.marketcruiser.common.entity.Category;
 import com.marketcruiser.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
