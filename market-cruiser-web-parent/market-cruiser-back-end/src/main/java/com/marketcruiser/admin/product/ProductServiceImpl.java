@@ -65,4 +65,16 @@ public class ProductServiceImpl implements ProductService {
     public void updateProductEnabledStatus(Long productId, boolean enabled) {
         productRepository.updateEnabledStatus(productId, enabled);
     }
+
+    // deletes a product by product id
+    @Override
+    public void deleteProduct(Long productId) throws ProductNotFoundException {
+        Long countProductById = productRepository.countByProductId(productId);
+
+        if (countProductById == null || countProductById == 0) {
+            throw new ProductNotFoundException("Could not find any product with ID " + productId);
+        }
+
+        productRepository.deleteById(productId);
+    }
 }

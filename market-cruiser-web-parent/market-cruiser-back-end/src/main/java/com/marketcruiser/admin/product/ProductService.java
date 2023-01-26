@@ -10,4 +10,5 @@ public interface ProductService {
     Product saveProduct(Product product);
     String checkUnique(Long productId, String name);
     void updateProductEnabledStatus(Long productId, boolean enabled);
+    void deleteProduct(Long productId) throws ProductNotFoundException;
 }

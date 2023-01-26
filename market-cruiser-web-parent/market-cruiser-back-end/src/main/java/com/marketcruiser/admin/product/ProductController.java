@@ -60,6 +60,7 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    // method that disables or enables the product
     @GetMapping("/products/{productId}/enabled/{status}")
     public String updateCategoryEnabledStatus(@PathVariable Long productId, @PathVariable("status") boolean enabled,
                                               RedirectAttributes redirectAttributes) {
@@ -67,6 +68,20 @@ public class ProductController {
         String status = enabled ? "enabled" : "disabled";
         String message = "The product ID " + productId + " has been " + status;
         redirectAttributes.addFlashAttribute("message", message);
+
+        return "redirect:/products";
+    }
+
+    // method that deletes product
+    @GetMapping("/products/delete/{productId}")
+    public String deleteProduct(@PathVariable Long productId, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            productService.deleteProduct(productId);
+
+            redirectAttributes.addFlashAttribute("message", "The product ID " + productId + " has been deleted successfully");
+        } catch (ProductNotFoundException exception) {
+            redirectAttributes.addFlashAttribute("message", exception.getMessage());
+        }
 
         return "redirect:/products";
     }
