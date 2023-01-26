@@ -58,7 +58,7 @@ public class ProductServiceImpl implements ProductService {
             }
         }
 
-        return "Ok";
+        return "OK";
     }
 
     @Override

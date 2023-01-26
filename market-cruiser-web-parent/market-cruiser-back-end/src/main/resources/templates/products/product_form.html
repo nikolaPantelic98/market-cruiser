@@ -20,6 +20,7 @@
     <br/>
 
     <form th:action="@{/products/save}" method="post" onsubmit="return checkUnique(this)"
+          enctype="multipart/form-data"
           th:object="${product}">
         <input type="hidden" th:field="*{productId}"/>
         <input type="hidden" id="enabled" th:field="*{enabled}"/>
@@ -96,7 +97,7 @@
 
                     <section>
                         <h2>Images</h2>
-                        Treci tab
+                        <div th:replace="products/fragment_product_images :: content"></div>
                     </section>
 
                     <section>
@@ -168,7 +169,7 @@
             if (response == "OK") {
                 form.submit();
             } else if (response == "Duplicate") {
-                showWarningModal("There is another brand having the same name " + productNewName);
+                showWarningModal("There is another product having the same name " + productNewName);
             } else {
                 showErrorModal("Unknown response from server");
             }
