@@ -171,23 +171,20 @@ public class CategoryServiceImpl implements CategoryService{
         boolean isCreatingNew = (categoryId == null || categoryId == 0);
 
         Category categoryByName = categoryRepository.findByName(name);
+        Category categoryByAlias = categoryRepository.findByAlias(alias);
 
         if (isCreatingNew) {
             if (categoryByName != null) {
                 return "DuplicateName";
-            } else {
-                Category categoryByAlias = categoryRepository.findByAlias(alias);
-                if (categoryByAlias != null) {
-                    return "DuplicateAlias";
-                }
+            } else if (categoryByAlias != null) {
+                return "DuplicateAlias";
             }
         } else {
-            if (categoryByName != null && categoryByName.getCategoryId() != categoryId) {
+            if (categoryByName != null && !categoryByName.getCategoryId().equals(categoryId)) {
                 return "DuplicateName";
             }
 
-            Category categoryByAlias = categoryRepository.findByAlias(alias);
-            if (categoryByAlias != null && categoryByAlias.getCategoryId() != categoryId) {
+            if (categoryByAlias != null && !categoryByAlias.getCategoryId().equals(categoryId)) {
                 return "DuplicateAlias";
             }
         }
