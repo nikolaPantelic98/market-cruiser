@@ -72,6 +72,7 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    // sets the name of the main image for a product based on the uploaded file
     private void setMainImageName(MultipartFile mainImageMultipart, Product product) {
         if (!mainImageMultipart.isEmpty()) {
             String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
@@ -79,17 +80,19 @@ public class ProductController {
         }
     }
 
+    // sets the names of the extra images for a product based on the uploaded files
     private void setExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
-            if (extraImageMultiparts.length > 0) {
-                for (MultipartFile multipartFile : extraImageMultiparts) {
-                    if (!multipartFile.isEmpty()) {
-                        String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
-                        product.addExtraImage(fileName);
-                    }
+        if (extraImageMultiparts.length > 0) {
+            for (MultipartFile multipartFile : extraImageMultiparts) {
+                if (!multipartFile.isEmpty()) {
+                    String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+                    product.addExtraImage(fileName);
                 }
             }
         }
+    }
 
+    // Saves the uploaded main image and extra images to disk
     private void saveUploadedImages(MultipartFile mainImageMultipart, MultipartFile[] extraImageMultiparts, Product savedProduct) throws IOException {
         if (!mainImageMultipart.isEmpty()) {
             String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());

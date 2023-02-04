@@ -135,10 +135,13 @@ public class Product {
                 '}';
     }
 
+
+    // adds an extra product image to the list of images for this product.
     public void addExtraImage(String imageName) {
         this.images.add(new ProductImage(imageName, this));
     }
 
+    // gets the file path of the main image for this product
     @Transient
     public String getMainImagePath() {
         if (productId == null || mainImage == null) return "/images/image-thumbnail.png";
@@ -146,6 +149,7 @@ public class Product {
         return "/product-images/" + this.productId + "/" + this.mainImage;
     }
 
+    // adds a product detail to the list of details for this product
     public void addDetail(String name, String value) {
         this.details.add(new ProductDetails(name, value, this));
     }
