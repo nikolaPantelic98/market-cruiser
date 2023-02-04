@@ -3,9 +3,7 @@ package com.marketcruiser.common.entity;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Getter
@@ -122,6 +120,12 @@ public class Product {
     )
     private Set<ProductImage> images = new HashSet<>();
 
+    @OneToMany(
+            mappedBy = "product",
+            cascade = CascadeType.ALL
+    )
+    private List<ProductDetails> details = new ArrayList<>();
+
 
     @Override
     public String toString() {
@@ -140,5 +144,9 @@ public class Product {
         if (productId == null || mainImage == null) return "/images/image-thumbnail.png";
 
         return "/product-images/" + this.productId + "/" + this.mainImage;
+    }
+
+    public void addDetail(String name, String value) {
+        this.details.add(new ProductDetails(name, value, this));
     }
 }
