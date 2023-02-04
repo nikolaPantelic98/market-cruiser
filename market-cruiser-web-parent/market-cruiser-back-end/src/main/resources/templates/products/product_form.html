@@ -25,6 +25,7 @@
         <input type="hidden" th:field="*{productId}"/>
         <input type="hidden" id="enabled" th:field="*{enabled}"/>
         <input type="hidden" id="inStock" th:field="*{inStock}"/>
+        <input th:if="${product.category != null}" type="hidden" id="categoryId" th:value="${product.category.categoryId}"/>
 
         <div>
             <div class="tabs">
