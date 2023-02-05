@@ -46,6 +46,7 @@ public class ProductRepositoryTest {
         product.setCost(250);
         product.setEnabled(true);
         product.setInStock(false);
+        product.setMainImage("mainimage.png");
         product.setCreatedTime(new Date());
         product.setUpdatedTime(new Date());
 

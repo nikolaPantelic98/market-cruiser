@@ -116,13 +116,15 @@ public class Product {
 
     @OneToMany(
             mappedBy = "product",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private Set<ProductImage> images = new HashSet<>();
 
     @OneToMany(
             mappedBy = "product",
-            cascade = CascadeType.ALL
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
     )
     private List<ProductDetails> details = new ArrayList<>();
 
@@ -152,5 +154,22 @@ public class Product {
     // adds a product detail to the list of details for this product
     public void addDetail(String name, String value) {
         this.details.add(new ProductDetails(name, value, this));
+    }
+
+    public void addDetail(Long productId, String name, String value) {
+        this.details.add(new ProductDetails(productId, name, value, this));
+    }
+
+    public boolean containsImageName(String imageName) {
+        Iterator<ProductImage> iterator = images.iterator();
+
+        while (iterator.hasNext()) {
+            ProductImage image = iterator.next();
+            if (image.getName().equals(imageName)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
