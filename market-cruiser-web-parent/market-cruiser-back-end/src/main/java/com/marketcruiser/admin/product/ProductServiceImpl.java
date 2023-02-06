@@ -32,16 +32,26 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll();
     }
 
+    // this method implements pagination and sorting of products based on multiple search criteria
     @Override
-    public Page<Product> listProductsByPage(int pageNumber, String sortField, String sortDir, String keyword) {
+    public Page<Product> listProductsByPage(int pageNumber, String sortField, String sortDir, String keyword, Long categoryId) {
         Sort sort = Sort.by(sortField);
 
         sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
 
         Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE, sort);
 
-        if (keyword != null) {
+        if (keyword != null && !keyword.isEmpty()) {
+            if (categoryId != null && categoryId > 0) {
+                String categoryIdMatch = "-" + String.valueOf(categoryId) + "-";
+                return productRepository.searchInCategory(categoryId, categoryIdMatch,keyword, pageable);
+            }
             return productRepository.findAllProducts(keyword, pageable);
+        }
+
+        if (categoryId != null && categoryId > 0) {
+            String categoryIdMatch = "-" + String.valueOf(categoryId) + "-";
+            return productRepository.findAllInCategory(categoryId, categoryIdMatch, pageable);
         }
 
         return productRepository.findAll(pageable);

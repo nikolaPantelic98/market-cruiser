@@ -20,4 +20,15 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             + "OR p.brand.name LIKE %?1% "
             + "OR p.category.name LIKE %?1% ")
     Page<Product> findAllProducts(String keyword, Pageable pageable);
+    @Query("SELECT p FROM Product p WHERE p.category.categoryId = ?1 "
+            + "OR p.category.allParentIDs LIKE %?2%")
+    Page<Product> findAllInCategory(Long categoryId, String categoryIdMatch, Pageable pageable);
+    @Query("SELECT p FROM Product p WHERE (p.category.categoryId = ?1 "
+            + "OR p.category.allParentIDs LIKE %?2%) AND "
+            + "(p.name LIKE %?3% "
+            + "OR p.shortDescription LIKE %?3% "
+            + "OR p.fullDescription LIKE %?3% "
+            + "OR p.brand.name LIKE %?3% "
+            + "OR p.category.name LIKE %?3%)")
+    Page<Product> searchInCategory(Long categoryId, String categoryIdMatch, String keyword, Pageable pageable);
 }

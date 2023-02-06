@@ -108,3 +108,15 @@
     top: 4px;
     height: 6px;
 }
+
+
+.search-cat {
+    width: auto;
+    height: 35px;
+    margin-left: -15px;
+    background: linear-gradient(-45deg, #101452, #272ccc, #24edd9);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease;
+    border-radius: 6px;
+}

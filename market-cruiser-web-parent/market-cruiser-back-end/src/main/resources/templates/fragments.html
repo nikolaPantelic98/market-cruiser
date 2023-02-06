@@ -29,7 +29,7 @@
 
     <th th:fragment="column_link(moduleURL, fieldName, columnLabel)" class="text-center" style="text-align: center; vertical-align: middle">
         <a class="a-sorting text-black"
-           th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">
+           th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">
             [[${columnLabel}]]
         </a>
         <span th:if="${sortField == fieldName}"
@@ -39,7 +39,7 @@
 
     <a th:fragment="page_link(moduleURL, pageNum, label)"
        class="page-link"
-       th:href="@{${moduleURL} + '/page/' + ${pageNum} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''}}">[[${label}]]</a>
+       th:href="@{${moduleURL} + '/page/' + ${pageNum} + '?sortField=' + ${sortField} + '&sortDir=' + ${sortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">[[${label}]]</a>
 
 
     <div th:fragment="status(enabled, entityName, entityURL)" th:remove="tag">
@@ -121,11 +121,6 @@
                     <span class="search-icon"></span>
                 </span>
             </div>
-<!--            <input type="search" name="keyword" th:value="${keyword}" class="form-control" required />-->
-<!--            &nbsp;&nbsp;-->
-<!--            <button type="submit" value="Search" class="btn btn-blue" >-->
-<!--                <i class="fa-solid fa-magnifying-glass"></i>-->
-<!--            </button>-->
             &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="button" value="Clear" class="btn btn-grey" onclick="clearFilter()" />
         </form>

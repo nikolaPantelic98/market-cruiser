@@ -16,7 +16,34 @@
         <a th:href="@{/products/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
     </div>
 
-    <div th:replace="fragments :: search_form_and_message('/products/page/1')"></div>
+    <div>
+        <div th:if="${message != null}" class="alert alert-success text-center">
+            [[${message}]]
+        </div>
+
+        <form th:action="@{/products/page/1}" class="form-inline m-3" id="searchForm">
+            <input type="hidden" name="sortField" th:value="${sortField}" />
+            <input type="hidden" name="sortDir" th:value="${sortDir}" />
+
+            Category:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <select class="search-cat" name="categoryId" id="dropdownCategory">
+                <option value="0">All Categories</option>
+
+                <th:block th:each="cat : ${listCategories}">
+                <option th:value="${cat.categoryId}" th:selected="(${categoryId} == ${cat.categoryId})">[[${cat.name}]]</option>
+                </th:block>
+            </select>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="search">
+                <input type="search" name="keyword" th:value="${keyword}" class="search-box" required />
+                <span class="search-button">
+                    <span class="search-icon"></span>
+                </span>
+            </div>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="button" value="Clear" class="btn btn-grey" onclick="clearFilter()" />
+        </form>
+    </div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -111,6 +138,10 @@
             e.preventDefault();
             linkDetailURL = $(this).attr("href");
             $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+
+        $("#dropdownCategory").on("change", function () {
+           $("#searchForm").submit();
         });
 
     });
