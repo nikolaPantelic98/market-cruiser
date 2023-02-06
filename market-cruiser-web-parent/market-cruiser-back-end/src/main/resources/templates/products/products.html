@@ -57,19 +57,25 @@
                         <img th:src="@{${product.mainImagePath}}" style="width: 66px" class="img-fluid"/>
                     </td>
 
-                    <td style="text-align: left; vertical-align: middle">[[${product.name}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="a-sorting text-black link-detail"
+                            th:href="@{'/products/detail/' + ${product.productId}}"
+                            title="View Details of This Product">
+                            [[${product.name}]]
+                        </a>
+                    </td>
 
-                    <td style="text-align: left; vertical-align: middle">[[${product.brand.name}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${product.brand.name}]]</td>
 
-                    <td style="text-align: left; vertical-align: middle">[[${product.category.name}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${product.category.name}]]</td>
 
                     <td style="text-align: center; vertical-align: middle">
                         <div th:replace="fragments :: status(${product.enabled}, 'product', '/products/' + ${product.productId})"></div>
                     </td>
 
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green"
-                            th:href="@{'/products/details/' + ${product.productId}}"
+                        <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-detail"
+                            th:href="@{'/products/detail/' + ${product.productId}}"
                             title="View Details of This Product"></a>
                         &nbsp;&nbsp;
                         <div th:replace="fragments :: edit('product', '/products/edit/' + ${product.productId})"></div>
@@ -83,6 +89,14 @@
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 
+    <div class="modal fade" id="detailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);">
+
+            </div>
+        </div>
+    </div>
+
     <br>
     <br>
 
@@ -91,13 +105,20 @@
 </div>
 <script th:src="@{/js/common_list.js}"></script>
 <script type="text/javascript">
-    moduleURL = "[[@{/brands}]]";
+    moduleURL = "[[@{/products}]]";
 
     $(document).ready(function () {
         $(".link-delete").on("click", function (e) {
             e.preventDefault();
             showDeleteConfirmModal($(this), 'product');
         });
+
+        $(".link-detail").on("click", function (e) {
+            e.preventDefault();
+            linkDetailURL = $(this).attr("href");
+            $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+
     });
 
 </script>

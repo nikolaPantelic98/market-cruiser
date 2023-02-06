@@ -217,6 +217,7 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    // updates an already existing product
     @GetMapping("/products/edit/{productId}")
     public String editProduct(@PathVariable Long productId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -235,7 +236,21 @@ public class ProductController {
             redirectAttributes.addFlashAttribute("message", exception.getMessage());
             return "redirect:/products";
         }
+    }
 
+    // views details of chosen product
+    @GetMapping("/products/detail/{productId}")
+    public String viewProductDetails(@PathVariable Long productId, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            Product product = productService.getProduct(productId);
 
+            model.addAttribute("product", product);
+
+            return "products/product_detail_modal";
+
+        } catch (ProductNotFoundException exception) {
+            redirectAttributes.addFlashAttribute("message", exception.getMessage());
+            return "redirect:/products";
+        }
     }
 }
