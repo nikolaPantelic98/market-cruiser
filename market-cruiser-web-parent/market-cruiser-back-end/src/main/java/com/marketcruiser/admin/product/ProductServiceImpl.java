@@ -2,6 +2,10 @@ package com.marketcruiser.admin.product;
 
 import com.marketcruiser.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -12,6 +16,8 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
+
+    public static final int PRODUCTS_PER_PAGE = 10;
 
     private final ProductRepository productRepository;
 
@@ -24,6 +30,21 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
+    }
+
+    @Override
+    public Page<Product> listProductsByPage(int pageNumber, String sortField, String sortDir, String keyword) {
+        Sort sort = Sort.by(sortField);
+
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE, sort);
+
+        if (keyword != null) {
+            return productRepository.findAllProducts(keyword, pageable);
+        }
+
+        return productRepository.findAll(pageable);
     }
 
     // saves product and overwrite alias of the saved product

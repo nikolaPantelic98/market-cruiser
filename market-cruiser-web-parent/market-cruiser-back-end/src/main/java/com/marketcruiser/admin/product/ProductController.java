@@ -6,6 +6,8 @@ import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Product;
 import com.marketcruiser.common.entity.ProductImage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -38,10 +40,36 @@ public class ProductController {
 
 
     @GetMapping("/products")
-    public String showAllProducts(Model model) {
-        List<Product> listProducts = productService.getAllProducts();
+    public String showFirstPageOfProducts(Model model) {
+        return showPageOfProducts(1, model, "name", "asc", null);
+    }
 
+    // shows a list of all products using pagination
+    @GetMapping("/products/page/{pageNumber}")
+    public String showPageOfProducts(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
+                                   @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
+        Page<Product> page = productService.listProductsByPage(pageNumber, sortField, sortDir, keyword);
+        List<Product> listProducts = page.getContent();
+
+        long startCount = (long) (pageNumber - 1) * ProductServiceImpl.PRODUCTS_PER_PAGE + 1;
+        long endCount = startCount + ProductServiceImpl.PRODUCTS_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            endCount = page.getTotalElements();
+        }
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", page.getTotalElements());
         model.addAttribute("listProducts", listProducts);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("keyword", keyword);
 
         return "products/products";
     }
@@ -58,6 +86,7 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("listBrands", listBrands);
         model.addAttribute("pageTitle", "Create New Product");
+        model.addAttribute("numberOfExistingExtraImages", 0);
 
         return "products/product_form";
     }

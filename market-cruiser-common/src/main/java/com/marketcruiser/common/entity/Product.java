@@ -160,6 +160,7 @@ public class Product {
         this.details.add(new ProductDetails(productId, name, value, this));
     }
 
+    // method that checks for the presence of an image name in a list of product images
     public boolean containsImageName(String imageName) {
         Iterator<ProductImage> iterator = images.iterator();
 
@@ -171,5 +172,15 @@ public class Product {
         }
 
         return false;
+    }
+
+    // method that returns a shortened version of the name attribute
+    @Transient
+    public String getShortName() {
+        if (name.length() > 30) {
+            return name.substring(0, 30).concat("...");
+        } else {
+            return name;
+        }
     }
 }

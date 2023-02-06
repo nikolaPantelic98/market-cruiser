@@ -22,25 +22,17 @@
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="tbl-header">
                 <tr>
-                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
-                        Product ID
-                    </th>
+                    <th th:replace="fragments :: column_link('/products', 'productId', 'Product ID')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Main Image
                     </th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
-                        Product Name
-                    </th>
+                    <th th:replace="fragments :: column_link('/products', 'name', 'Product Name')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
-                        Brand
-                    </th>
+                    <th th:replace="fragments :: column_link('/products', 'brand', 'Brand')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
-                        Category
-                    </th>
+                    <th th:replace="fragments :: column_link('/products', 'category', 'Category')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Enabled
@@ -60,8 +52,8 @@
                     <td style="text-align: center; vertical-align: middle">
                         <a class="a-sorting text-black link-detail"
                             th:href="@{'/products/detail/' + ${product.productId}}"
-                            title="View Details of This Product">
-                            [[${product.name}]]
+                            th:title="${product.name}">
+                            [[${product.shortName}]]
                         </a>
                     </td>
 
@@ -86,6 +78,8 @@
             </tbody>
         </table>
     </div>
+
+    <div th:replace="fragments :: pagination('/products', 'products')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 
