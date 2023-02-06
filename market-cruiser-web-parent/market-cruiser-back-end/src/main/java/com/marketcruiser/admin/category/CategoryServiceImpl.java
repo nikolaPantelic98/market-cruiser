@@ -108,6 +108,13 @@ public class CategoryServiceImpl implements CategoryService{
     // saves category
     @Override
     public Category saveCategory(Category category) {
+        Category parent = category.getParent();
+        if (parent != null) {
+            String allParentIds = parent.getAllParentIDs() == null ? "-" : parent.getAllParentIDs();
+            allParentIds += String.valueOf(parent.getCategoryId()) + "-";
+            category.setAllParentIDs(allParentIds);
+        }
+
         return categoryRepository.save(category);
     }
 
