@@ -3,6 +3,7 @@ package com.marketcruiser.admin.product;
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.admin.brand.BrandServiceImpl;
 import com.marketcruiser.admin.category.CategoryServiceImpl;
+import com.marketcruiser.admin.security.MarketCruiserUserDetails;
 import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Category;
 import com.marketcruiser.common.entity.Product;
@@ -10,6 +11,7 @@ import com.marketcruiser.common.entity.ProductImage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -104,13 +106,20 @@ public class ProductController {
     // saves a new product
     @PostMapping("/products/save")
     public String saveProduct(Product product, RedirectAttributes redirectAttributes,
-                              @RequestParam("fileImage") MultipartFile mainImageMultipart,
-                              @RequestParam("extraImage") MultipartFile[] extraImageMultiparts,
+                              @RequestParam(value = "fileImage", required = false) MultipartFile mainImageMultipart,
+                              @RequestParam(value = "extraImage", required = false) MultipartFile[] extraImageMultiparts,
                               @RequestParam(name = "detailIDs", required = false) String[] detailIDs,
                               @RequestParam(name = "detailNames", required = false) String[] detailNames,
                               @RequestParam(name = "detailValues", required = false) String[] detailValues,
                               @RequestParam(name = "imageIDs", required = false) String[] imageIDs,
-                              @RequestParam(name = "imageNames", required = false) String[] imageNames) throws IOException {
+                              @RequestParam(name = "imageNames", required = false) String[] imageNames,
+                              @AuthenticationPrincipal MarketCruiserUserDetails loggedUser) throws IOException {
+        if (loggedUser.hasRole("Salesperson")) {
+            productService.saveProductPrice(product);
+            redirectAttributes.addFlashAttribute("message", "The product has been saved successfully.");
+            return "redirect:/products";
+        }
+
         setMainImageName(mainImageMultipart, product);
         setExistingExtraImageNames(imageIDs, imageNames, product);
         setNewExtraImageNames(extraImageMultiparts, product);

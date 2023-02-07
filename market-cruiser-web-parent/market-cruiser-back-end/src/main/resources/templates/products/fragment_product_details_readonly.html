@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="content" th:remove="tag">
+        <div>
+            <table class="table table-bordered table-striped table-hover table-responsive-xl">
+                <thead class="tbl-header">
+                    <tr>
+                        <th style="text-align: center; vertical-align: middle; color: black; font-weight: bold">Name</th>
+                        <th style="text-align: center; vertical-align: middle; color: black; font-weight: bold">Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="detail: ${product.details}">
+                        <td style="text-align: center; vertical-align: middle">[[${detail.name}]]</td>
+                        <td style="text-align: center; vertical-align: middle">[[${detail.value}]]</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

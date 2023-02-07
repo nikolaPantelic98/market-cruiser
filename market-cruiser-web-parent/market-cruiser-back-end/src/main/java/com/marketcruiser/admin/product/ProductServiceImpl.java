@@ -76,6 +76,16 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    @Override
+    public void saveProductPrice(Product productInForm) {
+        Product productInDB = productRepository.findById(productInForm.getProductId()).get();
+        productInDB.setCost(productInForm.getCost());
+        productInDB.setPrice(productInForm.getPrice());
+        productInDB.setDiscountPercent(productInForm.getDiscountPercent());
+
+        productRepository.save(productInDB);
+    }
+
     // checks if the given product ID and name are unique
     @Override
     public String checkUnique(Long productId, String name) {
