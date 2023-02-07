@@ -121,6 +121,34 @@
         </table>
     </div>
 
+    <div class="less-details">
+        <div th:each="product : ${listProducts}" class="row m-1">
+            <div class="col-4">
+                <img th:src="@{${product.mainImagePath}}" style="width: 100px" class="img-fluid" />
+            </div>
+            <div class="col-8">
+                <div>
+                    <a class="a-sorting text-black link-detail" th:href="@{'/products/detail/' + ${product.productId}}">[[${product.shortName}]]</a>
+                </div>
+                <div class="mt-2">
+                    <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-detail"
+                       th:href="@{'/products/detail/' + ${product.productId}}"></a>
+
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">
+                    &nbsp;
+                    <div th:replace="fragments :: edit('product', '/products/edit/' + ${product.productId})"></div>
+                    </th:block>
+
+                    <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                    &nbsp;
+                    <div th:replace="fragments :: delete('product', ${product.productId}, '/products/delete/' + ${product.productId}, true)"></div>
+                    </th:block>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
     <div th:replace="fragments :: pagination('/products', 'products')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
