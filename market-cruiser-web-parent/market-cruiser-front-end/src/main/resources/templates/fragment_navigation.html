@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="header_menu">
+        <nav class="menu">
+            <ol>
+                <li class="menu-item active">
+                    <a th:href="@{/}">Home</a>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#0">Menu</a>
+                    <ol class="sub-menu">
+
+                        <li class="menu-item">
+                            <a href="#0">Careers</a>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="#0">Payments</a>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="#0">Shipping &amp; Delivery</a>
+                        </li>
+
+                    </ol>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#0">Login</a>
+                    <ol class="sub-menu">
+
+                        <li class="menu-item">
+                            <a href="#0">Login</a>
+                        </li>
+
+                        <li class="menu-item">
+                            <a href="#0">Register</a>
+                        </li>
+
+                    </ol>
+                </li>
+
+                <li class="menu-item">
+                    <a href="#0">Contact</a>
+                </li>
+
+            </ol>
+        </nav>
+    </div>
+
+    <div th:fragment="footer_menu">
+
+        <footer class="footer-distributed">
+
+            <div class="footer-right">
+
+                <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="#"><i class="fa-brands fa-github"></i></a>
+
+            </div>
+
+            <div class="footer-left">
+
+                <p class="footer-links">
+                    <a class="link-1" href="#">About Us</a>
+
+                    <a href="#">Privacy Policy</a>
+
+                    <a href="#">Returns &amp; Refunds</a>
+
+                </p>
+
+                <p>Market Cruiser &copy; 2023</p>
+            </div>
+
+        </footer>
+
+    </div>
+</body>
+</html>

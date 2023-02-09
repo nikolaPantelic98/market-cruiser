@@ -1,4 +1,4 @@
-package com.marketcruiser.site;
+package com.marketcruiser;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

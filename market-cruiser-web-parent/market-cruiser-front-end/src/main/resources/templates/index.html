@@ -1,10 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Welcome to Market Cruiser</title>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('Market Cruiser', 'none')">
+
 </head>
 <body>
-    <h1>Welcome to Market Cruiser eCommerce</h1>
+<div class="container-fluid">
+    <div th:replace="fragment_navigation :: header_menu"></div>
+
+    <br>
+    <div>
+        <h1>Welcome to Market Cruiser eCommerce</h1>
+    </div>
+
+    <div th:replace="fragment_navigation :: footer_menu"></div>
+
+</div>
 </body>
 </html>

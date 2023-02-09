@@ -1,4 +1,4 @@
-package com.marketcruiser.site;
+package com.marketcruiser;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

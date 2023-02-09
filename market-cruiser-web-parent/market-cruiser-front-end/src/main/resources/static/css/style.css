@@ -1,0 +1,201 @@
+
+/* icons */
+
+*.icon-green {
+    color:green
+}
+
+*.icon-dark {
+    color:gray
+}
+
+*.icon-darkblue {
+    color: #223775;
+}
+
+*.icon-red {
+    color: red
+}
+
+*.badge-blue {
+    color: black;
+    background-color: #48dbe8;
+}
+
+/* text */
+
+*.text-black {
+    color: black
+}
+
+*.text-white {
+    color: white;
+}
+
+/* a */
+
+a.a-sorting:link {
+    transition: all 0.3s ease;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.a-sorting:hover {
+    transform: scale(1.2);
+    color: #223775;
+    background-color: transparent;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+a.a-icon-darkblue {
+    transition: all 0.3s ease;
+}
+
+a.a-icon-darkblue:hover {
+    transform: scale(1.5);
+    color: #223775;
+}
+
+a.a-icon-darkgreen {
+    transition: all 0.3s ease;
+}
+
+a.a-icon-darkgreen:hover {
+    transform: scale(1.5);
+    color: #15234a;
+}
+
+/* buttons */
+
+.btn {
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border-radius: 6px;
+    background-size: 400% 400%;
+    color: #FFF;
+    border: 0;
+    padding: 8px 20px;
+    font-size: 13px;
+    animation: Gradient 10s ease infinite;
+}
+.btn:hover {
+    transform: scale(1.2);
+    background-size: 150% 150%;
+    font-weight: bold;
+}
+
+*.btn-blue {
+    background: linear-gradient(-45deg, #101452, #272ccc, #24edd9);
+}
+
+*.btn-grey {
+    background: linear-gradient(-45deg, #b3b3b3, #737373, #454545);
+}
+
+*.btn-red {
+    background: linear-gradient(-45deg, #fc7c7c, #fc0000, #ad0000);
+}
+
+/*pagination*/
+
+.pagination {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: 0.25rem;
+}
+
+.page-item:first-child .page-link {
+    padding: 0;
+    width: 40px;
+    height: 30px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.page-item:last-child .page-link {
+    padding: 0;
+    width: 40px;
+    height: 30px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+}
+
+.page-link {
+    margin-left: 3px;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    border-radius: 100%;
+    text-align: center;
+    color: white;
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+.page-link:hover {
+    z-index: 2;
+    color: white;
+    text-decoration: none;
+    background-color: #4169e1;
+    border-color: #4169e1;
+}
+
+.page-item.active .page-link {
+    z-index: 1;
+    color: white;
+    background-color: #223775;
+    border-color: #223775;
+}
+
+.page-item.disabled .page-link {
+    color: #4f5459;
+    pointer-events: none;
+    cursor: auto;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+
+
+
+@media screen and (max-width: 768px){
+    /* small screen */
+    div.full-details {
+        display: none;
+    }
+    div.less-details {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    /* medium screen */
+    div.full-details {
+        display: block;
+    }
+    div.less-details {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1024px){
+    /* big screen */
+    div.less-details {
+        display: none;
+    }
+}
