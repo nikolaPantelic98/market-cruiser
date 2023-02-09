@@ -12,6 +12,7 @@
 * Users:
   - In the market-cruiser-backend we made User Management Module - a module that manages users.
   - There are 5 roles: Admin, Salesperson, Editor, Assistant, and Shipper.
+  - Users listing page created.
   - A user can be created (first name, last name, password, email, photo, role, enabled) and a role can be assigned to him.
   - All CRUD operations for users are enabled.
   - Pagination and sorting for users are implemented.
@@ -27,6 +28,7 @@
 
 * Categories:
   - Category Module added. 
+  - Categories listing page created.
   - Categories now can be created, as well as subcategories under the parent category.
   - All CRUD operations for categories are enabled.
   - Pagination and Sorting for categories are implemented.
@@ -34,11 +36,26 @@
   - Table content of the categories can be exported & downloaded in CSV.
 
 * Brands:
-  - Brand Module added. 
+  - Brand Module added.
+  - Brands listing page created.
   - Brands now can be created and the categories can be assigned to brand.
-  - All CRUD operations for categories are enabled.
+  - All CRUD operations for brands are enabled.
   - Pagination and Sorting for brands are implemented.
   - Filter function for brands is implemented.
+
+* Products:
+  - Product Module added.
+  - Products listing page created.
+  - Products now can be created, separated into 5 sections:
+    - Overview - basic information about the product,
+    - Description - short description and full description with the possibility to format the text,
+    - Images - one main image and multiple additional images,
+    - Details - arbitrary addition of product details/components,
+    - Shipping - all necessary information about shipping.
+  - All CRUD operations for products are enabled.
+  - Pagination and Sorting for products are implemented.
+  - Filter function for products is implemented.
+  - Product management depending on the role
 
 ## Requirements
 
