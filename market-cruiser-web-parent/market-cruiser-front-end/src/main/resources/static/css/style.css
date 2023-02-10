@@ -51,6 +51,22 @@ a.a-sorting:hover {
     font-weight: bold;
 }
 
+a.sorting-category:link {
+    transition: all 0.3s ease;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.sorting-category:hover {
+    transform: scale(1.2);
+    color: #223775;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 a.a-icon-darkblue {
     transition: all 0.3s ease;
 }

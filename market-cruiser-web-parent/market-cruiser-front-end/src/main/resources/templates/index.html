@@ -10,9 +10,20 @@
 
     <br>
     <div>
-        <h1>Welcome to Market Cruiser eCommerce</h1>
+        <h1>Shopping by Categories</h1>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col" style="display: flex; justify-content: center; align-items: center" th:each="cat : ${listCategories}">
+            <div><img th:src="@{${cat.imagePath}}" width="150" /></div>
+            <div>
+                <a class="btn btn-blue" th:href="@{'/c/' + ${cat.alias}}">[[${cat.name}]]</a>
+            </div>
+        </div>
     </div>
 
+    <br>
+    <br>
     <div th:replace="fragment_navigation :: footer_menu"></div>
 
 </div>

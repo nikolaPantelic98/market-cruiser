@@ -17,12 +17,14 @@ section {
 
 .footer-distributed {
     background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);
-    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.12);
     box-sizing: border-box;
     width: 100%;
     text-align: left;
     font: normal 16px sans-serif;
     padding: 45px 50px;
+    border-top: solid 1px;
+    border-top-color: #223775;
 }
 
 .footer-distributed .footer-left p {
