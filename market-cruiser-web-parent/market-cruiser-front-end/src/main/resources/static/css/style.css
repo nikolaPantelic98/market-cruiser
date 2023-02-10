@@ -61,7 +61,7 @@ a.sorting-category:link {
 
 a.sorting-category:hover {
     transform: scale(1.2);
-    color: #223775;
+    color: #FFE5B4;
     background-color: transparent;
     text-decoration: none;
     font-weight: bold;
@@ -186,6 +186,64 @@ a.a-icon-darkgreen:hover {
     border-color: transparent;
 }
 
+/*breadcrumb*/
+
+.breadcrumb-custom {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    list-style: none;
+    background: linear-gradient(to right, #214ed4, #4a68cb 25%, #7c86b7 55%, #9897ac 70%, #b6a69d 90% ,#ffce72 100%);;
+    border-radius: 0.25rem;
+}
+
+.breadcrumb-item-custom + .breadcrumb-item-custom {
+    padding-left: 0.5rem;
+}
+
+.breadcrumb-item-custom + .breadcrumb-item-custom::before {
+    display: inline-block;
+    padding-right: 0.5rem;
+    color: #FFE5B4;
+    content: "/";
+}
+
+.breadcrumb-item-custom + .breadcrumb-item-custom:hover::before {
+    text-decoration: underline;
+}
+
+.breadcrumb-item-custom + .breadcrumb-item-custom:hover::before {
+    text-decoration: none;
+}
+
+.breadcrumb-item-custom.active {
+    color: #6c757d;
+}
+
+.breadcrumb-item-custom:hover .sub-categories {
+    display: block;
+}
+
+.sub-categories {
+    display: none;
+}
+
+.sub-categories a.text-black:link {
+    transition: all 0.3s ease;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+}
+
+.sub-categories a.text-black:hover {
+    transform: scale(1.2);
+    color: #FFE5B4;
+    background-color: transparent;
+    text-decoration: none;
+}
 
 
 
