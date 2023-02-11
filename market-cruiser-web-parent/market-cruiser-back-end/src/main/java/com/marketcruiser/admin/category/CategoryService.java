@@ -1,6 +1,7 @@
 package com.marketcruiser.admin.category;
 
 import com.marketcruiser.common.entity.Category;
+import com.marketcruiser.common.exception.CategoryNotFoundException;
 
 import java.util.List;
 

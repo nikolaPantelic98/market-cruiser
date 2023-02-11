@@ -2,6 +2,7 @@ package com.marketcruiser.admin.category;
 
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.common.entity.Category;
+import com.marketcruiser.common.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;

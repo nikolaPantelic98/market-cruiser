@@ -1,6 +1,7 @@
 package com.marketcruiser.admin.product;
 
 import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -65,7 +66,7 @@ public class ProductServiceImpl implements ProductService {
         }
 
         if (product.getAlias() == null || product.getAlias().isEmpty()) {
-            String defaultAlias = product.getName().replaceAll(" ", "_");
+            String defaultAlias = product.getName().replaceAll(" \\| ", "_").replaceAll(" ", "_").toLowerCase();
             product.setAlias(defaultAlias);
         } else {
             product.setAlias(product.getAlias().replaceAll(" ", "_"));

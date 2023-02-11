@@ -1,4 +1,4 @@
-package com.marketcruiser.admin.product;
+package com.marketcruiser.common.exception;
 
 public class ProductNotFoundException extends Exception {
 

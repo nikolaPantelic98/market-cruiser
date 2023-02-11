@@ -7,6 +7,7 @@ import com.marketcruiser.admin.security.MarketCruiserUserDetails;
 import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Category;
 import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;

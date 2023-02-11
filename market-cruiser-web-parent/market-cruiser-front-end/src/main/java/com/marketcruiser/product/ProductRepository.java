@@ -12,4 +12,6 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             + "AND (p.category.categoryId = ?1 OR p.category.allParentIDs LIKE %?2%) "
             + " ORDER BY p.name ASC")
     Page<Product> listProductsByCategory(Long categoryId, String categoryIdMatch, Pageable pageable);
+
+    Product findPByAlias(String alias);
 }

@@ -61,6 +61,7 @@ public class Category {
 
     @OneToMany(mappedBy = "parent")
     @ToString.Exclude
+    @OrderBy("name asc")
     private Set<Category> children = new HashSet<>();
 
 

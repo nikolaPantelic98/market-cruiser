@@ -2,6 +2,7 @@ package com.marketcruiser.admin.product;
 
 import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.exception.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;

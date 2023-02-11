@@ -1,4 +1,4 @@
-package com.marketcruiser.admin.category;
+package com.marketcruiser.common.exception;
 
 public class CategoryNotFoundException extends Exception {
 
