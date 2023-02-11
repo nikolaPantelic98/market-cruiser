@@ -9,19 +9,25 @@
     <div th:replace="fragment_navigation :: header_menu"></div>
     <br>
     <div th:replace="fragment_navigation :: search_nav"></div>
+
     <br>
-    <div th:replace="fragment_breadcrumb :: content"></div>
-    <br>
+    <div th:if="${totalItems > 0}">
+        <h2>Search Results for '[[${keyword}]]'</h2>
+        <br>
+    </div>
+    <div th:unless="${totalItems > 0}">
+        <h3>No match found for '[[${keyword}]]'</h3>
+        <br>
+    </div>
 
     <div class="row">
-        <th:block th:each="product : ${listProducts}">
+        <th:block th:each="product : ${listResult}">
         <div th:replace="products/fragment_product_info :: content"></div>
         </th:block>
     </div>
     <br>
 
-    <div th:replace="fragments :: pagination('/c/' + ${category.alias}, 'product')"></div>
-
+    <div th:replace="fragments :: pagination('/search', 'product')"></div>
 
     <br>
     <br>

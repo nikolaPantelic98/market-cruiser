@@ -7,6 +7,7 @@ import com.marketcruiser.common.exception.CategoryNotFoundException;
 import com.marketcruiser.common.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +67,7 @@ public class ProductController {
         }
     }
 
+    //method that retrieves the product details for a specific product with the given alias.
     @GetMapping("/p/{product_alias}")
     public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
 
@@ -81,5 +83,36 @@ public class ProductController {
         } catch (ProductNotFoundException e) {
             return "error/404";
         }
+    }
+
+    //method that retrieves the first page of the search results for a specific keyword.
+    @GetMapping("/search")
+    public String searchFirstPage(@Param("keyword") String keyword, Model model) {
+        return searchProductByPage(keyword, 1, model);
+    }
+
+    //method that retrieves the search results for a specific keyword and page number.
+    @GetMapping("/search/page/{pageNumber}")
+    public String searchProductByPage(@Param("keyword") String keyword, @PathVariable int pageNumber, Model model) {
+        Page<Product> pageProducts = productService.searchProduct(keyword, pageNumber);
+        List<Product> listResult = pageProducts.getContent();
+
+        long startCount = (long) (pageNumber - 1) * ProductServiceImpl.SEARCH_RESULTS_PER_PAGE + 1;
+        long endCount = startCount + ProductServiceImpl.SEARCH_RESULTS_PER_PAGE - 1;
+        if (endCount > pageProducts.getTotalElements()) {
+            endCount = pageProducts.getTotalElements();
+        }
+
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", pageProducts.getTotalPages());
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", pageProducts.getTotalElements());
+        model.addAttribute("pageTitle", keyword + " - Search Result");
+
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("listResult", listResult);
+
+        return "products/search_result";
     }
 }

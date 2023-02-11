@@ -20,6 +20,7 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
 
+    // method that retrieves a list of all the enabled categories that don't have any children categories
     @Override
     public List<Category> listNoChildrenCategories() {
         List<Category> listNoChildrenCategories = new ArrayList<>();
@@ -36,6 +37,7 @@ public class CategoryServiceImpl implements CategoryService{
         return listNoChildrenCategories;
     }
 
+    // method that retrieves the category with the given alias and returns it if found
     @Override
     public Category getCategory(String alias) throws CategoryNotFoundException {
         Category category = categoryRepository.findByAliasEnabled(alias);
@@ -45,6 +47,7 @@ public class CategoryServiceImpl implements CategoryService{
         return category;
     }
 
+    // method that retrieves a list of all the parent categories of the provided child category, including the child category itself
     @Override
     public List<Category> getCategoryParents(Category child) {
         List<Category> listParents = new ArrayList<>();

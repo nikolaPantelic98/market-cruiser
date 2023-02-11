@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    // registers a resource handler for user photos, category images and brand logos
+    // registers a resource handler for category images, brand logos and product images
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
