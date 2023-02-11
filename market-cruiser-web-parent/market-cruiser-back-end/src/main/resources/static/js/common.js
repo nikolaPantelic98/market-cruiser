@@ -20,3 +20,7 @@ function customizeDropdownMenu() {
         location.href = this.href;
     });
 }
+
+$('.search-button').click(function(){
+    $(this).parent().toggleClass('open');
+});

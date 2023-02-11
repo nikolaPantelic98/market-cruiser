@@ -31,5 +31,33 @@
         </div>
     </div>
 
+    <div th:fragment="content2" th:remove="tag">
+        <div class="row">
+            <div class="col">
+                <nav>
+                    <ol style="list-style-type: none" class="breadcrumb-custom">
+                        <li class="breadcrumb-item-custom">
+                            <a class="sorting-category text-black" th:href="@{/}">Home</a>
+                        </li>
+
+                        <th:block th:each="parent : ${listCategoryParents}">
+                            <li class="breadcrumb-item-custom">
+                                <a class="sorting-category text-black" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a>
+                                <div class="sub-categories">
+                                    <th:block th:each="cat : ${parent.children}">
+                                        <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="text-black" th:text="${cat.name}"></a><br>
+                                    </th:block>
+                                </div>
+                            </li>
+                        </th:block>
+                        <li class="breadcrumb-item-custom" th:if="${product != null}">
+                            <span>[[${product.name}]]</span>
+                        </li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

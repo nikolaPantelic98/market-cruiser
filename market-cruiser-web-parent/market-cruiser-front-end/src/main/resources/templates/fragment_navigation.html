@@ -50,14 +50,36 @@
         </nav>
     </div>
 
+<!--    <div th:fragment="search_nav" class="row">-->
+<!--        <div class="col-md">-->
+<!--            <div>-->
+<!--                <form class="form-inline" th:action="@{/search}" method="get">-->
+<!--                    <input type="search" name="keyword" class="form-control mr-sm-2"-->
+<!--                           th:value="${keyword}"-->
+<!--                           placeholder="keyword" required />-->
+<!--                    <input type="submit" value="Search" class="btn btn-blue"/>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <div th:fragment="search_nav" class="row">-->
+<!--        <div class="col-md">-->
+<!--            <div class="search-box">-->
+<!--                <button class="btn-search"><i class="fas fa-search"></i></button>-->
+<!--                <input type="text" class="input-search" placeholder="Type to Search...">-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <div th:fragment="search_nav" class="row">
         <div class="col-md">
-            <div>
+            <div class="search-box">
+                <span class="search-button">
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
+                </span>
                 <form class="form-inline" th:action="@{/search}" method="get">
-                    <input type="search" name="keyword" class="form-control mr-sm-2"
+                    <input type="text" name="keyword" class="input-search"
                            th:value="${keyword}"
-                           placeholder="keyword" required />
-                    <input type="submit" value="Search" class="btn btn-blue"/>
+                           placeholder="Type to Search...">
                 </form>
             </div>
         </div>

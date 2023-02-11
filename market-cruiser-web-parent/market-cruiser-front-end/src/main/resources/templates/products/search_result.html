@@ -9,7 +9,8 @@
     <div th:replace="fragment_navigation :: header_menu"></div>
     <br>
     <div th:replace="fragment_navigation :: search_nav"></div>
-
+    <br>
+    <div th:replace="fragment_breadcrumb :: content2"></div>
     <br>
     <div th:if="${totalItems > 0}">
         <h2>Search Results for '[[${keyword}]]'</h2>
@@ -34,5 +35,7 @@
     <div th:replace="fragment_navigation :: footer_menu"></div>
 
 </div>
+
+<script th:src="@{/js/common.js}"></script>
 </body>
 </html>
