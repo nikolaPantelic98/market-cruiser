@@ -36,4 +36,11 @@ public class SettingsRepositoryTest {
         settingsRepository.saveAll(List.of(currencyId, symbol, symbolPosition, decimalPointType,
                 decimalDigits, thousandsPointType));
     }
+
+    @Test
+    public void testListSettingsByCategory() {
+        List<Settings> settings = settingsRepository.findByCategory(SettingsCategory.GENERAL);
+
+        settings.forEach(System.out :: println);
+    }
 }

@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    // registers a resource handler for user photos, category images and brand logos
+    // registers a resource handler for user photos, category images, brand logos and site logo
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         String dirName = "user-photos";
@@ -32,5 +32,10 @@ public class MvcConfig implements WebMvcConfigurer {
         Path productImagesDir = Paths.get(productImagesDirName);
         String productImagesPath = productImagesDir.toFile().getAbsolutePath();
         registry.addResourceHandler("/product-images/**").addResourceLocations("file:/" + productImagesPath + "/");
+
+        String siteLogoDirName = "../site-logo";
+        Path siteLogoDir = Paths.get(siteLogoDirName);
+        String siteLogoPath = siteLogoDir.toFile().getAbsolutePath();
+        registry.addResourceHandler("/site-logo/**").addResourceLocations("file:/" + siteLogoPath + "/");
     }
 }
