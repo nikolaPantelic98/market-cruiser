@@ -40,13 +40,13 @@
             <div>
                 <div>
                     List Price:
-                    <span th:if="${product.discountPercent <= 0}" style="color: white">$ [[${product.price}]]</span>
-                    <del th:if="${product.discountPercent > 0}" style="color: #dbdbdb"><span style="color: #dbdbdb">$ [[${product.price}]]</span></del>
+                    <span th:if="${product.discountPercent <= 0}" style="color: white"><span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(product.price, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span></span>
+                    <del th:if="${product.discountPercent > 0}" style="color: #dbdbdb"><span style="color: #dbdbdb"><span style="color: #dbdbdb"><span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(product.price, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span></span></span></del>
                 </div>
                 <div th:if="${product.discountPercent > 0}">
                     Price:
-                    <span style="font-size: larger; color: white">$ [[${product.discountPrice}]]</span>
-                    ([[${product.discountPercent}]] % OFF)
+                    <span style="font-size: larger; color: white"><span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(product.discountPrice, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span></span>
+                    ([[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % OFF)
                 </div>
                 <div>&nbsp;</div>
                 <div th:utext="${product.shortDescription}"></div>
