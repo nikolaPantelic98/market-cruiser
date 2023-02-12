@@ -9,7 +9,7 @@
 * This is a multi-module Maven project
 * The project is divided into two parts: `market-cruiser-back-end` (server side) & `market-cruiser-front-end` (client side). Both exist under the `market-cruiser-web-parent`. `market-cruiser-common` is used for the common code in both directories.
 
-* Users:
+* User Management Module:
   - In the market-cruiser-backend we made User Management Module - a module that manages users.
   - There are 5 roles: Admin, Salesperson, Editor, Assistant, and Shipper.
   - Users listing page created.
@@ -19,14 +19,14 @@
   - Filter function for user is implemented.
   - Table content of the users can be exported & downloaded in CSV, Excel and PDF.
 
-* Spring Security:
+* User Authentication and Autorization (Spring Security):
   - Spring Security is implemented.
   - The login page has been created. The user can now log in and log out.
   - The user can change his data now (excluding email and roles).
   - From now on, each user can access links only with permission, depending on the role.
   - Custom Error pages added (403, 404, and 500)
 
-* Categories:
+* Category Management Module:
   - Category Module added. 
   - Categories listing page created.
   - Categories now can be created, as well as subcategories under the parent category.
@@ -35,7 +35,7 @@
   - Filter function for categories is implemented.
   - Table content of the categories can be exported & downloaded in CSV.
 
-* Brands:
+* Brand Management Module:
   - Brand Module added.
   - Brands listing page created.
   - Brands now can be created and the categories can be assigned to brand.
@@ -43,7 +43,7 @@
   - Pagination and Sorting for brands are implemented.
   - Filter function for brands is implemented.
 
-* Products:
+* Product Management Module:
   - Product Module added.
   - Products listing page created.
   - Products now can be created, separated into 5 sections:
@@ -56,6 +56,14 @@
   - Pagination and Sorting for products are implemented.
   - Filter function for products is implemented.
   - Product management depending on the role
+
+* Listing Products to Customers:
+  - Home Page
+  - Listing categories and products
+  - Search function
+
+* Settings Module:
+  - Settings Module added.
 
 ## Requirements
 
