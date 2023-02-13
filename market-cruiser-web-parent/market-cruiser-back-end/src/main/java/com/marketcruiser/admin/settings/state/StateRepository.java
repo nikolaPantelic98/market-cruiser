@@ -1,4 +1,4 @@
-package com.marketcruiser.admin.settings;
+package com.marketcruiser.admin.settings.state;
 
 import com.marketcruiser.common.entity.State;
 import org.springframework.data.jpa.repository.JpaRepository;

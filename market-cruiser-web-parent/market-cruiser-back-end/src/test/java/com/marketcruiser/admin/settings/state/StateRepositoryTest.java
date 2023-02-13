@@ -1,5 +1,6 @@
-package com.marketcruiser.admin.settings;
+package com.marketcruiser.admin.settings.state;
 
+import com.marketcruiser.admin.settings.state.StateRepository;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.State;
 import org.junit.jupiter.api.Test;

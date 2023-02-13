@@ -1,16 +1,13 @@
 package com.marketcruiser.common.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Getter
-@Setter
+@Getter(AccessLevel.PUBLIC)
+@Setter(AccessLevel.PUBLIC)
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(
@@ -36,6 +33,8 @@ public class Country {
     )
     private String code;
 
+    @Getter(AccessLevel.NONE)
+    @Setter(AccessLevel.NONE)
     @OneToMany(mappedBy = "country")
     private Set<State> states;
 
@@ -45,6 +44,15 @@ public class Country {
         this.code = code;
     }
 
+    public Country(String name) {
+        this.name = name;
+    }
+
+    public Country(Long countryId, String name, String code) {
+        this.countryId = countryId;
+        this.name = name;
+        this.code = code;
+    }
 
     @Override
     public String toString() {

@@ -1,7 +1,7 @@
-package com.marketcruiser.admin.settings;
+package com.marketcruiser.admin.settings.country;
 
+import com.marketcruiser.admin.settings.country.CountryRepository;
 import com.marketcruiser.common.entity.Country;
-import org.apache.poi.ss.formula.functions.Count;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
