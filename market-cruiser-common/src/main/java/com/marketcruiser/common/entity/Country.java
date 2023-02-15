@@ -54,6 +54,10 @@ public class Country {
         this.code = code;
     }
 
+    public Country(Long countryId) {
+        this.countryId = countryId;
+    }
+
     @Override
     public String toString() {
         return "Country{" +
