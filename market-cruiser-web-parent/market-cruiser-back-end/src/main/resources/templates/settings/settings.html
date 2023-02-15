@@ -102,7 +102,14 @@
 
                 <section>
                     <h2>States</h2>
-
+                    <div th:replace="settings/fragment_states :: content"></div>
+                    <div class="toast" role="alert" aria-live="polite" aria-atomic="true" data-delay="3000">
+                        <div role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-body">
+                                <span id="toastMessageState"></span>
+                            </div>
+                        </div>
+                    </div>
                 </section>
 
                 <section>
@@ -130,6 +137,7 @@
 
 <script th:src="@{/js/common_form.js}"></script>
 <script th:src="@{/js/countries_settings.js}"></script>
+<script th:src="@{/js/states_settings.js}"></script>
 
 </body>
 </html>

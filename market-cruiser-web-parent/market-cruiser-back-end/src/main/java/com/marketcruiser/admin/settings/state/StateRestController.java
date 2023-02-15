@@ -41,7 +41,7 @@ public class StateRestController {
     }
 
     // method that deletes state
-    @GetMapping("/states/delete/{stateId}")
+    @DeleteMapping("/states/delete/{stateId}")
     public void deleteState(@PathVariable Long stateId) {
         stateRepository.deleteById(stateId);
     }

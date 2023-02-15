@@ -35,7 +35,10 @@ public class Country {
 
     @Getter(AccessLevel.NONE)
     @Setter(AccessLevel.NONE)
-    @OneToMany(mappedBy = "country")
+    @OneToMany(
+            mappedBy = "country",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<State> states;
 
 
