@@ -28,7 +28,7 @@ public class CountryRestController {
         return String.valueOf(savedCountry.getCountryId());
     }
 
-    @GetMapping("/countries/delete/{countryId}")
+    @DeleteMapping("/countries/delete/{countryId}")
     public void deleteCountry(@PathVariable Long countryId) {
         countryRepository.deleteById(countryId);
     }
