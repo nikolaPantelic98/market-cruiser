@@ -63,7 +63,15 @@
   - Search function
 
 * Settings Module:
-  - Settings Module added.
+  - Settings Module added, separated into 5 sections:
+    - General - management of basic settings (site name, logo, footer, currencies, decimal digits etc.),
+    - Countries - setting countries,
+    - States - setting states/provinces within the countries,
+    - Mail Server - *upcoming*,
+    - Mail Template - *upcoming*,
+    - Payment - *upcoming*.
+  - All CRUD operations for countries and states.
+  - Module done with AJAX, without the need to refresh the page.
 
 ## Requirements
 
