@@ -44,5 +44,15 @@ public class SettingsServiceImpl implements SettingsService{
         settingsRepository.saveAll(settings);
     }
 
+    @Override
+    public List<Settings> getMailServerSettings() {
+        return settingsRepository.findByCategory(SettingsCategory.MAIL_SERVER);
+    }
+
+    @Override
+    public List<Settings> getMailTemplateSettings() {
+        return settingsRepository.findByCategory(SettingsCategory.MAIL_TEMPLATES);
+    }
+
 
 }

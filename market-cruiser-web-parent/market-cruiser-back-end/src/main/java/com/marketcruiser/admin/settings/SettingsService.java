@@ -9,4 +9,6 @@ public interface SettingsService {
     List<Settings> listAllSettings();
     GeneralSettingsBag getGeneralSettings();
     void saveAllSettings(Iterable<Settings> settings);
+    List<Settings> getMailServerSettings();
+    List<Settings> getMailTemplateSettings();
 }

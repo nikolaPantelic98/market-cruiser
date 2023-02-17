@@ -124,12 +124,12 @@
 
                 <section>
                     <h2>Mail Server</h2>
-
+                    <div th:replace="settings/fragment_mail_server :: content"></div>
                 </section>
 
                 <section>
                     <h2>Mail Templates</h2>
-
+                    <div th:replace="settings/mail_templates/fragment_mail_templates :: content"></div>
                 </section>
 
                 <section>
@@ -148,6 +148,11 @@
     contextPath = "[[@{/}]]"
     var csrfHeaderName = "[[${_csrf.headerName}]]";
     var csrfValue = "[[${_csrf.token}]]";
+
+    $(document).ready(function () {
+        $("#customerVerificationTextContent").richText();
+    });
+
 </script>
 
 <script th:src="@{/js/common_form.js}"></script>
