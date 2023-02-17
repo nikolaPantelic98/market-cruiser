@@ -24,4 +24,12 @@ public class SettingsServiceImpl implements SettingsService {
         return settingsRepository.findByTwoCategories(SettingsCategory.GENERAL, SettingsCategory.CURRENCY);
     }
 
+    @Override
+    public EmailSettingsBag getEmailSettings() {
+        List<Settings> settings = settingsRepository.findByCategory(SettingsCategory.MAIL_SERVER);
+        settings.addAll(settingsRepository.findByCategory(SettingsCategory.MAIL_TEMPLATES));
+
+        return new EmailSettingsBag(settings);
+    }
+
 }

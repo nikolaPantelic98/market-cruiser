@@ -7,4 +7,5 @@ import java.util.List;
 public interface SettingsService {
 
     List<Settings> getGeneralSettings();
+    EmailSettingsBag getEmailSettings();
 }
