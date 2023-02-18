@@ -10,4 +10,5 @@ public interface CustomerService {
     List<Country> listAllCountries();
     boolean isEmailUnique(String email);
     void registerCustomer(Customer customer);
+    boolean verifyCustomer(String verificationCode);
 }

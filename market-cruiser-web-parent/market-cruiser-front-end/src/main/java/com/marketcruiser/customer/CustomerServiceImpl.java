@@ -52,6 +52,18 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customer);
     }
 
+    @Override
+    public boolean verifyCustomer(String verificationCode) {
+        Customer customer = customerRepository.findCustomerByVerificationCode(verificationCode);
+
+        if (customer == null || customer.isEnabled()) {
+            return false;
+        } else {
+            customerRepository.enableCustomer(customer.getCustomerId());
+            return true;
+        }
+    }
+
     private void encodePassword(Customer customer) {
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
         customer.setPassword(encodedPassword);

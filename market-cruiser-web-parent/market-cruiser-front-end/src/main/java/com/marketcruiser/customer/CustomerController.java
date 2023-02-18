@@ -6,6 +6,7 @@ import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.settings.EmailSettingsBag;
 import com.marketcruiser.settings.SettingsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
+@Transactional
 public class CustomerController {
 
     private final CustomerServiceImpl customerService;
@@ -83,5 +86,12 @@ public class CustomerController {
 
         System.out.println("to Address: " + toAddress);
         System.out.println("Verify URL: " + verifyURL);
+    }
+
+    @GetMapping("/verify")
+    public String verifyCustomerAccount(@Param("code") String code, Model model) {
+        boolean verified = customerService.verifyCustomer(code);
+
+        return "register/" + (verified ? "verify_success" : "verify_fail");
     }
 }
