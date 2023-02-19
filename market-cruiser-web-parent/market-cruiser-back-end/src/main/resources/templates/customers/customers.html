@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Customers - Market Cruiser Admin', 'none')">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragment_navigation :: menu"></div>
+
+    <br/>
+    <div>
+        <h1>Manage Customers</h1>
+        <a th:href="@{/customers/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
+    </div>
+
+    <div th:replace="fragments :: search_form_and_message('/customers/page/1')"></div>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="tbl-header">
+                <tr>
+                    <th th:replace="fragments :: column_link('/customers', 'customerId', 'Customer ID')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'firstName', 'First Name')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'lastName', 'Last Name')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'email', 'E-Mail')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'city', 'City')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'state', 'State')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'country', 'Country')"></th>
+
+                    <th th:replace="fragments :: column_link('/customers', 'enabled', 'Enabled')"></th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="customer: ${listCustomers}">
+                    <td style="text-align: center; vertical-align: middle">[[${customer.customerId}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${customer.firstName}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${customer.lastName}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${customer.email}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${customer.city}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${customer.state}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${customer.country.name}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.customerId})"></div>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-detail"
+                           th:href="@{'/customers/detail/' + ${customer.customerId}}"
+                           title="View Details of This Customer">
+                        </a>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: edit('customer', '/customers/edit/' + ${customer.customerId})"></div>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: delete('customer', ${customer.customerId}, '/customers/delete/' + ${customer.customerId}, true)"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+
+    </div>
+
+    <div class="less-details">
+        <div th:each="customer: ${listCustomers}" class="row m-1">
+            <div class="col-4">
+                <span><b>[[${customer.fullName}]]</b></span>
+            </div>
+            <div class="col-8">
+                <div class="mb-1">
+                    <span>[[${customer.country.name}]]</span>
+                </div>
+                <div>
+                    <div th:replace="fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.customerId})"></div>
+                    &nbsp;
+                    <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-detail"
+                       th:href="@{'/customers/detail/' + ${customer.customerId}}"
+                       title="View details of this customer"
+                    ></a>
+                    &nbsp;
+                    <div th:replace="fragments :: edit('customer', '/customers/edit/' + ${customer.customerId})" ></div>
+                    &nbsp;
+                    <div th:replace="fragments :: delete('customer', ${customer.customerId}, '/customers/delete/' + ${customer.customerId}, true)" ></div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
+    <div th:replace="fragments :: pagination('/customers', 'customers')"></div>
+
+    <div th:replace="fragments_modal :: confirm_modal"></div>
+
+    <div class="modal fade" id="detailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);">
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div th:replace="fragments :: footer"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/customers}]]";
+
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e) {
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'customer');
+        });
+
+        $(".link-detail").on("click", function(e) {
+            e.preventDefault();
+            linkDetailURL = $(this).attr("href");
+            $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+    });
+
+</script>
+</body>
+</html>

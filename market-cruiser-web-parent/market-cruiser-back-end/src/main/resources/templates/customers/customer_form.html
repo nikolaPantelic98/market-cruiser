@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragment_navigation :: menu"></div>
+    <br>
+
+    <div class="text-center">
+        <h1>Manage Customers | [[${pageTitle}]]</h1>
+    </div>
+    <br>
+
+    <form th:action="@{/customers/save}" method="post" style="max-width: 700px; margin: 0 auto"
+          th:object="${customer}"
+          onsubmit="return checkEmailUnique(this)">
+          <input type="hidden" th:field="*{customerId}"/>
+        <div class="border border-round-secondary rounded p-3">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 10px">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="firstName" th:field="*{firstName}"
+                                required="required" maxlength="45" minlength="2"/>
+                            <label for="firstName">First Name</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="lastName" th:field="*{lastName}"
+                                   required="required" maxlength="45" minlength="2"/>
+                            <label for="lastName">Last Name</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="email" th:field="*{email}"
+                                   required="required" maxlength="45" minlength="8"/>
+                            <label for="email">Email</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="password" class="clean-slide" id="password" th:field="*{password}"
+                                   maxlength="30" minlength="6"
+                                   placeholder="Leave blank if you don't want to change the password"/>
+                            <label for="password">Password</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="phoneNumber" th:field="*{phoneNumber}"
+                                   required="required" maxlength="15" minlength="8"/>
+                            <label for="phoneNumber">Phone Number</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="addressLine1" th:field="*{addressLine1}"
+                                   required="required" maxlength="64" minlength="3"/>
+                            <label for="addressLine1">Address Line 1</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="addressLine2" th:field="*{addressLine2}"
+                                   maxlength="64" />
+                            <label for="addressLine1">Address Line 2</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="city" th:field="*{city}"
+                                   required="required" maxlength="45" minlength="2"/>
+                            <label for="city">City</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <select class="clean-slide" th:field="*{country}" id="country">
+                                <th:block th:each="country : ${listCountries}">
+                                <option th:value="${country.countryId}">[[${country.name}]]</option>
+                                </th:block>
+                            </select>
+                            <label for="country">Country</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="state" th:field="*{state}"
+                                   required="required" maxlength="45" minlength="3" list="listStates"/>
+                            <label for="state">State</label>
+                            <datalist id="listStates"></datalist>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="form-group row">
+                    <span style="position: relative; display: inline-block; margin: 15px 10px">
+                        <div class="col-sm-8">
+                            <input type="text" class="clean-slide" id="postCode" th:field="*{postCode}"
+                                   required="required" maxlength="10" minlength="2"/>
+                            <label for="postCode">Postcode</label>
+                        </div>
+                    </span>
+                </div>
+            </div>
+
+            <br>
+            <div class="text-center">
+                <input type="submit" value="Save" class="btn btn-blue">
+                <input type="button" value="Cancel" class="btn btn-grey" id="buttonCancel" />
+            </div>
+        </div>
+    </form>
+
+    <br>
+    <br>
+    <div th:replace="fragments_modal :: modal_dialog"></div>
+    <div th:replace="fragments :: footer"></div>
+
+</div>
+
+<script type="text/javascript">
+    var dropdownCountries;
+    var dropdownStates;
+
+    $(document).ready(function () {
+        dropdownCountries = $("#country");
+        dropdownStates = $("#listStates");
+
+        dropdownCountries.on("change", function () {
+            loadStates4ForCountry();
+            $("#state").val("").focus();
+        });
+
+        loadStates4ForCountry();
+
+        $('#buttonCancel').click(function () {
+            window.location = "[[@{/customers}]]";
+        });
+    });
+
+    function loadStates4ForCountry() {
+        selectedCountry = $("#country option:selected");
+        countryId = selectedCountry.val();
+
+        url = "[[@{/states/list_by_country/}]]" + countryId;
+
+        $.get(url, function (responseJSON) {
+            dropdownStates.empty();
+
+            $.each(responseJSON, function (index, state) {
+                $("<option>").val(state.name).text(state.name).appendTo(dropdownStates);
+            });
+        }).fail(function () {
+            showErrorModal("Error loading states/provinces for the selected country.");
+        });
+    }
+
+    function checkEmailUnique(form) {
+        customerId = $("#customerId").val();
+        customerEmail = $("#email").val();
+        csrfValue = $("input[name='_csrf']").val();
+
+        url = "[[@{/customers/check_email}]]";
+        params = {customerId : customerId, email: customerEmail, _csrf: csrfValue};
+
+        $.post(url, params, function(response) {
+            if (response == "OK") {
+                form.submit();
+            } else if (response == "Duplicated") {
+                showWarningModal("There is another customer having the email " + customerEmail);
+            } else {
+                showErrorModal("Unknown response from server");
+            }
+        }).fail(function() {
+            showErrorModal("Could not connect to the server");
+        });
+
+        return false;
+    }
+
+</script>
+<script th:src="@{/js/common_form.js}"></script>
+</body>
+</html>
