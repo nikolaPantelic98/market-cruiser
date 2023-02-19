@@ -73,6 +73,13 @@
   - All CRUD operations for countries and states.
   - Module done with AJAX, without the need to refresh the page.
 
+* Customer Registration:
+  - Customer Registration Form created.
+  - E-Mail settings added to Settings module:
+    - Mail Server,
+    - Mail Template.
+  - Verification mail for customer registration implemented and the customer must be verified now.
+
 ## Requirements
 
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
