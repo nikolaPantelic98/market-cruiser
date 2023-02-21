@@ -14,7 +14,7 @@
         <a th:href="@{/brands/new}" class="a-icon-darkgreen fas fa-folder-plus fa-2x icon-darkblue" title="Create New Brand"></a>
     </div>
 
-    <div th:replace="fragments :: search_form_and_message('/brands/page/1')"></div>
+    <div th:replace="fragments :: search_form_and_message"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -28,7 +28,7 @@
                         Logo
                     </th>
 
-                    <th th:replace="fragments :: column_link('/brands', 'name', 'Brand Name')"></th>
+                    <th th:replace="fragments :: column_link('name', 'Brand Name')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Categories
@@ -84,7 +84,7 @@
         </div>
     </div>
 
-    <div th:replace="fragments :: pagination('/brands', 'brands')"></div>
+    <div th:replace="fragments :: pagination('brands')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 

@@ -13,27 +13,27 @@
         <a th:href="@{/customers/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
     </div>
 
-    <div th:replace="fragments :: search_form_and_message('/customers/page/1')"></div>
+    <div th:replace="fragments :: search_form_and_message"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="tbl-header">
                 <tr>
-                    <th th:replace="fragments :: column_link('/customers', 'customerId', 'Customer ID')"></th>
+                    <th th:replace="fragments :: column_link('customerId', 'Customer ID')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'firstName', 'First Name')"></th>
+                    <th th:replace="fragments :: column_link('firstName', 'First Name')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'lastName', 'Last Name')"></th>
+                    <th th:replace="fragments :: column_link('lastName', 'Last Name')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'email', 'E-Mail')"></th>
+                    <th th:replace="fragments :: column_link('email', 'E-Mail')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'city', 'City')"></th>
+                    <th th:replace="fragments :: column_link('city', 'City')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'state', 'State')"></th>
+                    <th th:replace="fragments :: column_link('state', 'State')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'country', 'Country')"></th>
+                    <th th:replace="fragments :: column_link('country', 'Country')"></th>
 
-                    <th th:replace="fragments :: column_link('/customers', 'enabled', 'Enabled')"></th>
+                    <th th:replace="fragments :: column_link('enabled', 'Enabled')"></th>
 
                     <th></th>
                 </tr>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div th:replace="fragments :: pagination('/customers', 'customers')"></div>
+    <div th:replace="fragments :: pagination('customers')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 

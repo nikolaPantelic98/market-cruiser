@@ -19,29 +19,29 @@
         <a th:href="@{/users/export/pdf}" class="a-icon-darkgreen fas fa-file-pdf fa-2x icon-darkblue" title="Export to PDF"></a>
     </div>
 
-    <div th:replace="fragments :: search_form_and_message('/users/page/1')"></div>
+    <div th:replace="fragments :: search_form_and_message"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="tbl-header">
                 <tr>
-                    <th th:replace="fragments :: column_link('/users', 'userId', 'User ID')"></th>
+                    <th th:replace="fragments :: column_link('userId', 'User ID')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Photos
                     </th>
 
-                    <th th:replace="fragments :: column_link('/users', 'emailAddress', 'Email Address')"></th>
+                    <th th:replace="fragments :: column_link('emailAddress', 'Email Address')"></th>
 
-                    <th th:replace="fragments :: column_link('/users', 'firstName', 'First Name')"></th>
+                    <th th:replace="fragments :: column_link('firstName', 'First Name')"></th>
 
-                    <th th:replace="fragments :: column_link('/users', 'lastName', 'Last Name')"></th>
+                    <th th:replace="fragments :: column_link('lastName', 'Last Name')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Roles
                     </th>
 
-                    <th th:replace="fragments :: column_link('/users', 'enabled', 'Enabled')"></th>
+                    <th th:replace="fragments :: column_link('enabled', 'Enabled')"></th>
 
                     <th></th>
                 </tr>
@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <div th:replace="fragments :: pagination('/users', 'users')"></div>
+    <div th:replace="fragments :: pagination('users')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 

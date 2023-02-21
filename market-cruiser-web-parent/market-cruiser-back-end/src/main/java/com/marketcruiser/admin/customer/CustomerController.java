@@ -56,6 +56,7 @@ public class CustomerController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("reverseSortDir", sortDir.equals("asc") ? "desc" : "asc");
         model.addAttribute("endCount", endCount);
+        model.addAttribute("moduleURL", "/customers");
 
         return "customers/customers";
     }

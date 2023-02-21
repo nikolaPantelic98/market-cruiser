@@ -54,17 +54,17 @@
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
             <thead class="tbl-header">
                 <tr>
-                    <th th:replace="fragments :: column_link('/products', 'productId', 'Product ID')"></th>
+                    <th th:replace="fragments :: column_link('productId', 'Product ID')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Main Image
                     </th>
 
-                    <th th:replace="fragments :: column_link('/products', 'name', 'Product Name')"></th>
+                    <th th:replace="fragments :: column_link('name', 'Product Name')"></th>
 
-                    <th th:replace="fragments :: column_link('/products', 'brand', 'Brand')"></th>
+                    <th th:replace="fragments :: column_link('brand', 'Brand')"></th>
 
-                    <th th:replace="fragments :: column_link('/products', 'category', 'Category')"></th>
+                    <th th:replace="fragments :: column_link('category', 'Category')"></th>
 
                     <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
@@ -149,7 +149,7 @@
         </div>
     </div>
 
-    <div th:replace="fragments :: pagination('/products', 'products')"></div>
+    <div th:replace="fragments :: pagination('products')"></div>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 

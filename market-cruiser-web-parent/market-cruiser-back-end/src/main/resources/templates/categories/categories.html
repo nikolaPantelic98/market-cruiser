@@ -16,7 +16,7 @@
         <a th:href="@{/categories/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
     </div>
 
-    <div th:replace="fragments :: search_form_and_message('/categories/page/1')"></div>
+    <div th:replace="fragments :: search_form_and_message"></div>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -30,7 +30,7 @@
                         Category Image
                     </th>
 
-                    <th th:replace="fragments :: column_link('/categories', 'name', 'Category Name')"></th>
+                    <th th:replace="fragments :: column_link('name', 'Category Name')"></th>
 
                     <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">
                         Alias
@@ -90,11 +90,11 @@
 
     <div th:if="${keyword != null}" class="text-center">
         <span>Search result does not show categories in hierarchical form</span>
-        <div th:replace="fragments :: pagination('/categories', 'categories')"></div>
+        <div th:replace="fragments :: pagination('categories')"></div>
     </div>
 
     <th:block th:unless="${keyword != null}">
-    <div th:replace="fragments :: pagination('/categories', 'top-level categories')"></div>
+    <div th:replace="fragments :: pagination('top-level categories')"></div>
     </th:block>
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
