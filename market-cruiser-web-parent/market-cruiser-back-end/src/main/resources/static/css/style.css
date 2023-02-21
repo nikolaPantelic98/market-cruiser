@@ -43,7 +43,7 @@ a.a-sorting:link {
 }
 
 a.a-sorting:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     color: #223775;
     background-color: transparent;
     text-decoration: none;
@@ -85,7 +85,7 @@ a.a-icon-darkgreen:hover {
     animation: Gradient 10s ease infinite;
 }
 .btn:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
     background-size: 150% 150%;
     font-weight: bold;
 }
