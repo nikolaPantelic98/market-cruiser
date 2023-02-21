@@ -84,13 +84,18 @@ public class CustomerServiceImpl implements CustomerService{
     // saves customer
     @Override
     public void saveCustomer(Customer customerInForm) {
+        Customer customerInDB = customerRepository.findById(customerInForm.getCustomerId()).get();
+
         if (!customerInForm.getPassword().isEmpty()) {
             String encodedPassword = passwordEncoder.encode(customerInForm.getPassword());
             customerInForm.setPassword(encodedPassword);
         } else {
-            Customer customerInDB = customerRepository.findById(customerInForm.getCustomerId()).get();
             customerInForm.setPassword(customerInDB.getPassword());
         }
+
+        customerInForm.setEnabled(customerInDB.isEnabled());
+        customerInForm.setCreatedTime(customerInDB.getCreatedTime());
+        customerInForm.setVerificationCode(customerInDB.getVerificationCode());
 
         customerRepository.save(customerInForm);
     }

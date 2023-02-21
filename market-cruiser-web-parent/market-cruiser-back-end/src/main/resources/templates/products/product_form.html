@@ -93,33 +93,39 @@
 
                     <section>
                         <h2>Description</h2>
-                        <th:block sec:authorize="hasAuthority('Salesperson')">
-                        <div th:replace="products/fragment_product_description_readonly :: content"></div>
+                        <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
+                            <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
+                                <div th:replace="products/fragment_product_description_readonly :: content"></div>
+                            </th:block>
                         </th:block>
 
-                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                        <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
                         <div th:replace="products/fragment_product_description :: content"></div>
                         </th:block>
                     </section>
 
                     <section>
                         <h2>Images</h2>
-                        <th:block sec:authorize="hasAuthority('Salesperson')">
-                            <div th:replace="products/fragment_product_images_readonly :: content"></div>
+                        <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
+                            <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
+                                <div th:replace="products/fragment_product_images_readonly :: content"></div>
+                            </th:block>
                         </th:block>
 
-                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                            <div th:replace="products/fragment_product_images :: content"></div>
+                        <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
+                        <div th:replace="products/fragment_product_images :: content"></div>
                         </th:block>
                     </section>
 
                     <section>
                         <h2>Details</h2>
-                        <th:block sec:authorize="hasAuthority('Salesperson')">
-                            <div th:replace="products/fragment_product_details_readonly :: content"></div>
+                        <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
+                            <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
+                                <div th:replace="products/fragment_product_details_readonly :: content"></div>
+                            </th:block>
                         </th:block>
 
-                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
+                        <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
                         <div th:replace="products/fragment_product_details :: content"></div>
                         <br>
                         <div>
@@ -131,12 +137,14 @@
 
                     <section>
                         <h2>Shipping</h2>
-                        <th:block sec:authorize="hasAuthority('Salesperson')">
-                            <div th:replace="products/fragment_product_shipping_readonly :: content"></div>
+                        <th:block th:if="${!#authorization.expression('hasAuthority(''Admin'')') && !#authorization.expression('hasAuthority(''Editor'')')}">
+                            <th:block th:if="${#authorization.expression('hasAuthority(''Salesperson'')')}">
+                                <div th:replace="products/fragment_product_shipping_readonly :: content"></div>
+                            </th:block>
                         </th:block>
 
-                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-                            <div th:replace="products/fragment_product_shipping :: content"></div>
+                        <th:block th:if="${#authorization.expression('hasAuthority(''Admin'')') || #authorization.expression('hasAuthority(''Editor'')')}">
+                        <div th:replace="products/fragment_product_shipping :: content"></div>
                         </th:block>
                     </section>
                 </div>
