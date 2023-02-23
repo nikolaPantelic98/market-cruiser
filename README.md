@@ -80,6 +80,12 @@
     - Mail Template.
   - Verification mail for customer registration implemented and the customer must be verified now.
 
+* Customer Management Module:
+  - Customer Module added.
+  - Customers listing page created.
+  - All CRUD operations for customers are enabled.
+  - Pagination and Sorting for customers are implemented.
+
 ## Requirements
 
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
