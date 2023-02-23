@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('MarketCruiser', 'none')">
+
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div th:replace="fragment_navigation :: header_menu"></div>
+    <br>
+
+    <div>
+        <img th:src="@{/images/MarketCruiserTr.png}" style="width: 350px; height: 175px"/>
+    </div>
+    <br>
+
+    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+        <div th:if="${param.error}">
+            <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+        </div>
+        <div th:if="${param.logout}">
+            <p class="text-secondary">You have been logged out.</p>
+        </div>
+
+        <div class="border border-secondary rounded p-3">
+            <p>Access to Market Cruiser Control Panel</p>
+            <p>
+                <input type="email" name="email" class="form-control" placeholder="E-Mail" required />
+            </p>
+            <p>
+                <input type="password" name="password" class="form-control" placeholder="Password" required />
+            </p>
+            <p>
+                <input type="checkbox" name="remember-me" />&nbsp;Remember me
+            </p>
+            <p>
+                <input type="submit" value="Login" class="btn btn-blue" />
+            </p>
+        </div>
+    </form>
+
+    <br>
+    <br>
+    <br>
+    <div th:replace="fragment_navigation :: footer_menu"></div>
+</div>
+</body>
+</html>

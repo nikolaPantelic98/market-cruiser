@@ -36,10 +36,10 @@
     content: "\f0c9";
 }
 .menu-item:nth-child(3) > a::before {
-    content: "\f2f6";
+    content: "\f2c2";
 }
 .menu-item:nth-child(4) > a::before {
-    content: "\f2c2";
+    content: "\f2f6";
 }
 
 .menu-item:nth-child(1) > a::before {

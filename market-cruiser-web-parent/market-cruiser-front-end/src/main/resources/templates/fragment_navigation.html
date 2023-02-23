@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
     <div th:fragment="header_menu">
         <nav class="menu">
@@ -28,22 +29,57 @@
                 </li>
 
                 <li class="menu-item">
-                    <a href="#0">Account</a>
-                    <ol class="sub-menu">
-
-                        <li class="menu-item">
-                            <a href="#0">Login</a>
-                        </li>
-
-                        <li class="menu-item">
-                            <a th:href="@{/register}">Register</a>
-                        </li>
-
-                    </ol>
+                    <a href="#0">Contact</a>
                 </li>
 
                 <li class="menu-item">
-                    <a href="#0">Contact</a>
+                    <a href="#0">Account</a>
+                    <ol class="sub-menu">
+
+                        <li class="menu-item" sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/login}">Login</a>
+                        </li>
+
+                        <li class="menu-item" sec:authorize="!isAuthenticated()">
+                            <a th:href="@{/register}">Register</a>
+                        </li>
+
+                        <th:block sec:authorize="isAuthenticated()">
+                            <form th:action="@{/logout}" method="post" th:hidden="true" name="logoutForm">
+                                <input type="submit" value="Logout" />
+                            </form>
+
+                            <li class="menu-item">
+                                <b><a th:href="@{/customer}"
+                                      sec:authentication="principal.fullName"></a></b>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="">Addresses</a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="">Questions</a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="">Reviews</a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="">Orders</a>
+                            </li>
+
+                            <li class="menu-item">
+                                <a href="">Cart</a>
+                            </li>
+
+                            <li class="menu-item" style="background-color: #e14141 !important;">
+                                <a href="javascript: document.logoutForm.submit()">Logout</a>
+                            </li>
+                        </th:block>
+
+                    </ol>
                 </li>
 
             </ol>
