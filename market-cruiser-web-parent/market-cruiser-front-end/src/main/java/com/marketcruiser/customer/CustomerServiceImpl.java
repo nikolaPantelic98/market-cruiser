@@ -1,5 +1,6 @@
 package com.marketcruiser.customer;
 
+import com.marketcruiser.common.entity.AuthenticationType;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.settings.CountryRepository;
@@ -26,11 +27,13 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
 
+    // returns a list of all countries in ascending order by name
     @Override
     public List<Country> listAllCountries() {
         return countryRepository.findAllByOrderByNameAsc();
     }
 
+    // checks whether a customer with the given email exists in the database
     @Override
     public boolean isEmailUnique(String email) {
         Customer customer = customerRepository.findCustomerByEmail(email);
@@ -38,6 +41,7 @@ public class CustomerServiceImpl implements CustomerService{
         return customer == null;
     }
 
+    // registers a new customer in the database
     @Override
     public void registerCustomer(Customer customer) {
         encodePassword(customer);
@@ -52,6 +56,7 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customer);
     }
 
+    // verifies a customer's account with the given verification code
     @Override
     public boolean verifyCustomer(String verificationCode) {
         Customer customer = customerRepository.findCustomerByVerificationCode(verificationCode);
@@ -64,6 +69,15 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
+    // updates a customer's authentication type if it is different from the given type
+    @Override
+    public void updateAuthentication(Customer customer, AuthenticationType type) {
+        if (!customer.getAuthenticationType().equals(type)) {
+            customerRepository.updateAuthenticationType(customer.getCustomerId(), type);
+        }
+    }
+
+    // encodes the customer's password using the password encoder
     private void encodePassword(Customer customer) {
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
         customer.setPassword(encodedPassword);

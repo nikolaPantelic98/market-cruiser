@@ -45,11 +45,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
     }
 
+    // responsible for loading user details
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomerUserDetailsService();
     }
 
+    // responsible for authenticating users
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

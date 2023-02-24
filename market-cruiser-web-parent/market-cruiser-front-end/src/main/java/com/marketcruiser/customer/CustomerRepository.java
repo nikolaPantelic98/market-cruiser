@@ -1,5 +1,6 @@
 package com.marketcruiser.customer;
 
+import com.marketcruiser.common.entity.AuthenticationType;
 import com.marketcruiser.common.entity.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -14,6 +15,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("UPDATE Customer c SET c.enabled = true, c.verificationCode = null WHERE c.customerId = ?1")
     @Modifying
     void enableCustomer(Long customerId);
+
+    @Query("UPDATE Customer c SET c.authenticationType = ?2 WHERE c.customerId = ?1")
+    @Modifying
+    void updateAuthenticationType(Long customerId, AuthenticationType type);
 
 
 }

@@ -88,6 +88,7 @@ public class CustomerController {
         System.out.println("Verify URL: " + verifyURL);
     }
 
+    // verifies the customer's account
     @GetMapping("/verify")
     public String verifyCustomerAccount(@Param("code") String code, Model model) {
         boolean verified = customerService.verifyCustomer(code);

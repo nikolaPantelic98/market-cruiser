@@ -13,6 +13,7 @@ public class CustomerUserDetailsService implements UserDetailsService {
     private CustomerRepository customerRepository;
 
 
+    // loads a user by the given email address
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Customer customer = customerRepository.findCustomerByEmail(email);

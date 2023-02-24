@@ -1,5 +1,6 @@
 package com.marketcruiser.customer;
 
+import com.marketcruiser.common.entity.AuthenticationType;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.Customer;
 
@@ -11,4 +12,5 @@ public interface CustomerService {
     boolean isEmailUnique(String email);
     void registerCustomer(Customer customer);
     boolean verifyCustomer(String verificationCode);
+    void updateAuthentication(Customer customer, AuthenticationType type);
 }

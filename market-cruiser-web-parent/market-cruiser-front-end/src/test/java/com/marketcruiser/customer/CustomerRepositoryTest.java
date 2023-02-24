@@ -1,5 +1,6 @@
 package com.marketcruiser.customer;
 
+import com.marketcruiser.common.entity.AuthenticationType;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.Customer;
 import org.junit.jupiter.api.Test;
@@ -140,5 +141,15 @@ public class CustomerRepositoryTest {
 
         Customer customer = customerRepository.findById(customerId).get();
         assertThat(customer.isEnabled()).isTrue();
+    }
+
+    @Test
+    public void testUpdateAuthenticationType() {
+        Long customerId = 8L;
+        customerRepository.updateAuthenticationType(customerId, AuthenticationType.GOOGLE);
+
+        Customer customer = customerRepository.findById(customerId).get();
+
+        assertThat(customer.getAuthenticationType()).isEqualTo(AuthenticationType.GOOGLE);
     }
 }
