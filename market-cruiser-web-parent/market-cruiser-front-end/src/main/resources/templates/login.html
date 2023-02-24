@@ -13,6 +13,11 @@
     </div>
     <br>
 
+    <div>
+        <a class="btn btn-outline" style="color: white" th:href="@{/oauth2/authorization/google}">Continue with Google</a>
+    </div>
+    <br>
+
     <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
         <div th:if="${param.error}">
             <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
@@ -22,7 +27,7 @@
         </div>
 
         <div class="border border-secondary rounded p-3">
-            <p>Access to Market Cruiser Control Panel</p>
+            <p></p>
             <p>
                 <input type="email" name="email" class="form-control" placeholder="E-Mail" required />
             </p>
@@ -33,10 +38,15 @@
                 <input type="checkbox" name="remember-me" />&nbsp;Remember me
             </p>
             <p>
-                <input type="submit" value="Login" class="btn btn-blue" />
+                <input type="submit" value="Login" class="btn btn-outline" />
             </p>
         </div>
     </form>
+
+    <br>
+    <div>
+        Don't have account? <a class="a-sorting text-black" th:href="@{/register}"><b>Sign up</b></a>
+    </div>
 
     <br>
     <br>

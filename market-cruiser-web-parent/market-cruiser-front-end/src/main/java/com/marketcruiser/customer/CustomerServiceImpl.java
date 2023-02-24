@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +48,7 @@ public class CustomerServiceImpl implements CustomerService{
         encodePassword(customer);
         customer.setEnabled(false);
         customer.setCreatedTime(new Date());
+        customer.setAuthenticationType(AuthenticationType.DATABASE);
 
         String randomCode = RandomString.make(64);
         customer.setVerificationCode(randomCode);
@@ -54,6 +56,11 @@ public class CustomerServiceImpl implements CustomerService{
         System.out.println("Verification code:  " + randomCode);
 
         customerRepository.save(customer);
+    }
+
+    @Override
+    public Customer getCustomerByEmail(String email) {
+        return customerRepository.findCustomerByEmail(email);
     }
 
     // verifies a customer's account with the given verification code
@@ -71,9 +78,48 @@ public class CustomerServiceImpl implements CustomerService{
 
     // updates a customer's authentication type if it is different from the given type
     @Override
-    public void updateAuthentication(Customer customer, AuthenticationType type) {
+    @Transactional
+    public void updateAuthenticationType(Customer customer, AuthenticationType type) {
         if (!customer.getAuthenticationType().equals(type)) {
             customerRepository.updateAuthenticationType(customer.getCustomerId(), type);
+        }
+    }
+
+    // adds a new customer to the customer repository upon successful OAuth login
+    @Override
+    public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode) {
+        Customer customer = new Customer();
+        customer.setEmail(email);
+        setName(name, customer);
+
+        customer.setEnabled(true);
+        customer.setCreatedTime(new Date());
+        customer.setAuthenticationType(AuthenticationType.GOOGLE);
+        customer.setPassword("");
+        customer.setAddressLine1("");
+        customer.setAddressLine2("");
+        customer.setCity("");
+        customer.setState("");
+        customer.setPhoneNumber("");
+        customer.setPostCode("");
+        customer.setCountry(countryRepository.findCountryByCode(countryCode));
+
+        customerRepository.save(customer);
+    }
+
+    // helper method to set the first and last name of a customer
+    private void setName(String name, Customer customer) {
+        String[] nameArray = name.split(" ");
+
+        if (nameArray.length < 2) {
+            customer.setFirstName(name);
+            customer.setLastName("");
+        } else {
+            String firstName = nameArray[0];
+            customer.setFirstName(firstName);
+
+            String lastName = name.replaceFirst(firstName, "");
+            customer.setLastName(lastName);
         }
     }
 

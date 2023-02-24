@@ -11,6 +11,8 @@ public interface CustomerService {
     List<Country> listAllCountries();
     boolean isEmailUnique(String email);
     void registerCustomer(Customer customer);
+    Customer getCustomerByEmail(String email);
     boolean verifyCustomer(String verificationCode);
-    void updateAuthentication(Customer customer, AuthenticationType type);
+    void updateAuthenticationType(Customer customer, AuthenticationType type);
+    void addNewCustomerUponOAuthLogin(String name, String email, String countryCode);
 }
