@@ -24,6 +24,7 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         this.customerService = customerService;
     }
 
+    // this method handles the case when a customer successfully logs in using OAuth2
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         CustomerOAuth2User oAuth2User = (CustomerOAuth2User) authentication.getPrincipal();
@@ -32,12 +33,11 @@ public class OAuth2LoginSuccessHandler extends SavedRequestAwareAuthenticationSu
         String email = oAuth2User.getEmail();
         String countryCode = request.getLocale().getCountry();
 
-        System.out.println("OAuth2LoginSuccessHandler: " + name + " | " + email);
-
         Customer customer = customerService.getCustomerByEmail(email);
         if (customer == null) {
             customerService.addNewCustomerUponOAuthLogin(name, email, countryCode);
         } else {
+            oAuth2User.setFullName(customer.getFullName());
             customerService.updateAuthenticationType(customer, AuthenticationType.GOOGLE);
         }
 

@@ -33,7 +33,6 @@ public class SettingsFilter implements Filter {
         List<Settings> generalSettings = settingsService.getGeneralSettings();
 
         generalSettings.forEach(settings -> {
-            System.out.println(settings);
             request.setAttribute(settings.getKey(), settings.getValue());
         });
 
