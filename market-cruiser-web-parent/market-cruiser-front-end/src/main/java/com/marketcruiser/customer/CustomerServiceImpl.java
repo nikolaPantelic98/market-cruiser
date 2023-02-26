@@ -3,6 +3,7 @@ package com.marketcruiser.customer;
 import com.marketcruiser.common.entity.AuthenticationType;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.Customer;
+import com.marketcruiser.common.exception.CustomerNotFoundException;
 import com.marketcruiser.settings.CountryRepository;
 import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,12 @@ public class CustomerServiceImpl implements CustomerService{
         System.out.println("Verification code:  " + randomCode);
 
         customerRepository.save(customer);
+    }
+
+    // encodes the customer's password using the password encoder
+    private void encodePassword(Customer customer) {
+        String encodedPassword = passwordEncoder.encode(customer.getPassword());
+        customer.setPassword(encodedPassword);
     }
 
     @Override
@@ -143,13 +150,27 @@ public class CustomerServiceImpl implements CustomerService{
         customerInForm.setCreatedTime(customerInDB.getCreatedTime());
         customerInForm.setVerificationCode(customerInDB.getVerificationCode());
         customerInForm.setAuthenticationType(customerInDB.getAuthenticationType());
+        customerInForm.setResetPasswordToken(customerInDB.getResetPasswordToken());
 
         customerRepository.save(customerInForm);
     }
 
-    // encodes the customer's password using the password encoder
-    private void encodePassword(Customer customer) {
-        String encodedPassword = passwordEncoder.encode(customer.getPassword());
-        customer.setPassword(encodedPassword);
+    @Override
+    public String updateRestPasswordToken(String email) throws CustomerNotFoundException {
+        Customer customer = customerRepository.findCustomerByEmail(email);
+        if (customer != null) {
+            String token = RandomString.make(30);
+            customer.setResetPasswordToken(token);
+            customerRepository.save(customer);
+
+            return token;
+        } else {
+            throw new CustomerNotFoundException("Could not find any customer with the email " + email);
+        }
+    }
+
+    @Override
+    public Customer getCustomerByResetPasswordToken(String token) {
+        return customerRepository.findByResetPasswordToken(token);
     }
 }

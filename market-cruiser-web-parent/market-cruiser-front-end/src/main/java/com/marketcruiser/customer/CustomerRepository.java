@@ -15,10 +15,10 @@ public interface CustomerRepository extends JpaRepository<Customer, Long> {
     @Query("UPDATE Customer c SET c.enabled = true, c.verificationCode = null WHERE c.customerId = ?1")
     @Modifying
     void enableCustomer(Long customerId);
-
     @Query("UPDATE Customer c SET c.authenticationType = ?2 WHERE c.customerId = ?1")
     @Modifying
     void updateAuthenticationType(Long customerId, AuthenticationType type);
+    Customer findByResetPasswordToken(String token);
 
 
 }

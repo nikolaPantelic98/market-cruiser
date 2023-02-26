@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head(${pageTitle}, 'none')">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragment_navigation :: header_menu"></div>
+    <br>
+
+    <div th:if="${message != null}">
+        <h3>[[${message}]]</h3>
+    </div>
+    <br>
+
+
+
+
+    <br>
+    <br>
+    <div th:replace="fragment_navigation :: footer_menu"></div>
+
+</div>
+
+<script th:src="@{/js/common.js}"></script>
+</body>
+</html>
