@@ -56,6 +56,7 @@ public class ForgotPasswordController {
         return "customers/forgot_password_form";
     }
 
+    // helper method that is used to email the user with a link to reset their password
     private void sendEmail(String link, String email) throws MessagingException, UnsupportedEncodingException {
         EmailSettingsBag emailSettings = settingsService.getEmailSettings();
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
@@ -94,5 +95,26 @@ public class ForgotPasswordController {
         }
 
         return "customers/reset_password_form";
+    }
+
+    @PostMapping("/reset-password")
+    public String processResetForm(HttpServletRequest request, Model model) {
+        String token = request.getParameter("token");
+        String password = request.getParameter("password");
+
+        try {
+            customerService.updatePassword(token, password);
+            model.addAttribute("pageTitle", "Reset Your Password");
+            model.addAttribute("title", "Reset Your Password");
+            model.addAttribute("message", "You have successfully changed your password.");
+
+            return "message";
+
+        } catch (CustomerNotFoundException exception) {
+            model.addAttribute("pageTitle", "Invalid Token");
+            model.addAttribute("message", exception.getMessage());
+
+            return "message";
+        }
     }
 }
