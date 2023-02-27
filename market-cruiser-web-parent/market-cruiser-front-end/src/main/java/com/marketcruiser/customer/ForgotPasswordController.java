@@ -32,11 +32,13 @@ public class ForgotPasswordController {
     }
 
 
+    // displays the forgot password form for the user to enter their email
     @GetMapping("/forgot-password")
     public String showRequestForm() {
         return "customers/forgot_password_form";
     }
 
+    // processes the form data submitted by the user when requesting a password reset
     @PostMapping("/forgot-password")
     public String processRequestForm(HttpServletRequest request, Model model) {
         String email = request.getParameter("email");
@@ -82,6 +84,7 @@ public class ForgotPasswordController {
         mailSender.send(message);
     }
 
+    // displays the reset password form for the user to enter their new password
     @GetMapping("/reset-password")
     public String showResetPasswordForm(@Param("token") String token, Model model) {
         Customer customer = customerService.getCustomerByResetPasswordToken(token);
@@ -97,6 +100,7 @@ public class ForgotPasswordController {
         return "customers/reset_password_form";
     }
 
+    // processes the form data submitted by the user when resetting their password
     @PostMapping("/reset-password")
     public String processResetForm(HttpServletRequest request, Model model) {
         String token = request.getParameter("token");

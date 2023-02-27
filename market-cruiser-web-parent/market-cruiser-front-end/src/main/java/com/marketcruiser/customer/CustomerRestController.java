@@ -16,6 +16,7 @@ public class CustomerRestController {
     }
 
 
+    // checks whether the provided email is unique or already exists in the system
     @PostMapping("/customers/check_unique_email")
     public String checkDuplicateEmail(@Param("email") String email) {
         return customerService.isEmailUnique(email) ? "OK" : "Duplicated";

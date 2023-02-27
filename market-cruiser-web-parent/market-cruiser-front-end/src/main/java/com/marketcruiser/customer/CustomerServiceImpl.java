@@ -155,6 +155,7 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customerInForm);
     }
 
+    // updates the reset password token for the customer with the provided email address
     @Override
     public String updateRestPasswordToken(String email) throws CustomerNotFoundException {
         Customer customer = customerRepository.findCustomerByEmail(email);
@@ -169,11 +170,13 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
+    // retrieves the customer associated with the provided reset password token
     @Override
     public Customer getCustomerByResetPasswordToken(String token) {
         return customerRepository.findByResetPasswordToken(token);
     }
 
+    // updates the password for the customer associated with the provided reset password token
     @Override
     public void updatePassword(String token, String newPassword) throws CustomerNotFoundException {
         Customer customer = customerRepository.findByResetPasswordToken(token);
