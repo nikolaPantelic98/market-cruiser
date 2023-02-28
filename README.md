@@ -86,6 +86,13 @@
   - All CRUD operations for customers are enabled.
   - Pagination and Sorting for customers are implemented.
 
+* Customer Authentication:
+  - A login page for customers has been created, as well as a logout option.
+  - Two types of authentication have been created for customers: DATABASE and GOOGLE.
+  - Mandatory verification of the user who registered in the application was created.
+  - The ability of the customer to log in to the application via gmail has been created.
+  - A Forgot Password option was created, through which the customer can reset the password via email.
+
 ## Requirements
 
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
