@@ -128,6 +128,10 @@ public class Product {
     )
     private List<ProductDetails> details = new ArrayList<>();
 
+    public Product(Long productId) {
+        this.productId = productId;
+    }
+
 
     @Override
     public String toString() {

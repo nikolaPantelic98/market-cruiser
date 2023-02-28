@@ -117,6 +117,11 @@ public class Customer {
     private String resetPasswordToken;
 
 
+    public Customer(Long customerId) {
+        this.customerId = customerId;
+    }
+
+
     @Override
     public String toString() {
         return "Customer{" +

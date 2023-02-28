@@ -67,7 +67,7 @@ public class ProductController {
         }
     }
 
-    //method that retrieves the product details for a specific product with the given alias.
+    // method that retrieves the product details for a specific product with the given alias.
     @GetMapping("/p/{product_alias}")
     public String viewProductDetail(@PathVariable("product_alias") String alias, Model model) {
 
@@ -85,13 +85,13 @@ public class ProductController {
         }
     }
 
-    //method that retrieves the first page of the search results for a specific keyword.
+    // method that retrieves the first page of the search results for a specific keyword.
     @GetMapping("/search")
     public String searchFirstPage(@Param("keyword") String keyword, Model model) {
         return searchProductByPage(keyword, 1, model);
     }
 
-    //method that retrieves the search results for a specific keyword and page number.
+    // method that retrieves the search results for a specific keyword and page number.
     @GetMapping("/search/page/{pageNumber}")
     public String searchProductByPage(@Param("keyword") String keyword, @PathVariable int pageNumber, Model model) {
         Page<Product> pageProducts = productService.searchProduct(keyword, pageNumber);

@@ -19,6 +19,7 @@ public class SettingsFilter implements Filter {
         this.settingsService = settingsService;
     }
 
+
     // filters incoming request, sets general settings as request attributes
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
