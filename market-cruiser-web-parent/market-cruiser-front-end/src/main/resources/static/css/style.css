@@ -136,6 +136,18 @@ a.a-icon-darkgreen:hover {
     border: 3px solid #b2b2b2;
 }
 
+*.btn-outline-red {
+    border: 3px solid #ad0000;
+    color: #ad0000;
+    font-weight: 900;
+}
+
+*.btn-outline-red:hover {
+    background-color: #ad0000;
+    color: #FFE5B4;
+    border: 3px solid #b2b2b2;
+}
+
 /*pagination*/
 
 .pagination {
