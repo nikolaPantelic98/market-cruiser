@@ -78,3 +78,18 @@
 .clean-slide:active + label:after {
     transform: translate(100%);
 }
+
+@media (max-width: 576px) {
+    .clean-slide {
+        width: 100%;
+    }
+    .form-group.row label[for] {
+        position: absolute;
+        left: 15px;
+        top: 12px;
+        font-size: 12px;
+        padding: 2px 5px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+}
