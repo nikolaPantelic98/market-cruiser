@@ -105,7 +105,7 @@ public class CustomerController {
     // returns the account details page for the authenticated customer
     @GetMapping("/account_details")
     public String viewAccountDetails(Model model, HttpServletRequest request) {
-        String email = getEmailOfAuthenticatedCustomer(request);
+        String email = Utility.getEmailOfAuthenticatedCustomer(request);
         Customer customer = customerService.getCustomerByEmail(email);
         List<Country> listCountries = customerService.listAllCountries();
 
@@ -113,22 +113,6 @@ public class CustomerController {
         model.addAttribute("listCountries", listCountries);
 
         return "customers/account_form";
-    }
-
-    // retrieves the email of the authenticated customer
-    private String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
-        Object principal = request.getUserPrincipal();
-        String customerEmail = null;
-
-        if (principal instanceof UsernamePasswordAuthenticationToken || principal instanceof RememberMeAuthenticationToken) {
-            customerEmail = request.getUserPrincipal().getName();
-        } else if (principal instanceof OAuth2AuthenticationToken) {
-            OAuth2AuthenticationToken oAuth2Token = (OAuth2AuthenticationToken) principal;
-            CustomerOAuth2User oAuth2User = (CustomerOAuth2User) oAuth2Token.getPrincipal();
-            customerEmail = oAuth2User.getEmail();
-        }
-
-        return customerEmail;
     }
 
     // updates the account details of the customer
