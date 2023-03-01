@@ -6,6 +6,8 @@ import com.marketcruiser.common.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
@@ -44,5 +46,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         cartItemRepository.save(cartItem);
 
         return updateQuantity;
+    }
+
+    @Override
+    public List<CartItem> listCartItems(Customer customer) {
+        return cartItemRepository.findCartItemByCustomer(customer);
     }
 }
