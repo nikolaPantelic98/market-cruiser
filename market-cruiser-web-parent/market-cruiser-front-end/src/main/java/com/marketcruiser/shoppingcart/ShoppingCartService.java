@@ -9,4 +9,5 @@ public interface ShoppingCartService {
 
     Integer addProduct(Long productId, Integer quantity, Customer customer) throws ShoppingCartException;
     List<CartItem> listCartItems(Customer customer);
+    float updateQuantity(Long productId, Integer quantity, Customer customer);
 }

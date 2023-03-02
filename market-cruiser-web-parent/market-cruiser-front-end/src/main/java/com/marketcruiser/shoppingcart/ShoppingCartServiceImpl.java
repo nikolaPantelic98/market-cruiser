@@ -3,19 +3,24 @@ package com.marketcruiser.shoppingcart;
 import com.marketcruiser.common.entity.CartItem;
 import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.product.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
 
     private final CartItemRepository cartItemRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ShoppingCartServiceImpl(CartItemRepository cartItemRepository) {
+    public ShoppingCartServiceImpl(CartItemRepository cartItemRepository, ProductRepository productRepository) {
         this.cartItemRepository = cartItemRepository;
+        this.productRepository = productRepository;
     }
 
 
@@ -51,5 +56,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     @Override
     public List<CartItem> listCartItems(Customer customer) {
         return cartItemRepository.findCartItemByCustomer(customer);
+    }
+
+    // Updates the quantity of a product in the cart for a given customer
+    @Override
+    public float updateQuantity(Long productId, Integer quantity, Customer customer) {
+        cartItemRepository.updateQuantity(quantity, customer.getCustomerId(), productId);
+        Product product = productRepository.findById(productId).get();
+        float subtotal = product.getDiscountPrice() * quantity;
+
+        return subtotal;
     }
 }
