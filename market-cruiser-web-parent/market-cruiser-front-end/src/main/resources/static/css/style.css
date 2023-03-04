@@ -1,36 +1,21 @@
 
 /* icons */
 
-*.icon-green {
-    color:green
-}
+*.icon-green {color:green}
 
-*.icon-dark {
-    color:gray
-}
+*.icon-dark {color:gray}
 
-*.icon-darkblue {
-    color: #223775;
-}
+*.icon-darkblue {color: #223775;}
 
-*.icon-red {
-    color: #ad0000
-}
+*.icon-red {color: #ad0000}
 
-*.badge-blue {
-    color: black;
-    background-color: #48dbe8;
-}
+*.badge-blue {color: black; background-color: #48dbe8;}
 
 /* text */
 
-*.text-black {
-    color: black
-}
+*.text-black {color: black}
 
-*.text-white {
-    color: white;
-}
+*.text-white {color: white;}
 
 /*background*/
 
@@ -73,23 +58,13 @@ a.sorting-category:hover {
     font-weight: bold;
 }
 
-a.a-icon-darkblue {
-    transition: all 0.3s ease;
-}
+a.a-icon-darkblue {transition: all 0.3s ease;}
 
-a.a-icon-darkblue:hover {
-    transform: scale(1.5);
-    color: #223775;
-}
+a.a-icon-darkblue:hover {transform: scale(1.5); color: #223775;}
 
-a.a-icon-darkgreen {
-    transition: all 0.3s ease;
-}
+a.a-icon-darkgreen {transition: all 0.3s ease;}
 
-a.a-icon-darkgreen:hover {
-    transform: scale(1.5);
-    color: #15234a;
-}
+a.a-icon-darkgreen:hover {transform: scale(1.5); color: #15234a;}
 
 /* buttons */
 
@@ -279,6 +254,11 @@ a.a-icon-darkgreen:hover {
     margin-bottom: 80px;
 }
 
+.subtotal-container {
+    margin-left: 170px;
+    text-align: left;
+}
+
 
 @media screen and (max-width: 768px){
     /* small screen */
@@ -287,6 +267,10 @@ a.a-icon-darkgreen:hover {
     }
     div.less-details {
         display: block;
+    }
+    .subtotal-container {
+        margin-left: 0;
+        text-align: center;
     }
 }
 

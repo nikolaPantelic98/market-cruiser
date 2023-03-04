@@ -36,7 +36,7 @@
     content: "\f0c9";
 }
 .menu-item:nth-child(3) > a::before {
-    content: "\f2c2";
+    content: "\f07a";
 }
 .menu-item:nth-child(4) > a::before {
     content: "\f2f6";
