@@ -82,7 +82,7 @@ public class AddressRepositoryTest {
         Long addressId = 1L;
         Long customerId = 12L;
 
-        addressRepository.deleteAddressByAddressIdAAndCustomer(addressId, customerId);
+        addressRepository.deleteAddressByAddressIdAndCustomer(addressId, customerId);
 
         Address address = addressRepository.findAddressByAddressIdAndCustomer(addressId, customerId);
         assertThat(address).isNull();

@@ -77,5 +77,25 @@
         </div>
     </div>
 
+    <div th:fragment="confirm_modal" class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);">
+                <div class="modal-header">
+                    <h4 class="modal-title">Delete Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <span id="confirmText"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-outline" href="" id="yesButton">Yes</a>
+                    <button type="button" class="btn btn-outline-red" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

@@ -17,5 +17,5 @@ public interface AddressRepository extends JpaRepository<Address, Long> {
 
     @Query("DELETE FROM Address a WHERE a.addressId = ?1 AND a.customer.customerId = ?2")
     @Modifying
-    void deleteAddressByAddressIdAAndCustomer(Long addressId, Long customerId);
+    void deleteAddressByAddressIdAndCustomer(Long addressId, Long customerId);
 }

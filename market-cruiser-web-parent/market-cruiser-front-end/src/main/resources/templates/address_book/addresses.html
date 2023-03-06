@@ -17,6 +17,17 @@
     <div th:replace="fragment_navigation :: search_nav"></div>
     <br>
 
+    <div class="text-center">
+        <div>
+            <a th:href="@{/address_book/new}" class="btn btn-outline">Add New Address</a>
+        </div>
+    </div>
+    <br>
+
+    <div th:if="${message != null}" class="alert alert-success text-center m-1">
+        [[${message}]]
+    </div>
+
     <div class="row m-1">
         <div class="col-sm-6 mt-4">
             <div class="card" th:classappend="${usePrimaryAddressAsDefault ? 'bg-warning' : ''}">
@@ -24,6 +35,10 @@
                     <div class="row">
                         <div class="col">
                             <b>Your Primary Address</b>
+                        </div>
+                        <div class="float-right">
+                            <a class="a-icon-darkblue fas fa-edit icon-green" title="Edit your primary address"
+                                th:href="@{/account_details(redirect=address_book)}"></a>
                         </div>
                     </div>
                 </div>
@@ -41,6 +56,16 @@
                         <div class="col">
                             <b>Address #[[${status.count + 1}]]</b>
                         </div>
+                        <div class="col">
+                            <div class="float-right">
+                                <a class="a-icon-darkblue fas fa-edit icon-green" title="Edit this address"
+                                   th:href="@{'/address_book/edit/' + ${address.addressId}}"></a>
+                                &nbsp;
+                                <a class="a-icon-darkblue fas fa-trash icon-red link-delete" title="Delete this address"
+                                   th:entityId="${address.addressId}"
+                                   th:href="@{'/address_book/delete/' + ${address.addressId}}"></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="card-body">
@@ -51,6 +76,7 @@
         </th:block>
     </div>
 
+    <div th:replace="fragments :: confirm_modal"></div>
     <br>
     <br>
     <div th:replace="fragment_navigation :: footer_menu"></div>
@@ -58,5 +84,24 @@
 </div>
 
 <script th:src="@{/js/common.js}"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(evt) {
+            evt.preventDefault();
+            showDeleteConfirmModal($(this), 'address');
+        });
+    });
+
+    function showDeleteConfirmModal(link, entityName) {
+        entityId = link.attr("entityId");
+
+        $("#yesButton").attr("href", link.attr("href"));
+        $("#confirmText").text("Are you sure you want to delete this "
+            + entityName + " ID " + entityId + "?");
+        $("#confirmModal").modal();
+    }
+
+</script>
 </body>
 </html>

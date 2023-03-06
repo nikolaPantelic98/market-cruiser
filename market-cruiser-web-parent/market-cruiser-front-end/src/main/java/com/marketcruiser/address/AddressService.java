@@ -8,4 +8,7 @@ import java.util.List;
 public interface AddressService {
 
     List<Address> listAddressBook(Customer customer);
+    void saveAddress(Address address);
+    Address getAddress(Long addressId, Long customerId);
+    void deleteAddress(Long addressId, Long customerId);
 }

@@ -2,12 +2,16 @@ package com.marketcruiser.address;
 
 import com.marketcruiser.Utility;
 import com.marketcruiser.common.entity.Address;
+import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.customer.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -50,5 +54,56 @@ public class AddressController {
     private Customer getAuthenticatedCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         return customerService.getCustomerByEmail(email);
+    }
+
+    // shows the form to add a new address
+    @GetMapping("/address_book/new")
+    public String newAddress(Model model) {
+        List<Country> listCountries = customerService.listAllCountries();
+
+        model.addAttribute("listCountries", listCountries);
+        model.addAttribute("address", new Address());
+        model.addAttribute("pageTitle", "Add New Address");
+
+        return "address_book/address_form";
+    }
+
+    // saves a new or edited address to the database, and redirects back to the address book page
+    @PostMapping("/address_book/save")
+    public String saveAddress(Address address, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        Customer customer = getAuthenticatedCustomer(request);
+
+        address.setCustomer(customer);
+        addressService.saveAddress(address);
+
+        redirectAttributes.addFlashAttribute("message", "The address has been saved successfully.");
+
+        return "redirect:/address_book";
+    }
+
+    // shows the form to edit an existing address
+    @GetMapping("/address_book/edit/{addressId}")
+    public String editAddress(@PathVariable Long addressId, Model model, HttpServletRequest request) {
+        Customer customer = getAuthenticatedCustomer(request);
+        List<Country> listCountries = customerService.listAllCountries();
+
+        Address address = addressService.getAddress(addressId, customer.getCustomerId());
+
+        model.addAttribute("address", address);
+        model.addAttribute("listCountries", listCountries);
+        model.addAttribute("pageTitle", "Edit Address (ID: " + addressId + ")");
+
+        return "address_book/address_form";
+    }
+
+    // deletes an address from the database, and redirects back to the address book page
+    @GetMapping("/address_book/delete/{addressId}")
+    public String deleteAddress(@PathVariable Long addressId, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        Customer customer = getAuthenticatedCustomer(request);
+        addressService.deleteAddress(addressId, customer.getCustomerId());
+
+        redirectAttributes.addFlashAttribute("message", "The address ID " + addressId + " has been deleted.");
+
+        return "redirect:/address_book";
     }
 }

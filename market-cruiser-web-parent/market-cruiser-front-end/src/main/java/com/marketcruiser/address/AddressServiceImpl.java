@@ -5,9 +5,11 @@ import com.marketcruiser.common.entity.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
+@Transactional
 public class AddressServiceImpl implements AddressService{
 
     private final AddressRepository addressRepository;
@@ -18,8 +20,27 @@ public class AddressServiceImpl implements AddressService{
     }
 
 
+    // returns a list of addresses associated with the given customer
     @Override
     public List<Address> listAddressBook(Customer customer) {
         return addressRepository.findAddressByCustomer(customer);
+    }
+
+    // saves the given address to the database
+    @Override
+    public void saveAddress(Address address) {
+        addressRepository.save(address);
+    }
+
+    // returns the address associated with the given customer
+    @Override
+    public Address getAddress(Long addressId, Long customerId) {
+        return addressRepository.findAddressByAddressIdAndCustomer(addressId, customerId);
+    }
+
+    // deletes the address associated with the given customer
+    @Override
+    public void deleteAddress(Long addressId, Long customerId) {
+        addressRepository.deleteAddressByAddressIdAndCustomer(addressId, customerId);
     }
 }
