@@ -90,19 +90,38 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "addressId=" + addressId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", addressLine1='" + addressLine1 + '\'' +
-                ", addressLine2='" + addressLine2 + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", postCode='" + postCode + '\'' +
-                ", country=" + country +
-                ", customer=" + customer +
-                ", defaultForShipping=" + defaultForShipping +
-                '}';
+        String address = firstName;
+
+        if (lastName != null && !lastName.isEmpty()) {
+            address += " " + lastName;
+        }
+
+        if (!addressLine1.isEmpty()) {
+            address += ", " + addressLine1;
+        }
+
+        if (addressLine2 != null && !addressLine2.isEmpty()) {
+            address += ", " + addressLine2;
+        }
+
+        if (!city.isEmpty()) {
+            address += ", " + city;
+        }
+
+        if (state != null && !state.isEmpty()) {
+            address += ", " + state;
+        }
+
+        address += ", " + country.getName();
+
+        if (!postCode.isEmpty()) {
+            address += ". Post Code: " + postCode;
+        }
+
+        if (!phoneNumber.isEmpty()) {
+            address += ". Phone Number: " + phoneNumber;
+        }
+
+        return address;
     }
 }

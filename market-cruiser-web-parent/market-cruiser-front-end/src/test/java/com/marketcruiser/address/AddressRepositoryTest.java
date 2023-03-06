@@ -30,14 +30,14 @@ public class AddressRepositoryTest {
         Address newAddress = new Address();
         newAddress.setCustomer(new Customer(customerId));
         newAddress.setCountry(new Country(countryId));
-        newAddress.setFirstName("Walter");
-        newAddress.setLastName("White");
-        newAddress.setPhoneNumber("19094644165");
-        newAddress.setAddressLine1("4213 Gordon Street");
-        newAddress.setAddressLine2("Novak Building");
-        newAddress.setCity("Los Angeles");
+        newAddress.setFirstName("John");
+        newAddress.setLastName("Jones");
+        newAddress.setPhoneNumber("8172816221212");
+        newAddress.setAddressLine1("1313 Long Avenue");
+        newAddress.setAddressLine2("State Department 13");
+        newAddress.setCity("San Francisco");
         newAddress.setState("California");
-        newAddress.setPostCode("91710");
+        newAddress.setPostCode("131313");
 
         Address savedAddress = addressRepository.save(newAddress);
 
@@ -67,7 +67,7 @@ public class AddressRepositoryTest {
 
     @Test
     public void testUpdate() {
-        Long addressId = 1L;
+        Long addressId = 2L;
         String phoneNumber = "646-232-3932";
 
         Address address = addressRepository.findById(addressId).get();
