@@ -93,6 +93,12 @@
   - The ability of the customer to log in to the application via gmail has been created.
   - A Forgot Password option was created, through which the customer can reset the password via email.
 
+* Shopping Cart Module:
+  - Shopping Cart Module added.
+  - The customer can add the product to the cart.
+  - The customer can determine how many of the same products will be in the cart (quantity).
+  - The cart shows the total price of all products.
+
 ## Requirements
 
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
