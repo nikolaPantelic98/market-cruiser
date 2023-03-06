@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Shipping Rates - Market Cruiser Admin', 'none')">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragment_navigation :: menu"></div>
+
+    <br/>
+    <div>
+        <h1>Manage Shipping Rates</h1>
+        <br/>
+        <a th:href="@{/shipping_rates/new}" class="a-icon-darkgreen fas fa-folder-plus fa-2x icon-darkblue" title="Create New Shipping Rate"></a>
+    </div>
+
+    <div th:replace="fragments :: search_form_and_message"></div>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="tbl-header">
+                <tr>
+                    <th th:replace="fragments :: column_link('shippingRateId', 'ID')"></th>
+                    <th th:replace="fragments :: column_link('country', 'Country')"></th>
+                    <th th:replace="fragments :: column_link('state', 'State')"></th>
+                    <th th:replace="fragments :: column_link('rate', 'Rate')"></th>
+                    <th th:replace="fragments :: column_link('days', 'Days')"></th>
+                    <th th:replace="fragments :: column_link('codSupported', 'COD Supported')"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="rate: ${listShippingRates}">
+                    <td style="text-align: center; vertical-align: middle">[[${rate.shippingRateId}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">[[${rate.country.name}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">[[${rate.state}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">[[${rate.rate}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">[[${rate.days}]]</td>
+
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="shipping_rates/shipping_rates_fragment :: cod_support"></div>
+                    </td>
+
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: edit('shipping rate', '/shipping_rates/edit/' + ${rate.shippingRateId})"></div>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: delete('shipping rate', ${rate.shippingRateId}, '/shipping_rates/delete/' + ${rate.shippingRateId}, true)"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+
+    </div>
+
+    <div class="less-details">
+        <div th:each="rate : ${listShippingRates}" class="row m-1">
+            <div class="col-4">
+                <span><b>[[${rate.country.name}]]</b></span>
+                <br/>
+                <span>[[${rate.state}]]</span>
+            </div>
+            <div class="col-8">
+                <div>
+                    <div th:replace="shipping_rates/shipping_rates_fragment :: cod_support"></div>
+                    &nbsp;
+                    <div th:replace="fragments :: edit('shipping rate', '/shipping_rates/edit/' + ${rate.shippingRateId})"></div>
+                    &nbsp;
+                    <div th:replace="fragments :: delete('shipping rate', ${rate.shippingRateId}, '/shipping_rates/delete/' + ${rate.shippingRateId}, true)"></div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </div>
+    </div>
+
+    <div th:replace="fragments :: pagination('shipping rates')"></div>
+
+    <div th:replace="fragments_modal :: confirm_modal"></div>
+
+    <br>
+    <br>
+
+    <div th:replace="fragments :: footer"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/shipping_rates}]]";
+
+    $(document).ready(function() {
+        $(".link-delete").on("click", function(e) {
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'shipping rate');
+        });
+    });
+
+</script>
+</body>
+</html>
