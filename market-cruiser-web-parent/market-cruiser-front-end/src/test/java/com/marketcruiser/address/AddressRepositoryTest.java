@@ -87,4 +87,12 @@ public class AddressRepositoryTest {
         Address address = addressRepository.findAddressByAddressIdAndCustomer(addressId, customerId);
         assertThat(address).isNull();
     }
+
+    @Test
+    public void testSetNonDefaultAddresses() {
+        Long addressId = 2L;
+        Long customerId = 12L;
+
+        addressRepository.setNonDefaultForOthers(addressId, customerId);
+    }
 }

@@ -106,4 +106,13 @@ public class AddressController {
 
         return "redirect:/address_book";
     }
+
+    // sets the default address for the given customer and updates all other addresses as non-default
+    @GetMapping("/address_book/default/{addressId}")
+    public String setDefaultAddress(@PathVariable Long addressId, HttpServletRequest request) {
+        Customer customer = getAuthenticatedCustomer(request);
+        addressService.setDefaultAddress(addressId, customer.getCustomerId());
+
+        return "redirect:/address_book";
+    }
 }

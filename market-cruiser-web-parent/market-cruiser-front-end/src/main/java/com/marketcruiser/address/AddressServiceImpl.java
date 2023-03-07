@@ -43,4 +43,14 @@ public class AddressServiceImpl implements AddressService{
     public void deleteAddress(Long addressId, Long customerId) {
         addressRepository.deleteAddressByAddressIdAndCustomer(addressId, customerId);
     }
+
+    // sets the default address for a given customer, and sets all other addresses as non-default
+    @Override
+    public void setDefaultAddress(Long defaultAddressId, Long customerId) {
+        if (defaultAddressId > 0) {
+            addressRepository.setDefaultAddress(defaultAddressId);
+        }
+
+        addressRepository.setNonDefaultForOthers(defaultAddressId, customerId);
+    }
 }

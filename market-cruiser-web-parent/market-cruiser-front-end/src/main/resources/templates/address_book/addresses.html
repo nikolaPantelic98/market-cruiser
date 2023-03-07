@@ -35,6 +35,15 @@
                     <div class="row">
                         <div class="col">
                             <b>Your Primary Address</b>
+
+                            <th:block th:if="${usePrimaryAddressAsDefault}">
+                                <span class="text-danger">[Default]</span>
+                            </th:block>
+
+                            <th:block th:unless="${usePrimaryAddressAsDefault}">
+                                <a th:href="@{'/address_book/default/0'}">[Set as default]</a>
+                            </th:block>
+
                         </div>
                         <div class="float-right">
                             <a class="a-icon-darkblue fas fa-edit icon-green" title="Edit your primary address"
@@ -55,6 +64,15 @@
                     <div class="row">
                         <div class="col">
                             <b>Address #[[${status.count + 1}]]</b>
+
+                            <th:block th:if="${address.defaultForShipping}">
+                            <span class="text-danger">[Default]</span>
+                            </th:block>
+
+                            <th:block th:unless="${address.defaultForShipping}">
+                            <a th:href="@{'/address_book/default/' + ${address.addressId}}">[Set as default]</a>
+                            </th:block>
+
                         </div>
                         <div class="col">
                             <div class="float-right">
