@@ -23,6 +23,11 @@
     background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);
 }
 
+.bg-blue {
+    background-color: #223775;
+    color: white;
+}
+
 /* a */
 
 a.a-sorting:link {

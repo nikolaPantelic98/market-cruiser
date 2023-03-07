@@ -137,15 +137,22 @@ public class Customer {
     }
 
     @Transient
-    public String getAddress() {
-        String address = firstName;
+    public String getName() {
+        String name = firstName;
 
         if (lastName != null && !lastName.isEmpty()) {
-            address += " " + lastName;
+            name += " " + lastName + ",";
         }
 
+        return name;
+    }
+
+    @Transient
+    public String getAddress() {
+        String address = "";
+
         if (!addressLine1.isEmpty()) {
-            address += ", " + addressLine1;
+            address += addressLine1;
         }
 
         if (addressLine2 != null && !addressLine2.isEmpty()) {
@@ -160,16 +167,23 @@ public class Customer {
             address += ", " + state;
         }
 
-        address += ", " + country.getName();
+        address += ", " + country.getName() + ",";
+
+        return address;
+    }
+
+    @Transient
+    public String getPostCodeAndPhoneNumber() {
+        String postCodeAndPhoneNumber = "";
 
         if (!postCode.isEmpty()) {
-            address += ". Post Code: " + postCode;
+            postCodeAndPhoneNumber += "Post Code: " + postCode;
         }
 
         if (!phoneNumber.isEmpty()) {
-            address += ". Phone Number: " + phoneNumber;
+            postCodeAndPhoneNumber += ", Phone Number: " + phoneNumber;
         }
 
-        return address;
+        return postCodeAndPhoneNumber;
     }
 }
