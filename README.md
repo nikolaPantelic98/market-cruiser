@@ -99,6 +99,19 @@
   - The customer can determine how many of the same products will be in the cart (quantity).
   - The cart shows the total price of all products.
 
+* Shipping Rates Management Module:
+  - Shipping Rates Management Module added.
+  - Shipping rates listing page is created.
+  - Shipping rates can now be created to determine the cost of postage to a specific country.
+  - All CRUD operations for shipping rates are enabled.
+  - Pagination and Sorting for shipping rates are implemented.
+
+* Address Book Module:
+  - Address Book Module added.
+  - Customer can add several different addresses and specify to which address he wants to buy the product.
+  - Customer can specify which address is default.
+  - All CRUD operations are enabled, so customer can create, read, update or delete his addresses.
+
 ## Requirements
 
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
