@@ -11,4 +11,5 @@ public interface SettingsService {
     void saveAllSettings(Iterable<Settings> settings);
     List<Settings> getMailServerSettings();
     List<Settings> getMailTemplateSettings();
+    List<Settings> getCurrencySettings();
 }

@@ -120,4 +120,14 @@ public class Order {
                 ", customer=" + customer.getFullName() +
                 '}';
     }
+
+    // getter method used in orders.html to show city, state and country of the user
+    @Transient
+    public String getDestination() {
+        String destination =  city + ", ";
+        if (state != null && !state.isEmpty()) destination += state + ", ";
+        destination += country;
+
+        return destination;
+    }
 }

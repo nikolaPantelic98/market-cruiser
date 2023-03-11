@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Orders - Market Cruiser Admin', 'none')">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragment_navigation :: menu"></div>
+
+    <br/>
+    <div>
+        <h1>Manage Orders</h1>
+    </div>
+
+    <div th:replace="fragments :: search_form_and_message"></div>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="tbl-header">
+                <tr>
+                    <th th:replace="fragments :: column_link('orderId', 'Order ID')"></th>
+
+                    <th th:replace="fragments :: column_link('customer', 'Customer')"></th>
+
+                    <th th:replace="fragments :: column_link('total', 'Total')"></th>
+
+                    <th th:replace="fragments :: column_link('orderTime', 'Order Time')"></th>
+
+                    <th th:replace="fragments :: column_link('destination', 'Destination')"></th>
+
+                    <th th:replace="fragments :: column_link('paymentMethod', 'Payment Method')"></th>
+
+                    <th th:replace="fragments :: column_link('status', 'Status')"></th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order: ${listOrders}">
+                    <td style="text-align: center; vertical-align: middle">[[${order.orderId}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="a-sorting text-black linkCustomerDetail" th:href="@{'/customers/detail/' + ${order.customer.customerId}}">
+                            [[${order.customer.fullName}]]
+                        </a>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: format_currency(${order.total})"></div>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: format_time(${order.orderTime})"></div>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">[[${order.destination}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${order.paymentMethod}]]</td>
+                    <td style="text-align: center; vertical-align: middle">[[${order.status}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-order-detail"
+                           th:href="@{'/orders/detail/' + ${order.orderId}}"
+                           title="View Details of This Order">
+                        </a>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: edit('order', '/orders/edit/' + ${order.orderId})"></div>
+                        &nbsp;&nbsp;
+                        <div th:replace="fragments :: delete('order', ${order.orderId}, '/orders/delete/' + ${order.orderId}, true)"></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+
+    </div>
+
+
+
+    <div th:replace="fragments :: pagination('orders')"></div>
+
+    <div th:replace="fragments_modal :: confirm_modal"></div>
+
+    <div class="modal fade" id="detailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);">
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div th:replace="fragments :: footer"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/orders}]]";
+
+    $(document).ready(function() {
+        handleLinkViewCustomerDetails();
+    });
+
+    function handleLinkViewCustomerDetails() {
+        $(".linkCustomerDetail").on("click", function (e) {
+            e.preventDefault();
+            linkDetailURL = $(this).attr("href");
+            $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+    }
+
+</script>
+</body>
+</html>

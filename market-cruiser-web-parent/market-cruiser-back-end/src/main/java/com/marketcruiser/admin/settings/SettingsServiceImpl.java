@@ -54,5 +54,8 @@ public class SettingsServiceImpl implements SettingsService{
         return settingsRepository.findByCategory(SettingsCategory.MAIL_TEMPLATES);
     }
 
-
+    @Override
+    public List<Settings> getCurrencySettings() {
+        return settingsRepository.findByCategory(SettingsCategory.CURRENCY);
+    }
 }

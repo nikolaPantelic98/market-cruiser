@@ -1,0 +1,79 @@
+package com.marketcruiser.admin.order;
+
+import com.marketcruiser.admin.settings.SettingsServiceImpl;
+import com.marketcruiser.admin.shippingrate.ShippingRateServiceImpl;
+import com.marketcruiser.common.entity.Order;
+import com.marketcruiser.common.entity.Settings;
+import com.marketcruiser.common.entity.ShippingRate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
+@Controller
+public class OrderController {
+
+    private final OrderServiceImpl orderService;
+    private final SettingsServiceImpl settingsService;
+
+    @Autowired
+    public OrderController(OrderServiceImpl orderService, SettingsServiceImpl settingsService) {
+        this.orderService = orderService;
+        this.settingsService = settingsService;
+    }
+
+
+    // returns the first page of orders
+    @GetMapping("/orders")
+    public String showFirstPageOfOrders(Model model, HttpServletRequest request) {
+        return showPageOfOrders(1, model, "orderTime", "desc", null, request);
+    }
+
+    // shows a page of orders
+    @GetMapping("/orders/page/{pageNumber}")
+    public String showPageOfOrders(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
+                                          @Param("sortDir") String sortDir, @Param("keyword") String keyword , HttpServletRequest request) {
+
+        Page<Order> page = orderService.listOrdersByPage(pageNumber, sortField, sortDir, keyword);
+        List<Order> listOrders = page.getContent();
+
+        long startCount = (long) (pageNumber - 1) * OrderServiceImpl.ORDERS_PER_PAGE + 1;
+        long endCount = startCount + OrderServiceImpl.ORDERS_PER_PAGE - 1;
+
+        if (endCount > page.getTotalElements()) {
+            endCount = page.getTotalElements();
+        }
+
+        loadCurrencySettings(request);
+
+        String reverseSortDir = sortDir.equals("asc") ? "desc" : "asc";
+
+        model.addAttribute("currentPage", pageNumber);
+        model.addAttribute("totalPages", page.getTotalPages());
+        model.addAttribute("startCount", startCount);
+        model.addAttribute("endCount", endCount);
+        model.addAttribute("totalItems", page.getTotalElements());
+        model.addAttribute("listOrders", listOrders);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("sortDir", sortDir);
+        model.addAttribute("reverseSortDir", reverseSortDir);
+        model.addAttribute("keyword", keyword);
+        model.addAttribute("moduleURL", "/orders");
+
+        return "orders/orders";
+    }
+
+    private void loadCurrencySettings(HttpServletRequest request) {
+        List<Settings> currencySettings = settingsService.getCurrencySettings();
+
+        for (Settings settings : currencySettings) {
+            request.setAttribute(settings.getKey(), settings.getValue());
+        }
+    }
+}

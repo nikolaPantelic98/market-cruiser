@@ -26,7 +26,7 @@ public class ShippingRateController {
     }
 
 
-    // Returns the first page of shipping rates
+    // returns the first page of shipping rates
     @GetMapping("/shipping_rates")
     public String showFirstPageOfShippingRates(Model model) {
         return showPageOfShippingRates(1, model, "country", "asc", null );

@@ -26,8 +26,8 @@ public class OrderRepositoryTest {
 
     @Test
     public void testCreateNewOrderWithSingleProduct() {
-        Customer customer = entityManager.find(Customer.class, 12L);
-        Product product = entityManager.find(Product.class, 44L);
+        Customer customer = entityManager.find(Customer.class, 14L);
+        Product product = entityManager.find(Product.class, 43L);
 
         Order mainOrder = new Order();
         mainOrder.setOrderTime(new Date());
@@ -42,22 +42,22 @@ public class OrderRepositoryTest {
         mainOrder.setPostCode(customer.getPostCode());
         mainOrder.setState(customer.getState());
 
-        mainOrder.setShippingCost(10);
+        mainOrder.setShippingCost(5);
         mainOrder.setProductCost(product.getCost());
         mainOrder.setTax(0);
         mainOrder.setSubtotal(product.getPrice());
-        mainOrder.setTotal(product.getPrice() + 10);
+        mainOrder.setTotal(product.getPrice() + 5);
 
-        mainOrder.setPaymentMethod(PaymentMethod.CREDIT_CARD);
+        mainOrder.setPaymentMethod(PaymentMethod.COD);
         mainOrder.setStatus(OrderStatus.NEW);
         mainOrder.setDeliverDate(new Date());
-        mainOrder.setDeliverDays(1);
+        mainOrder.setDeliverDays(2);
 
         OrderDetail orderDetail = new OrderDetail();
         orderDetail.setProduct(product);
         orderDetail.setOrder(mainOrder);
         orderDetail.setProductCost(product.getCost());
-        orderDetail.setShippingCost(10);
+        orderDetail.setShippingCost(5);
         orderDetail.setQuantity(1);
         orderDetail.setSubtotal(product.getPrice());
         orderDetail.setUnitPrice(product.getPrice());
