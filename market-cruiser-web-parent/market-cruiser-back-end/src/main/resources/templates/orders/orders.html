@@ -39,7 +39,7 @@
                 <tr th:each="order: ${listOrders}">
                     <td style="text-align: center; vertical-align: middle">[[${order.orderId}]]</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black linkCustomerDetail" th:href="@{'/customers/detail/' + ${order.customer.customerId}}">
+                        <a class="a-sorting text-black link-customer-detail" th:href="@{'/customers/detail/' + ${order.customer.customerId}}">
                             [[${order.customer.fullName}]]
                         </a>
                     </td>
@@ -77,7 +77,15 @@
 
     <div th:replace="fragments_modal :: confirm_modal"></div>
 
-    <div class="modal fade" id="detailModal">
+    <div class="modal fade" id="customerDetailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);">
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="orderDetailModal">
         <div class="modal-dialog modal-xl">
             <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);">
 
@@ -97,13 +105,22 @@
 
     $(document).ready(function() {
         handleLinkViewCustomerDetails();
+        handleLinkViewOrderDetails();
     });
 
     function handleLinkViewCustomerDetails() {
-        $(".linkCustomerDetail").on("click", function (e) {
+        $(".link-customer-detail").on("click", function (e) {
             e.preventDefault();
             linkDetailURL = $(this).attr("href");
-            $("#detailModal").modal("show").find(".modal-content").load(linkDetailURL);
+            $("#customerDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+    }
+
+    function handleLinkViewOrderDetails() {
+        $(".link-order-detail").on("click", function (e) {
+            e.preventDefault();
+            linkDetailURL = $(this).attr("href");
+            $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
         });
     }
 

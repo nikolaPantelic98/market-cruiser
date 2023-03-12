@@ -8,6 +8,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.NoSuchElementException;
+
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -40,5 +42,15 @@ public class OrderServiceImpl implements OrderService{
         }
 
         return orderRepository.findAll(pageable);
+    }
+
+    // Retrieves an order from the database by its ID
+    @Override
+    public Order getOrder(Long orderId) throws OrderNotFoundException {
+        try {
+            return orderRepository.findById(orderId).get();
+        } catch (NoSuchElementException exception) {
+            throw new OrderNotFoundException("Could not find any orders with ID " + orderId);
+        }
     }
 }

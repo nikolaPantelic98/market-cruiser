@@ -16,6 +16,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/tab_five.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/tab_six.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/tab_two.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/tab_three.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/css/input.css}">
     <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
@@ -135,6 +136,10 @@
 
     <div th:fragment="format_time(dateTime)" th:remove="tag">
         <span th:text="${#dates.format(dateTime, 'dd/MM/yyyy HH:mm:ss')}"></span>
+    </div>
+
+    <div th:fragment="currency_input(amount)" th:remove="tag">
+        <input type="text" readonly class="form-control" th:value="${(CURRENCY_SYMBOL_POSITION == 'Before price' ? CURRENCY_SYMBOL : '') + #numbers.formatDecimal(amount, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE) + (CURRENCY_SYMBOL_POSITION == 'After price' ? CURRENCY_SYMBOL : '')}">
     </div>
 </body>
 </html>

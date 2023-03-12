@@ -1,10 +1,8 @@
 package com.marketcruiser.admin.order;
 
 import com.marketcruiser.admin.settings.SettingsServiceImpl;
-import com.marketcruiser.admin.shippingrate.ShippingRateServiceImpl;
 import com.marketcruiser.common.entity.Order;
 import com.marketcruiser.common.entity.Settings;
-import com.marketcruiser.common.entity.ShippingRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
@@ -12,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -69,11 +68,27 @@ public class OrderController {
         return "orders/orders";
     }
 
+    // this method loads the currency settings into the request attribute for displaying on the page
     private void loadCurrencySettings(HttpServletRequest request) {
         List<Settings> currencySettings = settingsService.getCurrencySettings();
 
         for (Settings settings : currencySettings) {
             request.setAttribute(settings.getKey(), settings.getValue());
+        }
+    }
+
+    // displays the details of a single order in a modal dialog
+    @GetMapping("/orders/detail/{orderId}")
+    public String viewOrderDetails(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        try {
+            Order order = orderService.getOrder(orderId);
+            loadCurrencySettings(request);
+            model.addAttribute("order", order);
+
+            return "orders/order_details_modal";
+        } catch (OrderNotFoundException exception) {
+            redirectAttributes.addFlashAttribute("message", exception.getMessage());
+            return showPageOfOrders(1, model, "orderTime", "desc", null, request);
         }
     }
 }
