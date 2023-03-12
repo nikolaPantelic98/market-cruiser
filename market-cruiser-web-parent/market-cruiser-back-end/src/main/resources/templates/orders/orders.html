@@ -106,7 +106,15 @@
     $(document).ready(function() {
         handleLinkViewCustomerDetails();
         handleLinkViewOrderDetails();
+        handleLinkDeleteOrder();
     });
+
+    function handleLinkDeleteOrder() {
+        $(".link-delete").on("click", function (e) {
+            e.preventDefault();
+            showDeleteConfirmModal($(this), 'order');
+        });
+    }
 
     function handleLinkViewCustomerDetails() {
         $(".link-customer-detail").on("click", function (e) {

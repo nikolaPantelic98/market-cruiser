@@ -53,4 +53,15 @@ public class OrderServiceImpl implements OrderService{
             throw new OrderNotFoundException("Could not find any orders with ID " + orderId);
         }
     }
+
+    // deletes order
+    @Override
+    public void deleteOrder(Long orderId) throws OrderNotFoundException {
+        Long count = orderRepository.countByOrderId(orderId);
+        if (count == null || count == 0) {
+            throw new OrderNotFoundException("Could not find any orders with ID " + orderId);
+        }
+
+        orderRepository.deleteById(orderId);
+    }
 }

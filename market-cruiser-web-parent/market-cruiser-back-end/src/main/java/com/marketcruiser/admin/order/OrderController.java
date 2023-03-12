@@ -88,7 +88,20 @@ public class OrderController {
             return "orders/order_details_modal";
         } catch (OrderNotFoundException exception) {
             redirectAttributes.addFlashAttribute("message", exception.getMessage());
-            return showPageOfOrders(1, model, "orderTime", "desc", null, request);
+            return "redirect:/orders";
         }
+    }
+
+    // method that deletes order
+    @GetMapping("/orders/delete/{orderId}")
+    public String deleteOrder(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            orderService.deleteOrder(orderId);
+            redirectAttributes.addFlashAttribute("message", "The order ID " + orderId + " has been deleted.");
+        } catch (OrderNotFoundException exception) {
+            redirectAttributes.addFlashAttribute("message", exception.getMessage());
+        }
+
+        return "redirect:/orders";
     }
 }

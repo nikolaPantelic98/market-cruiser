@@ -16,5 +16,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             + " o.paymentMethod LIKE %?1% OR o.status LIKE %?1% OR"
             + " o.customer.firstName LIKE %?1% OR"
             + " o.customer.lastName LIKE %?1%")
-    public Page<Order> findAll(String keyword, Pageable pageable);
+    Page<Order> findAll(String keyword, Pageable pageable);
+    Long countByOrderId(Long orderId);
 }
