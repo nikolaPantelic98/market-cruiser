@@ -1,36 +1,26 @@
 
 /* icons */
 
-*.icon-green {
-    color:green
-}
+*.icon-dark {color:gray}
 
-*.icon-dark {
-    color:gray
-}
+*.icon-lightgreen {color: #1deba8;}
 
-*.icon-darkblue {
-    color: #223775;
-}
+*.icon-red {color: #800000;}
 
-*.icon-red {
-    color: red
-}
-
-*.badge-blue {
+*.badge-green {
     color: black;
-    background-color: #48dbe8;
+    background-color: #1deba8;
 }
 
 /* text */
 
-*.text-black {
-    color: black
-}
+*.text-black {color: black}
 
-*.text-white {
-    color: white;
-}
+*.text-white {color: white;}
+
+*.text-green {color: #1deba8;}
+
+*.text-green-dark {color: #0c9669;}
 
 /* a */
 
@@ -43,30 +33,35 @@ a.a-sorting:link {
 }
 
 a.a-sorting:hover {
-    transform: scale(1.1);
-    color: #223775;
+    transform: scale(1.2);
+    color: #1deba8;
     background-color: transparent;
     text-decoration: none;
-    font-size: 15px;
     font-weight: bold;
 }
 
-a.a-icon-darkblue {
+a.sorting-category:link {
+    transition: all 0.3s ease;
+    color: #1deba8;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.sorting-category:hover {
+    transform: scale(1.2);
+    color: #FFE5B4;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.a-icon-lightgreen {
     transition: all 0.3s ease;
 }
 
-a.a-icon-darkblue:hover {
-    transform: scale(1.5);
-    color: #223775;
-}
-
-a.a-icon-darkgreen {
-    transition: all 0.3s ease;
-}
-
-a.a-icon-darkgreen:hover {
-    transform: scale(1.5);
-    color: #15234a;
+a.a-icon-lightgreen:hover {
+    color: #097853;
 }
 
 /* buttons */
@@ -90,16 +85,28 @@ a.a-icon-darkgreen:hover {
     font-weight: bold;
 }
 
-*.btn-blue {
-    background: linear-gradient(-45deg, #101452, #272ccc, #24edd9);
+*.btn-outline-green {
+    border: 3px solid #10bc84;
+    color: #1deba8;
+    font-weight: 700;
 }
 
-*.btn-grey {
-    background: linear-gradient(-45deg, #b3b3b3, #737373, #454545);
+*.btn-outline-green:hover {
+    background-color: #1deba8;
+    color: #302c54;
+    border: 3px solid #1deba8;
 }
 
-*.btn-red {
-    background: linear-gradient(-45deg, #fc7c7c, #fc0000, #ad0000);
+*.btn-outline-red {
+    border: 3px solid #d79e12;
+    color: #d79e12;
+    font-weight: 700;
+}
+
+*.btn-outline-red:hover {
+    background-color: #d79e12;
+    color: #302c54;
+    border: 3px solid #d79e12;
 }
 
 /*pagination*/
@@ -151,19 +158,19 @@ a.a-icon-darkgreen:hover {
     z-index: 2;
     color: white;
     text-decoration: none;
-    background-color: #4169e1;
-    border-color: #4169e1;
+    background-color: #1deba8;
+    border-color: #0c9669;
 }
 
 .page-item.active .page-link {
     z-index: 1;
     color: white;
-    background-color: #223775;
-    border-color: #223775;
+    background-color: #0c9669;
+    border-color: #0c9669;
 }
 
 .page-item.disabled .page-link {
-    color: #4f5459;
+    color: #086949;
     pointer-events: none;
     cursor: auto;
     background-color: transparent;

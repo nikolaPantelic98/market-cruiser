@@ -41,7 +41,7 @@ function showExtraImageThumbnail(fileInput, index) {
 function addNextExtraImageSection(index) {
     htmlExtraImage = `
     <div class="col border m-3 p-2" id="divExtraImage${index}">
-        <div id="extraImageHeader${index}"><label>Extra Image #${index + 1}:</label></div>
+        <div id="extraImageHeader${index}"><label style="color: white">Extra Image #${index + 1}:</label></div>
         <div class="m-2">
             <img id="extraThumbnail${index}" alt="Extra image #${index + 1} preview" class="img-fluid" src="${defaultImageThumbnailSrc}" />
         </div>
@@ -52,7 +52,7 @@ function addNextExtraImageSection(index) {
     `;
 
     htmlLinkRemove = `
-    <a class="a-icon-darkblue fas fa-times-circle fa-1x icon-darkblue float-right" 
+    <a class="a-icon-lightgreen fas fa-times-circle fa-1x icon-lightgreen float-right" 
         href="javascript:removeExtraImage(${index - 1})"
         title="Remove this image"></a>
     `;

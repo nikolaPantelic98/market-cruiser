@@ -8,12 +8,12 @@
 <div class="container-fluid">
     <div th:replace="fragment_navigation :: menu"></div>
     <br>
-    <div>
-        <h2>Market Cruiser Control Panel</h2>
+    <div style="color: #0c9669">
+        <h1>Market Cruiser Control Panel</h1>
         Welcome
         <a class="a-sorting text-white" th:href="@{/account}"
            sec:authentication="principal.fullName"></a>
-        <span sec:authentication="principal.authorities"></span>
+        <span sec:authentication="principal.authorities" style="color: #0c9669"></span>
     </div>
 
     <div th:replace="fragments :: footer"></div>

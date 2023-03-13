@@ -4,13 +4,13 @@
 
     <div th:fragment="content" th:remove="tag">
         <div>
-            <p>
+            <p style="color: white">
                 Use this page to manage countries which will be displayed in customer registration form.
                 Click Load Country First.
             </p>
         </div>
         <div>
-            <input type="button" value="Load Countries" id="buttonLoadCountries" class="btn btn-blue m-2" style="margin-left: 5px !important;" />
+            <input type="button" value="Load Countries" id="buttonLoadCountries" class="btn btn-outline-green m-2" style="margin-left: 5px !important;" />
         </div>
         <div>
             <select class="form-control m-4" style="height: 300px" size="3" id="dropdownCountries">
@@ -20,18 +20,18 @@
 
         <form id="formCountry">
             <div class="form-group row ml-2">
-                <label class="col-form-label mt-2" id="labelCountryName">Country Name:</label>
+                <label class="col-form-label mt-2 text-white" id="labelCountryName">Country Name:</label>
                 <div class="col-md">
                     <input type="text" class="form-control mt-2" id="fieldCountryName" required minlength="3" maxlength="45" />
                 </div>
-                <label class="col-form-label mt-2">Code:</label>
+                <label class="col-form-label mt-2 text-white">Code:</label>
                 <div class="col-md">
                     <input type="text" class="form-control mt-2" id="fieldCountryCode" required minlength="2" maxlength="3" />
                 </div>
                 <div class="col-lg-4 mt-2">
-                    <input type="button" id="buttonAddCountry" value="New" class="btn btn-blue" />
-                    <input type="button" id="buttonUpdateCountry" value="Update" class="btn btn-blue" disabled="disabled" />
-                    <input type="button" id="buttonDeleteCountry" value="Delete" class="btn btn-red" disabled="disabled" />
+                    <input type="button" id="buttonAddCountry" value="New" class="btn btn-outline-green" />
+                    <input type="button" id="buttonUpdateCountry" value="Update" class="btn btn-outline-green" disabled="disabled" />
+                    <input type="button" id="buttonDeleteCountry" value="Delete" class="btn btn-outline-red" disabled="disabled" />
                 </div>
             </div>
         </form>

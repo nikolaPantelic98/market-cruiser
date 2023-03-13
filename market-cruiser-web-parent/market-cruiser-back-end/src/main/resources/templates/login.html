@@ -27,13 +27,21 @@
             font-weight: bold;
         }
 
-        .btn-blue {
-            background: linear-gradient(-45deg, #101452, #272ccc, #24edd9);
+        *.btn-outline-green {
+            border: 3px solid #10bc84;
+            color: #1deba8;
+            font-weight: 700;
+        }
+
+        *.btn-outline-green:hover {
+            background-color: #1deba8;
+            color: #302c54;
+            border: 3px solid #1deba8;
         }
 
         body{
-            background: -webkit-linear-gradient(left, #4169e1, #FFE5B4);
-            background: linear-gradient(to right, #4169e1, #7188D6 25%, #A0A7CB 55%, #B8B7C6 70%, #D0C6C0 90% ,#FFE5B4 100%);
+            background: linear-gradient(to top, #302c54 65%, transparent 75%),
+            linear-gradient(to right, #302c54, #302c54 25%, #382c54 55%, #482c54 70%, #4c2c4c 90% ,#582454 100%);
             font-family: 'Roboto', sans-serif;
         }
     </style>
@@ -42,7 +50,7 @@
 <div class="container-fluid text-center">
     <br>
     <div>
-        <img th:src="@{/images/MarketCruiserTr.png}" style="width: 350px; height: 175px"/>
+        <img th:src="@{/images/marketcruiser123.png}" style="width: 350px; height: 175px"/>
     </div>
     <br>
 
@@ -55,18 +63,18 @@
         </div>
 
         <div class="border border-secondary rounded p-3">
-            <p>Access to Market Cruiser Control Panel</p>
+            <p style="color: #1deba8">Access to Market Cruiser Control Panel</p>
             <p>
                 <input type="email" name="emailAddress" class="form-control" placeholder="Email Address" required />
             </p>
             <p>
                 <input type="password" name="password" class="form-control" placeholder="Password" required />
             </p>
-            <p>
+            <p style="color: #0c9669">
                 <input type="checkbox" name="remember-me" />&nbsp;Remember me
             </p>
             <p>
-                <input type="submit" value="Login" class="btn btn-blue" />
+                <input type="submit" value="Login" class="btn btn-outline-green" />
             </p>
         </div>
     </form>

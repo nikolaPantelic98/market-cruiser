@@ -8,15 +8,15 @@
                     <nav>
                         <ol style="list-style-type: none" class="breadcrumb-custom">
                             <li class="breadcrumb-item-custom">
-                                <a class="sorting-category text-black" th:href="@{/}">Home</a>
+                                <a class="sorting-category text-green" th:href="@{/}">Home</a>
                             </li>
 
                             <th:block th:each="parent : ${listCategoryParents}">
                                 <li class="breadcrumb-item-custom">
-                                    <a class="sorting-category text-black" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a>
+                                    <a class="sorting-category text-green" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a>
                                     <div class="sub-categories">
                                         <th:block th:each="cat : ${parent.children}">
-                                            <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="text-black" th:text="${cat.name}"></a><br>
+                                            <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="text-green" th:text="${cat.name}"></a><br>
                                         </th:block>
                                     </div>
                                 </li>
@@ -37,21 +37,21 @@
                 <nav>
                     <ol style="list-style-type: none" class="breadcrumb-custom">
                         <li class="breadcrumb-item-custom">
-                            <a class="sorting-category text-black" th:href="@{/}">Home</a>
+                            <a class="sorting-category text-green" th:href="@{/}">Home</a>
                         </li>
 
                         <th:block th:each="parent : ${listCategoryParents}">
                             <li class="breadcrumb-item-custom">
-                                <a class="sorting-category text-black" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a>
+                                <a class="sorting-category text-green" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a>
                                 <div class="sub-categories">
                                     <th:block th:each="cat : ${parent.children}">
-                                        <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="text-black" th:text="${cat.name}"></a><br>
+                                        <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="text-green" th:text="${cat.name}"></a><br>
                                     </th:block>
                                 </div>
                             </li>
                         </th:block>
                         <li class="breadcrumb-item-custom" th:if="${product != null}">
-                            <span>[[${product.name}]]</span>
+                            <span style="color: #0c9669">[[${product.name}]]</span>
                         </li>
                     </ol>
                 </nav>

@@ -13,11 +13,11 @@
     <div th:replace="fragment_breadcrumb :: content2"></div>
     <br>
     <div th:if="${totalItems > 0}">
-        <h2>Search Results for '[[${keyword}]]'</h2>
+        <h2 style="color: #1deba8">Search Results for '[[${keyword}]]'</h2>
         <br>
     </div>
     <div th:unless="${totalItems > 0}">
-        <h3>No match found for '[[${keyword}]]'</h3>
+        <h3 style="color: #1deba8">No match found for '[[${keyword}]]'</h3>
         <br>
     </div>
 

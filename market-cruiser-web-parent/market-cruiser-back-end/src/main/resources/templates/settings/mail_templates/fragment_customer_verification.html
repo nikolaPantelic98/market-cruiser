@@ -5,7 +5,7 @@
     <div th:fragment="content" th:remove="tag">
 
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">E-Mail Subject:</label>
+            <label class="col-sm-2 col-form-label text-white">E-Mail Subject:</label>
             <div class="col-sm-12">
                 <input type="text" class="form-control" name="CUSTOMER_VERIFY_SUBJECT"
                        th:value="${CUSTOMER_VERIFY_SUBJECT}" required />
@@ -13,7 +13,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">E-Mail Content:</label>
+            <label class="col-sm-2 col-form-label text-white">E-Mail Content:</label>
             <div class="col-sm-12">
                 <textarea rows="5" name="CUSTOMER_VERIFY_CONTENT" id="customerVerificationTextContent">[[${CUSTOMER_VERIFY_CONTENT}]]</textarea>
             </div>

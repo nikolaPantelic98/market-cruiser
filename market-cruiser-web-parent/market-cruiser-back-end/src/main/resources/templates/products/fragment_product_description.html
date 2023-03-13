@@ -3,12 +3,12 @@
 <body>
     <div th:fragment="content" remove="tag">
         <div class="m-2">
-            <label style="font-family: Montserrat" >Short Description</label>
+            <label style="color: white">Short Description</label>
             <textarea class="form-control" th:field="*{shortDescription}" rows="5" required></textarea>
         </div>
 
         <div class="m-2">
-            <label>Full Description</label>
+            <label style="color: white">Full Description</label>
             <textarea class="form-control" th:field="*{fullDescription}" rows="10" required></textarea>
         </div>
     </div>

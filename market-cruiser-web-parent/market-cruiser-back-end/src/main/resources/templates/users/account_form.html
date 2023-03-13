@@ -120,7 +120,7 @@
           th:object="${user}">
         <input type="hidden" th:field="*{userId}"/>
         <div class="text-center">
-            <h2>Your Account Details</h2>
+            <h1>Your Account Details</h1>
         </div>
         <br>
 
@@ -130,28 +130,28 @@
 
     <div class="border border-round-secondary rounded p-3">
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">E-Mail:</label>
+            <label class="col-sm-4 col-form-label text-white">E-Mail:</label>
             <div class="col-sm-8">
                 <input type="email" class="form-control" th:field="*{emailAddress}" readonly="readonly"/>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">First Name:</label>
+            <label class="col-sm-4 col-form-label text-white">First Name:</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" th:field="*{firstName}" required minlength="2" maxlength="45" />
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Last Name:</label>
+            <label class="col-sm-4 col-form-label text-white">Last Name:</label>
             <div class="col-sm-8">
                 <input type="text" class="form-control" th:field="*{lastName}" required minlength="2" maxlength="45" />
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Password:</label>
+            <label class="col-sm-4 col-form-label text-white">Password:</label>
             <div class="col-sm-8">
                 <input type="password" th:field="*{password}" class="form-control"
                        placeholder="Leave blank if you don't want to change password"
@@ -161,7 +161,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Confirm Password:</label>
+            <label class="col-sm-4 col-form-label text-white">Confirm Password:</label>
             <div class="col-sm-8">
                 <input type="password" id="confirmPassword" class="form-control"
                        minlength="8" maxlength="45"
@@ -170,14 +170,14 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Assigned Roles:</label>
+            <label class="col-sm-4 col-form-label text-white">Assigned Roles:</label>
             <div class="col-sm-8">
-                <span><b>[[${user.roles}]]</b></span>
+                <span style="color: #1deba8"><b>[[${user.roles}]]</b></span>
             </div>
         </div>
 
         <div class="form-group row">
-            <label class="col-sm-4 col-form-label">Photos:</label>
+            <label class="col-sm-4 col-form-label text-white">Photos:</label>
             <div class="col-sm-8">
                 <input type="hidden" th:field="*{photo}" />
                 <input type="file" id="fileImage" name="image" accept="image/png, image/jpeg"
@@ -188,11 +188,14 @@
         </div>
 
         <div class="text-center">
-            <input type="submit" value="Save" class="btn btn-blue m-3"/>
-            <input type="button" value="Cancel" class="btn btn-grey" id="buttonCancel" />
+            <input type="submit" value="Save" class="btn btn-outline-green m-3"/>
+            <input type="button" value="Cancel" class="btn btn-outline-red" id="buttonCancel" />
         </div>
     </div>
     </form>
+
+    <br>
+    <br>
 
     <div th:replace="fragments :: footer"></div>
 </div>

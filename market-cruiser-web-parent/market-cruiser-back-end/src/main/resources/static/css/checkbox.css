@@ -73,7 +73,7 @@
 }
 
 .checkbox {
-    border: 1px solid blue;
+    border: 1px solid #1deba8;
     border-radius: 3px;
     width: 16px;
     height: 16px;
@@ -89,7 +89,7 @@
     transform: translate(-50%, -50%) scale(0);
     width: 12px;
     height: 12px;
-    background-color: blue;
+    background-color: #1deba8;
     border-radius: 3px;
     transition: 0.3s;
 }

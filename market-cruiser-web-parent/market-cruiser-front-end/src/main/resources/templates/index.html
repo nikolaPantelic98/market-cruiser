@@ -24,7 +24,7 @@
                 <img th:src="@{${cat.imagePath}}" width="150" style="margin-bottom: 20px" />
             </div>
             <div style="text-align: center">
-                <a class="btn btn-outline" th:href="@{'/c/' + ${cat.alias}}" th:text="${cat.name}"></a>
+                <a class="btn btn-outline-green" th:href="@{'/c/' + ${cat.alias}}" th:text="${cat.name}"></a>
             </div>
         </div>
         <div class="col" th:if="${iterStat.index + 1 < #lists.size(listCategories)}">
@@ -32,7 +32,7 @@
                 <img th:src="@{${listCategories[iterStat.index + 1].imagePath}}" width="150" style="margin-bottom: 20px"/>
             </div>
             <div style="text-align: center">
-                <a class="btn btn-outline" th:href="@{'/c/' + ${listCategories[iterStat.index + 1].alias}}" th:text="${listCategories[iterStat.index + 1].name}"></a>
+                <a class="btn btn-outline-green" th:href="@{'/c/' + ${listCategories[iterStat.index + 1].alias}}" th:text="${listCategories[iterStat.index + 1].name}"></a>
             </div>
         </div>
         <div class="col" th:if="${iterStat.index + 2 < #lists.size(listCategories)}">
@@ -40,7 +40,7 @@
                 <img th:src="@{${listCategories[iterStat.index + 2].imagePath}}" width="150" style="margin-bottom: 20px"/>
             </div>
             <div style="text-align: center">
-                <a class="btn btn-outline" th:href="@{'/c/' + ${listCategories[iterStat.index + 2].alias}}" th:text="${listCategories[iterStat.index + 2].name}"></a>
+                <a class="btn btn-outline-green" th:href="@{'/c/' + ${listCategories[iterStat.index + 2].alias}}" th:text="${listCategories[iterStat.index + 2].name}"></a>
             </div>
         </div>
         <div class="col" th:if="${iterStat.index + 3 < #lists.size(listCategories)}">
@@ -48,7 +48,7 @@
                 <img th:src="@{${listCategories[iterStat.index + 3].imagePath}}" width="150" style="margin-bottom: 20px"/>
             </div>
             <div style="text-align: center">
-                <a class="btn btn-outline" th:href="@{'/c/' + ${listCategories[iterStat.index + 3].alias}}" th:text="${listCategories[iterStat.index + 3].name}"></a>
+                <a class="btn btn-outline-green" th:href="@{'/c/' + ${listCategories[iterStat.index + 3].alias}}" th:text="${listCategories[iterStat.index + 3].name}"></a>
             </div>
         </div>
         <div class="col" th:if="${iterStat.index + 4 < #lists.size(listCategories)}">
@@ -56,7 +56,7 @@
                 <img th:src="@{${listCategories[iterStat.index + 4].imagePath}}" width="150" style="margin-bottom: 20px"/>
             </div>
             <div style="text-align: center">
-                <a class="btn btn-outline" th:href="@{'/c/' + ${listCategories[iterStat.index + 4].alias}}" th:text="${listCategories[iterStat.index + 4].name}"></a>
+                <a class="btn btn-outline-green" th:href="@{'/c/' + ${listCategories[iterStat.index + 4].alias}}" th:text="${listCategories[iterStat.index + 4].name}"></a>
             </div>
         </div>
     </div>

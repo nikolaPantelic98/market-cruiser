@@ -10,13 +10,13 @@
 
     <br/>
     <div>
-        <h2>Manage Products</h2>
+        <h1>Manage Products</h1>
         <br/>
 
         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
-        <a th:href="@{/products/new}" class="a-icon-darkgreen fas fa-folder-plus fa-2x icon-darkblue" title="Create New Product"></a>
+        <a th:href="@{/products/new}" class="a-icon-lightgreen fas fa-folder-plus fa-2x icon-lightgreen" title="Create New Product"></a>
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a th:href="@{/products/export/csv}" class="a-icon-darkgreen fas fa-file-csv fa-2x icon-darkblue" title="Export to CSV"></a>
+        <a th:href="@{/products/export/csv}" class="a-icon-lightgreen fas fa-file-csv fa-2x icon-lightgreen" title="Export to CSV"></a>
         </th:block>
 
     </div>
@@ -30,7 +30,8 @@
             <input type="hidden" name="sortField" th:value="${sortField}" />
             <input type="hidden" name="sortDir" th:value="${sortDir}" />
 
-            Category:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span style="color: white">Category:</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <select class="search-cat" name="categoryId" id="dropdownCategory">
                 <option value="0">All Categories</option>
 
@@ -46,7 +47,7 @@
                 </span>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="button" value="Clear" class="btn btn-grey" onclick="clearFilter()" />
+            <input type="button" value="Clear" class="btn btn-outline-red" onclick="clearFilter()" />
         </form>
     </div>
 
@@ -84,7 +85,7 @@
                     </td>
 
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black link-detail"
+                        <a class="sorting-category link-detail"
                             th:href="@{'/products/detail/' + ${product.productId}}"
                             th:title="${product.name}">
                             [[${product.shortName}]]
@@ -102,7 +103,7 @@
                     </th:block>
 
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-detail"
+                        <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen link-detail"
                             th:href="@{'/products/detail/' + ${product.productId}}"
                             title="View Details of This Product"></a>
 
@@ -131,7 +132,7 @@
                     <a class="a-sorting text-black link-detail" th:href="@{'/products/detail/' + ${product.productId}}">[[${product.shortName}]]</a>
                 </div>
                 <div class="mt-2">
-                    <a class="a-icon-darkblue fas fa-file-alt fa-2x icon-green link-detail"
+                    <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen link-detail"
                        th:href="@{'/products/detail/' + ${product.productId}}"></a>
 
                     <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor', 'Salesperson')">

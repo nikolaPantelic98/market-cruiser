@@ -27,7 +27,7 @@
 
 
     <div th:fragment="footer" class="text-center m-3">
-        <p>Market Cruiser Control Panel - Copyright &copy; Market Cruiser</p>
+        <p style="color: #0c9669">Market Cruiser Control Panel - Copyright &copy; Market Cruiser</p>
     </div>
 
 
@@ -47,12 +47,12 @@
 
 
     <div th:fragment="status(enabled, entityName, entityURL)" th:remove="tag">
-        <a th:if="${enabled == true}" class="a-icon-darkblue fas fa-check-circle fa-2x icon-green"
+        <a th:if="${enabled == true}" class="a-icon-lightgreen fas fa-check-circle fa-2x icon-lightgreen"
            th:href="@{${entityURL} + '/enabled/false'}"
            th:title="'Disable ' + ${entityName}"
         ></a>
 
-        <a th:if="${enabled == false}" class="a-icon-darkblue fas fa-circle fa-2x icon-dark"
+        <a th:if="${enabled == false}" class="a-icon-lightgreen fas fa-circle fa-2x icon-dark"
            th:href="@{${entityURL} + '/enabled/true'}"
            th:title="'Enable ' + ${entityName}"
         ></a>
@@ -60,14 +60,14 @@
 
 
     <div th:fragment="edit(entityName, editURL)" th:remove="tag">
-        <a class="a-icon-darkblue fas fa-edit fa-2x icon-green" th:href="@{${editURL}}"
+        <a class="a-icon-lightgreen fas fa-edit fa-2x icon-lightgreen" th:href="@{${editURL}}"
            th:title="'Edit ' + ${entityName}"></a>
     </div>
 
 
     <div th:fragment="delete(entityName, entityId, deleteURL, visible)" th:remove="tag">
         <th:block th:if="${visible}">
-        <a class="a-icon-darkblue fas fa-trash fa-2x icon-red link-delete"
+        <a class="a-icon-lightgreen fas fa-trash fa-2x icon-red link-delete"
            th:href="@{${deleteURL}}"
            th:entityId = "${entityId}"
            th:title="'Delete ' + ${entityName}"></a>
@@ -78,10 +78,10 @@
 
     <div th:fragment="pagination(entityName)" th:remove="tag">
         <div class="text-center m-1" th:if="${totalItems > 0}">
-            <span>Showing [[${entityName}]] # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
+            <span style="color: #0c9669">Showing [[${entityName}]] # [[${startCount}]] to [[${endCount}]] of [[${totalItems}]]</span>
         </div>
         <div class="text-center m-1" th:unless="${totalItems > 0}">
-            <span>No [[${entityName}]] found</span>
+            <span style="color: #0c9669">No [[${entityName}]] found</span>
         </div>
 
         <div th:if="${totalPages > 1}">
@@ -126,7 +126,7 @@
                 </span>
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="button" value="Clear" class="btn btn-grey" onclick="clearFilter()" />
+            <input type="button" value="Clear" class="btn btn-outline-red" onclick="clearFilter()" />
         </form>
     </div>
 
