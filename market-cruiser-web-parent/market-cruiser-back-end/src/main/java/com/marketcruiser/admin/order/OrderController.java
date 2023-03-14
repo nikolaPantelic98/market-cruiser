@@ -1,8 +1,8 @@
 package com.marketcruiser.admin.order;
 
 import com.marketcruiser.admin.settings.SettingsServiceImpl;
-import com.marketcruiser.common.entity.Order;
-import com.marketcruiser.common.entity.Settings;
+import com.marketcruiser.common.entity.order.Order;
+import com.marketcruiser.common.entity.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;

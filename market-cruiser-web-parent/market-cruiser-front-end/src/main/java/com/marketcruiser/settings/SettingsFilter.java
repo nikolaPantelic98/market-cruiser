@@ -1,6 +1,6 @@
 package com.marketcruiser.settings;
 
-import com.marketcruiser.common.entity.Settings;
+import com.marketcruiser.common.entity.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

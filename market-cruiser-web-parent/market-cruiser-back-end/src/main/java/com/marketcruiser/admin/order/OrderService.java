@@ -1,6 +1,6 @@
 package com.marketcruiser.admin.order;
 
-import com.marketcruiser.common.entity.Order;
+import com.marketcruiser.common.entity.order.Order;
 import org.springframework.data.domain.Page;
 
 public interface OrderService {

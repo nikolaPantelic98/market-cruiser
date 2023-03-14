@@ -1,7 +1,7 @@
 package com.marketcruiser.settings;
 
-import com.marketcruiser.common.entity.Settings;
-import com.marketcruiser.common.entity.SettingsCategory;
+import com.marketcruiser.common.entity.settings.Settings;
+import com.marketcruiser.common.entity.settings.SettingsCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

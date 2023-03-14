@@ -1,7 +1,7 @@
 package com.marketcruiser.admin.settings;
 
-import com.marketcruiser.common.entity.Settings;
-import com.marketcruiser.common.entity.SettingsBag;
+import com.marketcruiser.common.entity.settings.Settings;
+import com.marketcruiser.common.entity.settings.SettingsBag;
 
 import java.util.List;
 

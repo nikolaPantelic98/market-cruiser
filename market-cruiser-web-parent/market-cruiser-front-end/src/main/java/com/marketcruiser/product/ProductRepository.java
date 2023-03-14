@@ -1,6 +1,6 @@
 package com.marketcruiser.product;
 
-import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.entity.product.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

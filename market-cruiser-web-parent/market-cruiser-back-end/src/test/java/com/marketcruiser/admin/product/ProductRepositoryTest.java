@@ -2,7 +2,7 @@ package com.marketcruiser.admin.product;
 
 import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Category;
-import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.entity.product.Product;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

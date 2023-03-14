@@ -1,5 +1,6 @@
 package com.marketcruiser.common.entity;
 
+import com.marketcruiser.common.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

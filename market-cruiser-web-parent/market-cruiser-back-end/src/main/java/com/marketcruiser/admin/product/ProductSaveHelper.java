@@ -1,8 +1,8 @@
 package com.marketcruiser.admin.product;
 
 import com.marketcruiser.admin.FileUploadUtil;
-import com.marketcruiser.common.entity.Product;
-import com.marketcruiser.common.entity.ProductImage;
+import com.marketcruiser.common.entity.product.Product;
+import com.marketcruiser.common.entity.product.ProductImage;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 

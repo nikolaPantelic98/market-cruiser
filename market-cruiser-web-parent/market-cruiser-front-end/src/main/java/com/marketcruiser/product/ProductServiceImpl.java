@@ -1,6 +1,6 @@
 package com.marketcruiser.product;
 
-import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.entity.product.Product;
 import com.marketcruiser.common.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

@@ -2,7 +2,7 @@ package com.marketcruiser.shoppingcart;
 
 import com.marketcruiser.common.entity.CartItem;
 import com.marketcruiser.common.entity.Customer;
-import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.entity.product.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

@@ -1,6 +1,11 @@
 package com.marketcruiser.admin.order;
 
 import com.marketcruiser.common.entity.*;
+import com.marketcruiser.common.entity.order.Order;
+import com.marketcruiser.common.entity.order.OrderDetail;
+import com.marketcruiser.common.entity.order.OrderStatus;
+import com.marketcruiser.common.entity.order.PaymentMethod;
+import com.marketcruiser.common.entity.product.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;

@@ -2,7 +2,7 @@ package com.marketcruiser.product;
 
 import com.marketcruiser.category.CategoryServiceImpl;
 import com.marketcruiser.common.entity.Category;
-import com.marketcruiser.common.entity.Product;
+import com.marketcruiser.common.entity.product.Product;
 import com.marketcruiser.common.exception.CategoryNotFoundException;
 import com.marketcruiser.common.exception.ProductNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
