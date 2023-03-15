@@ -41,7 +41,14 @@
                             </th:block>
 
                             <th:block th:unless="${usePrimaryAddressAsDefault}">
-                                <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/0'}">&nbsp;&nbsp;[Set as default]</a>
+                                <th:block th:unless="${param.redirect}">
+                                    <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/0'}">&nbsp;&nbsp;[Set as default]</a>
+                                </th:block>
+                                <th:block th:if="${param.redirect}">
+                                    <th:block th:if="${param.redirect[0]=='cart'}">
+                                        <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/0?redirect=cart'}">&nbsp;&nbsp;[Set as default]</a>
+                                    </th:block>
+                                </th:block>
                             </th:block>
 
                         </div>
@@ -78,7 +85,14 @@
                             </th:block>
 
                             <th:block th:unless="${address.defaultForShipping}">
-                            <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId}}">&nbsp;&nbsp;[Set as default]</a>
+                                <th:block th:unless="${param.redirect}">
+                                    <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId}}">&nbsp;&nbsp;[Set as default]</a>
+                                </th:block>
+                                <th:block th:if="${param.redirect}">
+                                    <th:block th:if="${param.redirect[0]=='cart'}">
+                                        <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId} + '?redirect=cart'}">&nbsp;&nbsp;[Set as default]</a>
+                                    </th:block>
+                                </th:block>
                             </th:block>
 
                         </div>

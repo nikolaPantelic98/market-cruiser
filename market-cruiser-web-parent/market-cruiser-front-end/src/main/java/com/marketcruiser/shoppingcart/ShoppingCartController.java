@@ -1,9 +1,13 @@
 package com.marketcruiser.shoppingcart;
 
 import com.marketcruiser.Utility;
+import com.marketcruiser.address.AddressServiceImpl;
+import com.marketcruiser.common.entity.Address;
 import com.marketcruiser.common.entity.CartItem;
 import com.marketcruiser.common.entity.Customer;
+import com.marketcruiser.common.entity.ShippingRate;
 import com.marketcruiser.customer.CustomerServiceImpl;
+import com.marketcruiser.shipping.ShippingRateServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +21,15 @@ public class ShoppingCartController {
 
     private final ShoppingCartServiceImpl shoppingCartService;
     private final CustomerServiceImpl customerService;
+    private final ShippingRateServiceImpl shippingRateService;
+    private final AddressServiceImpl addressService;
 
     @Autowired
-    public ShoppingCartController(ShoppingCartServiceImpl shoppingCartService, CustomerServiceImpl customerService) {
+    public ShoppingCartController(ShoppingCartServiceImpl shoppingCartService, CustomerServiceImpl customerService, ShippingRateServiceImpl shippingRateService, AddressServiceImpl addressService) {
         this.shoppingCartService = shoppingCartService;
         this.customerService = customerService;
+        this.shippingRateService = shippingRateService;
+        this.addressService = addressService;
     }
 
 
@@ -36,6 +44,21 @@ public class ShoppingCartController {
         for (CartItem item : cartItems) {
             estimatedTotal += item.getSubtotal();
         }
+
+        Address defaultAddress = addressService.getDefaultAddress(customer);
+        ShippingRate shippingRate = null;
+        boolean usePrimaryAddressAsDefault = false;
+
+        if (defaultAddress != null) {
+            shippingRate = shippingRateService.getShippingRateForAddress(defaultAddress);
+        } else {
+            usePrimaryAddressAsDefault = true;
+            shippingRate = shippingRateService.getShippingRateForCustomer(customer);
+        }
+
+
+        model.addAttribute("usePrimaryAddressAsDefault", usePrimaryAddressAsDefault);
+        model.addAttribute("shippingSupported", shippingRate != null);
         model.addAttribute("cartItems", cartItems);
         model.addAttribute("estimatedTotal", estimatedTotal);
 

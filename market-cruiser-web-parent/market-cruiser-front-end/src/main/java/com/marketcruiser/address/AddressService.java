@@ -12,4 +12,5 @@ public interface AddressService {
     Address getAddress(Long addressId, Long customerId);
     void deleteAddress(Long addressId, Long customerId);
     void setDefaultAddress(Long defaultAddressId, Long customerId);
+    Address getDefaultAddress(Customer customer);
 }
