@@ -112,6 +112,13 @@
   - Customer can specify which address is default.
   - All CRUD operations are enabled, so customer can create, read, update or delete his addresses.
 
+* Order Management Module:
+  - Order Management Module added.
+  - Order listing page is created.
+  - Admin can see the entire customer order and change its status.
+  - The option to delete orders has been added.
+  - Pagination and sorting for orders have been implemented, starting from the latest date to the oldest.
+
 ## Requirements
 
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
