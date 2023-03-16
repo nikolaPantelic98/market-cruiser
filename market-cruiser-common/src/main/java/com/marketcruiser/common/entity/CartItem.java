@@ -38,6 +38,9 @@ public class CartItem {
 
     private int quantity;
 
+    @Transient
+    private float shippingCost;
+
 
     @Override
     public String toString() {
@@ -52,5 +55,10 @@ public class CartItem {
     @Transient
     public float getSubtotal() {
         return product.getDiscountPrice() * quantity;
+    }
+
+    @Transient
+    public float getShippingCost() {
+        return shippingCost;
     }
 }
