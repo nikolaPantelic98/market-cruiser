@@ -76,9 +76,16 @@ public class AddressController {
         address.setCustomer(customer);
         addressService.saveAddress(address);
 
+        String redirectOption = request.getParameter("redirect");
+        String redirectURL = "redirect:/address_book";
+
+        if ("checkout".equals(redirectOption)) {
+            redirectURL += "?redirect=checkout";
+        }
+
         redirectAttributes.addFlashAttribute("message", "The address has been saved successfully.");
 
-        return "redirect:/address_book";
+        return redirectURL;
     }
 
     // shows the form to edit an existing address
@@ -118,6 +125,8 @@ public class AddressController {
 
         if ("cart".equals(redirectOption)) {
             redirectURL = "redirect:/cart";
+        } else if ("checkout".equals(redirectOption)) {
+            redirectURL = "redirect:/checkout";
         }
 
         return redirectURL;

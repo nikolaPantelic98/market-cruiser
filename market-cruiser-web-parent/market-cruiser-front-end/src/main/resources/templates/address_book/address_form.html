@@ -18,6 +18,7 @@
           th:object="${address}">
         <input type="hidden" th:field="*{addressId}" />
         <input type="hidden" th:field="*{defaultForShipping}" />
+        <input type="hidden" name="redirect" th:value="${param.redirect}" />
         <div class="border border-round-secondary rounded p-3">
 
             <div class="d-flex align-items-center justify-content-center">
