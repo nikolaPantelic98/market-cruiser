@@ -12,4 +12,5 @@ public interface SettingsService {
     List<Settings> getMailServerSettings();
     List<Settings> getMailTemplateSettings();
     List<Settings> getCurrencySettings();
+    List<Settings> getPaymentSettings();
 }

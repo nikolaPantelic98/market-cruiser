@@ -46,6 +46,7 @@ body{
     background: -webkit-linear-gradient(left, #4169e1, #FFE5B4);
     background: linear-gradient(to top, #302c54 65%, transparent 75%),
     linear-gradient(to right, #302c54, #302c54 25%, #382c54 55%, #482c54 70%, #4c2c4c 90% ,#582454 100%);
+    background-attachment: fixed;
     font-family: 'Roboto', sans-serif;
 }
 section{

@@ -222,7 +222,7 @@
 .tabs_six input[name=tab-control]:nth-of-type(6):checked ~ .slider {
     transform: translateX(500%);
 }
-.tabs_six input[name=tab-control]:nth-of-type(6):checked ~ .content > section:nth-child(5) {
+.tabs_six input[name=tab-control]:nth-of-type(6):checked ~ .content > section:nth-child(6) {
     display: block;
 }
 @-webkit-keyframes content {
