@@ -11,4 +11,5 @@ public interface ShoppingCartService {
     List<CartItem> listCartItems(Customer customer);
     float updateQuantity(Long productId, Integer quantity, Customer customer);
     void removeProduct(Long productId, Customer customer);
+    void deleteProductByCustomer(Customer customer);
 }

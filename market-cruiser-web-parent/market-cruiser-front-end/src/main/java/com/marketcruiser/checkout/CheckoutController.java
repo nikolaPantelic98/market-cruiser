@@ -6,13 +6,16 @@ import com.marketcruiser.common.entity.Address;
 import com.marketcruiser.common.entity.CartItem;
 import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.common.entity.ShippingRate;
+import com.marketcruiser.common.entity.order.PaymentMethod;
 import com.marketcruiser.customer.CustomerServiceImpl;
+import com.marketcruiser.order.OrderServiceImpl;
 import com.marketcruiser.shipping.ShippingRateServiceImpl;
 import com.marketcruiser.shoppingcart.ShoppingCartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -25,15 +28,17 @@ public class CheckoutController {
     private final AddressServiceImpl addressService;
     private final ShippingRateServiceImpl shippingRateService;
     private final ShoppingCartServiceImpl shoppingCartService;
+    private final OrderServiceImpl orderService;
 
     @Autowired
     public CheckoutController(CheckoutServiceImpl checkoutService, CustomerServiceImpl customerService, AddressServiceImpl addressService,
-                              ShippingRateServiceImpl shippingRateService, ShoppingCartServiceImpl shoppingCartService) {
+                              ShippingRateServiceImpl shippingRateService, ShoppingCartServiceImpl shoppingCartService, OrderServiceImpl orderService) {
         this.checkoutService = checkoutService;
         this.customerService = customerService;
         this.addressService = addressService;
         this.shippingRateService = shippingRateService;
         this.shoppingCartService = shoppingCartService;
+        this.orderService = orderService;
     }
 
 
@@ -75,5 +80,31 @@ public class CheckoutController {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
 
         return customerService.getCustomerByEmail(email);
+    }
+
+    // this method processes a customer's order
+    @PostMapping("/place_order")
+    public String placeOrder(HttpServletRequest request) {
+        String paymentType = request.getParameter("paymentMethod");
+        PaymentMethod paymentMethod = PaymentMethod.valueOf(paymentType);
+
+        Customer customer = getAuthenticatedCustomer(request);
+
+        Address defaultAddress = addressService.getDefaultAddress(customer);
+        ShippingRate shippingRate = null;
+
+        if (defaultAddress != null) {
+            shippingRate = shippingRateService.getShippingRateForAddress(defaultAddress);
+        } else {
+            shippingRate = shippingRateService.getShippingRateForCustomer(customer);
+        }
+
+        List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
+        CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
+
+        orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
+        shoppingCartService.deleteProductByCustomer(customer);
+
+        return "checkout/order_completed";
     }
 }

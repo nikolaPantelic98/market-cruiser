@@ -1,5 +1,6 @@
 package com.marketcruiser.common.entity.order;
 
+import com.marketcruiser.common.entity.Address;
 import com.marketcruiser.common.entity.Customer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -110,6 +111,31 @@ public class Order {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderDetail> orderDetails = new HashSet<>();
+
+
+    public void copyAddressFromCustomer() {
+        setFirstName(customer.getFirstName());
+        setLastName(customer.getLastName());
+        setPhoneNumber(customer.getPhoneNumber());
+        setAddressLine1(customer.getAddressLine1());
+        setAddressLine2(customer.getAddressLine2());
+        setCity(customer.getCity());
+        setCountry(customer.getCountry().getName());
+        setPostCode(customer.getPostCode());
+        setState(customer.getState());
+    }
+
+    public void copyShippingAddress(Address address) {
+        setFirstName(address.getFirstName());
+        setLastName(address.getLastName());
+        setPhoneNumber(address.getPhoneNumber());
+        setAddressLine1(address.getAddressLine1());
+        setAddressLine2(address.getAddressLine2());
+        setCity(address.getCity());
+        setCountry(address.getCountry().getName());
+        setPostCode(address.getPostCode());
+        setState(address.getState());
+    }
 
     @Override
     public String toString() {
