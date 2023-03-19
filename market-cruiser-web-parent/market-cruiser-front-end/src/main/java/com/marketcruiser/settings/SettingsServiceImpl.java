@@ -31,4 +31,11 @@ public class SettingsServiceImpl implements SettingsService {
         return new EmailSettingsBag(settings);
     }
 
+    @Override
+    public CurrencySettingsBag getCurrencySettings() {
+        List<Settings> settings = settingsRepository.findByCategory(SettingsCategory.CURRENCY);
+
+        return new CurrencySettingsBag(settings);
+    }
+
 }

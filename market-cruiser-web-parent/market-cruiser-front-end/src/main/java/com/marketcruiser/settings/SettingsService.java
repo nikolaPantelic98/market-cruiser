@@ -8,4 +8,5 @@ public interface SettingsService {
 
     List<Settings> getGeneralSettings();
     EmailSettingsBag getEmailSettings();
+    CurrencySettingsBag getCurrencySettings();
 }

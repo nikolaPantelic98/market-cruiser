@@ -157,4 +157,55 @@ public class Order {
 
         return destination;
     }
+
+    @Transient
+    public String getCustomerName() {
+        String name = firstName;
+
+        if (lastName != null && !lastName.isEmpty()) {
+            name += " " + lastName + ",";
+        }
+
+        return name;
+    }
+
+    @Transient
+    public String getCustomerAddress() {
+        String address = "";
+
+        if (!addressLine1.isEmpty()) {
+            address += addressLine1;
+        }
+
+        if (addressLine2 != null && !addressLine2.isEmpty()) {
+            address += ", " + addressLine2;
+        }
+
+        if (!city.isEmpty()) {
+            address += ", " + city;
+        }
+
+        if (state != null && !state.isEmpty()) {
+            address += ", " + state;
+        }
+
+        address += ", " + country + ",";
+
+        return address;
+    }
+
+    @Transient
+    public String getCustomerPostCodeAndPhoneNumber() {
+        String postCodeAndPhoneNumber = "";
+
+        if (!postCode.isEmpty()) {
+            postCodeAndPhoneNumber += "Post Code: " + postCode;
+        }
+
+        if (!phoneNumber.isEmpty()) {
+            postCodeAndPhoneNumber += ", Phone Number: " + phoneNumber;
+        }
+
+        return postCodeAndPhoneNumber;
+    }
 }
