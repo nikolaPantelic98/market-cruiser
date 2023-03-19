@@ -12,6 +12,7 @@ import com.marketcruiser.customer.CustomerServiceImpl;
 import com.marketcruiser.order.OrderServiceImpl;
 import com.marketcruiser.settings.CurrencySettingsBag;
 import com.marketcruiser.settings.EmailSettingsBag;
+import com.marketcruiser.settings.PaymentSettingsBag;
 import com.marketcruiser.settings.SettingsServiceImpl;
 import com.marketcruiser.shipping.ShippingRateServiceImpl;
 import com.marketcruiser.shoppingcart.ShoppingCartServiceImpl;
@@ -82,6 +83,13 @@ public class CheckoutController {
         List<CartItem> cartItems = shoppingCartService.listCartItems(customer);
         CheckoutInfo checkoutInfo = checkoutService.prepareCheckout(cartItems, shippingRate);
 
+        String currencyCode = settingsService.getCurrencyCode();
+        PaymentSettingsBag paymentSettings = settingsService.getPaymentSettings();
+        String paypalClientId = paymentSettings.getClientId();
+
+        model.addAttribute("paypalClientId", paypalClientId);
+        model.addAttribute("currencyCode", currencyCode);
+        model.addAttribute("customer", customer);
         model.addAttribute("checkoutInfo", checkoutInfo);
         model.addAttribute("cartItems", cartItems);
 
