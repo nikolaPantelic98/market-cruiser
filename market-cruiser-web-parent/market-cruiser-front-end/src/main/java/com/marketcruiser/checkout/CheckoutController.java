@@ -2,6 +2,8 @@ package com.marketcruiser.checkout;
 
 import com.marketcruiser.Utility;
 import com.marketcruiser.address.AddressServiceImpl;
+import com.marketcruiser.checkout.paypal.PayPalApiException;
+import com.marketcruiser.checkout.paypal.PayPalServiceImpl;
 import com.marketcruiser.common.entity.Address;
 import com.marketcruiser.common.entity.CartItem;
 import com.marketcruiser.common.entity.Customer;
@@ -42,10 +44,13 @@ public class CheckoutController {
     private final ShoppingCartServiceImpl shoppingCartService;
     private final OrderServiceImpl orderService;
     private final SettingsServiceImpl settingsService;
+    private final PayPalServiceImpl payPalService;
 
     @Autowired
-    public CheckoutController(CheckoutServiceImpl checkoutService, CustomerServiceImpl customerService, AddressServiceImpl addressService,
-                              ShippingRateServiceImpl shippingRateService, ShoppingCartServiceImpl shoppingCartService, OrderServiceImpl orderService, SettingsServiceImpl settingsService) {
+    public CheckoutController(CheckoutServiceImpl checkoutService, CustomerServiceImpl customerService,
+                              AddressServiceImpl addressService, ShippingRateServiceImpl shippingRateService,
+                              ShoppingCartServiceImpl shoppingCartService, OrderServiceImpl orderService,
+                              SettingsServiceImpl settingsService, PayPalServiceImpl payPalService) {
         this.checkoutService = checkoutService;
         this.customerService = customerService;
         this.addressService = addressService;
@@ -53,6 +58,7 @@ public class CheckoutController {
         this.shoppingCartService = shoppingCartService;
         this.orderService = orderService;
         this.settingsService = settingsService;
+        this.payPalService = payPalService;
     }
 
 
@@ -166,5 +172,29 @@ public class CheckoutController {
 
         helper.setText(content, true);
         mailSender.send(message);
+    }
+
+    // method that handles the processing of a PayPal order
+    @PostMapping("/process_paypal_order")
+    public String processPayPalOrder(HttpServletRequest request, Model model) throws UnsupportedEncodingException, MessagingException {
+        String orderId = request.getParameter("orderId");
+        String pageTitle = "Checkout Failure";
+        String message = null;
+
+        try {
+            if (payPalService.validateOrder(orderId)) {
+                return placeOrder(request);
+            } else {
+                pageTitle = "Checkout Failure";
+                message = "ERROR: Transaction could not be completed because order information is invalid";
+            }
+        } catch (PayPalApiException exception) {
+            message = "ERROR: Transaction failed due to error: " + exception.getMessage();
+        }
+
+        model.addAttribute("pageTitle", pageTitle);
+        model.addAttribute("message", message);
+
+        return "message";
     }
 }
