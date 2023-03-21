@@ -15,8 +15,10 @@
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <a th:href="@{/categories/export/csv}" class="a-icon-lightgreen fas fa-file-csv fa-2x icon-lightgreen" title="Export to CSV"></a>
     </div>
+    <br>
 
     <div th:replace="fragments :: search_form_and_message"></div>
+    <br>
 
     <div class="full-details">
         <table class="table table-bordered table-striped table-hover table-responsive-xl">
@@ -89,7 +91,7 @@
     </div>
 
     <div th:if="${keyword != null}" class="text-center">
-        <span>Search result does not show categories in hierarchical form</span>
+        <span style="color: #0c9669">Search result does not show categories in hierarchical form</span>
         <div th:replace="fragments :: pagination('categories')"></div>
     </div>
 

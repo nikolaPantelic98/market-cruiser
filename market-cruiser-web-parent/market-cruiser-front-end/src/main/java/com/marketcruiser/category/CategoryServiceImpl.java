@@ -3,6 +3,7 @@ package com.marketcruiser.category;
 import com.marketcruiser.common.entity.Category;
 import com.marketcruiser.common.exception.CategoryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -63,4 +64,12 @@ public class CategoryServiceImpl implements CategoryService{
 
         return listParents;
     }
+
+    @Override
+    public List<Category> listRootCategories() {
+
+        return categoryRepository.findRootCategories(Sort.by("name").ascending());
+    }
+
+
 }

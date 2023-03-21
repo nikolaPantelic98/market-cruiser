@@ -29,6 +29,16 @@
     color: #302c54;
 }
 
+.bg-transparent {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: solid 1px #1deba8;
+}
+
+.bg-transparent .card-header {
+    border-bottom: solid 1px #1deba8;
+}
+
 /* a */
 
 a.sorting-category:link {
@@ -184,7 +194,7 @@ a.a-icon-lightgreen:hover {color: #0c9669;}
     border-color: transparent;
 }
 
-/*breadcrumb*/
+    /*breadcrumb*/
 
 .breadcrumb-custom {
     display: -ms-flexbox;

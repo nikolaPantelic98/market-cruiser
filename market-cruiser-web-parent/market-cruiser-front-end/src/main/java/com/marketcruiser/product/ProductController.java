@@ -40,6 +40,7 @@ public class ProductController {
             Category category = categoryService.getCategory(alias);
 
             List<Category> listCategoryParents = categoryService.getCategoryParents(category);
+            List<Category> listRootCategories = categoryService.listRootCategories();
 
             Page<Product> pageProducts = productService.listProductsByCategory(pageNumber, category.getCategoryId());
             List<Product> listProducts = pageProducts.getContent();
@@ -57,6 +58,7 @@ public class ProductController {
             model.addAttribute("totalItems", pageProducts.getTotalElements());
             model.addAttribute("pageTitle", category.getName());
             model.addAttribute("listCategoryParents", listCategoryParents);
+            model.addAttribute("listRootCategories", listRootCategories);
             model.addAttribute("listProducts", listProducts);
             model.addAttribute("category", category);
 
@@ -74,8 +76,10 @@ public class ProductController {
         try {
             Product product = productService.getProduct(alias);
             List<Category> listCategoryParents = categoryService.getCategoryParents(product.getCategory());
+            List<Category> listRootCategories = categoryService.listRootCategories();
 
             model.addAttribute("listCategoryParents", listCategoryParents);
+            model.addAttribute("listRootCategories", listRootCategories);
             model.addAttribute("product", product);
             model.addAttribute("pageTitle", product.getShortName());
 

@@ -10,4 +10,5 @@ public interface CategoryService {
     List<Category> listNoChildrenCategories();
     Category getCategory(String alias) throws CategoryNotFoundException;
     List<Category> getCategoryParents(Category child);
+    List<Category> listRootCategories();
 }

@@ -40,11 +40,11 @@
                 </th:block>
             </select>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <div class="search">
-                <input type="search" name="keyword" th:value="${keyword}" class="search-box" required />
+            <div class="search-box">
                 <span class="search-button">
-                    <span class="search-icon"></span>
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
                 </span>
+                <input type="text" name="keyword" th:value="${keyword}" class="input-search" required="required" placeholder="Type to search..." />
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <input type="button" value="Clear" class="btn btn-outline-red" onclick="clearFilter()" />

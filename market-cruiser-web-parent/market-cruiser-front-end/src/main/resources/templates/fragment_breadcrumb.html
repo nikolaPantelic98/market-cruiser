@@ -7,8 +7,14 @@
                 <div class="col">
                     <nav>
                         <ol style="list-style-type: none" class="breadcrumb-custom">
+
                             <li class="breadcrumb-item-custom">
                                 <a class="sorting-category text-green" th:href="@{/}">Home</a>
+                                <div class="sub-categories">
+                                    <th:block th:each="rootCat : ${listRootCategories}">
+                                        <a th:if="${rootCat.enabled == true}" th:href="@{'/c/' + ${rootCat.alias}}" class="sorting-category text-green-dark" th:text="${rootCat.name}"></a><br>
+                                    </th:block>
+                                </div>
                             </li>
 
                             <th:block th:each="parent : ${listCategoryParents}">
@@ -16,7 +22,7 @@
                                     <a class="sorting-category text-green" th:href="@{'/c/' + ${parent.alias}}">[[${parent.name}]]</a>
                                     <div class="sub-categories">
                                         <th:block th:each="cat : ${parent.children}">
-                                            <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="text-green" th:text="${cat.name}"></a><br>
+                                            <a th:if="${cat.enabled == true}" th:href="@{'/c/' + ${cat.alias}}" class="sorting-category text-green-dark" th:text="${cat.name}"></a><br>
                                         </th:block>
                                     </div>
                                 </li>
@@ -36,8 +42,14 @@
             <div class="col">
                 <nav>
                     <ol style="list-style-type: none" class="breadcrumb-custom">
+
                         <li class="breadcrumb-item-custom">
                             <a class="sorting-category text-green" th:href="@{/}">Home</a>
+                            <div class="sub-categories">
+                                <th:block th:each="rootCat : ${listRootCategories}">
+                                    <a th:if="${rootCat.enabled == true}" th:href="@{'/c/' + ${rootCat.alias}}" class="sorting-category text-green-dark" th:text="${rootCat.name}"></a><br>
+                                </th:block>
+                            </div>
                         </li>
 
                         <th:block th:each="parent : ${listCategoryParents}">
