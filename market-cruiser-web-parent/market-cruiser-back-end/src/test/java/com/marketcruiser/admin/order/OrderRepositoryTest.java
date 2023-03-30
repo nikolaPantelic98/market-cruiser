@@ -1,10 +1,7 @@
 package com.marketcruiser.admin.order;
 
 import com.marketcruiser.common.entity.*;
-import com.marketcruiser.common.entity.order.Order;
-import com.marketcruiser.common.entity.order.OrderDetail;
-import com.marketcruiser.common.entity.order.OrderStatus;
-import com.marketcruiser.common.entity.order.PaymentMethod;
+import com.marketcruiser.common.entity.order.*;
 import com.marketcruiser.common.entity.product.Product;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -114,5 +112,32 @@ public class OrderRepositoryTest {
 
         Optional<Order> result = orderRepository.findById(orderId);
         assertThat(result).isNotPresent();
+    }
+
+    @Test
+    public void testUpdateOrderTracks() {
+        Long orderId = 18L;
+
+        Order order = orderRepository.findById(orderId).get();
+
+        OrderTrack newTrack = new OrderTrack();
+        newTrack.setOrder(order);
+        newTrack.setUpdatedTime(new Date());
+        newTrack.setStatus(OrderStatus.NEW);
+        newTrack.setNotes(OrderStatus.NEW.defaultDescription());
+
+        OrderTrack processingTrack = new OrderTrack();
+        processingTrack.setOrder(order);
+        processingTrack.setUpdatedTime(new Date());
+        processingTrack.setStatus(OrderStatus.PROCESSING);
+        processingTrack.setNotes(OrderStatus.PROCESSING.defaultDescription());
+
+        List<OrderTrack> orderTracks = order.getOrderTracks();
+        orderTracks.add(newTrack);
+        orderTracks.add(processingTrack);
+
+        Order updatedOrder = orderRepository.save(order);
+
+        assertThat(updatedOrder.getOrderTracks()).hasSizeGreaterThan(1);
     }
 }
