@@ -1,5 +1,7 @@
 package com.marketcruiser.admin.order;
 
+import com.marketcruiser.admin.settings.country.CountryRepository;
+import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.order.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -8,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -15,10 +18,12 @@ public class OrderServiceImpl implements OrderService{
 
     public static final int ORDERS_PER_PAGE = 10;
     private final OrderRepository orderRepository;
+    private final CountryRepository countryRepository;
 
     @Autowired
-    public OrderServiceImpl(OrderRepository orderRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository, CountryRepository countryRepository) {
         this.orderRepository = orderRepository;
+        this.countryRepository = countryRepository;
     }
 
     // retrieves a specific page of orders from the database
@@ -63,5 +68,11 @@ public class OrderServiceImpl implements OrderService{
         }
 
         orderRepository.deleteById(orderId);
+    }
+
+    // returns a list of all countries sorted by name in ascending order
+    @Override
+    public List<Country> listAllCountries() {
+        return countryRepository.findAllByOrderByNameAsc();
     }
 }

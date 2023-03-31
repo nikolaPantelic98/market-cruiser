@@ -1,6 +1,7 @@
 package com.marketcruiser.admin.order;
 
 import com.marketcruiser.admin.settings.SettingsServiceImpl;
+import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.order.Order;
 import com.marketcruiser.common.entity.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,5 +104,25 @@ public class OrderController {
         }
 
         return "redirect:/orders";
+    }
+
+    // displays the form for editing an order
+    @GetMapping("/orders/edit/{orderId}")
+    public String editOrder(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+        try {
+            Order order = orderService.getOrder(orderId);
+
+            List<Country> listCountries = orderService.listAllCountries();
+
+            model.addAttribute("pageTitle", "Edit Order (ID: " + orderId + ")");
+            model.addAttribute("order", order);
+            model.addAttribute("listCountries", listCountries);
+
+            return "orders/order_form";
+
+        } catch (OrderNotFoundException exception) {
+            redirectAttributes.addFlashAttribute("message", exception.getMessage());
+            return "redirect:/orders";
+        }
     }
 }
