@@ -72,7 +72,7 @@
 }
 .tabs_three .slider-three {
     position: relative;
-    width: 33%;
+    width: 25%;
     transition: all 0.33s cubic-bezier(0.38, 0.8, 0.32, 1.07);
 }
 .tabs_three .slider-three .indicator_three {
@@ -167,6 +167,24 @@
     transform: translateX(200%);
 }
 .tabs_three input[name=tab-control]:nth-of-type(3):checked ~ .content > section:nth-child(3) {
+    display: block;
+}
+.tabs_three input[name=tab-control]:nth-of-type(4):checked ~ ul > li:nth-child(4) > label {
+    cursor: default;
+    color: #0a875e;
+}
+.tabs_three input[name=tab-control]:nth-of-type(4):checked ~ ul > li:nth-child(4) > label svg {
+    fill: #0a875e;
+}
+@media (max-width: 600px) {
+    .tabs_three input[name=tab-control]:nth-of-type(4):checked ~ ul > li:nth-child(4) > label {
+        background: rgba(0, 0, 0, 0.08);
+    }
+}
+.tabs_three input[name=tab-control]:nth-of-type(4):checked ~ .slider-three {
+    transform: translateX(200%);
+}
+.tabs_three input[name=tab-control]:nth-of-type(4):checked ~ .content > section:nth-child(4) {
     display: block;
 }
 
