@@ -177,6 +177,10 @@ a.a-icon-lightgreen:hover {
     border-color: transparent;
 }
 
+.border-green {
+    border: 1px solid #1deba8;
+}
+
 
 
 
