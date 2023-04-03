@@ -1,8 +1,10 @@
 package com.marketcruiser.admin.shippingrate;
 
+import com.marketcruiser.admin.product.ProductRepository;
 import com.marketcruiser.admin.settings.country.CountryRepository;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.ShippingRate;
+import com.marketcruiser.common.entity.product.Product;
 import com.marketcruiser.common.exception.ShippingRateNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,14 +22,16 @@ import java.util.NoSuchElementException;
 public class ShippingRateServiceImpl implements ShippingRateService{
 
     public static final int RATES_PER_PAGE = 10;
-
+    private static final int DIM_DIVISOR = 139;
     private final ShippingRateRepository shippingRateRepository;
     private final CountryRepository countryRepository;
+    private final ProductRepository productRepository;
 
     @Autowired
-    public ShippingRateServiceImpl(ShippingRateRepository shippingRateRepository, CountryRepository countryRepository) {
+    public ShippingRateServiceImpl(ShippingRateRepository shippingRateRepository, CountryRepository countryRepository, ProductRepository productRepository) {
         this.shippingRateRepository = shippingRateRepository;
         this.countryRepository = countryRepository;
+        this.productRepository = productRepository;
     }
 
 
@@ -99,5 +103,23 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         }
 
         shippingRateRepository.deleteById(shippingRateId);
+    }
+
+    // calculates the shipping cost for a product being shipped to a specific country and state
+    @Override
+    public float calculateShippingCost(Long productId, Long countryId, String state) throws ShippingRateNotFoundException {
+        ShippingRate shippingRate = shippingRateRepository.findByCountryAndState(countryId, state);
+
+        if (shippingRate == null) {
+            throw new ShippingRateNotFoundException("No shipping rate found for the given destination. " +
+                    "You have to enter shipping cost manually.");
+        }
+
+        Product product = productRepository.findById(productId).get();
+
+        float dimWeight = (product.getLength() * product.getWidth() * product.getHeight()) / DIM_DIVISOR;
+        float finalWeight = product.getWeight() > dimWeight ? product.getWeight() : dimWeight;
+
+        return finalWeight * shippingRate.getRate();
     }
 }

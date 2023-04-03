@@ -15,4 +15,5 @@ public interface ShippingRateService {
     ShippingRate getShippingRate(Long shippingRateId) throws ShippingRateNotFoundException;
     void updateCODSupport(Long shippingRateId, boolean codSupported) throws ShippingRateNotFoundException;
     void deleteShippingRate(Long shippingRateId) throws ShippingRateNotFoundException;
+    float calculateShippingCost(Long productId, Long countryId, String state) throws ShippingRateNotFoundException;
 }
