@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Search Product', 'none')">
+</head>
+<body>
+<div class="container-fluid">
+    <br>
+    <div>
+        <div class="col-md">
+            <div class="search-box">
+                <span class="search-button">
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
+                </span>
+                <form class="form-inline" th:action="@{/orders/search_product}" method="post">
+                    <input type="hidden" name="sortField" th:value="${sortField}" />
+                    <input type="hidden" name="sortDir" th:value="${sortDir}" />
+                    <input type="text" name="keyword" class="input-search"
+                           th:value="${keyword}"
+                           placeholder="Type to Search...">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <th:block th:each="product: ${listProducts}">
+        <div class="col">
+            <a href="" class="linkProduct sorting-category" th:pid="${product.productId}">
+                <img th:src="@{${product.mainImagePath}}" height="150px">
+                <br>
+                <b th:id="'pname' + ${product.productId}">[[${product.shortName}]]</b>
+            </a>
+
+        </div>
+        </th:block>
+    </div>
+    <br>
+
+    <div th:replace="fragments_modal :: modal_dialog"></div>
+
+    <div th:replace="fragments :: pagination('products')"></div>
+
+</div>
+
+<script th:src="@{/js/common_list.js}"></script>
+<script th:src="@{/js/common_form.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        handleLinkProduct();
+    });
+
+    function handleLinkProduct() {
+        $(".linkProduct").on("click", function (e) {
+            e.preventDefault();
+            productId = $(this).attr("pid");
+            productName = $("#pname" + productId).text();
+
+            if (window.parent.isProductAlreadyAdded(productId)) {
+                showWarningModal("The product '" + productName + "' was already added.");
+            } else {
+                window.parent.addProduct(productId, productName);
+            }
+        });
+    }
+</script>
+</body>
+</html>

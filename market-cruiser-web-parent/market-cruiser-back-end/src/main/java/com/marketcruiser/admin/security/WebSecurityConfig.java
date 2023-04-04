@@ -80,6 +80,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .rememberMe()
                         .key("AbcdefgHijKLmN_12345")
                         .tokenValiditySeconds(7 * 24 * 60 * 60);
+
+        http.headers().frameOptions().sameOrigin();
     }
 
     // configures web security

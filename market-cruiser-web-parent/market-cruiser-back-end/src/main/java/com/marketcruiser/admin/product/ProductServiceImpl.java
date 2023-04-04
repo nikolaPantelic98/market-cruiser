@@ -131,5 +131,16 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public Page<Product> searchProducts(int pageNumber, String sortField, String sortDir, String keyword) {
+        Sort sort = Sort.by(sortField);
+
+        sort = sortDir.equals("asc") ? sort.ascending() : sort.descending();
+
+        Pageable pageable = PageRequest.of(pageNumber - 1, PRODUCTS_PER_PAGE, sort);
+
+        return productRepository.searchProductsByName(keyword, pageable);
+    }
+
 
 }

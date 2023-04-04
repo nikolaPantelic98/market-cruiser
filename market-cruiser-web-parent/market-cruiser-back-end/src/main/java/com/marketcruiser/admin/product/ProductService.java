@@ -16,4 +16,5 @@ public interface ProductService {
     void updateProductEnabledStatus(Long productId, boolean enabled);
     void deleteProduct(Long productId) throws ProductNotFoundException;
     Product getProduct(Long productId) throws ProductNotFoundException;
+    Page<Product> searchProducts(int pageNumber, String sortField, String sortDir, String keyword);
 }
