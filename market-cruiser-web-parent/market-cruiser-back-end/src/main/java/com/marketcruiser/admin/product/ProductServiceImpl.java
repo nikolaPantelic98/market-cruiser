@@ -121,6 +121,7 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(productId);
     }
 
+    // gets a product
     @Override
     public Product getProduct(Long productId) throws ProductNotFoundException {
         try {
@@ -131,6 +132,7 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    // searches for products by a given keyword
     @Override
     public Page<Product> searchProducts(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);

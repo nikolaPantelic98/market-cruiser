@@ -20,11 +20,13 @@ public class ProductRestController {
     }
 
 
+    // checks if the given product name is unique
     @PostMapping("/products/check-unique")
     public String checkUnique(@Param("productId") Long productId, @Param("name") String name) {
         return productService.checkUnique(productId, name);
     }
 
+    // contains information about the product
     @GetMapping("/products/get/{productId}")
     public ProductDTO getProductInfo(@PathVariable Long productId) throws ProductNotFoundException {
         Product product = productService.getProduct(productId);

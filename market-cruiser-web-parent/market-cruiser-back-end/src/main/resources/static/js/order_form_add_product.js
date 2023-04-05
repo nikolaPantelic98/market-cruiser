@@ -59,6 +59,8 @@ function getProductInfo(productId, shippingCost) {
         htmlCode = generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost);
         $("#productList").append(htmlCode);
 
+        updateOrderAmounts();
+
     }).fail(function (err) {
         showWarningModal(err.responseJSON.message);
     });
@@ -66,12 +68,14 @@ function getProductInfo(productId, shippingCost) {
 
 function generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost) {
     nextCount = $(".hiddenProductId").length + 1;
+    rowId = "row" + nextCount;
     quantityId = "quantity" + nextCount;
     priceId = "price" + nextCount;
     subtotalId = "subtotal" + nextCount;
+    blankLineId = "blankLine" + nextCount;
 
     htmlCode = `
-        <div class="border-green rounded p-1">
+        <div class="border-green rounded p-1" id="${rowId}">
             <input type="hidden" name="productId" value="${productId}" class="hiddenProductId" />
 
             <div class="row">
@@ -82,7 +86,7 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
                     <img src="${mainImagePath}" class="img-fluid" width="200px" />
                 </div>
                 <div class="col-3" style="display: flex; align-items: center; justify-content: center">
-                    <div><a class="a-icon-lightgreen fas fa-trash icon-red fa-2x link-remove" href="" th:rowNumber="${status.count}"></a></div>
+                    <div><a class="a-icon-lightgreen fas fa-trash icon-red fa-2x link-remove" href="" rowNumber="${nextCount}"></a></div>
                 </div>
             </div>
 
@@ -143,7 +147,7 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
             </div>
 
         </div>
-            <div class="row">&nbsp;</div>
+            <div id="${blankLineId}" class="row">&nbsp;</div>
     `;
 
     return htmlCode;
