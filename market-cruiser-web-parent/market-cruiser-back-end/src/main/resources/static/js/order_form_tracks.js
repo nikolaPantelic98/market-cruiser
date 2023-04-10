@@ -69,7 +69,7 @@ function generateTrackCode() {
                             <label class="col-sm-2 col-form-label text-white">Status:</label>
                             <div class="col-sm-10">
                                 <select name="trackStatus" class="form-control dropDownStatus" required style="max-width: 150px"
-                                        rowNumber="${nextCount}"   
+                                        rowNumber="${nextCount}"
 			`;
 
     htmlCode += $("#trackStatusOptions").clone().html();
@@ -84,7 +84,7 @@ function generateTrackCode() {
 						<textarea rows="2" cols="10" class="form-control" name="trackNotes" id="${trackNoteId}" style="    max-width: 300px" required></textarea>
 				    </div>
 				  </div>
-				  
+
 				  <div>
                             <div class="mt-1" style="margin-left: 30px">
                                 <a class="a-icon-lightgreen fas fa-trash icon-red fa-2x linkRemoveTrack" href="" rowNumber="${nextCount}"></a>

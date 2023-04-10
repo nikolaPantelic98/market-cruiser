@@ -75,4 +75,14 @@ public class OrderServiceImpl implements OrderService{
     public List<Country> listAllCountries() {
         return countryRepository.findAllByOrderByNameAsc();
     }
+
+    // saves an order
+    @Override
+    public void saveOrder(Order orderInForm) {
+        Order orderInDB = orderRepository.findById(orderInForm.getOrderId()).get();
+        orderInForm.setOrderTime(orderInDB.getOrderTime());
+        orderInForm.setCustomer(orderInDB.getCustomer());
+
+        orderRepository.save(orderInForm);
+    }
 }

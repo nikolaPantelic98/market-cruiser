@@ -76,6 +76,7 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
 
     htmlCode = `
         <div class="border-green rounded p-1" id="${rowId}">
+            <input type="hidden" name="detailId" value="0" />
             <input type="hidden" name="productId" value="${productId}" class="hiddenProductId" />
 
             <div class="row">
