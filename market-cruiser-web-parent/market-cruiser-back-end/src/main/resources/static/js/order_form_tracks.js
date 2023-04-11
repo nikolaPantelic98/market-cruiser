@@ -46,55 +46,49 @@ function generateTrackCode() {
 
     htmlCode = `
 			<div class="border-green rounded p-1" id="${rowId}">
-                <div class="row">
-                    <div class="col-3" style="margin-left: 30px">
-                        <br>
-                        <div class="divCountTrack" style="color: white">${nextCount} + '.'</div>
-                        <br>
-                    </div>
-
-                    <div class="col-10">
-                        <div class="form-group row" style="margin-left: 20px">
-                            <label class="col-sm-2 col-form-label text-white">Time:</label>
-                            <div class="col-sm-10">
-
-                                <input type="datetime-local" name="trackDate" value="${currentDateTime}"
-                                       class="form-control"
-                                       required
-                                       style="max-width: 300px"/>
-                            </div>
-                        </div>
-
-                        <div class="form-group row" style="margin-left: 20px">
-                            <label class="col-sm-2 col-form-label text-white">Status:</label>
-                            <div class="col-sm-10">
-                                <select name="trackStatus" class="form-control dropDownStatus" required style="max-width: 150px"
-                                        rowNumber="${nextCount}"
+				<input type="hidden" name="trackId" value="0" class="hiddenTrackId" />
+				<div class="col-2">
+				    <br>
+					<div class="divCountTrack" style="color: white">${nextCount}.</div>
+					<br>
+				</div>				
+				
+				<div class="col-10">
+				  <div class="form-group row" style="margin-left: 20px">
+				    <label class="col-sm-2 col-form-label text-white">Time:</label>
+				    <div class="col-sm-10">
+						<input type="datetime-local" name="trackDate" value="${currentDateTime}" class="form-control" required
+							style="max-width: 300px"/>						
+				    </div>
+				  </div>					
+				<div class="form-group row" style="margin-left: 20px">  
+				<label class="col-sm-2 col-form-label text-white">Status:</label>
+				<div class="col-sm-10">
+					<select name="trackStatus" class="form-control dropDownStatus" required style="max-width: 150px" rowNumber="${nextCount}">
 			`;
 
     htmlCode += $("#trackStatusOptions").clone().html();
 
     htmlCode += `
-                        </select>
-                            </div>
-                        </div>
+				      </select>						
+				    </div>
+				  </div>
 				  <div class="form-group row" style="margin-left: 20px">
 				    <label class="col-sm-2 col-form-label text-white">Notes:</label>
 				    <div class="col-sm-10">
-						<textarea rows="2" cols="10" class="form-control" name="trackNotes" id="${trackNoteId}" style="    max-width: 300px" required></textarea>
+						<textarea rows="2" cols="10" class="form-control" name="trackNotes" id="${trackNoteId}" style="max-width: 300px" required></textarea>
 				    </div>
 				  </div>
-
+				  
 				  <div>
-                            <div class="mt-1" style="margin-left: 30px">
-                                <a class="a-icon-lightgreen fas fa-trash icon-red fa-2x linkRemoveTrack" href="" rowNumber="${nextCount}"></a>
-                            </div>
-                            <br>
-                        </div>
-
-				</div>
-			</div>
-			</div>
+                    <div class="mt-1" style="margin-left: 30px">
+                      <a class="a-icon-lightgreen fas fa-trash icon-red fa-2x linkRemoveTrack" href="" rowNumber="${nextCount}"></a>
+                    </div>
+                      <br>
+                  </div>
+				  
+				</div>				
+			</div>	
 			<div id="${emptyLineId}" class="row">&nbsp;</div>
 	`;
 
