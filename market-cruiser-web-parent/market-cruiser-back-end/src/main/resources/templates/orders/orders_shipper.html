@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('Orders - Market Cruiser Admin', 'none')">
+</head>
+<body>
+<div class="container-fluid">
+
+    <div th:replace="fragment_navigation :: menu"></div>
+
+    <br>
+    <div>
+        <h1>Manage Orders (Shipper)</h1>
+    </div>
+
+    <div th:replace="fragments :: search_form_and_message"></div>
+    <br>
+
+    <div>
+        <th:block th:each="order : ${listOrders}">
+            <div class="row m-1">
+                <div class="card bg-transparent">
+                    <div class="card-header">
+                        <div class="row">
+                            <div class="col">
+                                <span style="color: white; vertical-align: middle">Order ID #[[${order.orderId}]]</span>
+                            </div>
+                            <div class="col">
+                                <div class="float-right">
+                                    <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen link-order-detail"
+                                       th:href="@{'/orders/detail/' + ${order.orderId}}"
+                                       title="View details of this order"
+                                    ></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div>
+                            <i class="fas fa-user" style="color: #1deba8"></i>
+                            &nbsp;
+                            <b>[[${order.recipientName}]]</b>
+                        </div>
+                        <div>
+                            <i class="fas fa-home" style="color: #1deba8"></i>
+                            &nbsp;
+                            [[${order.recipientAddress}]]
+                        </div>
+                        <div>
+                            <i class="fas fa-phone-alt" style="color: #1deba8"></i>
+                            &nbsp;
+                            [[${order.phoneNumber}]]
+                        </div>
+                        <div th:if="${order.COD}">
+                            <span>COD:&nbsp; <b style="color: #1deba8"><div th:replace="fragments :: format_currency(${order.total})"></div></b></span>
+                        </div>
+
+                        <div>&nbsp;</div>
+                        <div class="row">
+                            <div class="col">
+                                <th:block th:if="${order.picked}">
+                                    <i class="fas fa-people-carry fa-2x icon-orange"></i>
+                                </th:block>
+
+                                <th:block th:unless="${order.picked}">
+                                    <i class="fas fa-people-carry fa-2x icon-dark"></i>
+                                </th:block>
+                            </div>
+
+                            <div class="col">
+                                <th:block th:if="${order.shipping}">
+                                    <i class="fas fa-shipping-fast fa-2x icon-orange"></i>
+                                </th:block>
+
+                                <th:block th:unless="${order.shipping}">
+                                    <i class="fas fa-shipping-fast fa-2x icon-dark"></i>
+                                </th:block>
+                            </div>
+
+                            <div class="col">
+                                <th:block th:if="${order.delivered}">
+                                    <i class="fas fa-box-open fa-2x icon-orange"></i>
+                                </th:block>
+
+                                <th:block th:unless="${order.delivered}">
+                                    <i class="fas fa-box-open fa-2x icon-dark"></i>
+                                </th:block>
+                            </div>
+
+                            <div class="col">
+                                <th:block th:if="${order.returned}">
+                                    <i class="fas fa-people-carry fa-2x icon-orange"></i>
+                                </th:block>
+
+                                <th:block th:unless="${order.returned}">
+                                    <i class="fas fa-undo fa-2x icon-dark"></i>
+                                </th:block>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div>&nbsp;</div>
+        </th:block>
+    </div>
+
+
+    <div th:replace="fragments :: pagination('orders')"></div>
+
+    <div class="modal fade" id="orderDetailModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to top, #302c54 65%, transparent 75%),
+                                                            linear-gradient(to right, #302c54, #302c54 25%, #382c54 55%, #482c54 70%, #4c2c4c 90% ,#582454 100%);
+                                                            background-attachment: fixed;">
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div th:replace="fragments :: footer"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script type="text/javascript">
+    moduleURL = "[[@{/orders}]]";
+
+    $(document).ready(function() {
+        handleLinkViewOrderDetails();
+    });
+
+    function handleLinkViewOrderDetails() {
+        $(".link-order-detail").on("click", function (e) {
+            e.preventDefault();
+            linkDetailURL = $(this).attr("href");
+            $("#orderDetailModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+    }
+
+</script>
+</body>
+</html>

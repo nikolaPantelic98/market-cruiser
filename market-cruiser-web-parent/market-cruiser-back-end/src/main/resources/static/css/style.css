@@ -5,6 +5,8 @@
 
 *.icon-lightgreen {color: #1deba8;}
 
+*.icon-orange {color: #d79e12}
+
 *.icon-red {color: #800000;}
 
 *.badge-green {
@@ -21,6 +23,18 @@
 *.text-green {color: #1deba8;}
 
 *.text-green-dark {color: #0c9669;}
+
+/*background*/
+
+.bg-transparent {
+    background-color: transparent;
+    color: #FFFFFF;
+    border: solid 1px #1deba8;
+}
+
+.bg-transparent .card-header {
+    border-bottom: solid 1px #1deba8;
+}
 
 /* a */
 

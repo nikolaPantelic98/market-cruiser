@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.order;
 
+import com.marketcruiser.admin.security.MarketCruiserUserDetails;
 import com.marketcruiser.admin.settings.SettingsServiceImpl;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.order.Order;
@@ -11,6 +12,7 @@ import com.marketcruiser.common.entity.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -40,14 +42,15 @@ public class OrderController {
 
     // returns the first page of orders
     @GetMapping("/orders")
-    public String showFirstPageOfOrders(Model model, HttpServletRequest request) {
-        return showPageOfOrders(1, model, "orderTime", "desc", null, request);
+    public String showFirstPageOfOrders() {
+        return "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
     }
 
     // shows a page of orders
     @GetMapping("/orders/page/{pageNumber}")
     public String showPageOfOrders(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
-                                          @Param("sortDir") String sortDir, @Param("keyword") String keyword , HttpServletRequest request) {
+                                   @Param("sortDir") String sortDir, @Param("keyword") String keyword ,
+                                   HttpServletRequest request, @AuthenticationPrincipal MarketCruiserUserDetails loggedUser) {
 
         Page<Order> page = orderService.listOrdersByPage(pageNumber, sortField, sortDir, keyword);
         List<Order> listOrders = page.getContent();
@@ -75,6 +78,10 @@ public class OrderController {
         model.addAttribute("keyword", keyword);
         model.addAttribute("moduleURL", "/orders");
 
+        if (!loggedUser.hasRole("Admin") && !loggedUser.hasRole("Salesperson") && loggedUser.hasRole("Shipper")) {
+            return "orders/orders_shipper";
+        }
+
         return "orders/orders";
     }
 
@@ -89,10 +96,19 @@ public class OrderController {
 
     // displays the details of a single order in a modal dialog
     @GetMapping("/orders/detail/{orderId}")
-    public String viewOrderDetails(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
+    public String viewOrderDetails(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes,
+                                   HttpServletRequest request, @AuthenticationPrincipal MarketCruiserUserDetails loggedUser) {
         try {
             Order order = orderService.getOrder(orderId);
             loadCurrencySettings(request);
+
+            boolean isVisibleForAdminOrSalesperson = false;
+
+            if (loggedUser.hasRole("Admin") || loggedUser.hasRole("Salesperson")) {
+                isVisibleForAdminOrSalesperson = true;
+            }
+
+            model.addAttribute("isVisibleForAdminOrSalesperson", isVisibleForAdminOrSalesperson);
             model.addAttribute("order", order);
 
             return "orders/order_details_modal";

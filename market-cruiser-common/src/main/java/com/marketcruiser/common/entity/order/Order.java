@@ -229,6 +229,88 @@ public class Order {
         } catch (ParseException exception) {
             exception.printStackTrace();
         }
+    }
 
+    // returns the recipient's name by concatenating the first name and last name
+    @Transient
+    public String getRecipientName() {
+        String name = firstName;
+
+        if (lastName != null && !lastName.isEmpty()) {
+            name += " " + lastName;
+        }
+
+        return name;
+    }
+
+    // returns the recipient's address
+    @Transient
+    public String getRecipientAddress() {
+        String address = "";
+
+        if (!addressLine1.isEmpty()) {
+            address += addressLine1;
+        }
+
+        if (addressLine2 != null && !addressLine2.isEmpty()) {
+            address += ", " + addressLine2;
+        }
+
+        if (!city.isEmpty()) {
+            address += ", " + city;
+        }
+
+        if (state != null && !state.isEmpty()) {
+            address += ", " + state;
+        }
+
+        address += ", " + country;
+
+        if (!postCode.isEmpty()) {
+            address += ", " + postCode;
+        }
+
+        return address;
+    }
+
+    // checks if the payment method for the order is Cash on Delivery (COD)
+    @Transient
+    public boolean isCOD() {
+        return paymentMethod.equals(PaymentMethod.COD);
+    }
+
+    // checks if the order has the status "PICKED" in its order tracks
+    @Transient
+    public boolean isPicked() {
+        return hasStatus(OrderStatus.PICKED);
+    }
+
+    // checks if the order has the status "SHIPPING" in its order tracks
+    @Transient
+    public boolean isShipping() {
+        return hasStatus(OrderStatus.SHIPPING);
+    }
+
+    // checks if the order has the status "DELIVERED" in its order tracks
+    @Transient
+    public boolean isDelivered() {
+        return hasStatus(OrderStatus.DELIVERED);
+    }
+
+    // checks if the order has the status "RETURNED" in its order tracks
+    @Transient
+    public boolean isReturned() {
+        return hasStatus(OrderStatus.RETURNED);
+    }
+
+    // checks if the order has a specific status in its order tracks
+    public boolean hasStatus(OrderStatus status) {
+        for (OrderTrack aTrack : orderTracks) {
+            if (aTrack.getStatus().equals(status)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

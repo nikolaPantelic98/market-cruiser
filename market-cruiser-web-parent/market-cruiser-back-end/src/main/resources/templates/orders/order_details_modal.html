@@ -62,6 +62,7 @@
                     </div>
                 </div>
 
+                <th:block th:if="${isVisibleForAdminOrSalesperson}">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label text-white">Customer:</label>
                     <div class="col-sm-10">
@@ -96,6 +97,7 @@
                         <div th:replace="fragments :: currency_input(${order.tax})">Tax</div>
                     </div>
                 </div>
+                </th:block>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label text-white">Total:</label>
@@ -104,12 +106,14 @@
                     </div>
                 </div>
 
+                <th:block th:if="${isVisibleForAdminOrSalesperson}">
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label text-white"></label>
                     <div class="col-sm-10 text-white">
                         TOTAL = Subtotal + Shipping Cost + Tax
                     </div>
                 </div>
+                </th:block>
 
                 <div class="form-group row">
                     <label class="col-sm-2 col-form-label text-white">Payment Method:</label>
@@ -138,6 +142,8 @@
                             <div class="text-wrap">
                                 <b class="text-white">[[${product.name}]]</b>
                             </div>
+
+                            <th:block th:if="${isVisibleForAdminOrSalesperson}">
                             <div class="text-white">
                                 Product Cost: <div th:replace="fragments :: format_currency(${detail.productCost})"></div>
                             </div>
@@ -150,6 +156,7 @@
                             <div class="text-white">
                                 Shipping Cost: <div th:replace="fragments :: format_currency(${detail.shippingCost})"></div>
                             </div>
+                            </th:block>
                         </div>
                     </div>
                 </th:block>
