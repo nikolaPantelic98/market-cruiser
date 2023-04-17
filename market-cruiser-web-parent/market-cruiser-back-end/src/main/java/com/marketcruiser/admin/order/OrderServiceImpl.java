@@ -3,6 +3,8 @@ package com.marketcruiser.admin.order;
 import com.marketcruiser.admin.settings.country.CountryRepository;
 import com.marketcruiser.common.entity.Country;
 import com.marketcruiser.common.entity.order.Order;
+import com.marketcruiser.common.entity.order.OrderStatus;
+import com.marketcruiser.common.entity.order.OrderTrack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -10,6 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -84,5 +87,28 @@ public class OrderServiceImpl implements OrderService{
         orderInForm.setCustomer(orderInDB.getCustomer());
 
         orderRepository.save(orderInForm);
+    }
+
+    // updates the status of an order
+    @Override
+    public void updateStatus(Long orderId, String status) {
+        Order orderInDB = orderRepository.findById(orderId).get();
+        OrderStatus statusToUpdate = OrderStatus.valueOf(status);
+
+        if (!orderInDB.hasStatus(statusToUpdate)) {
+            List<OrderTrack> orderTracks = orderInDB.getOrderTracks();
+
+            OrderTrack track = new OrderTrack();
+            track.setOrder(orderInDB);
+            track.setStatus(statusToUpdate);
+            track.setUpdatedTime(new Date());
+            track.setNotes(statusToUpdate.defaultDescription());
+
+            orderTracks.add(track);
+
+            orderInDB.setStatus(statusToUpdate);
+
+            orderRepository.save(orderInDB);
+        }
     }
 }

@@ -13,4 +13,5 @@ public interface OrderService {
     void deleteOrder(Long orderId) throws OrderNotFoundException;
     List<Country> listAllCountries();
     void saveOrder(Order orderInForm);
+    void updateStatus(Long orderId, String status);
 }
