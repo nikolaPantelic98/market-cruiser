@@ -62,7 +62,11 @@
                                 </th:block>
 
                                 <th:block th:unless="${order.picked}">
-                                    <i class="fas fa-people-carry fa-2x icon-dark"></i>
+                                    <a class="a-icon-orange fas fa-people-carry fa-2x icon-dark linkUpdateStatus"
+                                       th:id="'linkPICKED' + ${order.orderId}"
+                                       th:orderId="${order.orderId}"
+                                       status="PICKED"
+                                       th:href="@{'/orders_shipper/update/' + ${order.orderId} + '/PICKED'}"></a>
                                 </th:block>
                             </div>
 
@@ -72,7 +76,11 @@
                                 </th:block>
 
                                 <th:block th:unless="${order.shipping}">
-                                    <i class="fas fa-shipping-fast fa-2x icon-dark"></i>
+                                    <a class="a-icon-orange fas fa-shipping-fast fa-2x icon-dark linkUpdateStatus"
+                                       th:id="'linkSHIPPING' + ${order.orderId}"
+                                       th:orderId="${order.orderId}"
+                                       status="SHIPPING"
+                                       th:href="@{'/orders_shipper/update/' + ${order.orderId} + '/SHIPPING'}"></a>
                                 </th:block>
                             </div>
 
@@ -82,17 +90,25 @@
                                 </th:block>
 
                                 <th:block th:unless="${order.delivered}">
-                                    <i class="fas fa-box-open fa-2x icon-dark"></i>
+                                    <a class="a-icon-orange fas fa-box-open fa-2x icon-dark linkUpdateStatus"
+                                       th:id="'linkDELIVERED' + ${order.orderId}"
+                                       th:orderId="${order.orderId}"
+                                       status="DELIVERED"
+                                       th:href="@{'/orders_shipper/update/' + ${order.orderId} + '/DELIVERED'}"></a>
                                 </th:block>
                             </div>
 
                             <div class="col">
                                 <th:block th:if="${order.returned}">
-                                    <i class="fas fa-people-carry fa-2x icon-orange"></i>
+                                    <i class="fas fa-undo fa-2x icon-orange"></i>
                                 </th:block>
 
                                 <th:block th:unless="${order.returned}">
-                                    <i class="fas fa-undo fa-2x icon-dark"></i>
+                                    <a class="a-icon-orange fas fa-undo fa-2x icon-dark linkUpdateStatus"
+                                       th:id="'linkRETURNED' + ${order.orderId}"
+                                       th:orderId="${order.orderId}"
+                                       status="RETURNED"
+                                       th:href="@{'/orders_shipper/update/' + ${order.orderId} + '/RETURNED'}"></a>
                                 </th:block>
                             </div>
                         </div>
@@ -105,6 +121,26 @@
 
 
     <div th:replace="fragments :: pagination('orders')"></div>
+
+    <div th:fragment="confirm_modal" class="modal fade text-center" id="confirmModal">
+        <div class="modal-dialog">
+            <div class="modal-content" style="background: #302c54">
+                <div class="modal-header">
+                    <h4 class="modal-title" style="color: #1deba8">Update Confirmation</h4>
+                    <button type="button" class="close" data-dismiss="modal" style="color: #1deba8">&times;</button>
+                </div>
+
+                <div class="modal-body" style="color: white">
+                    <span id="confirmText"></span>
+                </div>
+
+                <div class="modal-footer">
+                    <a class="btn btn-outline-red" href="" id="yesButton">Yes</a>
+                    <button type="button" class="btn btn-outline-green" id="noButton" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal fade" id="orderDetailModal">
         <div class="modal-dialog modal-xl">
@@ -123,8 +159,11 @@
 
 </div>
 <script th:src="@{/js/common_list.js}"></script>
+<script th:src="@{/js/orders_shipper.js}"></script>
 <script type="text/javascript">
     moduleURL = "[[@{/orders}]]";
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
 
     $(document).ready(function() {
         handleLinkViewOrderDetails();

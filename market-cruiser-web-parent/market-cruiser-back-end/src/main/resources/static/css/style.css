@@ -78,6 +78,14 @@ a.a-icon-lightgreen:hover {
     color: #097853;
 }
 
+a.a-icon-orange {
+    transition: all 0.3s ease;
+}
+
+a.a-icon-orange:hover {
+    color: #d79e12;
+}
+
 /* buttons */
 
 .btn {
