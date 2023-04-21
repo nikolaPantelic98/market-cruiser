@@ -7,6 +7,8 @@
 
 *.icon-red {color: #800000}
 
+*.icon-dark {color:gray}
+
 /* text */
 
 *.text-black {color: black}
@@ -40,6 +42,22 @@
 }
 
 /* a */
+
+a.a-sorting:link {
+    transition: all 0.3s ease;
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.a-sorting:hover {
+    transform: scale(1.2);
+    color: #1deba8;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
 
 a.sorting-category:link {
     transition: all 0.3s ease;
@@ -80,6 +98,14 @@ a.a-icon-darkblue:hover {color: #302c54;}
 a.a-icon-lightgreen {transition: all 0.3s ease;}
 
 a.a-icon-lightgreen:hover {color: #0c9669;}
+
+a.a-icon-orange {
+    transition: all 0.3s ease;
+}
+
+a.a-icon-orange:hover {
+    color: #d79e12;
+}
 
 /* buttons */
 

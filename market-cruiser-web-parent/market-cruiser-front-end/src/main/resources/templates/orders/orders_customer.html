@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments :: page_head('My Orders', 'none')">
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div th:replace="fragment_navigation :: header_menu"></div>
+    <br>
+
+    <div>
+        <h1>My Orders</h1>
+    </div>
+    <br>
+
+    <div class="row">
+        <div class="col-md">
+            <div class="search-box">
+                <span class="search-button">
+                    <button class="btn-search"><i class="fas fa-search"></i></button>
+                </span>
+                <form class="form-inline" th:action="@{/search}" method="get">
+                    <input type="text" name="orderKeyword" class="input-search"
+                           th:value="${orderKeyword}"
+                           placeholder="Type to Search...">
+                </form>
+            </div>
+        </div>
+    </div>
+    <br>
+
+    <div class="full-details">
+        <table class="table table-bordered table-striped table-hover table-responsive-xl">
+            <thead class="tbl-header">
+                <tr>
+                    <th th:replace="fragments :: column_link('orderId', 'Order ID')"></th>
+
+                    <th th:replace="fragments :: column_link('orderTime', 'Order Time')"></th>
+
+                    <th class="text-center" style="text-align: center; vertical-align: middle">Products</th>
+
+                    <th th:replace="fragments :: column_link('total', 'Total')"></th>
+
+                    <th th:replace="fragments :: column_link('status', 'Status')"></th>
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${listOrders}">
+                    <td style="text-align: center; vertical-align: middle">ID #[[${order.orderId}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: format_time(${order.orderTime})"></div>
+                    </td>
+                    <td th:utext="${order.productNames}"></td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <div th:replace="fragments :: format_currency(${order.total})"></div>
+                    </td>
+                    <td style="text-align: center; vertical-align: middle">[[${order.status}]]</td>
+                    <td style="text-align: center; vertical-align: middle">
+                        <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen linkDetail"
+                           th:href="@{'/orders/detail/' + ${order.orderId}}"
+                           title="View Details of This Order">
+                        </a>
+                        <th:block th:unless="${order.returnRequested}">
+                            &nbsp;&nbsp;&nbsp;
+                            <a class="a-icon-lightgreen fas fa-undo fa-2x icon-dark linkReturnOrder" href=""
+                               th:orderId="${order.orderId}"
+                               title="Return this order"></a>
+                        </th:block>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="less-details p-2">
+        <th:block th:each="order : ${listOrders}">
+            <div class="row m-1">
+                <div class="col-sm-6 mt-4">
+                    <div class="card bg-transparent">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col">
+                                    <span>Order ID #[[${order.orderId}]]</span>
+                                </div>
+                                <div class="col">
+                                    <div class="float-right">
+                                        <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen linkDetail"
+                                           th:href="@{'/orders/detail/' + ${order.orderId}}"></a>
+
+                                        <th:block th:unless="${order.returnRequested}">
+                                            &nbsp;
+                                            <a class="a-icon-lightgreen fas fa-undo fa-2x icon-dark linkReturnOrder" href=""
+                                               th:orderId="${order.orderId}"
+                                               title="Return this order"></a>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <span th:utext="${order.productNames}" style="font-size: small"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col" style="color: #1deba8">
+                                    <div th:replace="fragments :: format_currency(${order.total})">Total</div>
+                                </div>
+                                <div class="col" style="color: #d79e12">
+                                    <span th:class="'textOrderStatus' + ${order.orderId}">[[${order.status}]]</span>
+                                </div>
+                            </div>
+                            <br>
+                            <div><small><div th:replace="fragments :: format_time(${order.orderTime})"></div></small></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </th:block>
+    </div>
+
+    <div th:replace="fragments :: pagination('/orders' ,'orders')"></div>
+
+    <div class="modal fade" id="orderDetailsModal">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" style="background: -webkit-linear-gradient(left, #4169e1, #FFE5B4); background: linear-gradient(to top, #302c54 65%, transparent 75%),
+                                                            linear-gradient(to right, #302c54, #302c54 25%, #382c54 55%, #482c54 70%, #4c2c4c 90% ,#582454 100%);
+                                                            background-attachment: fixed;">
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div th:replace="fragment_navigation :: footer_menu"></div>
+
+</div>
+<script th:src="@{/js/common_list.js}"></script>
+<script th:src="@{/js/common.js}"></script>
+<script type="text/javascript">
+
+    moduleURL = "[[@{/orders}]]";
+    contextPath = "[[@{/}]]";
+    var csrfHeaderName = "[[${_csrf.headerName}]]";
+    var csrfValue = "[[${_csrf.token}]]";
+
+</script>
+</body>
+</html>

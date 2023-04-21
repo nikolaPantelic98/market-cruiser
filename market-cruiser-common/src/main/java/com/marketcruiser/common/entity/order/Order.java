@@ -297,6 +297,11 @@ public class Order {
         return hasStatus(OrderStatus.DELIVERED);
     }
 
+    @Transient
+    public boolean isReturnRequested() {
+        return hasStatus(OrderStatus.RETURN_REQUESTED);
+    }
+
     // checks if the order has the status "RETURNED" in its order tracks
     @Transient
     public boolean isReturned() {
@@ -312,5 +317,18 @@ public class Order {
         }
 
         return false;
+    }
+
+    @Transient
+    public String getProductNames() {
+        String productNames = "";
+
+        for (OrderDetail detail : orderDetails) {
+            productNames += "<li>" + detail.getProduct().getShortName() + "</li>";
+        }
+
+        productNames += "</ul>";
+
+        return productNames;
     }
 }
