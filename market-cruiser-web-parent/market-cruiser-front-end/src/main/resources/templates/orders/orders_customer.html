@@ -139,7 +139,6 @@
     <div th:replace="fragment_navigation :: footer_menu"></div>
 
 </div>
-<script th:src="@{/js/common_list.js}"></script>
 <script th:src="@{/js/common.js}"></script>
 <script type="text/javascript">
 
@@ -147,6 +146,18 @@
     contextPath = "[[@{/}]]";
     var csrfHeaderName = "[[${_csrf.headerName}]]";
     var csrfValue = "[[${_csrf.token}]]";
+
+    $(document).ready(function () {
+        handleDetailLink();
+    });
+
+    function handleDetailLink() {
+        $(".linkDetail").on("click", function (e) {
+            e.preventDefault();
+            linkDetailURL = $(this).attr("href");
+            $("#orderDetailsModal").modal("show").find(".modal-content").load(linkDetailURL);
+        });
+    }
 
 </script>
 </body>

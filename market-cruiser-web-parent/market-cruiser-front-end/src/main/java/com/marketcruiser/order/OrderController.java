@@ -7,7 +7,6 @@ import com.marketcruiser.customer.CustomerServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +33,7 @@ public class OrderController {
         return "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
     }
 
+    // displays a page of orders for a customer with pagination, sorting, and search functionality
     @GetMapping("/orders/page/{pageNumber}")
     public String showPageOfOrders(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                    @Param("sortDir") String sortDir, @Param("keyword") String orderKeyword,
@@ -68,8 +68,20 @@ public class OrderController {
         return "orders/orders_customer";
     }
 
+    // retrieves the authenticated customer
     private Customer getAuthenticatedCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         return customerService.getCustomerByEmail(email);
+    }
+
+    // displays the details of a specific order
+    @GetMapping("/orders/detail/{orderId}")
+    public String viewOrderDetails(Model model, @PathVariable Long orderId, HttpServletRequest request) {
+        Customer customer = getAuthenticatedCustomer(request);
+
+        Order order = orderService.getOrder(orderId, customer);
+        model.addAttribute("order", order);
+
+        return "orders/order_details_modal";
     }
 }

@@ -1,5 +1,6 @@
 package com.marketcruiser.order;
 
+import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.common.entity.order.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,4 +16,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query("SELECT o FROM Order o WHERE o.customer.customerId = ?1")
     Page<Order> findAll (Long customerId, Pageable pageable);
+
+    Order findByOrderIdAndCustomer(Long orderId, Customer customer);
 }

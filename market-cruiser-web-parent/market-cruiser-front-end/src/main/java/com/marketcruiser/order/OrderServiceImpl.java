@@ -81,6 +81,7 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.save(newOrder);
     }
 
+    // retrieves a paginated list of orders for a given customer
     @Override
     public Page<Order> listForCustomerByPage(Customer customer, int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -93,6 +94,12 @@ public class OrderServiceImpl implements OrderService{
         }
 
         return orderRepository.findAll(customer.getCustomerId(), pageable);
+    }
+
+    // retrieves an order
+    @Override
+    public Order getOrder(Long orderId, Customer customer) {
+        return orderRepository.findByOrderIdAndCustomer(orderId, customer);
     }
 
 

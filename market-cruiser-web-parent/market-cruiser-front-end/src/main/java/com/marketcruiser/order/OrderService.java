@@ -15,4 +15,5 @@ public interface OrderService {
     Order createOrder(Customer customer, Address address, List<CartItem> cartItems, PaymentMethod paymentMethod,
                       CheckoutInfo checkoutInfo);
     Page<Order> listForCustomerByPage(Customer customer, int pageNumber, String sortField, String sortDir, String keyword);
+    Order getOrder(Long orderId, Customer customer);
 }

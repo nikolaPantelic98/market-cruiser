@@ -279,6 +279,12 @@ public class Order {
         return paymentMethod.equals(PaymentMethod.COD);
     }
 
+    // checks if the order has the status "PROCESSING" in its order tracks
+    @Transient
+    public boolean isProcessing() {
+        return hasStatus(OrderStatus.PROCESSING);
+    }
+
     // checks if the order has the status "PICKED" in its order tracks
     @Transient
     public boolean isPicked() {
