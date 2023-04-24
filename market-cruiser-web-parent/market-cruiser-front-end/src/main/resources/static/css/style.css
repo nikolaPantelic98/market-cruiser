@@ -306,6 +306,11 @@ a.a-icon-orange:hover {
         margin-left: 0;
         text-align: center;
     }
+
+    textarea.form-control {
+        width: 280px !important;
+        margin: 0 auto !important;
+    }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px){

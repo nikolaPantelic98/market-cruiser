@@ -58,15 +58,16 @@
                     <td style="text-align: center; vertical-align: middle">
                         <div th:replace="fragments :: format_currency(${order.total})"></div>
                     </td>
-                    <td style="text-align: center; vertical-align: middle">[[${order.status}]]</td>
+                    <td style="text-align: center; vertical-align: middle"><span th:class="'textOrderStatus' + ${order.orderId}">[[${order.status}]]</span></td>
                     <td style="text-align: center; vertical-align: middle">
                         <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen linkDetail"
                            th:href="@{'/orders/detail/' + ${order.orderId}}"
                            title="View Details of This Order">
                         </a>
-                        <th:block th:unless="${order.returnRequested}">
+                        <th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
                             &nbsp;&nbsp;&nbsp;
                             <a class="a-icon-lightgreen fas fa-undo fa-2x icon-dark linkReturnOrder" href=""
+                               th:classappend="'linkReturn' + ${order.orderId}"
                                th:orderId="${order.orderId}"
                                title="Return this order"></a>
                         </th:block>
@@ -91,9 +92,10 @@
                                         <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen linkDetail"
                                            th:href="@{'/orders/detail/' + ${order.orderId}}"></a>
 
-                                        <th:block th:unless="${order.returnRequested}">
+                                        <th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
                                             &nbsp;
                                             <a class="a-icon-lightgreen fas fa-undo fa-2x icon-dark linkReturnOrder" href=""
+                                               th:classappend="'linkReturn' + ${order.orderId}"
                                                th:orderId="${order.orderId}"
                                                title="Return this order"></a>
                                         </th:block>
@@ -123,6 +125,8 @@
     </div>
 
     <div th:replace="fragments :: pagination('/orders' ,'orders')"></div>
+
+    <div th:replace="orders/return_order_modal :: content"></div>
 
     <div class="modal fade" id="orderDetailsModal">
         <div class="modal-dialog modal-xl">
@@ -160,5 +164,6 @@
     }
 
 </script>
+<script type="text/javascript" th:src="@{/js/return_order.js}"></script>
 </body>
 </html>

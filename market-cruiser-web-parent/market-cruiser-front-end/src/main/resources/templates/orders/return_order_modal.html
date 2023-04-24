@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="content" class="modal fade text-center" id="returnOrderModal">
+    <div class="modal-dialog">
+        <div class="modal-content" style="background: #302c54">
+            <div class="modal-header">
+                <h4 class="modal-title" id="returnOrderModalTitle" style="color: #1deba8">Return Order</h4>
+                <button type="button" class="close" data-dismiss="modal" style="color: #1deba8">&times;</button>
+            </div>
+
+            <form onsubmit="return submitReturnOrderForm();">
+                <div class="modal-body" style="color: white">
+                    <div id="divReason">
+                        <div class="h5">Reason:</div>
+                        <div>&nbsp;</div>
+                        <div style="text-align: left; margin-left: 35px">
+                            <input type="radio" name="returnReason" value="I bought the wrong items" required>
+                            I bought the wrong items
+                        </div>
+                        <div style="text-align: left; margin-left: 35px">
+                            <input type="radio" name="returnReason" value="I received the wrong items">
+                            I received the wrong items
+                        </div>
+                        <div style="text-align: left; margin-left: 35px">
+                            <input type="radio" name="returnReason" value="The product was damaged/defective">
+                            The product was damaged/defective
+                        </div>
+                        <div style="text-align: left; margin-left: 35px">
+                            <input type="radio" name="returnReason" value="The product arrived too late">
+                            The product arrived too late
+                        </div>
+                        <div>&nbsp;&nbsp;</div>
+                        <div>
+                            <textarea class="form-control" id="returnNote" rows="4" maxlength="120"
+                                      style="width: 400px; margin: 0 auto; display: block" placeholder="Add Notes..."></textarea>
+                        </div>
+                    </div>
+                    <div id="divMessage" class="text-center">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-outline-green" id="firstButton">Send Request</button>
+                    <button type="button" class="btn btn-outline-red" id="secondButton" data-dismiss="modal">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
