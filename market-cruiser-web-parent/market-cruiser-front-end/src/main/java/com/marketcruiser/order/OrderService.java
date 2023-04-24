@@ -6,6 +6,7 @@ import com.marketcruiser.common.entity.CartItem;
 import com.marketcruiser.common.entity.Customer;
 import com.marketcruiser.common.entity.order.Order;
 import com.marketcruiser.common.entity.order.PaymentMethod;
+import com.marketcruiser.common.exception.OrderNotFoundException;
 import org.springframework.data.domain.Page;
 
 import java.util.List;
@@ -16,4 +17,5 @@ public interface OrderService {
                       CheckoutInfo checkoutInfo);
     Page<Order> listForCustomerByPage(Customer customer, int pageNumber, String sortField, String sortDir, String keyword);
     Order getOrder(Long orderId, Customer customer);
+    void setOrderReturnRequested(OrderReturnRequest request, Customer customer) throws OrderNotFoundException;
 }
