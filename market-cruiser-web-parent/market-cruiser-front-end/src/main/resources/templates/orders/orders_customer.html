@@ -39,7 +39,7 @@
 
                     <th th:replace="fragments :: column_link('orderTime', 'Order Time')"></th>
 
-                    <th class="text-center" style="text-align: center; vertical-align: middle">Products</th>
+                    <th class="text-center" style="text-align: center; vertical-align: middle; color: black; font-weight: bold">Products</th>
 
                     <th th:replace="fragments :: column_link('total', 'Total')"></th>
 
@@ -66,7 +66,7 @@
                         </a>
                         <th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
                             &nbsp;&nbsp;&nbsp;
-                            <a class="a-icon-lightgreen fas fa-undo fa-2x icon-dark linkReturnOrder" href=""
+                            <a class="a-icon-lightgreen fas fa-undo fa-2x icon-orange linkReturnOrder" href=""
                                th:classappend="'linkReturn' + ${order.orderId}"
                                th:orderId="${order.orderId}"
                                title="Return this order"></a>
@@ -94,7 +94,7 @@
 
                                         <th:block th:if="${order.returnRequested == false && order.delivered == true && order.returned == false}">
                                             &nbsp;
-                                            <a class="a-icon-lightgreen fas fa-undo fa-2x icon-dark linkReturnOrder" href=""
+                                            <a class="a-icon-lightgreen fas fa-undo fa-2x icon-orange linkReturnOrder" href=""
                                                th:classappend="'linkReturn' + ${order.orderId}"
                                                th:orderId="${order.orderId}"
                                                title="Return this order"></a>

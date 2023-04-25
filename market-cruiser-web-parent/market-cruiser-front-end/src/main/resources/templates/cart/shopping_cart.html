@@ -20,25 +20,25 @@
     <div class="row m-1">
         <div class="col-sm-8">
             <th:block th:each="item, status : ${cartItems}">
-            <div class="row border rounded p-1" th:id="'row' + ${status.count}">
+            <div class="row border border-lightgreen rounded p-1" th:id="'row' + ${status.count}">
                 <div class="col-1" style="display: flex; align-items: center; justify-content: center;">
-                    <div class="div-count text-center text-green-dark">[[${status.count}]]</div>
+                    <div class="div-count text-center text-darkgreen">[[${status.count}]]</div>
                 </div>
                 <div class="col-3" style="display: flex; align-items: center; justify-content: center;">
                     <img th:src="@{${item.product.mainImagePath}}" class="img-fluid" />
                 </div>
                 <div class="col-6" >
-                    <div style="text-align: center">
+                    <div class="text-center">
                         <br>
-                        <a class="sorting-category-green-dark text-green-dark" th:href="@{'/p/' + ${item.product.alias}}" target="_blank"
-                            th:title="${item.product.name}">
+                        <a class="a-darkgreen-to-white text-darkgreen" th:href="@{'/p/' + ${item.product.alias}}" target="_blank"
+                           th:title="${item.product.name}">
                             <b>[[${item.product.shortName}]]</b>
                         </a>
                     </div>
                     <div th:replace="cart/quantity_control :: quantity_control(${item.quantity}, ${item.product.productId})"></div>
 
                     <div class="subtotal-container">
-                        <span style="vertical-align: 2px">x&nbsp;</span>
+                        <span style="vertical-align: 2px" class="text-white">x&nbsp;</span>
                         <th:block th:if="${item.product.discountPercent <= 0}" style="width: 150px; text-align: center">
                             <span style="color: white">
                                 <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>[[${#numbers.formatDecimal(item.product.price, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]<span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
@@ -56,7 +56,7 @@
                     </div>
                     <div>&nbsp;</div>
                     <div class="subtotal-container">
-                        <span style="vertical-align: 2px">=&nbsp;</span>
+                        <span style="vertical-align: 2px" class="text-white">=&nbsp;</span>
                         <span class="h4" style="color: #1deba8">
                             <span th:if="${CURRENCY_SYMBOL_POSITION == 'Before price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span><span th:id="'subtotal' + ${item.product.productId}" class="subtotal">[[${#numbers.formatDecimal(item.subtotal, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]]</span><span th:if="${CURRENCY_SYMBOL_POSITION == 'After price'}" th:remove="tag">[[${CURRENCY_SYMBOL}]]</span>
                         </span>
@@ -65,7 +65,7 @@
                 </div>
                 <div class="col-1" style="display: flex; align-items: center; justify-content: center;">
                     <div>
-                        <a class="a-icon-lightgreen fas fa-trash icon-red fa-2x link-remove" th:rowNumber="${status.count}"
+                        <a class="a-icon-lightgreen fas fa-trash icon-orange fa-2x link-remove" th:rowNumber="${status.count}"
                            th:href="@{'/cart/remove/' + ${item.product.productId}}"></a>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
             <div class="mt-2" style="text-align: center">
                 <div th:if="${shippingSupported}">
                     <form th:action="@{/checkout}">
-                        <button type="submit" class="btn btn-outline-red p-3 mt-2">Check Out</button>
+                        <button type="submit" class="btn btn-outline-orange p-3 mt-2">Check Out</button>
                     </form>
                 </div>
                 <div th:unless="${shippingSupported}">
@@ -94,10 +94,10 @@
                         <span class="h5 text-warning">No shipping available for you location</span>
                     </div>
                     <div th:if="${usePrimaryAddressAsDefault}">
-                        <a th:href="@{/account_details(redirect=cart)}" class="h6 sorting-category-green-dark text-green-dark">Update your address</a>
+                        <a th:href="@{/account_details(redirect=cart)}" class="h6 a-darkgreen-to-white text-darkgreen">Update your address</a>
                     </div>
                     <div>
-                        <a th:href="@{/address_book(redirect=cart)}" class="h6 sorting-category-green-dark text-green-dark">Use another shipping address</a>
+                        <a th:href="@{/address_book(redirect=cart)}" class="h6 a-darkgreen-to-white text-darkgreen">Use another shipping address</a>
                     </div>
                 </div>
             </div>
@@ -105,7 +105,7 @@
     </div>
 
     <div id="section-empty-cart-message" th:class="'text-center' + ${#lists.isEmpty(cartItems) ? '' : ' d-none'}">
-        <h3 style="color: #1deba8">You have not chosen any products yet.</h3>
+        <h3 style="color: #1deba8">You have not chosen any products yet</h3>
     </div>
 
     <br>

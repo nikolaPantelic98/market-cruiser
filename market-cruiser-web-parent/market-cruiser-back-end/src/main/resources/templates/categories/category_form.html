@@ -24,21 +24,21 @@
         <div class="border border-round-secondary rounded p-3">
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Category Name:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <input type="text" class="form-control" th:field="*{name}" required minlength="3" maxlength="128" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Alias:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <input type="text" class="form-control" th:field="*{alias}" required minlength="3" maxlength="64" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Parent Category:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <select class="form-control" th:field="*{parent}">
                         <option value="0">[No parent]</option>
                         <th:block th:each="category : ${listCategories}">
@@ -50,7 +50,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Image:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <input type="hidden" th:field="*{image}" />
                     <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
                            th:required="${category.imagePath == null}" class="mb-2" />
@@ -75,7 +75,7 @@
 
             <div class="text-center">
                 <input type="submit" value="Save" class="btn btn-outline-green m-3"/>
-                <input type="button" value="Cancel" class="btn btn-outline-red" id="buttonCancel" />
+                <input type="button" value="Cancel" class="btn btn-outline-orange" id="buttonCancel" />
             </div>
         </div>
     </form>

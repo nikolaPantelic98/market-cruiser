@@ -29,7 +29,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Brand Logo:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <input type="hidden" th:field="*{logo}" />
                     <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"
                            th:required="${brand.brandId == null}" class="mb-2"/>
@@ -42,7 +42,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Select one or more categories:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <select class="form-control" th:field="*{categories}" multiple required
                             style="resize: vertical; height: 200px">
                         <th:block th:each="category : ${listCategories}">
@@ -54,7 +54,7 @@
 
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Chosen Categories:</label>
-                <div class="col-sm-8">
+                <div class="col-sm-8 center-div">
                     <div id="chosenCategories">
 
                     </div>
@@ -63,7 +63,7 @@
 
             <div class="text-center">
                 <input type="submit" value="Save" class="btn btn-outline-green m-3"/>
-                <input type="button" value="Cancel" class="btn btn-outline-red" id="buttonCancel" />
+                <input type="button" value="Cancel" class="btn btn-outline-orange" id="buttonCancel" />
             </div>
         </div>
     </form>

@@ -19,7 +19,7 @@
             <th:block th:each="productImage, status : ${product.images}">
                 <div class="col border m-3 p-2" th:id="'divExtraImage' + ${status.index}">
                     <div>
-                        <label>Extra Image #[[${status.index + 1}]]: [[${productImage.name}]]</label>
+                        <label style="color: white">Extra Image #[[${status.index + 1}]]: [[${productImage.name}]]</label>
                         <a name="linkRemoveExtraImage"
                            class="a-icon-lightgreen fas fa-times-circle fa-1x icon-lightgreen float-right"
                            title="Remove this image"></a>
@@ -43,7 +43,7 @@
 
             <div class="col border m-3 p-2" th:id="'divExtraImage' + ${numberOfExistingExtraImages}">
                 <div th:id="'extraImageHeader' + ${numberOfExistingExtraImages}">
-                    <label>Extra Image #[[${numberOfExistingExtraImages + 1}]]:</label>
+                    <label style="color: white">Extra Image #[[${numberOfExistingExtraImages + 1}]]:</label>
                 </div>
                 <div class="m-2">
                     <img th:id="'extraThumbnail' + ${numberOfExistingExtraImages}"

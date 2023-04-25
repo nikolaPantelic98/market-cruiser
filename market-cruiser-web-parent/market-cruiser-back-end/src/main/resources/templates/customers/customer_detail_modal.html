@@ -1,5 +1,5 @@
 <div class="modal-header">
-    <h4 class="modal-title">Customer Details</h4>
+    <h4 class="modal-title text-white">Customer Details</h4>
     <button type="button" class="close" data-dismiss="modal">&times;</button>
 </div>
 
@@ -35,35 +35,35 @@
             <section>
                 <h2>General</h2>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Customer ID:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Customer ID:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.customerId}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Full Name:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Full Name:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.fullName}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">E-mail:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">E-mail:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.email}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Phone Number:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Phone Number:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.phoneNumber}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label checkbox-label">Enabled:</label>
+                    <label class="col-sm-2 col-form-label checkbox-label text-white">Enabled:</label>
                     <div class="box">
                         <input type="checkbox" id="checkbox" class="checkbox-input"
                                th:checked="${customer.enabled}" onclick="updateEnabledField()" readonly />
@@ -75,9 +75,9 @@
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Created Time:</label>
-                    <div class="col-sm-10">
-                        <span th:text="${#dates.format(customer.createdTime, 'dd/MM/yyyy HH:mm:ss')}"></span>
+                    <label class="col-sm-2 col-form-label text-white">Created Time:</label>
+                    <div class="col-sm-10 center-div">
+                        <span class="text-white" th:text="${#dates.format(customer.createdTime, 'dd/MM/yyyy HH:mm:ss')}"></span>
                     </div>
                 </div>
             </section>
@@ -85,43 +85,43 @@
             <section>
                 <h2>Address</h2>
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Address Line 1:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Address Line 1:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.addressLine1}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Address Line 2:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Address Line 2:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.addressLine2}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">City:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">City:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.city}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">State/Province:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">State/Province:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.state}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Country:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Country:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.country.name}" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label class="col-sm-2 col-form-label">Post Code:</label>
-                    <div class="col-sm-10">
+                    <label class="col-sm-2 col-form-label text-white">Post Code:</label>
+                    <div class="col-sm-10 center-div">
                         <input type="text" readonly class="form-control" th:value="${customer.postCode}" />
                     </div>
                 </div>
@@ -129,8 +129,9 @@
 
         </div>
     </div>
+    <div>&nbsp;</div>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-outline-green" data-dismiss="modal">Close</button>
+    <button type="button" class="btn btn-outline-orange" data-dismiss="modal">Close</button>
 </div>

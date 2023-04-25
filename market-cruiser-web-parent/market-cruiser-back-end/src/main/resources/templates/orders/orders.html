@@ -40,7 +40,7 @@
                 <tr th:each="order: ${listOrders}">
                     <td style="text-align: center; vertical-align: middle">[[${order.orderId}]]</td>
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="a-sorting text-black link-customer-detail" th:href="@{'/customers/detail/' + ${order.customer.customerId}}">
+                        <a class="a-orange-to-lightgreen text-black link-customer-detail" th:href="@{'/customers/detail/' + ${order.customer.customerId}}">
                             [[${order.customer.fullName}]]
                         </a>
                     </td>

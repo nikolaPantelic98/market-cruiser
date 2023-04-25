@@ -4,7 +4,7 @@
 <div th:fragment="content" th:remove="tag">
     <div id="trackList">
         <th:block th:each="track, status : ${order.orderTracks}">
-            <div class="border-green rounded p-1" th:id="'rowTrack' + ${status.count}"
+            <div class="border-lightgreen rounded p-1" th:id="'rowTrack' + ${status.count}"
                  th:with="isTrackWithStatusNew = ${track.status.toString() == 'NEW'}">
 
                 <input type="hidden" name="trackId" th:value="${track.orderTrackId}" class="hiddenTrackId" />

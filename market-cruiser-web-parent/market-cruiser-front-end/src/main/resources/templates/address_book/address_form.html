@@ -19,11 +19,11 @@
         <input type="hidden" th:field="*{addressId}" />
         <input type="hidden" th:field="*{defaultForShipping}" />
         <input type="hidden" name="redirect" th:value="${param.redirect}" />
-        <div class="border border-round-secondary rounded p-3">
+        <div class="border border-lightgreen rounded p-3">
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="firstName" th:field="*{firstName}" required="required"/>
                             <label for="firstName">First Name</label>
@@ -34,7 +34,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="lastName" th:field="*{lastName}" required="required"/>
                             <label for="lastName">Last Name</label>
@@ -45,7 +45,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 10px">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="phoneNumber" th:field="*{phoneNumber}"
                                    required="required" maxlength="15" minlength="8"/>
@@ -57,7 +57,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="addressLine1" th:field="*{addressLine1}"
                                    required="required" maxlength="64" minlength="3"/>
@@ -69,7 +69,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="addressLine2" th:field="*{addressLine2}"
                                    maxlength="64" />
@@ -81,7 +81,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="city" th:field="*{city}"
                                    required maxlength="45" minlength="2"/>
@@ -93,7 +93,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <select class="clean-slide" th:field="*{country}" id="country">
                                 <th:block th:each="country : ${listCountries}">
@@ -108,7 +108,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 0">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="state" th:field="*{state}"
                                    maxlength="45" minlength="3" list="listStates"/>
@@ -121,7 +121,7 @@
 
             <div class="d-flex align-items-center justify-content-center">
                 <div class="form-group row">
-                    <span style="position: relative; display: inline-block; margin: 15px 10px">
+                    <span class="form-relative">
                         <div class="col-sm-8">
                             <input type="text" class="clean-slide" id="postCode" th:field="*{postCode}"
                                    required maxlength="10" minlength="2"/>
@@ -135,7 +135,7 @@
             <div class="text-center">
                 <input type="submit" value="Save" class="btn btn-outline-green">
                 &nbsp;&nbsp;
-                <input type="button" value="Cancel" class="btn btn-outline-red" id="buttonCancel" />
+                <input type="button" value="Cancel" class="btn btn-outline-orange" id="buttonCancel" />
             </div>
             <br>
         </div>

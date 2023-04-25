@@ -12,23 +12,26 @@
             <form onsubmit="return submitReturnOrderForm();">
                 <div class="modal-body" style="color: white">
                     <div id="divReason">
-                        <div class="h5">Reason:</div>
-                        <div>&nbsp;</div>
+                        <div class="h5" style="text-align: left; margin-left: 35px">Reason:</div>
                         <div style="text-align: left; margin-left: 35px">
                             <input type="radio" name="returnReason" value="I bought the wrong items" required>
-                            I bought the wrong items
+                            &nbsp;
+                            <span style="vertical-align: top">I bought the wrong items</span>
                         </div>
                         <div style="text-align: left; margin-left: 35px">
                             <input type="radio" name="returnReason" value="I received the wrong items">
-                            I received the wrong items
+                            &nbsp;
+                            <span style="vertical-align: top">I received the wrong items</span>
                         </div>
                         <div style="text-align: left; margin-left: 35px">
                             <input type="radio" name="returnReason" value="The product was damaged/defective">
-                            The product was damaged/defective
+                            &nbsp;
+                            <span style="vertical-align: top">The product was damaged/defective</span>
                         </div>
                         <div style="text-align: left; margin-left: 35px">
                             <input type="radio" name="returnReason" value="The product arrived too late">
-                            The product arrived too late
+                            &nbsp;
+                            <span style="vertical-align: top">The product arrived too late</span>
                         </div>
                         <div>&nbsp;&nbsp;</div>
                         <div>
@@ -42,7 +45,7 @@
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-outline-green" id="firstButton">Send Request</button>
-                    <button type="button" class="btn btn-outline-red" id="secondButton" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-orange" id="secondButton" data-dismiss="modal">Cancel</button>
                 </div>
             </form>
         </div>

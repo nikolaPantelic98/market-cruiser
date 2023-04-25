@@ -80,7 +80,7 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
     blankLineId = "blankLine" + nextCount;
 
     htmlCode = `
-        <div class="border-green rounded p-1" id="${rowId}">
+        <div class="border-lightgreen rounded p-1" id="${rowId}">
             <input type="hidden" name="detailId" value="0" />
             <input type="hidden" name="productId" value="${productId}" class="hiddenProductId" />
 

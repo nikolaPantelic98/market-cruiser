@@ -25,7 +25,7 @@
     <div class="row">
         <th:block th:each="product: ${listProducts}">
         <div class="col">
-            <a href="" class="linkProduct sorting-category" th:pid="${product.productId}">
+            <a href="" class="linkProduct a-lightgreen-to-white" th:pid="${product.productId}">
                 <img th:src="@{${product.mainImagePath}}" height="150px">
                 <br>
                 <b th:id="'pname' + ${product.productId}">[[${product.shortName}]]</b>

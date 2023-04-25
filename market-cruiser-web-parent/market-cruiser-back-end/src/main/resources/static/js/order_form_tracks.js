@@ -50,7 +50,7 @@ function generateTrackCode() {
     currentDateTime = formatCurrentDateTime();
 
     htmlCode = `
-			<div class="border-green rounded p-1" id="${rowId}">
+			<div class="border-lightgreen rounded p-1" id="${rowId}">
 				<input type="hidden" name="trackId" value="0" class="hiddenTrackId" />
 				<div class="col-2">
 				    <br>

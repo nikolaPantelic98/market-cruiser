@@ -44,10 +44,12 @@
                 <span class="search-button">
                     <button class="btn-search"><i class="fas fa-search"></i></button>
                 </span>
-                <input type="text" name="keyword" th:value="${keyword}" class="input-search" required="required" placeholder="Type to search..." />
+                <input type="text" name="keyword" th:value="${keyword}" class="input-search"
+                       required="required"
+                       placeholder="Type to search..." />
             </div>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="button" value="Clear" class="btn btn-outline-red" onclick="clearFilter()" />
+            <input type="button" value="Clear" class="btn btn-outline-orange" onclick="clearFilter()" />
         </form>
     </div>
 
@@ -85,7 +87,7 @@
                     </td>
 
                     <td style="text-align: center; vertical-align: middle">
-                        <a class="sorting-category link-detail"
+                        <a class="a-lightgreen-to-white link-detail"
                             th:href="@{'/products/detail/' + ${product.productId}}"
                             th:title="${product.name}">
                             [[${product.shortName}]]
@@ -129,7 +131,7 @@
             </div>
             <div class="col-8">
                 <div>
-                    <a class="a-sorting text-black link-detail" th:href="@{'/products/detail/' + ${product.productId}}">[[${product.shortName}]]</a>
+                    <a class="a-black-to-lightgreen text-black link-detail" th:href="@{'/products/detail/' + ${product.productId}}">[[${product.shortName}]]</a>
                 </div>
                 <div class="mt-2">
                     <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen link-detail"

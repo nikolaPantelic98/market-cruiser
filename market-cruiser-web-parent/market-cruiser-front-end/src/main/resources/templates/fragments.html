@@ -23,7 +23,7 @@
 <body>
 
     <th th:fragment="column_link(fieldName, columnLabel)" class="text-center" style="text-align: center; vertical-align: middle">
-        <a class="a-sorting text-black"
+        <a class="a-black-to-lightgreen text-black"
            th:href="@{${moduleURL} + '/page/' + ${currentPage} + '?sortField=' + ${fieldName} + '&sortDir=' + ${sortField != fieldName ? sortDir : reverseSortDir} + ${keyword != null ? '&keyword=' + keyword : ''} + ${categoryId != null ? '&categoryId=' + categoryId : ''}}">
             [[${columnLabel}]]
         </a>
@@ -81,7 +81,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-red" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-outline-orange" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -101,7 +101,7 @@
 
                 <div class="modal-footer">
                     <a class="btn btn-outline-green" href="" id="yesButton">Yes</a>
-                    <button type="button" class="btn btn-outline-red" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-outline-orange" data-dismiss="modal">No</button>
                 </div>
             </div>
         </div>

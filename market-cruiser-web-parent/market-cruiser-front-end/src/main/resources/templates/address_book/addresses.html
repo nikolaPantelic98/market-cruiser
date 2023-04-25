@@ -43,14 +43,14 @@
 
                             <th:block th:unless="${usePrimaryAddressAsDefault}">
                                 <th:block th:unless="${param.redirect}">
-                                    <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/0'}">&nbsp;&nbsp;[Set as default]</a>
+                                    <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/0'}" title="Set as default">&nbsp;&nbsp;[Set as default]</a>
                                 </th:block>
                                 <th:block th:if="${param.redirect}">
                                     <th:block th:if="${param.redirect[0]=='cart'}">
-                                        <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/0?redirect=cart'}">&nbsp;&nbsp;[Set as default]</a>
+                                        <a style="color: #223775; text-decoration: none" th:href="@{'/address_book/default/0?redirect=cart'}"  title="Set as default">&nbsp;&nbsp;[Set as default]</a>
                                     </th:block>
                                     <th:block th:if="${param.redirect[0]=='checkout'}">
-                                        <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/0?redirect=checkout'}">&nbsp;&nbsp;[Choose]</a>
+                                        <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/0?redirect=checkout'}" title="Choose">&nbsp;&nbsp;[Choose]</a>
                                     </th:block>
                                 </th:block>
                             </th:block>
@@ -93,14 +93,14 @@
 
                             <th:block th:unless="${address.defaultForShipping}">
                                 <th:block th:unless="${param.redirect}">
-                                    <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId}}">&nbsp;&nbsp;[Set as default]</a>
+                                    <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId}}" title="Set as default">&nbsp;&nbsp;[Set as default]</a>
                                 </th:block>
                                 <th:block th:if="${param.redirect}">
                                     <th:block th:if="${param.redirect[0]=='cart'}">
-                                        <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId} + '?redirect=cart'}">&nbsp;&nbsp;[Set as default]</a>
+                                        <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId} + '?redirect=cart'}" title="Set as default">&nbsp;&nbsp;[Set as default]</a>
                                     </th:block>
                                     <th:block th:if="${param.redirect[0]=='checkout'}">
-                                        <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId} + '?redirect=checkout'}">&nbsp;&nbsp;[Choose]</a>
+                                        <a style="color: #1deba8; text-decoration: none" th:href="@{'/address_book/default/' + ${address.addressId} + '?redirect=checkout'}" title="Choose">&nbsp;&nbsp;[Choose]</a>
                                     </th:block>
                                 </th:block>
                             </th:block>
