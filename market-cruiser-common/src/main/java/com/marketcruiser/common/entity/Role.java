@@ -5,6 +5,10 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * The Role class represents the role entity that is stored in the "roles" table of the database.
+ * It contains information about a user's role, including its name and description.
+ */
 @Entity
 @Getter
 @Setter

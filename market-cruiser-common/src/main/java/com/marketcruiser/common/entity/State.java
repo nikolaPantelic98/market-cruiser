@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * The State class represents a state or province in a country.
+ * It contains the state's ID, name, and the country it belongs to.
+ */
 @Entity
 @Getter
 @Setter

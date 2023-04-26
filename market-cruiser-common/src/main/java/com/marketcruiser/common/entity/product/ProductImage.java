@@ -1,6 +1,5 @@
 package com.marketcruiser.common.entity.product;
 
-import com.marketcruiser.common.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * This class represents a product image.
+ */
 @Entity
 @Getter
 @Setter
@@ -41,6 +43,9 @@ public class ProductImage {
         this.product = product;
     }
 
+    /**
+     * Get the path of the image file.
+     */
     @Transient
     public String getImagePath() {
         return "/product-images/" + product.getProductId() + "/extras/" + this.name;

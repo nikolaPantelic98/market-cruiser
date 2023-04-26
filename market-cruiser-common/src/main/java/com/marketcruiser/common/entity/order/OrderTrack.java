@@ -11,6 +11,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * Represents an order track entity which contains information about the order's status, notes, and updated time.
+ * This entity is mapped to the "order_track" table in the database.
+ */
 @Entity
 @Getter
 @Setter
@@ -53,12 +57,19 @@ public class OrderTrack {
     private Order order;
 
 
+    /**
+     * Returns the updated time in the format "yyyy-MM-dd'T'hh:mm:ss" for display purposes.
+     */
     @Transient
     public String getUpdatedTimeOnForm() {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
         return dateFormatter.format(this.updatedTime);
     }
 
+    /**
+     * Sets the updated time based on the provided date string in the format "yyyy-MM-dd'T'hh:mm:ss".
+     * @param dateString the date string to use for setting the updated time
+     */
     @Transient
     public void setUpdatedTimeOnForm(String dateString) {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");

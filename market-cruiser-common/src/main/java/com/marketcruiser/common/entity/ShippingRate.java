@@ -8,6 +8,10 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * The ShippingRate class represents a shipping rate entity, which includes the shipping cost, delivery time,
+ * and whether or not the shipping supports cash on delivery.
+ */
 @Entity
 @Getter
 @Setter

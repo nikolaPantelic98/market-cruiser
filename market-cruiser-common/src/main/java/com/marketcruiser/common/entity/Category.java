@@ -6,6 +6,12 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Represents a category of products in the system.
+ * A category can have a parent category and multiple children categories.
+ * Each category has a name, alias, image, and an enabled status.
+ * The category entity is persisted in the database and uses JPA annotations.
+ */
 @Entity
 @Getter
 @Setter
@@ -87,6 +93,12 @@ public class Category {
         this.alias = alias;
     }
 
+    /**
+     * Creates a copy of the given category with only its ID and name set.
+     *
+     * @param category The category to copy.
+     * @return A new category with only its ID and name set.
+     */
     public static Category copyCategoryIdAndName(Category category) {
         Category copyCategory = new Category();
         copyCategory.setCategoryId(category.getCategoryId());
@@ -95,6 +107,13 @@ public class Category {
         return copyCategory;
     }
 
+    /**
+     * Creates a new category with the given ID and name.
+     *
+     * @param categoryId The ID of the category.
+     * @param name       The name of the category.
+     * @return A new category with the given ID and name.
+     */
     public static Category copyCategoryIdAndName(Long categoryId, String name) {
         Category copyCategory = new Category();
         copyCategory.setCategoryId(categoryId);
@@ -103,6 +122,12 @@ public class Category {
         return copyCategory;
     }
 
+    /**
+     * Creates a copy of the given category with all of its properties set.
+     *
+     * @param category The category to copy.
+     * @return A new category with all of the given category's properties set.
+     */
     public static Category copyFull(Category category) {
         Category copyCategory = new Category();
         copyCategory.setCategoryId(category.getCategoryId());
@@ -115,6 +140,13 @@ public class Category {
         return copyCategory;
     }
 
+    /**
+     * Creates a copy of the given category with the given name and all other properties set.
+     *
+     * @param category The category to copy.
+     * @param name     The name for the new category.
+     * @return A new category with the given name and all other properties set from the original category.
+     */
     public static Category copyFull(Category category, String name) {
         Category copyCategory = Category.copyFull(category);
         copyCategory.setName(name);
@@ -122,7 +154,9 @@ public class Category {
         return copyCategory;
     }
 
-    // getter method used in categories.html to show image of the category
+    /**
+     * Returns the image path for this category's image.
+     */
     @Transient
     public String getImagePath() {
         if (this.categoryId == null) return "/images/image-thumbnail.png";
@@ -130,6 +164,9 @@ public class Category {
         return "/category-images/" + this.categoryId + "/" + this.image;
     }
 
+    /**
+     * Indicates if this category has any child categories.
+     */
     @Transient
     private boolean hasChildren;
 

@@ -1,6 +1,5 @@
 package com.marketcruiser.common.entity.product;
 
-import com.marketcruiser.common.entity.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +7,12 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * This class represents the details associated with a product. Each product can have multiple
+ * details, such as size, color, etc. These details are stored in a separate table in the database.
+ * The class is annotated with JPA annotations to map the object to a database table. It has a many-to-one
+ * relationship with the Product entity, where each product can have multiple product details.
+ */
 @Entity
 @Getter
 @Setter

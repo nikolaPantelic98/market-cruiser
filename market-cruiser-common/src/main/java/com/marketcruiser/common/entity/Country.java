@@ -5,6 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.Set;
 
+/**
+ * Represents a country entity, containing information such as its ID, name, code and a set of states.
+ */
 @Entity
 @Getter(AccessLevel.PUBLIC)
 @Setter(AccessLevel.PUBLIC)

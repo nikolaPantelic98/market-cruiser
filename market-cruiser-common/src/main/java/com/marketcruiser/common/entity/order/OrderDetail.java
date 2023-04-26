@@ -8,6 +8,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Entity class representing an order detail, which is a specific product that has been ordered as part of an order.
+ * This class is mapped to a database table named "order_details".
+ */
 @Entity
 @Getter
 @Setter

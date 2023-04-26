@@ -8,6 +8,13 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Objects;
 
+/**
+ * The Settings entity represents a setting stored in the database.
+ * It contains a key, a value, and a settings category. The key is unique
+ * for each setting and is used to identify it. The value is the
+ * actual value of the setting, and the category is an enumeration
+ * representing the category of the setting.
+ */
 @Entity
 @Getter
 @Setter

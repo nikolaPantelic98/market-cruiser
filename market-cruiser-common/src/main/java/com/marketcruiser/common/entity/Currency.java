@@ -7,6 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * The Currency class represents a currency used in the online shop.
+ * It contains information about the currency's name, symbol, and code.
+ */
 @Entity
 @Getter
 @Setter

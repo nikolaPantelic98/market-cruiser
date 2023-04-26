@@ -7,6 +7,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * This class represents a user entity in the application.
+ * It is used to store user information such as email, password, name, and photo.
+ * The user can be associated with multiple roles using the roles set.
+ * The class provides methods for adding roles, getting user's full name and photo path,
+ * and checking if a user has a specific role.
+ */
 @Entity
 @Getter
 @Setter
@@ -88,11 +95,18 @@ public class User {
         this.enabled = enabled;
     }
 
+    /**
+     * Adds a role to the user's roles set.
+     * @param role the role to be added.
+     */
     public void addRole(Role role) {
         this.roles.add(role);
     }
 
-    // getter method used in users.html and user_form.html to show profile photo of the user
+    /**
+     * Gets the path to the user's photo image file.
+     * @return the path to the user's photo image file.
+     */
     @Transient
     public String getPhotosImagePath() {
         if (userId == null || photo == null) return "/images/default-user.png";
@@ -100,13 +114,19 @@ public class User {
         return "/user-photos/" + this.userId + "/" + this.photo;
     }
 
-    // getter method used in users.html to show full name of the user on small screen
+    /**
+     * Gets the full name of the user.
+     */
     @Transient
     public String getFullName() {
         return firstName + " " + lastName;
     }
 
-    // method that checks if a role with the given name exists in the roles collection
+    /**
+     * Checks if the user has the specified role.
+     * @param roleName the name of the role to check.
+     * @return true if the user has the specified role, false otherwise.
+     */
     public boolean hasRole(String roleName) {
         Iterator<Role> iterator = roles.iterator();
 

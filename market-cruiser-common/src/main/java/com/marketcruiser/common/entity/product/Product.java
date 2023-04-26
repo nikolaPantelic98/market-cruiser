@@ -7,6 +7,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.util.*;
 
+/**
+ * Represents a product entity with its attributes.
+ */
 @Entity
 @Getter
 @Setter
@@ -144,12 +147,20 @@ public class Product {
     }
 
 
-    // adds an extra product image to the list of images for this product.
+    /**
+     * Adds an extra product image to the list of images for this product.
+     *
+     * @param imageName the name of the image to add.
+     */
     public void addExtraImage(String imageName) {
         this.images.add(new ProductImage(imageName, this));
     }
 
-    // gets the file path of the main image for this product
+    /**
+     * Gets the file path of the main image for this product.
+     *
+     * @return the file path of the main image for this product.
+     */
     @Transient
     public String getMainImagePath() {
         if (productId == null || mainImage == null) return "/images/image-thumbnail.png";
@@ -157,16 +168,33 @@ public class Product {
         return "/product-images/" + this.productId + "/" + this.mainImage;
     }
 
-    // adds a product detail to the list of details for this product
+    /**
+     * Adds a product detail to the list of details for this product.
+     *
+     * @param name  the name of the product detail to add.
+     * @param value the value of the product detail to add.
+     */
     public void addDetail(String name, String value) {
         this.details.add(new ProductDetails(name, value, this));
     }
 
+    /**
+     * Adds a product detail with a given product ID to the list of details for this product.
+     *
+     * @param productId the ID of the product to add the detail for.
+     * @param name      the name of the product detail to add.
+     * @param value     the value of the product detail to add.
+     */
     public void addDetail(Long productId, String name, String value) {
         this.details.add(new ProductDetails(productId, name, value, this));
     }
 
-    // method that checks for the presence of an image name in a list of product images
+    /**
+     * Method that checks for the presence of an image name in a list of product images.
+     *
+     * @param imageName the name of the image to check for.
+     * @return true if the image is found, false otherwise.
+     */
     public boolean containsImageName(String imageName) {
         Iterator<ProductImage> iterator = images.iterator();
 
@@ -180,7 +208,11 @@ public class Product {
         return false;
     }
 
-    // method that returns a shortened version of the name attribute
+    /**
+     * Method that returns a shortened version of the name attribute.
+     *
+     * @return a shortened version of the name attribute.
+     */
     @Transient
     public String getShortName() {
         if (name.length() > 30) {
@@ -190,7 +222,11 @@ public class Product {
         }
     }
 
-    // method that returns discount price
+    /**
+     * Method that returns the discount price of the product.
+     *
+     * @return the discount price of the product.
+     */
     @Transient
     public float getDiscountPrice() {
         if (discountPercent > 0) {

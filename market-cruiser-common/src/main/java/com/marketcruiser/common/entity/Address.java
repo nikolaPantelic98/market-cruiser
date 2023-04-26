@@ -7,6 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Address entity class representing a physical address for a customer.
+ */
 @Entity
 @Getter
 @Setter
@@ -89,6 +92,9 @@ public class Address {
 
 
 
+    /**
+     * Get the full name associated with this address.
+     */
     @Transient
     public String getName() {
         String name = firstName;
@@ -100,6 +106,10 @@ public class Address {
         return name;
     }
 
+    /**
+     * Get the full address associated with this address, including street address, city, state/province, and country.
+     * @return The full address as a string.
+     */
     @Transient
     public String getAddress() {
         String address = "";
@@ -125,6 +135,9 @@ public class Address {
         return address;
     }
 
+    /**
+     * Get the post code and phone number associated with this address.
+     */
     @Transient
     public String getPostCodeAndPhoneNumber() {
         String postCodeAndPhoneNumber = "";

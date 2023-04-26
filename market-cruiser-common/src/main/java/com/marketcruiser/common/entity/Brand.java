@@ -6,6 +6,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The Brand class represents a brand in the system, and contains information about the brand name and logo.
+ * It also has a many-to-many relationship with the Category class, representing the categories that the brand belongs to.
+ */
 @Entity
 @Getter
 @Setter
@@ -64,7 +68,10 @@ public class Brand {
         return "Brand [id=" + brandId + ", name=" + name + ", categories=" + categories + "]";
     }
 
-
+    /**
+     * Returns the path to the logo image file for the brand.
+     * If the brand ID is null, a default thumbnail image is returned.
+     */
     @Transient
     public String getLogoPath() {
         if (this.brandId == null) return "/images/image-thumbnail.png";

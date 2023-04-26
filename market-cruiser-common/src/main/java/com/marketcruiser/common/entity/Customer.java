@@ -8,6 +8,12 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * This class represents the entity for customers in the system. It contains the customer's personal
+ * information such as name, email, phone number and address, as well as some additional attributes
+ * such as verification code, authentication type and reset password token. It is also associated with
+ * a country entity to represent the customer's country of residence.
+ */
 @Entity
 @Getter
 @Setter
@@ -132,10 +138,17 @@ public class Customer {
                 '}';
     }
 
+    /**
+     * Returns the customer's full name (first name and last name).
+     */
     public String getFullName() {
         return firstName + " " + lastName;
     }
 
+    /**
+     * Returns the customer's name (first name and last name) as a single string.
+     * If the last name is not available, returns just the first name.
+     */
     @Transient
     public String getName() {
         String name = firstName;
@@ -147,6 +160,9 @@ public class Customer {
         return name;
     }
 
+    /**
+     * Returns the customer's full address as a single string.
+     */
     @Transient
     public String getAddress() {
         String address = "";
@@ -172,6 +188,9 @@ public class Customer {
         return address;
     }
 
+    /**
+     * Returns the customer's post code and phone number as a single string.
+     */
     @Transient
     public String getPostCodeAndPhoneNumber() {
         String postCodeAndPhoneNumber = "";

@@ -8,6 +8,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
+/**
+ * Represents an item in a customer's shopping cart.
+ */
 @Entity
 @Getter
 @Setter
@@ -52,11 +55,17 @@ public class CartItem {
                 '}';
     }
 
+    /**
+     * Calculates and returns the subtotal for this cart item.
+     */
     @Transient
     public float getSubtotal() {
         return product.getDiscountPrice() * quantity;
     }
 
+    /**
+     * Returns the shipping cost for this cart item.
+     */
     @Transient
     public float getShippingCost() {
         return shippingCost;

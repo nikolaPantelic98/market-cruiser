@@ -1,5 +1,9 @@
 package com.marketcruiser.common.entity.order;
 
+/**
+ * Enum representing the possible status of an order.
+ * Each status has a default description associated with it.
+ */
 public enum OrderStatus {
 
     NEW {

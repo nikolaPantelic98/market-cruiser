@@ -13,6 +13,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * This class represents an Order entity in the system. It contains all the necessary information to create
+ * and manage an order made by a customer, including information about the customer, shipping address, order details,
+ * payment method, order status, and delivery date.
+ */
 @Entity
 @Getter
 @Setter
@@ -118,6 +123,10 @@ public class Order {
     private List<OrderTrack> orderTracks = new ArrayList<>();
 
 
+    /**
+     * Copies the address details of the customer to the order instance.
+     * Used for setting the order address details to be the same as the customer's address.
+     */
     public void copyAddressFromCustomer() {
         setFirstName(customer.getFirstName());
         setLastName(customer.getLastName());
@@ -130,6 +139,11 @@ public class Order {
         setState(customer.getState());
     }
 
+    /**
+     * Copies the address details of the provided Address object to the order instance.
+     * Used for setting the order address details to be the same as the shipping address.
+     * @param address the Address object containing the address details to copy
+     */
     public void copyShippingAddress(Address address) {
         setFirstName(address.getFirstName());
         setLastName(address.getLastName());
@@ -153,7 +167,10 @@ public class Order {
                 '}';
     }
 
-    // getter method used in orders.html to show city, state and country of the user
+    /**
+     * Returns the destination of the order as a string.
+     * Used to display the city, state, and country of the order.
+     */
     @Transient
     public String getDestination() {
         String destination =  city + ", ";
@@ -163,6 +180,9 @@ public class Order {
         return destination;
     }
 
+    /**
+     * Returns the full name of the customer who placed an order as a string.
+     */
     @Transient
     public String getCustomerName() {
         String name = firstName;
@@ -174,6 +194,9 @@ public class Order {
         return name;
     }
 
+    /**
+     * Returns the full address of the customer as a string.
+     */
     @Transient
     public String getCustomerAddress() {
         String address = "";
@@ -199,6 +222,9 @@ public class Order {
         return address;
     }
 
+    /**
+     * Returns the postal code and phone number of the customer as a string.
+     */
     @Transient
     public String getCustomerPostCodeAndPhoneNumber() {
         String postCodeAndPhoneNumber = "";
@@ -214,14 +240,19 @@ public class Order {
         return postCodeAndPhoneNumber;
     }
 
-    // returns the delivery date of the order
+    /**
+     * This method returns the delivery date of the order in the "yyyy-MM-dd" format
+     */
     @Transient
     public String getDeliverDateOnForm() {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormatter.format(this.deliverDate);
     }
 
-    // sets the delivery date of the order
+    /**
+     * This method sets the delivery date of the order based on the given dateString parameter
+     * @param dateString a String representing the delivery date in the "yyyy-MM-dd" format
+     */
     public void setDeliverDateOnForm(String dateString) {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         try {
@@ -231,7 +262,10 @@ public class Order {
         }
     }
 
-    // returns the recipient's name by concatenating the first name and last name
+    /**
+     * This method returns the recipient's name by concatenating the first name and last name
+     * @return a String representing the recipient's full name
+     */
     @Transient
     public String getRecipientName() {
         String name = firstName;
@@ -243,7 +277,9 @@ public class Order {
         return name;
     }
 
-    // returns the recipient's address
+    /**
+     * This method returns the recipient's full address
+     */
     @Transient
     public String getRecipientAddress() {
         String address = "";
@@ -273,48 +309,74 @@ public class Order {
         return address;
     }
 
-    // checks if the payment method for the order is Cash on Delivery (COD)
+    /**
+     * This method checks if the payment method for the order is Cash on Delivery (COD)
+     * @return true if the payment method is COD, false otherwise
+     */
     @Transient
     public boolean isCOD() {
         return paymentMethod.equals(PaymentMethod.COD);
     }
 
-    // checks if the order has the status "PROCESSING" in its order tracks
+    /**
+     * This method checks if the order has the status "PROCESSING" in its order tracks
+     * @return true if the order has the status "PROCESSING", false otherwise
+     */
     @Transient
     public boolean isProcessing() {
         return hasStatus(OrderStatus.PROCESSING);
     }
 
-    // checks if the order has the status "PICKED" in its order tracks
+    /**
+     * This method checks if the order has the status "PICKED" in its order tracks
+     * @return true if the order has the status "PICKED", false otherwise
+     */
     @Transient
     public boolean isPicked() {
         return hasStatus(OrderStatus.PICKED);
     }
 
-    // checks if the order has the status "SHIPPING" in its order tracks
+    /**
+     * This method checks if the order has the status "SHIPPING" in its order tracks
+     * @return true if the order has the status "SHIPPING", false otherwise
+     */
     @Transient
     public boolean isShipping() {
         return hasStatus(OrderStatus.SHIPPING);
     }
 
-    // checks if the order has the status "DELIVERED" in its order tracks
+    /**
+     * This method checks if the order has the status "DELIVERED" in its order tracks
+     * @return true if the order has the status "DELIVERED", false otherwise
+     */
     @Transient
     public boolean isDelivered() {
         return hasStatus(OrderStatus.DELIVERED);
     }
 
+    /**
+     * This method checks if the order has the status "RETURN_REQUESTED" in its order tracks
+     * @return true if the order has the status "RETURN_REQUESTED", false otherwise
+     */
     @Transient
     public boolean isReturnRequested() {
         return hasStatus(OrderStatus.RETURN_REQUESTED);
     }
 
-    // checks if the order has the status "RETURNED" in its order tracks
+    /**
+     * This method checks if the order has the status "RETURNED" in its order tracks
+     * @return true if the order has the status "RETURNED", false otherwise
+     */
     @Transient
     public boolean isReturned() {
         return hasStatus(OrderStatus.RETURNED);
     }
 
-    // checks if the order has a specific status in its order tracks
+    /**
+     * Checks if the order has a specific status in its order tracks.
+     * @param status the status to check for
+     * @return boolean indicating whether the order has the specified status
+     */
     public boolean hasStatus(OrderStatus status) {
         for (OrderTrack aTrack : orderTracks) {
             if (aTrack.getStatus().equals(status)) {
@@ -325,6 +387,10 @@ public class Order {
         return false;
     }
 
+    /**
+     * This method returns a string containing the short name of each product in the order.
+     * @return string containing HTML <'li'> tags with each product's short name
+     */
     @Transient
     public String getProductNames() {
         String productNames = "";
