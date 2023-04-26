@@ -7,12 +7,22 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This class represents the service layer for providing the business logic related to checkout,
+ * providing methods for preparing the checkout information and calculating various costs related to the checkout process.
+ */
 @Service
 public class CheckoutServiceImpl implements CheckoutService{
 
     private static final int DIM_DIVISOR = 139;
 
-    // prepares the checkout information by calculating the various costs
+    /**
+     * Calculates the various costs related to the checkout process.
+     *
+     * @param cartItems a list of CartItem objects representing the items in the cart.
+     * @param shippingRate a ShippingRate object representing the shipping rate for the items in the cart.
+     * @return a CheckoutInfo object containing the calculated costs.
+     */
     @Override
     public CheckoutInfo prepareCheckout(List<CartItem> cartItems, ShippingRate shippingRate) {
         CheckoutInfo checkoutInfo = new CheckoutInfo();
@@ -32,7 +42,13 @@ public class CheckoutServiceImpl implements CheckoutService{
         return checkoutInfo;
     }
 
-    // calculates the total cost for shipping all items in the cart using the specified shipping rate
+    /**
+     * Calculates the total cost for shipping all items in the cart using the specified shipping rate.
+     *
+     * @param cartItems a list of CartItem objects representing the items in the cart.
+     * @param shippingRate a ShippingRate object representing the shipping rate for the items in the cart.
+     * @return a float representing the total cost for shipping all items in the cart.
+     */
     private float calculateShippingCost(List<CartItem> cartItems, ShippingRate shippingRate) {
         float shippingCostTotal = 0.0F;
 
@@ -50,7 +66,12 @@ public class CheckoutServiceImpl implements CheckoutService{
         return shippingCostTotal;
     }
 
-    // calculates the total cost of all products in the cart
+    /**
+     * Calculates the total cost of all products in the cart.
+     *
+     * @param cartItems a list of CartItem objects representing the items in the cart.
+     * @return a float representing the total cost of all products in the cart.
+     */
     private float calculateProductTotal(List<CartItem> cartItems) {
         float total = 0.0F;
 
@@ -61,7 +82,12 @@ public class CheckoutServiceImpl implements CheckoutService{
         return total;
     }
 
-    // calculates the total cost of all items in the cart, taking into account the quantity of each item and its unit cost
+    /**
+     * Calculates the total cost of all items in the cart, taking into account the quantity of each item and its unit cost.
+     *
+     * @param cartItems a list of CartItem objects representing the items in the cart.
+     * @return a float representing the total cost of all items in the cart.
+     */
     private float calculateProductCost(List<CartItem> cartItems) {
         float cost = 0.0F;
 

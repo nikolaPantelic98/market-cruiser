@@ -18,6 +18,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class represents the service layer for providing the business logic related to order.
+ */
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -30,7 +33,16 @@ public class OrderServiceImpl implements OrderService{
     }
 
 
-    // creates a new order
+    /**
+     * Creates a new order based on the customer, shipping address, cart items, payment method, and checkout information provided.
+     *
+     * @param customer the customer associated with the order
+     * @param address the shipping address for the order
+     * @param cartItems the list of cart items for the order
+     * @param paymentMethod the payment method for the order
+     * @param checkoutInfo the checkout information for the order
+     * @return the newly created order
+     */
     @Override
     public Order createOrder(Customer customer, Address address, List<CartItem> cartItems, PaymentMethod paymentMethod,
                              CheckoutInfo checkoutInfo) {
@@ -87,7 +99,16 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.save(newOrder);
     }
 
-    // retrieves a paginated list of orders for a given customer
+    /**
+     * Retrieves a paginated list of orders for a given customer.
+     *
+     * @param customer the customer for whom to retrieve the orders
+     * @param pageNumber the page number of the results to retrieve
+     * @param sortField the field to sort the results by
+     * @param sortDir the direction in which to sort the results (ascending or descending)
+     * @param keyword the keyword to search for in the orders (optional)
+     * @return a page of orders for the given customer
+     */
     @Override
     public Page<Order> listForCustomerByPage(Customer customer, int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -102,13 +123,25 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findAll(customer.getCustomerId(), pageable);
     }
 
-    // retrieves an order
+    /**
+     * Retrieves an order for a given customer by order ID.
+     *
+     * @param orderId the ID of the order to retrieve
+     * @param customer the customer for whom to retrieve the order
+     * @return the order with the given ID and belonging to the given customer
+     */
     @Override
     public Order getOrder(Long orderId, Customer customer) {
         return orderRepository.findByOrderIdAndCustomer(orderId, customer);
     }
 
-    // Updates the status of the specified order to indicate that a return has been requested
+    /**
+     * Updates the status of the specified order to indicate that a return has been requested.
+     *
+     * @param request the order return request containing the order ID and reason for the return
+     * @param customer the customer who placed the order
+     * @throws OrderNotFoundException if the order with the specified ID and customer is not found
+     */
     @Override
     public void setOrderReturnRequested(OrderReturnRequest request, Customer customer) throws OrderNotFoundException {
         Order order = orderRepository.findByOrderIdAndCustomer(request.getOrderId(), customer);
@@ -136,6 +169,4 @@ public class OrderServiceImpl implements OrderService{
 
         orderRepository.save(order);
     }
-
-
 }

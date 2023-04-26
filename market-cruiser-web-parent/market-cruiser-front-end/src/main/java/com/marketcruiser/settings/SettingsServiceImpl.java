@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * This class represents the service layer for providing the business logic related to settings.
+ */
 @Service
 public class SettingsServiceImpl implements SettingsService {
 
@@ -21,11 +24,21 @@ public class SettingsServiceImpl implements SettingsService {
     }
 
 
+    /**
+     * Retrieves general settings
+     *
+     * @return a list of Settings objects related to general settings
+     */
     @Override
     public List<Settings> getGeneralSettings() {
         return settingsRepository.findByTwoCategories(SettingsCategory.GENERAL, SettingsCategory.CURRENCY);
     }
 
+    /**
+     * Retrieves email settings
+     *
+     * @return an EmailSettingsBag object containing email settings
+     */
     @Override
     public EmailSettingsBag getEmailSettings() {
         List<Settings> settings = settingsRepository.findByCategory(SettingsCategory.MAIL_SERVER);
@@ -34,6 +47,11 @@ public class SettingsServiceImpl implements SettingsService {
         return new EmailSettingsBag(settings);
     }
 
+    /**
+     * Retrieves currency settings
+     *
+     * @return a CurrencySettingsBag object containing currency settings
+     */
     @Override
     public CurrencySettingsBag getCurrencySettings() {
         List<Settings> settings = settingsRepository.findByCategory(SettingsCategory.CURRENCY);
@@ -41,6 +59,11 @@ public class SettingsServiceImpl implements SettingsService {
         return new CurrencySettingsBag(settings);
     }
 
+    /**
+     * Retrieves payment settings
+     *
+     * @return a PaymentSettingsBag object containing payment settings
+     */
     @Override
     public PaymentSettingsBag getPaymentSettings() {
         List<Settings> settings = settingsRepository.findByCategory(SettingsCategory.PAYMENT);
@@ -48,7 +71,11 @@ public class SettingsServiceImpl implements SettingsService {
         return new PaymentSettingsBag(settings);
     }
 
-    // retrieves the currency code from a database
+    /**
+     * Retrieves the currency code for a specific currency
+     *
+     * @return a string representing the currency code
+     */
     @Override
     public String getCurrencyCode() {
         Settings setting = settingsRepository.findByKey("CURRENCY_ID");
@@ -57,5 +84,4 @@ public class SettingsServiceImpl implements SettingsService {
 
         return currency.getCode();
     }
-
 }

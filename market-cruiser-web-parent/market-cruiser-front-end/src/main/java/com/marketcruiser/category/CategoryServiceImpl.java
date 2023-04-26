@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class represents the service layer for providing the business logic related to category.
+ */
 @Service
 public class CategoryServiceImpl implements CategoryService{
 
@@ -21,7 +24,11 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
 
-    // method that retrieves a list of all the enabled categories that don't have any children categories
+    /**
+     * Retrieves a list of all the enabled categories that don't have any children categories.
+     *
+     * @return a List of Category objects that have no children categories
+     */
     @Override
     public List<Category> listNoChildrenCategories() {
         List<Category> listNoChildrenCategories = new ArrayList<>();
@@ -38,7 +45,13 @@ public class CategoryServiceImpl implements CategoryService{
         return listNoChildrenCategories;
     }
 
-    // method that retrieves the category with the given alias and returns it if found
+    /**
+     * Retrieves the category with the given alias and returns it if found.
+     *
+     * @param alias the alias to search for
+     * @return the Category object with the given alias
+     * @throws CategoryNotFoundException if no category with the given alias is found
+     */
     @Override
     public Category getCategory(String alias) throws CategoryNotFoundException {
         Category category = categoryRepository.findByAliasEnabled(alias);
@@ -48,7 +61,12 @@ public class CategoryServiceImpl implements CategoryService{
         return category;
     }
 
-    // method that retrieves a list of all the parent categories of the provided child category, including the child category itself
+    /**
+     * Retrieves a list of all the parent categories of the provided child category, including the child category itself.
+     *
+     * @param child the child category whose parent categories to retrieve
+     * @return a List of Category objects that includes the parent categories of the child category
+     */
     @Override
     public List<Category> getCategoryParents(Category child) {
         List<Category> listParents = new ArrayList<>();
@@ -65,11 +83,14 @@ public class CategoryServiceImpl implements CategoryService{
         return listParents;
     }
 
+    /**
+     * Retrieves a list of all root categories, sorted by name in ascending order.
+     *
+     * @return a List of Category objects that are root categories
+     */
     @Override
     public List<Category> listRootCategories() {
 
         return categoryRepository.findRootCategories(Sort.by("name").ascending());
     }
-
-
 }

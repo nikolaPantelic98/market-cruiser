@@ -6,6 +6,9 @@ import com.marketcruiser.common.entity.ShippingRate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * This class represents the service layer for providing the business logic related to shipping rate.
+ */
 @Service
 public class ShippingRateServiceImpl implements ShippingRateService{
 
@@ -17,7 +20,12 @@ public class ShippingRateServiceImpl implements ShippingRateService{
     }
 
 
-    // retrieves the shipping rate for a given customer's state or city, based on the customer's country
+    /**
+     * Retrieve the shipping rate for a customer by their state and country
+     *
+     * @param customer The customer to get the shipping rate for
+     * @return The shipping rate for the customer's location
+     */
     @Override
     public ShippingRate getShippingRateForCustomer(Customer customer) {
         String state = customer.getState();
@@ -28,7 +36,12 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         return shippingRateRepository.findShippingRateByCountryAndState(customer.getCountry(), state);
     }
 
-    // retrieves the shipping rate for a given address's state or city, based on the address's country
+    /**
+     * Retrieve the shipping rate for an address by its state and country
+     *
+     * @param address The address to get the shipping rate for
+     * @return The shipping rate for the address's location
+     */
     @Override
     public ShippingRate getShippingRateForAddress(Address address) {
         String state = address.getState();

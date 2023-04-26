@@ -14,6 +14,9 @@ import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * This class represents the service layer for providing the business logic related to customer.
+ */
 @Service
 public class CustomerServiceImpl implements CustomerService{
 
@@ -29,13 +32,20 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
 
-    // returns a list of all countries in ascending order by name
+    /**
+     * Returns a list of all countries in ascending order by name.
+     */
     @Override
     public List<Country> listAllCountries() {
         return countryRepository.findAllByOrderByNameAsc();
     }
 
-    // checks whether a customer with the given email exists in the database
+    /**
+     * Checks whether a customer with the given email exists in the database.
+     *
+     * @param email the email address to check
+     * @return true if the email is unique (i.e., not associated with any customer), false otherwise
+     */
     @Override
     public boolean isEmailUnique(String email) {
         Customer customer = customerRepository.findCustomerByEmail(email);
@@ -43,7 +53,11 @@ public class CustomerServiceImpl implements CustomerService{
         return customer == null;
     }
 
-    // registers a new customer in the database
+    /**
+     * Registers a new customer in the database.
+     *
+     * @param customer the customer to register
+     */
     @Override
     public void registerCustomer(Customer customer) {
         encodePassword(customer);
@@ -59,18 +73,32 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customer);
     }
 
-    // encodes the customer's password using the password encoder
+    /**
+     * Encodes the customer's password using the password encoder.
+     *
+     * @param customer the customer whose password to encode
+     */
     private void encodePassword(Customer customer) {
         String encodedPassword = passwordEncoder.encode(customer.getPassword());
         customer.setPassword(encodedPassword);
     }
 
+    /**
+     * Returns the customer with the given email address.
+     *
+     * @param email the email address of the customer to retrieve
+     */
     @Override
     public Customer getCustomerByEmail(String email) {
         return customerRepository.findCustomerByEmail(email);
     }
 
-    // verifies a customer's account with the given verification code
+    /**
+     * Verifies a customer's account with the given verification code.
+     *
+     * @param verificationCode the verification code to use
+     * @return true if the verification is successful, false otherwise
+     */
     @Override
     public boolean verifyCustomer(String verificationCode) {
         Customer customer = customerRepository.findCustomerByVerificationCode(verificationCode);
@@ -83,7 +111,12 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
-    // updates a customer's authentication type if it is different from the given type
+    /**
+     * Updates a customer's authentication type if it is different from the given type.
+     *
+     * @param customer the customer to update
+     * @param type the new authentication type
+     */
     @Override
     @Transactional
     public void updateAuthenticationType(Customer customer, AuthenticationType type) {
@@ -92,7 +125,13 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
-    // adds a new customer to the customer repository upon successful OAuth login
+    /**
+     * Adds a new customer to the customer repository upon successful OAuth login.
+     *
+     * @param name the name of the new customer
+     * @param email the email of the new customer
+     * @param countryCode the country code of the new customer
+     */
     @Override
     public void addNewCustomerUponOAuthLogin(String name, String email, String countryCode) {
         Customer customer = new Customer();
@@ -114,7 +153,12 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customer);
     }
 
-    // helper method to set the first and last name of a customer
+    /**
+     * Helper method to set the first and last name of a customer.
+     *
+     * @param name the full name of the customer
+     * @param customer the customer object to update
+     */
     private void setName(String name, Customer customer) {
         String[] nameArray = name.split(" ");
 
@@ -130,7 +174,11 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
-    // updates a customer's information
+    /**
+     * Updates a customer's information.
+     *
+     * @param customerInForm the customer object with updated information
+     */
     @Override
     public void updateCustomer(Customer customerInForm) {
         Customer customerInDB = customerRepository.findById(customerInForm.getCustomerId()).get();
@@ -155,7 +203,13 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customerInForm);
     }
 
-    // updates the reset password token for the customer with the provided email address
+    /**
+     * Updates the reset password token for the customer with the provided email address.
+     *
+     * @param email the email of the customer
+     * @return the new reset password token
+     * @throws CustomerNotFoundException if no customer is found with the given email
+     */
     @Override
     public String updateRestPasswordToken(String email) throws CustomerNotFoundException {
         Customer customer = customerRepository.findCustomerByEmail(email);
@@ -170,13 +224,24 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
-    // retrieves the customer associated with the provided reset password token
+    /**
+     * Retrieves the customer associated with the provided reset password token.
+     *
+     * @param token the reset password token used to retrieve the customer
+     * @return the customer associated with the provided reset password token
+     */
     @Override
     public Customer getCustomerByResetPasswordToken(String token) {
         return customerRepository.findByResetPasswordToken(token);
     }
 
-    // updates the password for the customer associated with the provided reset password token
+    /**
+     * Updates the password for the customer associated with the provided reset password token.
+     *
+     * @param token the reset password token used to retrieve the customer
+     * @param newPassword the new password to update for the customer
+     * @throws CustomerNotFoundException if no customer found for the given reset password token
+     */
     @Override
     public void updatePassword(String token, String newPassword) throws CustomerNotFoundException {
         Customer customer = customerRepository.findByResetPasswordToken(token);

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * This class represents the service layer for providing the business logic related to shopping cart.
+ */
 @Service
 @Transactional
 public class ShoppingCartServiceImpl implements ShoppingCartService{
@@ -24,7 +27,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
     }
 
 
-    // adds the product with the given quantity to the shopping cart of the given customer
+    /**
+     * Adds a product with the given quantity to the shopping cart of the given customer.
+     *
+     * @param productId the ID of the product to add
+     * @param quantity the quantity of the product to add
+     * @param customer the customer whose shopping cart is being modified
+     * @return the updated quantity of the product in the shopping cart
+     * @throws ShoppingCartException if the quantity of the product to add exceeds the maximum allowed quantity of 5
+     */
     @Override
     public Integer addProduct(Long productId, Integer quantity, Customer customer) throws ShoppingCartException {
         Integer updateQuantity = quantity;
@@ -53,12 +64,25 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         return updateQuantity;
     }
 
+    /**
+     * Returns a list of cart items for the given customer.
+     *
+     * @param customer the customer whose cart items to retrieve
+     * @return a list of cart items
+     */
     @Override
     public List<CartItem> listCartItems(Customer customer) {
         return cartItemRepository.findCartItemByCustomer(customer);
     }
 
-    // Updates the quantity of a product in the cart for a given customer
+    /**
+     * Updates the quantity of a product in the shopping cart of the given customer.
+     *
+     * @param productId the ID of the product whose quantity to update
+     * @param quantity the new quantity of the product
+     * @param customer the customer whose shopping cart is being modified
+     * @return the new subtotal of the product in the shopping cart
+     */
     @Override
     public float updateQuantity(Long productId, Integer quantity, Customer customer) {
         cartItemRepository.updateQuantity(quantity, customer.getCustomerId(), productId);
@@ -68,13 +92,21 @@ public class ShoppingCartServiceImpl implements ShoppingCartService{
         return subtotal;
     }
 
-    // removes a product from the cart for the given customer
+    /**
+     * Removes a product from the shopping cart of the given customer.
+     *
+     * @param productId the ID of the product to remove
+     * @param customer the customer whose shopping cart is being modified
+     */
     @Override
     public void removeProduct(Long productId, Customer customer) {
         cartItemRepository.deleteCartItemByCustomerAndProduct(customer.getCustomerId(), productId);
     }
 
-    // deletes all of the cart items associated with a given customer
+    /**
+     * Deletes all the cart items in the shopping cart of the given customer.
+     * @param customer the customer whose shopping cart will be cleared
+     */
     @Override
     public void deleteProductByCustomer(Customer customer) {
         cartItemRepository.deleteCartItemByCustomer(customer.getCustomerId());

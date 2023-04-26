@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+/**
+ * This class represents the service layer for providing the business logic related to address.
+ */
 @Service
 @Transactional
 public class AddressServiceImpl implements AddressService{
@@ -20,31 +23,56 @@ public class AddressServiceImpl implements AddressService{
     }
 
 
-    // returns a list of addresses associated with the given customer
+    /**
+     * Returns a list of addresses associated with the given customer.
+     *
+     * @param customer the customer for which the addresses are requested.
+     * @return a list of addresses associated with the given customer.
+     */
     @Override
     public List<Address> listAddressBook(Customer customer) {
         return addressRepository.findAddressByCustomer(customer);
     }
 
-    // saves the given address to the database
+    /**
+     * Saves the given address to the database.
+     *
+     * @param address the address to be saved.
+     */
     @Override
     public void saveAddress(Address address) {
         addressRepository.save(address);
     }
 
-    // returns the address associated with the given customer
+    /**
+     * Returns the address associated with the given customer.
+     *
+     * @param addressId the ID of the address to be returned.
+     * @param customerId the ID of the customer associated with the address.
+     * @return the address associated with the given customer.
+     */
     @Override
     public Address getAddress(Long addressId, Long customerId) {
         return addressRepository.findAddressByAddressIdAndCustomer(addressId, customerId);
     }
 
-    // deletes the address associated with the given customer
+    /**
+     * Deletes the address associated with the given customer.
+     *
+     * @param addressId the ID of the address to be deleted.
+     * @param customerId the ID of the customer associated with the address.
+     */
     @Override
     public void deleteAddress(Long addressId, Long customerId) {
         addressRepository.deleteAddressByAddressIdAndCustomer(addressId, customerId);
     }
 
-    // sets the default address for a given customer, and sets all other addresses as non-default
+    /**
+     * Sets the default address for a given customer and sets all other addresses as non-default.
+     *
+     * @param defaultAddressId The ID of the address to be set as default.
+     * @param customerId The ID of the customer whose addresses are to be updated.
+     */
     @Override
     public void setDefaultAddress(Long defaultAddressId, Long customerId) {
         if (defaultAddressId > 0) {
@@ -54,6 +82,12 @@ public class AddressServiceImpl implements AddressService{
         addressRepository.setNonDefaultForOthers(defaultAddressId, customerId);
     }
 
+    /**
+     * Retrieves the default address associated with the given customer.
+     *
+     * @param customer The customer whose default address is to be retrieved.
+     * @return The default address associated with the given customer.
+     */
     @Override
     public Address getDefaultAddress(Customer customer) {
         return addressRepository.findDefaultAddressByCustomer(customer.getCustomerId());
