@@ -16,6 +16,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements the {@link  CustomerService} interface and defines the business logic for customer operations.
+ * It contains methods to retrieve and manipulate Customer objects from the database.
+ */
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService{
@@ -34,7 +38,15 @@ public class CustomerServiceImpl implements CustomerService{
     }
 
 
-    // this method implements pagination and sorting of customers based on multiple search criteria
+    /**
+     * Retrieves a paginated list of customers based on multiple search criteria.
+     *
+     * @param pageNumber The page number to retrieve.
+     * @param sortField The field to sort the results by.
+     * @param sortDir The sort direction (ascending or descending).
+     * @param keyword The keyword to search for.
+     * @return A paginated list of customers.
+     */
     @Override
     public Page<Customer> listCustomersByPage(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -49,11 +61,24 @@ public class CustomerServiceImpl implements CustomerService{
         return customerRepository.findAll(pageable);
     }
 
+    /**
+     * Updates the enabled status of a customer.
+     *
+     * @param customerId The ID of the customer to update.
+     * @param enabled The new enabled status of the customer.
+     */
     @Override
     public void updateCustomerEnabledStatus(Long customerId, boolean enabled) {
         customerRepository.updateCustomerEnabledStatus(customerId, enabled);
     }
 
+    /**
+     * Retrieves a customer by their ID.
+     *
+     * @param customerId The ID of the customer to retrieve.
+     * @return The customer entity.
+     * @throws CustomerNotFoundException if a customer with the given ID is not found.
+     */
     @Override
     public Customer getCustomer(Long customerId) throws CustomerNotFoundException {
         try {
@@ -63,12 +88,21 @@ public class CustomerServiceImpl implements CustomerService{
         }
     }
 
+    /**
+     * Retrieves a list of all countries in the system, ordered by name.
+     */
     @Override
     public List<Country> listAllCountries() {
         return countryRepository.findAllByOrderByNameAsc();
     }
 
-    // checks if the given email is unique
+    /**
+     * Checks if the given email is unique.
+     *
+     * @param customerId The ID of the customer to exclude from the check.
+     * @param email The email to check.
+     * @return true if the email is unique, false otherwise.
+     */
     @Override
     public boolean isEmailUnique(Long customerId, String email) {
         Customer existCustomer = customerRepository.findCustomerByEmail(email);
@@ -81,7 +115,10 @@ public class CustomerServiceImpl implements CustomerService{
         return true;
     }
 
-    // saves customer
+    /**
+     * Saves a customer to the database.
+     * @param customerInForm The customer entity to save.
+     */
     @Override
     public void saveCustomer(Customer customerInForm) {
         Customer customerInDB = customerRepository.findById(customerInForm.getCustomerId()).get();
@@ -102,7 +139,12 @@ public class CustomerServiceImpl implements CustomerService{
         customerRepository.save(customerInForm);
     }
 
-    // deletes customer
+    /**
+     * Deletes a customer with the given customerId from the database.
+     *
+     * @param customerId The ID of the customer to be deleted.
+     * @throws CustomerNotFoundException If the customer with the given ID does not exist in the database.
+     */
     @Override
     public void deleteCustomer(Long customerId) throws CustomerNotFoundException {
         Long count = customerRepository.countByCustomerId(customerId);

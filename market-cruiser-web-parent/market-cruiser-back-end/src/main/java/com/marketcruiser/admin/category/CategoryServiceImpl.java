@@ -12,6 +12,10 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.*;
 
+/**
+ * This class implements the {@link  CategoryService} interface and defines the business logic for category operations.
+ * It contains methods to retrieve and manipulate Category objects from the database.
+ */
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService{
@@ -27,7 +31,15 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
 
-    // returns a list of categories in the database
+    /**
+     * Retrieves a list of categories from the database, sorted and filtered according to the provided parameters.
+     *
+     * @param pageInfo An object that holds information about the current page being displayed
+     * @param pageNum The current page number
+     * @param sortDir The direction in which to sort the categories (ascending or descending)
+     * @param keyword A search keyword to filter the categories by name (optional)
+     * @return A list of Category objects
+     */
     @Override
     public List<Category> listCategoriesByPage(CategoryPageInfo pageInfo, int pageNum, String sortDir, String keyword) {
         Sort sort = Sort.by("name");
@@ -65,8 +77,13 @@ public class CategoryServiceImpl implements CategoryService{
         }
     }
 
-    // returns a list of categories in a hierarchical structure
-    // root categories at the top and child categories indented beneath their parent categories
+    /**
+     * Retrieves a list of categories from the provided root categories in hierarchical structure
+     *
+     * @param rootCategories A list of root Category objects
+     * @param sortDir The direction in which to sort the subcategories (ascending or descending)
+     * @return A list of Category objects in hierarchical structure
+     */
     private List<Category> listHierarchicalCategories(List<Category> rootCategories, String sortDir) {
         List<Category> hierarchicalCategories = new ArrayList<>();
 
@@ -86,7 +103,14 @@ public class CategoryServiceImpl implements CategoryService{
         return hierarchicalCategories;
     }
 
-    // Recursively adds subcategories of a given parent category to a list of categories in a hierarchical structure
+    /**
+     * Recursively adds subcategories of a given parent category to a list of categories in a hierarchical structure.
+     *
+     * @param hierarchicalCategories The list to which the hierarchical categories will be added.
+     * @param parent The parent category whose subcategories will be added to the list.
+     * @param subLevel The level of the parent category in the hierarchy.
+     * @param sortDir The direction in which to sort the subcategories (asc/desc).
+     */
     private void listSubHierarchicalCategories(List<Category> hierarchicalCategories, Category parent, int subLevel, String sortDir) {
         Set<Category> children = sortSubCategories(parent.getChildren(), sortDir);
         int newSubLevel = subLevel + 1;
@@ -106,7 +130,12 @@ public class CategoryServiceImpl implements CategoryService{
 
     }
 
-    // saves category
+    /**
+     * Saves a category to the database.
+     *
+     * @param category The category to be saved.
+     * @return The saved category.
+     */
     @Override
     public Category saveCategory(Category category) {
         Category parent = category.getParent();
@@ -119,7 +148,11 @@ public class CategoryServiceImpl implements CategoryService{
         return categoryRepository.save(category);
     }
 
-    // returns a list of categories in the database which includes all top-level categories and their children, with each subcategory
+    /**
+     * Returns a list of categories in the database which includes all top-level categories and their children,
+     * with each subcategory indented by a number of hyphens to indicate its level in the hierarchy.
+     * @return The list of categories used in a form.
+     */
     @Override
     public List<Category> listCategoriesUsedInForm() {
         List<Category> categoriesUsedInForm = new ArrayList<>();
@@ -144,8 +177,14 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
 
-    // adds the children of a given category to a list of categories used in a form
-    // the subcategories are indented by a number of hyphens to indicate their level in the hierarchy
+    /**
+     * Adds the children of a given category to a list of categories used in a form, with each subcategory
+     * indented by a number of hyphens to indicate its level in the hierarchy.
+     *
+     * @param categoriesUsedInForm The list to which the categories will be added.
+     * @param parent The parent category whose subcategories will be added to the list.
+     * @param subLevel The level of the parent category in the hierarchy.
+     */
     private void listSubCategoriesUsedInForm(List<Category> categoriesUsedInForm, Category parent, int subLevel) {
         int newSubLevel = subLevel + 1;
         Set<Category> children = sortSubCategories(parent.getChildren());
@@ -163,7 +202,13 @@ public class CategoryServiceImpl implements CategoryService{
         }
     }
 
-    // gets a category by category id
+    /**
+     * Retrieves a category by its category ID.
+     *
+     * @param categoryId The ID of the category to retrieve.
+     * @return The category with the specified ID.
+     * @throws CategoryNotFoundException If no category with the specified ID is found.
+     */
     @Override
     public Category getCategoryById(Long categoryId) throws CategoryNotFoundException {
         try {
@@ -173,7 +218,15 @@ public class CategoryServiceImpl implements CategoryService{
         }
     }
 
-    // checks if the given category ID, name and alias are unique
+    /**
+     * Checks whether the given category ID, name and alias are unique.
+     *
+     * @param categoryId The ID of the category being checked, or null if a new category is being created.
+     * @param name The name of the category being checked.
+     * @param alias The alias of the category being checked.
+     * @return "OK" if the category ID, name and alias are all unique; "DuplicateName" if the name is not unique;
+     * "DuplicateAlias" if the alias is not unique.
+     */
     @Override
     public String checkUnique(Long categoryId, String name, String alias) {
         boolean isCreatingNew = (categoryId == null || categoryId == 0);
@@ -200,12 +253,23 @@ public class CategoryServiceImpl implements CategoryService{
         return "OK";
     }
 
-    // sorts the subcategories of a parent category in ascending order by name
+    /**
+     * Sorts the subcategories of a parent category in ascending order by name.
+     *
+     * @param children The set of subcategories to sort.
+     * @return The sorted set of subcategories.
+     */
     private SortedSet<Category> sortSubCategories(Set<Category> children) {
         return sortSubCategories(children, "asc");
     }
 
-    // sorts the subcategories of a parent category by name in the specified direction
+    /**
+     * Sorts the subcategories of a parent category by name in the specified direction.
+     *
+     * @param children The set of subcategories to sort.
+     * @param sortDir The sort direction ("asc" or "desc").
+     * @return The sorted set of subcategories.
+     */
     private SortedSet<Category> sortSubCategories(Set<Category> children, String sortDir) {
         SortedSet<Category> sortedChildren = new TreeSet<>(new Comparator<Category>() {
 
@@ -225,12 +289,23 @@ public class CategoryServiceImpl implements CategoryService{
     }
 
 
+    /**
+     * Updates the enabled status of a category.
+     *
+     * @param categoryId The ID of the category to update.
+     * @param enabled The new enabled status.
+     */
     @Override
     public void updateCategoryEnabledStatus(Long categoryId, boolean enabled) {
         categoryRepository.updateEnabledStatus(categoryId, enabled);
     }
 
-    // deletes a category by category id
+    /**
+     * Deletes a category by its category ID.
+     *
+     * @param categoryId The ID of the category to delete.
+     * @throws CategoryNotFoundException If no category with the specified ID is found.
+     */
     @Override
     public void deleteCategory(Long categoryId) throws CategoryNotFoundException {
         Long countById = categoryRepository.countByCategoryId(categoryId);

@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of the {@link  SettingsService} interface that provides methods for managing settings.
+ */
 @Service
 public class SettingsServiceImpl implements SettingsService{
 
@@ -19,12 +22,19 @@ public class SettingsServiceImpl implements SettingsService{
     }
 
 
+    /**
+     * Returns a list of all Settings.
+     */
     @Override
     public List<Settings> listAllSettings() {
         return settingsRepository.findAll();
     }
 
-    // retrieves the general settings and currency settings from the settings repository
+    /**
+     * Retrieves the general settings and currency settings from the settings repository.
+     *
+     * @return a GeneralSettingsBag object containing the general and currency settings
+     */
     @Override
     public GeneralSettingsBag getGeneralSettings() {
         List<Settings> settings = new ArrayList<>();
@@ -38,27 +48,43 @@ public class SettingsServiceImpl implements SettingsService{
         return new GeneralSettingsBag(settings);
     }
 
-    // method that saves all the given settings to the settings repository
+    /**
+     * Saves all the given settings to the settings repository.
+     *
+     * @param settings an Iterable of Settings to save
+     */
     @Override
     public void saveAllSettings(Iterable<Settings> settings) {
         settingsRepository.saveAll(settings);
     }
 
+    /**
+     * Returns a list of all mail server settings.
+     */
     @Override
     public List<Settings> getMailServerSettings() {
         return settingsRepository.findByCategory(SettingsCategory.MAIL_SERVER);
     }
 
+    /**
+     * Returns a list of all mail template settings.
+     */
     @Override
     public List<Settings> getMailTemplateSettings() {
         return settingsRepository.findByCategory(SettingsCategory.MAIL_TEMPLATES);
     }
 
+    /**
+     * Returns a list of all currency settings.
+     */
     @Override
     public List<Settings> getCurrencySettings() {
         return settingsRepository.findByCategory(SettingsCategory.CURRENCY);
     }
 
+    /**
+     * Returns a list of all payment settings.
+     */
     @Override
     public List<Settings> getPaymentSettings() {
         return settingsRepository.findByCategory(SettingsCategory.PAYMENT);

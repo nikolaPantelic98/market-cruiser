@@ -14,6 +14,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements the {@link  ProductService} interface and defines the business logic for product operations.
+ * It contains methods to retrieve and manipulate Product objects from the database.
+ */
 @Service
 @Transactional
 public class ProductServiceImpl implements ProductService {
@@ -28,12 +32,24 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    /**
+     * Returns a list of all products.
+     */
     @Override
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    // this method implements pagination and sorting of products based on multiple search criteria
+    /**
+     * Returns a page of products based on multiple search criteria.
+     *
+     * @param pageNumber the page number to display.
+     * @param sortField the field to sort by.
+     * @param sortDir the direction of the sort.
+     * @param keyword the keyword to search for.
+     * @param categoryId the category id to search in.
+     * @return a page of products based on multiple search criteria.
+     */
     @Override
     public Page<Product> listProductsByPage(int pageNumber, String sortField, String sortDir, String keyword, Long categoryId) {
         Sort sort = Sort.by(sortField);
@@ -58,7 +74,12 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.findAll(pageable);
     }
 
-    // saves product and overwrite alias of the saved product
+    /**
+     * Saves a product and overwrites the alias of the saved product.
+     *
+     * @param product the product to be saved.
+     * @return the saved product.
+     */
     @Override
     public Product saveProduct(Product product) {
         if (product.getProductId() == null) {
@@ -77,6 +98,11 @@ public class ProductServiceImpl implements ProductService {
         return productRepository.save(product);
     }
 
+    /**
+     * Updates the price and cost of a product in the database.
+     *
+     * @param productInForm The product object containing the new price and cost values.
+     */
     @Override
     public void saveProductPrice(Product productInForm) {
         Product productInDB = productRepository.findById(productInForm.getProductId()).get();
@@ -87,7 +113,13 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(productInDB);
     }
 
-    // checks if the given product ID and name are unique
+    /**
+     * Checks whether the given product ID and name are unique.
+     *
+     * @param productId The ID of the product being checked (null or 0 if creating a new product).
+     * @param name The name of the product being checked.
+     * @return A String indicating whether the ID and name are unique ("OK") or a duplicate ("Duplicate").
+     */
     @Override
     public String checkUnique(Long productId, String name) {
         boolean isCreatingNew = (productId == null || productId == 0);
@@ -104,12 +136,23 @@ public class ProductServiceImpl implements ProductService {
         return "OK";
     }
 
+    /**
+     * Updates the enabled status of a product in the database.
+     *
+     * @param productId The ID of the product being updated.
+     * @param enabled The new enabled status of the product.
+     */
     @Override
     public void updateProductEnabledStatus(Long productId, boolean enabled) {
         productRepository.updateEnabledStatus(productId, enabled);
     }
 
-    // deletes a product by product id
+    /**
+     * Deletes a product from the database by ID.
+     *
+     * @param productId The ID of the product being deleted.
+     * @throws ProductNotFoundException if no product is found with the given ID.
+     */
     @Override
     public void deleteProduct(Long productId) throws ProductNotFoundException {
         Long countProductById = productRepository.countByProductId(productId);
@@ -121,7 +164,13 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteById(productId);
     }
 
-    // gets a product
+    /**
+     * Retrieves a product from the database by ID.
+     *
+     * @param productId The ID of the product being retrieved.
+     * @return The product with the given ID.
+     * @throws ProductNotFoundException if no product is found with the given ID.
+     */
     @Override
     public Product getProduct(Long productId) throws ProductNotFoundException {
         try {
@@ -132,7 +181,15 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
-    // searches for products by a given keyword
+    /**
+     * Searches for products by a given keyword.
+     *
+     * @param pageNumber the page number to retrieve.
+     * @param sortField the field to sort by.
+     * @param sortDir the direction to sort in ("asc" for ascending or "desc" for descending).
+     * @param keyword the keyword to search for in product names.
+     * @return a Page object containing a list of products that match the keyword.
+     */
     @Override
     public Page<Product> searchProducts(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -143,6 +200,4 @@ public class ProductServiceImpl implements ProductService {
 
         return productRepository.searchProductsByName(keyword, pageable);
     }
-
-
 }

@@ -14,6 +14,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements the {@link  UserService} interface and defines the business logic for user operations.
+ * It contains methods to retrieve and manipulate User objects from the database.
+ */
 @Service
 @Transactional
 public class UserServiceImpl implements UserService{
@@ -32,19 +36,34 @@ public class UserServiceImpl implements UserService{
     }
 
 
-    // returns the user with the given email address
+    /**
+     * Returns the user with the given email address.
+     *
+     * @param emailAddress email address of the user to be retrieved
+     * @return user object with the given email address
+     */
     @Override
     public User getUserByEmailAddress(String emailAddress) {
         return userRepository.getUserByEmailAddress(emailAddress);
     }
 
-    // returns a list of all users, sorted by first name in ascending order
+    /**
+     * Returns a list of all users, sorted by first name in ascending order.
+     */
     @Override
     public List<User> getAllUsersSortedByFirstName() {
         return userRepository.findAll(Sort.by("firstName").ascending());
     }
 
-    // returns a page of users sorted by the specified field and direction
+    /**
+     * Returns a page of users sorted by the specified field and direction.
+     *
+     * @param pageNumber the page number
+     * @param sortField the field to sort by
+     * @param sortDir the sort direction
+     * @param keyword the search keyword
+     * @return page of users sorted by the specified field and direction
+     */
     @Override
     public Page<User> listUsersByPage(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -59,13 +78,20 @@ public class UserServiceImpl implements UserService{
         return userRepository.findAll(pageable);
     }
 
-    // returns a list of all roles
+    /**
+     * Returns a list of all roles.
+     */
     @Override
     public List<Role> getAllRoles() {
         return roleRepository.findAll();
     }
 
-    // saves or updates a user
+    /**
+     * Saves or updates a user.
+     *
+     * @param user the user to be saved or updated
+     * @return saved or updated user
+     */
     @Override
     public User saveUser(User user) {
         boolean isUpdatingUser = (user.getUserId() != null);
@@ -85,7 +111,12 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(user);
     }
 
-    // updates the user's account details in the database
+    /**
+     * Updates the user's account details in the database.
+     *
+     * @param userInForm the user whose details are to be updated
+     * @return updated user object
+     */
     @Override
     public User updateAccount(User userInForm) {
         User userInDB = userRepository.findById(userInForm.getUserId()).get();
@@ -105,14 +136,24 @@ public class UserServiceImpl implements UserService{
         return userRepository.save(userInDB);
     }
 
-    // encodes a user's password
+    /**
+     * Encodes a user's password using the password encoder.
+     *
+     * @param user the user whose password needs to be encoded
+     */
     @Override
     public void encodePassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
     }
 
-    // checks whether an email address is available for a new user
+    /**
+     * Checks whether an email address is available for a new user.
+     *
+     * @param userId the user id of the user (if any)
+     * @param emailAddress the email address to be checked
+     * @return true if the email address is unique, false otherwise
+     */
     @Override
     public boolean isEmailAddressUnique(Long userId, String emailAddress) {
         User userByEmailAddress = userRepository.getUserByEmailAddress(emailAddress);
@@ -131,7 +172,13 @@ public class UserServiceImpl implements UserService{
         return true;
     }
 
-    // gets a user by user id
+    /**
+     * Gets a user by user id.
+     *
+     * @param userId the user id of the user to be retrieved
+     * @return the user with the specified user id
+     * @throws UserNotFoundException if the user cannot be found
+     */
     @Override
     public User getUserById(Long userId) throws UserNotFoundException {
         try {
@@ -141,7 +188,12 @@ public class UserServiceImpl implements UserService{
         }
     }
 
-    // deletes a user by user id
+    /**
+     * Deletes a user by user id.
+     *
+     * @param userId the user id of the user to be deleted
+     * @throws UserNotFoundException if the user cannot be found
+     */
     @Override
     public void deleteUser(Long userId) throws UserNotFoundException {
         Long countById = userRepository.countByUserId(userId);
@@ -151,6 +203,12 @@ public class UserServiceImpl implements UserService{
         userRepository.deleteById(userId);
     }
 
+    /**
+     * Updates the enabled status of a user.
+     *
+     * @param userId the user id of the user whose enabled status needs to be updated
+     * @param enabled the new enabled status
+     */
     @Override
     public void updateUserEnabledStatus(Long userId, boolean enabled) {
         userRepository.updateEnabledStatus(userId, enabled);

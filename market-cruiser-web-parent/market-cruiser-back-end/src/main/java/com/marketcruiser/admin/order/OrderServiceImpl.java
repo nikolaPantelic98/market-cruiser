@@ -16,6 +16,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements the {@link  OrderService} interface and defines the business logic for order operations.
+ * It contains methods to retrieve and manipulate Order objects from the database.
+ */
 @Service
 public class OrderServiceImpl implements OrderService{
 
@@ -29,7 +33,15 @@ public class OrderServiceImpl implements OrderService{
         this.countryRepository = countryRepository;
     }
 
-    // retrieves a specific page of orders from the database
+    /**
+     * Retrieves a specific page of orders from the database.
+     *
+     * @param pageNumber - page number to retrieve
+     * @param sortField - field to sort by
+     * @param sortDir - sort direction (asc/desc)
+     * @param keyword - search keyword
+     * @return - a page of orders
+     */
     @Override
     public Page<Order> listOrdersByPage(int pageNumber, String sortField, String sortDir, String keyword) {
 
@@ -52,7 +64,13 @@ public class OrderServiceImpl implements OrderService{
         return orderRepository.findAll(pageable);
     }
 
-    // Retrieves an order from the database by its ID
+    /**
+     * Retrieves an order from the database by its ID.
+     *
+     * @param orderId - ID of the order to retrieve
+     * @return - the order with the specified ID
+     * @throws OrderNotFoundException - if the order is not found
+     */
     @Override
     public Order getOrder(Long orderId) throws OrderNotFoundException {
         try {
@@ -62,7 +80,12 @@ public class OrderServiceImpl implements OrderService{
         }
     }
 
-    // deletes order
+    /**
+     * Deletes an order from the database by its ID.
+     *
+     * @param orderId - ID of the order to delete
+     * @throws OrderNotFoundException - if the order is not found
+     */
     @Override
     public void deleteOrder(Long orderId) throws OrderNotFoundException {
         Long count = orderRepository.countByOrderId(orderId);
@@ -73,13 +96,22 @@ public class OrderServiceImpl implements OrderService{
         orderRepository.deleteById(orderId);
     }
 
-    // returns a list of all countries sorted by name in ascending order
+    /**
+     * Retrieves a list of all countries sorted by name in ascending order.
+     *
+     * @return - a list of countries
+     */
     @Override
     public List<Country> listAllCountries() {
         return countryRepository.findAllByOrderByNameAsc();
     }
 
-    // saves an order
+    /**
+     * Saves an order to the database by updating an existing order record with
+     * the data provided in the orderInForm object.
+     *
+     * @param orderInForm The order object containing the updated data
+     */
     @Override
     public void saveOrder(Order orderInForm) {
         Order orderInDB = orderRepository.findById(orderInForm.getOrderId()).get();
@@ -89,7 +121,12 @@ public class OrderServiceImpl implements OrderService{
         orderRepository.save(orderInForm);
     }
 
-    // updates the status of an order
+    /**
+     * Updates the status of an order and creates a new order track for the order.
+     *
+     * @param orderId The ID of the order to update
+     * @param status The new status to set for the order
+     */
     @Override
     public void updateStatus(Long orderId, String status) {
         Order orderInDB = orderRepository.findById(orderId).get();

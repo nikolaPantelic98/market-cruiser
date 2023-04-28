@@ -11,6 +11,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements the {@link  BrandService} interface and defines the business logic for brand operations.
+ * It contains methods to retrieve and manipulate Brand objects from the database.
+ */
 @Service
 public class BrandServiceImpl implements BrandService{
 
@@ -24,12 +28,23 @@ public class BrandServiceImpl implements BrandService{
     }
 
 
+    /**
+     * Returns a list of all Brand entities in the database.
+     */
     @Override
     public List<Brand> getAllBrands() {
         return brandRepository.findAll();
     }
 
-    // returns a page of brands sorted by the specified field and direction
+    /**
+     * Returns a Page of Brand entities sorted by the specified field and direction.
+     *
+     * @param pageNumber The page number to retrieve.
+     * @param sortField The field to sort the entities by.
+     * @param sortDir The direction to sort the entities in (asc or desc).
+     * @param keyword The keyword to search for in the brand names (can be null).
+     * @return A Page of Brand entities sorted by the specified field and direction.
+     */
     @Override
     public Page<Brand> listBrandsByPage(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -45,13 +60,24 @@ public class BrandServiceImpl implements BrandService{
         return brandRepository.findAll(pageable);
     }
 
-    // saves brand
+    /**
+     * Saves a Brand entity to the database.
+     *
+     * @param brand The Brand entity to be saved.
+     * @return The saved Brand entity.
+     */
     @Override
     public Brand saveBrand(Brand brand) {
         return brandRepository.save(brand);
     }
 
-    // gets a brand by brand id
+    /**
+     * Retrieves a Brand entity by its ID.
+     *
+     * @param brandId The ID of the Brand entity to retrieve.
+     * @return The retrieved Brand entity.
+     * @throws BrandNotFoundException if no Brand entity is found with the given ID.
+     */
     @Override
     public Brand getBrandById(Long brandId) throws BrandNotFoundException {
         try {
@@ -61,7 +87,12 @@ public class BrandServiceImpl implements BrandService{
         }
     }
 
-    // deletes a brand by brand id
+    /**
+     * Deletes a Brand entity from the database by its ID.
+     *
+     * @param brandId The ID of the Brand entity to delete.
+     * @throws BrandNotFoundException if no Brand entity is found with the given ID.
+     */
     @Override
     public void deleteBrand(Long brandId) throws BrandNotFoundException {
         Long countByBrandId = brandRepository.countByBrandId(brandId);
@@ -73,7 +104,13 @@ public class BrandServiceImpl implements BrandService{
         brandRepository.deleteById(brandId);
     }
 
-    // checks if the given brand ID and name are unique
+    /**
+     * Checks if the given brand ID and name are unique in the system.
+     *
+     * @param brandId the ID of the brand, null or 0 if creating a new brand
+     * @param name the name of the brand to be checked
+     * @return "OK" if the brand ID and name are unique, "Duplicate" if not
+     */
     @Override
     public String checkUnique(Long brandId, String name) {
         boolean isCreatingNew = (brandId == null || brandId == 0);

@@ -17,6 +17,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+/**
+ * This class implements the {@link  ShippingRateService} interface and defines the business logic for shipping operations.
+ * It contains methods to retrieve and manipulate Shipping Rate objects from the database.
+ */
 @Service
 @Transactional
 public class ShippingRateServiceImpl implements ShippingRateService{
@@ -35,7 +39,15 @@ public class ShippingRateServiceImpl implements ShippingRateService{
     }
 
 
-    // retrieves a specific page of shipping rates from the database
+    /**
+     * Retrieves a specific page of shipping rates from the database.
+     *
+     * @param pageNumber - The page number to retrieve.
+     * @param sortField - The field to sort by.
+     * @param sortDir - The direction to sort by.
+     * @param keyword - The keyword to search for.
+     * @return - The page of shipping rates.
+     */
     @Override
     public Page<ShippingRate> listShippingRatesByPage(int pageNumber, String sortField, String sortDir, String keyword) {
         Sort sort = Sort.by(sortField);
@@ -51,13 +63,20 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         return shippingRateRepository.findAll(pageable);
     }
 
-    // retrieves a list of all countries from the database, ordered by name in ascending order
+    /**
+     * Retrieves a list of all countries from the database, ordered by name in ascending order.
+     */
     @Override
     public List<Country> listAllCountries() {
         return countryRepository.findAllByOrderByNameAsc();
     }
 
-    // saves a shipping rate to the database
+    /**
+     * Saves a shipping rate to the database.
+     *
+     * @param rateInForm - The shipping rate to save.
+     * @throws ShippingRateAlreadyExistsException - If a shipping rate already exists for the same country and state.
+     */
     @Override
     public void saveShippingRate(ShippingRate rateInForm) throws ShippingRateAlreadyExistsException{
         ShippingRate rateInDB = shippingRateRepository.findByCountryAndState(
@@ -73,7 +92,13 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         shippingRateRepository.save(rateInForm);
     }
 
-    // retrieves a shipping rate with the specified ID from the database
+    /**
+     * Retrieves a shipping rate with the specified ID from the database.
+     *
+     * @param shippingRateId the ID of the shipping rate to retrieve
+     * @return the shipping rate with the specified ID
+     * @throws ShippingRateNotFoundException if no shipping rate with the specified ID is found
+     */
     @Override
     public ShippingRate getShippingRate(Long shippingRateId) throws ShippingRateNotFoundException {
         try {
@@ -83,7 +108,13 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         }
     }
 
-    // updates the cash on delivery (COD) support for a shipping rate in the database
+    /**
+     * Updates the cash on delivery (COD) support for a shipping rate in the database.
+     *
+     * @param shippingRateId the ID of the shipping rate to update
+     * @param codSupported the new value of the COD support
+     * @throws ShippingRateNotFoundException if no shipping rate with the specified ID is found
+     */
     @Override
     public void updateCODSupport(Long shippingRateId, boolean codSupported) throws ShippingRateNotFoundException {
         Long count = shippingRateRepository.countByShippingRateId(shippingRateId);
@@ -94,7 +125,12 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         shippingRateRepository.updateCODSupport(shippingRateId, codSupported);
     }
 
-    // deletes a shipping rate with the specified ID from the database
+    /**
+     * Deletes a shipping rate with the specified ID from the database.
+     *
+     * @param shippingRateId the ID of the shipping rate to delete
+     * @throws ShippingRateNotFoundException if no shipping rate with the specified ID is found
+     */
     @Override
     public void deleteShippingRate(Long shippingRateId) throws ShippingRateNotFoundException {
         Long count = shippingRateRepository.countByShippingRateId(shippingRateId);
@@ -105,7 +141,15 @@ public class ShippingRateServiceImpl implements ShippingRateService{
         shippingRateRepository.deleteById(shippingRateId);
     }
 
-    // calculates the shipping cost for a product being shipped to a specific country and state
+    /**
+     * Calculates the shipping cost for a product being shipped to a specific country and state.
+     *
+     * @param productId the ID of the product being shipped
+     * @param countryId the ID of the destination country
+     * @param state the destination state
+     * @return the calculated shipping cost
+     * @throws ShippingRateNotFoundException if no shipping rate is found for the given destination
+     */
     @Override
     public float calculateShippingCost(Long productId, Long countryId, String state) throws ShippingRateNotFoundException {
         ShippingRate shippingRate = shippingRateRepository.findByCountryAndState(countryId, state);
