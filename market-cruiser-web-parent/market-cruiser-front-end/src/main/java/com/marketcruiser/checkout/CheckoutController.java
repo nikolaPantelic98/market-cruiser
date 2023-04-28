@@ -34,6 +34,10 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * The CheckoutController class is a Spring MVC Controller that handles HTTP requests related to managing a customer's
+ * checkout.
+ */
 @Controller
 public class CheckoutController {
 
@@ -62,7 +66,13 @@ public class CheckoutController {
     }
 
 
-    // displays the checkout page for the authenticated customer
+    /**
+     * Displays the checkout page for the authenticated customer.
+     *
+     * @param model   an instance of the Model class
+     * @param request an instance of the HttpServletRequest class
+     * @return the view name of the checkout page
+     */
     @GetMapping("/checkout")
     public String showCheckoutPage(Model model, HttpServletRequest request) {
         Customer customer = getAuthenticatedCustomer(request);
@@ -102,14 +112,28 @@ public class CheckoutController {
         return "checkout/checkout";
     }
 
-    // helper method that gets the authenticated customer from the request
+    /**
+     * This method is a helper method that retrieves the authenticated customer from the given HttpServletRequest object.
+     *
+     * @param request the HttpServletRequest object that will be used to retrieve the authenticated customer's email address
+     * @return the Customer object representing the authenticated customer
+     */
     private Customer getAuthenticatedCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
 
         return customerService.getCustomerByEmail(email);
     }
 
-    // this method processes a customer's order
+    /**
+     * Endpoint for placing an order. Retrieves the payment method, customer information, default address, shipping rate,
+     * cart items, and checkout information. Creates an order and sends a confirmation email to the customer. Returns the view
+     * "checkout/order_completed".
+     *
+     * @param request the HttpServletRequest containing the payment method information
+     * @return the String representation of the view "checkout/order_completed"
+     * @throws MessagingException if there is an issue sending the confirmation email
+     * @throws UnsupportedEncodingException if there is an issue encoding the confirmation email content
+     */
     @PostMapping("/place_order")
     public String placeOrder(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         String paymentType = request.getParameter("paymentMethod");
@@ -136,7 +160,14 @@ public class CheckoutController {
         return "checkout/order_completed";
     }
 
-    // sends an email to the customer to confirm that their order has been successfully placed
+    /**
+     * Sends an email to the customer to confirm that their order has been successfully placed.
+     *
+     * @param request the HttpServletRequest containing the email settings
+     * @param order the Order object to send the confirmation for
+     * @throws MessagingException if there is an issue sending the confirmation email
+     * @throws UnsupportedEncodingException if there is an issue encoding the confirmation email content
+     */
     private void sendOrderConfirmationEmail(HttpServletRequest request, Order order) throws MessagingException, UnsupportedEncodingException {
         EmailSettingsBag emailSettings = settingsService.getEmailSettings();
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
@@ -174,7 +205,18 @@ public class CheckoutController {
         mailSender.send(message);
     }
 
-    // method that handles the processing of a PayPal order
+    /**
+     * Handles the processing of a PayPal order. Validates the order information using the PayPal API,
+     * and calls the {@link #placeOrder(HttpServletRequest)} method to complete the checkout process
+     * if the order information is valid. If the validation fails, a "Checkout Failure" message is
+     * displayed to the user.
+     *
+     * @param request the HTTP request object containing the order ID parameter
+     * @param model the model object to which the page title and message are added
+     * @return a string indicating the name of the view to be displayed to the user
+     * @throws UnsupportedEncodingException if there is a problem with the character encoding
+     * @throws MessagingException if there is a problem with sending an email
+     */
     @PostMapping("/process_paypal_order")
     public String processPayPalOrder(HttpServletRequest request, Model model) throws UnsupportedEncodingException, MessagingException {
         String orderId = request.getParameter("orderId");

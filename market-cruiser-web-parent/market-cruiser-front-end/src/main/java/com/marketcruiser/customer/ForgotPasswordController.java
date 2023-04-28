@@ -19,6 +19,11 @@ import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
 
+/**
+ * The ForgotPasswordController class handles the forgot password functionality
+ * for the customer. It allows the user to request a password reset link, reset
+ * their password, and receive email notifications.
+ */
 @Controller
 public class ForgotPasswordController {
 
@@ -32,13 +37,24 @@ public class ForgotPasswordController {
     }
 
 
-    // displays the forgot password form for the user to enter their email
+    /**
+     * Displays the forgot password form for the user to enter their email.
+     *
+     * @return the view name for the forgot password form
+     */
     @GetMapping("/forgot_password")
     public String showRequestForm() {
         return "customers/forgot_password_form";
     }
 
-    // processes the form data submitted by the user when requesting a password reset
+    /**
+     * Processes the form data submitted by the user when requesting a password reset.
+     * Sends an email to the user with a link to reset their password.
+     *
+     * @param request the HTTP servlet request object
+     * @param model the view model object
+     * @return the view name for the forgot password form
+     */
     @PostMapping("/forgot_password")
     public String processRequestForm(HttpServletRequest request, Model model) {
         String email = request.getParameter("email");
@@ -58,7 +74,14 @@ public class ForgotPasswordController {
         return "customers/forgot_password_form";
     }
 
-    // helper method that is used to email the user with a link to reset their password
+    /**
+     * Helper method that is used to email the user with a link to reset their password.
+     *
+     * @param link the reset password link
+     * @param email the user's email address
+     * @throws MessagingException if there is an issue with sending the email
+     * @throws UnsupportedEncodingException if there is an issue with the email encoding
+     */
     private void sendEmail(String link, String email) throws MessagingException, UnsupportedEncodingException {
         EmailSettingsBag emailSettings = settingsService.getEmailSettings();
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
@@ -84,7 +107,13 @@ public class ForgotPasswordController {
         mailSender.send(message);
     }
 
-    // displays the reset password form for the user to enter their new password
+    /**
+     * Displays the reset password form for the user to enter their new password.
+     *
+     * @param token The reset password token.
+     * @param model The Model object to add attributes to.
+     * @return The view name for the reset password form.
+     */
     @GetMapping("/reset_password")
     public String showResetPasswordForm(@Param("token") String token, Model model) {
         Customer customer = customerService.getCustomerByResetPasswordToken(token);
@@ -100,7 +129,13 @@ public class ForgotPasswordController {
         return "customers/reset_password_form";
     }
 
-    // processes the form data submitted by the user when resetting their password
+    /**
+     * Processes the form data submitted by the user when resetting their password.
+     *
+     * @param request The HttpServletRequest object to get parameters from.
+     * @param model The Model object to add attributes to.
+     * @return The view name for the message page.
+     */
     @PostMapping("/reset_password")
     public String processResetForm(HttpServletRequest request, Model model) {
         String token = request.getParameter("token");

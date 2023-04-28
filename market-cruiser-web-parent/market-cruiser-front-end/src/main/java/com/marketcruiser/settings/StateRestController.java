@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Rest controller that provides endpoints for managing states.
+ */
 @RestController
 public class StateRestController {
 
@@ -20,7 +23,12 @@ public class StateRestController {
     }
 
 
-    // retrieves a list of states for the specified country ID and returns it as a list of StateDTO objects
+    /**
+     * Endpoint that retrieves a list of states for the specified country ID and returns it as a list of StateDTO objects
+     *
+     * @param countryId the ID of the country for which to retrieve the list of states
+     * @return a list of StateDTO objects containing the ID and name of each state
+     */
     @GetMapping("/settings/list_states_by_country/{countryId}")
     public List<StateDTO> listStatesByCountry(@PathVariable Long countryId) {
         List<State> listStates = stateRepository.findByCountryOrderByNameAsc(new Country(countryId));

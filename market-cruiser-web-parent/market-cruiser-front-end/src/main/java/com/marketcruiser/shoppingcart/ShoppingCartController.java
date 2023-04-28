@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
+/**
+ * This class serves as a controller for the shopping cart-related pages, including viewing the contents of the cart
+ * and calculating the estimated total price of all items in the cart. It also includes a helper method that retrieves the
+ * authenticated customer from the request.
+ */
 @Controller
 public class ShoppingCartController {
 
@@ -33,7 +38,14 @@ public class ShoppingCartController {
     }
 
 
-    // view the contents of the shopping cart for the authenticated customer and calculates the estimated total price of all items in the cart
+    /**
+     * Displays the contents of the shopping cart for the authenticated customer and calculates the estimated total price
+     * of all items in the cart.
+     *
+     * @param model the Model object containing data to be displayed on the page
+     * @param request the HttpServletRequest containing information about the request
+     * @return the name of the view to be displayed
+     */
     @GetMapping("/cart")
     public String viewCart(Model model, HttpServletRequest request) {
         Customer customer = getAuthenticatedCustomer(request);
@@ -65,7 +77,12 @@ public class ShoppingCartController {
         return "cart/shopping_cart";
     }
 
-    // helper method that gets the authenticated customer from the request
+    /**
+     * Retrieves the authenticated customer from the request.
+     *
+     * @param request the HttpServletRequest containing the authenticated customer's email address
+     * @return the authenticated customer
+     */
     private Customer getAuthenticatedCustomer(HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
 

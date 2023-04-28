@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This class defines a Rest Controller for handling order-related requests.
+ * It provides methods for initiating the return of an order and for getting the authenticated customer.
+ */
 @RestController
 public class OrderRestController {
 
@@ -27,7 +31,13 @@ public class OrderRestController {
     }
 
 
-    // Handles a request to initiate the return of an order.
+    /**
+     * Handles a request to initiate the return of an order.
+     *
+     * @param returnRequest - the OrderReturnRequest object containing the order ID, reason and note for the return request
+     * @param servletRequest - the HttpServletRequest object representing the request
+     * @return a ResponseEntity object with the appropriate status code and message based on the success or failure of the return request
+     */
     @PostMapping("/orders/return")
     public ResponseEntity<?> handleOrderReturnRequest(@RequestBody OrderReturnRequest returnRequest, HttpServletRequest servletRequest) {
 
@@ -51,7 +61,13 @@ public class OrderRestController {
         return new ResponseEntity<>(new OrderReturnResponse(returnRequest.getOrderId()), HttpStatus.OK);
     }
 
-    // helper method that gets the authenticated customer from the request
+    /**
+     * Helper method that gets the authenticated customer from the request.
+     *
+     * @param request - the HttpServletRequest object representing the request
+     * @return a Customer object representing the authenticated customer
+     * @throws CustomerNotFoundException if the customer is not found in the request
+     */
     private Customer getAuthenticatedCustomer(HttpServletRequest request) throws CustomerNotFoundException {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         if (email == null) {

@@ -13,16 +13,29 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Properties;
 
+/**
+ * This class contains utility methods for the MarketCruiser application.
+ */
 public class Utility {
 
-    // returns the site URL by removing the servlet path from the request URL.
+    /**
+     * Returns the site URL by removing the servlet path from the request URL.
+     *
+     * @param request The HTTP servlet request.
+     * @return The site URL.
+     */
     public static String getSiteURL(HttpServletRequest request) {
         String siteURL = request.getRequestURL().toString();
 
         return siteURL.replace(request.getServletPath(), "");
     }
 
-    // prepares and returns a JavaMailSenderImpl object using the provided email settings
+    /**
+     * Prepares and returns a JavaMailSenderImpl object using the provided email settings.
+     *
+     * @param settings The email settings.
+     * @return The JavaMailSenderImpl object.
+     */
     public static JavaMailSenderImpl prepareMailSender(EmailSettingsBag settings) {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
 
@@ -40,7 +53,12 @@ public class Utility {
         return mailSender;
     }
 
-    // retrieves the email of the authenticated customer
+    /**
+     * Retrieves the email of the authenticated customer.
+     *
+     * @param request The HTTP servlet request.
+     * @return The email of the authenticated customer, or null if not authenticated.
+     */
     public static String getEmailOfAuthenticatedCustomer(HttpServletRequest request) {
         Object principal = request.getUserPrincipal();
         if (principal == null) return null;
@@ -58,6 +76,13 @@ public class Utility {
         return customerEmail;
     }
 
+    /**
+     * Formats the specified amount as a currency string using the provided currency settings.
+     *
+     * @param amount The amount to format.
+     * @param currencySettings The currency settings.
+     * @return The formatted currency string.
+     */
     public static String formatCurrency(float amount, CurrencySettingsBag currencySettings) {
         String symbol = currencySettings.getSymbol();
         String symbolPosition = currencySettings.getSymbolPosition();

@@ -27,6 +27,9 @@ import javax.transaction.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+/**
+ * The CustomerController class is a Spring MVC Controller that handles HTTP requests related to managing a customer
+ */
 @Controller
 @Transactional
 public class CustomerController {
@@ -41,7 +44,12 @@ public class CustomerController {
     }
 
 
-    // displays the registration form
+    /**
+     * This method displays the registration form.
+     *
+     * @param model the model object containing the list of countries and the customer object
+     * @return the view name for the registration form
+     */
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
         List<Country> listCountries = customerService.listAllCountries();
@@ -53,7 +61,16 @@ public class CustomerController {
         return "register/register_form";
     }
 
-    // creates a new customer in the database
+    /**
+     * This method creates a new customer in the database.
+     *
+     * @param customer the customer object to be created
+     * @param model the model object containing the page title
+     * @param request the HTTP servlet request
+     * @return the view name for the registration success page
+     * @throws MessagingException if there is an issue with sending the verification email
+     * @throws UnsupportedEncodingException if there is an issue with encoding the email content
+     */
     @PostMapping("/create_customer")
     public String createCustomer(Customer customer, Model model, HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
         customerService.registerCustomer(customer);
@@ -64,7 +81,14 @@ public class CustomerController {
         return "/register/register_success";
     }
 
-    // helper method to send a verification email to a new customer
+    /**
+     * This method is a helper method that sends a verification email to a new customer.
+     *
+     * @param request the HTTP servlet request
+     * @param customer the customer object for whom to send the verification email
+     * @throws MessagingException if there is an issue with sending the email
+     * @throws UnsupportedEncodingException if there is an issue with encoding the email content
+     */
     private void sendVerificationEmail(HttpServletRequest request, Customer customer) throws MessagingException, UnsupportedEncodingException {
         EmailSettingsBag emailSettings = settingsService.getEmailSettings();
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
@@ -94,7 +118,13 @@ public class CustomerController {
         System.out.println("Verify URL: " + verifyURL);
     }
 
-    // verifies the customer's account
+    /**
+     * This method is used to verify the customer account with the given verification code.
+     *
+     * @param code the verification code to verify the customer account
+     * @param model the Spring model object used to pass data to the view
+     * @return a string representing the name of the view to be displayed
+     */
     @GetMapping("/verify")
     public String verifyCustomerAccount(@Param("code") String code, Model model) {
         boolean verified = customerService.verifyCustomer(code);
@@ -102,7 +132,13 @@ public class CustomerController {
         return "register/" + (verified ? "verify_success" : "verify_fail");
     }
 
-    // returns the account details page for the authenticated customer
+    /**
+     * This method is used to return the account details page for the authenticated customer.
+     *
+     * @param model the Spring model object used to pass data to the view
+     * @param request the HTTP request object
+     * @return a string representing the name of the view to be displayed
+     */
     @GetMapping("/account_details")
     public String viewAccountDetails(Model model, HttpServletRequest request) {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
@@ -115,7 +151,15 @@ public class CustomerController {
         return "customers/account_form";
     }
 
-    // updates the account details of the customer
+    /**
+     * This method is used to update the account details of the customer.
+     *
+     * @param model the Spring model object used to pass data to the view
+     * @param customer the Customer object representing the updated customer account details
+     * @param redirectAttributes the Spring RedirectAttributes object used to add attributes to the redirect URL
+     * @param request the HTTP request object
+     * @return a string representing the redirect URL to be used after the account details are updated
+     */
     @PostMapping("/update_account_details")
     public String updateAccountDetails(Model model, Customer customer, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         customerService.updateCustomer(customer);
@@ -138,7 +182,12 @@ public class CustomerController {
         return redirectURL;
     }
 
-    // helper method that updates the name of the authenticated customer
+    /**
+     * This is a helper method used to update the name of the authenticated customer.
+     *
+     * @param customer the Customer object representing the updated customer account details
+     * @param request the HTTP request object
+     */
     private void updateNameForAuthenticatedCustomer(Customer customer, HttpServletRequest request) {
         Object principal = request.getUserPrincipal();
 
@@ -156,7 +205,12 @@ public class CustomerController {
         }
     }
 
-    // helper method that returns a CustomerUserDetails object based on the principal object passed in
+    /**
+     * This is a helper method used to return a CustomerUserDetails object based on the principal object passed in.
+     *
+     * @param principal the principal object representing the authenticated user
+     * @return a CustomerUserDetails object representing the authenticated user details
+     */
     private CustomerUserDetails getCustomerUserDetailsObject(Object principal) {
         CustomerUserDetails userDetails = null;
         if (principal instanceof UsernamePasswordAuthenticationToken) {

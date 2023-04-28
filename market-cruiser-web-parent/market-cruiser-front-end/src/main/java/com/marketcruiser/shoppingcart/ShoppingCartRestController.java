@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * This class represents a REST controller for managing shopping cart related functionality.
+ * It provides endpoints for adding, updating and removing products from a customer's cart.
+ */
 @RestController
 public class ShoppingCartRestController {
 
@@ -25,7 +29,14 @@ public class ShoppingCartRestController {
     }
 
 
-    // adds a product with a specified quantity to a customer's shopping cart
+    /**
+     * Adds a specified quantity of a product to a customer's shopping cart
+     *
+     * @param productId The ID of the product to be added to cart
+     * @param quantity The quantity of the product to be added to cart
+     * @param request The HttpServletRequest object containing the customer's authentication details
+     * @return A message indicating the status of the operation
+     */
     @PostMapping("/cart/add/{productId}/{quantity}")
     public String addProductToCart(@PathVariable Long productId, @PathVariable Integer quantity, HttpServletRequest request) {
         try {
@@ -40,7 +51,13 @@ public class ShoppingCartRestController {
         }
     }
 
-    // helper method that gets the authenticated customer from the request
+    /**
+     * Helper method that gets the authenticated customer from the request
+     *
+     * @param request The HttpServletRequest object containing the customer's authentication details
+     * @return The authenticated customer
+     * @throws CustomerNotFoundException Thrown if the customer is not found in the system
+     */
     private Customer getAuthenticatedCustomer(HttpServletRequest request) throws CustomerNotFoundException {
         String email = Utility.getEmailOfAuthenticatedCustomer(request);
         if (email == null) {
@@ -50,7 +67,14 @@ public class ShoppingCartRestController {
         return customerService.getCustomerByEmail(email);
     }
 
-    // updates the quantity of a product in the cart for the authenticated customer
+    /**
+     * Updates the quantity of a product in the cart for the authenticated customer
+     *
+     * @param productId The ID of the product to be updated
+     * @param quantity The new quantity of the product
+     * @param request The HttpServletRequest object containing the customer's authentication details
+     * @return The new subtotal of the updated product
+     */
     @PostMapping("/cart/update/{productId}/{quantity}")
     public String updateQuantity(@PathVariable Long productId, @PathVariable Integer quantity, HttpServletRequest request) {
         try {
@@ -63,7 +87,14 @@ public class ShoppingCartRestController {
         }
     }
 
-    // removes a product from the cart for the authenticated customer
+    /**
+     * Removes a product from the cart for the authenticated customer.
+     *
+     * @param productId the ID of the product to remove from the cart.
+     * @param request the HttpServletRequest object containing the request information.
+     * @return a String indicating that the product has been successfully removed from the cart.
+     * @throws CustomerNotFoundException if the customer is not authenticated.
+     */
     @DeleteMapping("/cart/remove/{productId}")
     public String removeProduct(@PathVariable Long productId, HttpServletRequest request) {
         try {
