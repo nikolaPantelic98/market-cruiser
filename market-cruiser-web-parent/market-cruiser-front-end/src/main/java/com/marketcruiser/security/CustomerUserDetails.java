@@ -6,6 +6,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
+/**
+ * This class represents the details of a customer for Spring Security's authentication and authorization process.
+ */
 public class CustomerUserDetails implements UserDetails {
 
     private Customer customer;

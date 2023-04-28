@@ -6,6 +6,10 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.Collection;
 import java.util.Map;
 
+/**
+ * Represents a customer authenticated via OAuth2.
+ * Provides additional functionality over the base OAuth2User implementation, such as retrieving the user's full name.
+ */
 public class CustomerOAuth2User implements OAuth2User {
 
     private OAuth2User oAuth2User;

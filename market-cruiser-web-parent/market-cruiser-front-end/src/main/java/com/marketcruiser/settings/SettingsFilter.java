@@ -9,6 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * A filter that intercepts incoming requests and sets general settings as request attributes.
+ * Implements the {@link Filter} interface.
+ */
 @Component
 public class SettingsFilter implements Filter {
 
@@ -20,7 +24,15 @@ public class SettingsFilter implements Filter {
     }
 
 
-    // filters incoming request, sets general settings as request attributes
+    /**
+     * Filters incoming requests and sets general settings as request attributes.
+     *
+     * @param request  The ServletRequest object representing the incoming request.
+     * @param response The ServletResponse object representing the response to send back to the client.
+     * @param chain    The FilterChain object representing the chain of filters to execute.
+     * @throws IOException      If an I/O error occurs while processing the request.
+     * @throws ServletException If an error occurs while processing the request.
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest servletRequest = (HttpServletRequest) request;

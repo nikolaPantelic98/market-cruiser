@@ -5,6 +5,11 @@ import com.marketcruiser.common.entity.settings.SettingsBag;
 
 import java.util.List;
 
+/**
+ * CurrencySettingsBag is a subclass of SettingsBag that contains methods to retrieve various currency settings
+ * for a given list of settings. It provides methods to get the currency symbol, currency symbol position, decimal point type,
+ * thousand point type, and decimal digits from the list of settings.
+ */
 public class CurrencySettingsBag extends SettingsBag {
 
     public CurrencySettingsBag(List<Settings> listSettings) {

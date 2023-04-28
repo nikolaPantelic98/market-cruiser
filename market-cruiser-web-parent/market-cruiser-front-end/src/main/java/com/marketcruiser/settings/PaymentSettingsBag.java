@@ -5,6 +5,10 @@ import com.marketcruiser.common.entity.settings.SettingsBag;
 
 import java.util.List;
 
+/**
+ * A class for holding payment settings data as a collection of key-value pairs.
+ * Extends the {@link SettingsBag} class.
+ */
 public class PaymentSettingsBag extends SettingsBag {
 
     public PaymentSettingsBag(List<Settings> listSettings) {

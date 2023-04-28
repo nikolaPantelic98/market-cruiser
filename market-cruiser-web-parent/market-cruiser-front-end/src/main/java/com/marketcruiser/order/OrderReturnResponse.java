@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+/**
+ * Represents a response for an order return request.
+ */
 @Getter
 @Setter
 @AllArgsConstructor

@@ -26,12 +26,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private DatabaseLoginSuccessHandler databaseLoginSuccessHandler;
 
+
+    /**
+     * This method returns a PasswordEncoder instance which uses the BCrypt hashing function.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // configures the security for HTTPS requests
+    /**
+     * This method configures the security for HTTPS requests, including
+     * URL path restrictions and success handlers for form login and OAuth2 login.
+     * It also sets a key and validity period for remember me functionality.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -61,19 +69,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS);
     }
 
-    // configures web security
+    /**
+     * This method configures web security and ignores resources such as images,
+     * JavaScript, and webjars.
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");
     }
 
-    // responsible for loading user details
+    /**
+     * This method returns an instance of CustomerUserDetailsService, which is responsible
+     * for loading user details.
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return new CustomerUserDetailsService();
     }
 
-    // responsible for authenticating users
+    /**
+     * This method returns an instance of DaoAuthenticationProvider, which is responsible
+     * for authenticating users using the userDetailsService and passwordEncoder.
+     */
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

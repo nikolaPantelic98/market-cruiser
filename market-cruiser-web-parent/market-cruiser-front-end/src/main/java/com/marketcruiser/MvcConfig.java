@@ -7,10 +7,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+/**
+ * The MvcConfig class is responsible for configuring the Spring MVC resources such as
+ * user photos, category images, brand logos, product images and site logo.
+ */
 @Configuration
 public class MvcConfig implements WebMvcConfigurer {
 
-    // registers a resource handler for category images, brand logos, product images and site logo
+    /**
+     * Registers resource handlers for various resources like category images, brand logos, product images, and site logo.
+     *
+     * @param registry ResourceHandlerRegistry object that contains the resource mappings
+     */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
 

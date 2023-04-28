@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+/**
+ * This class implements a custom success handler for database authentication. It extends the
+ * {@link  SavedRequestAwareAuthenticationSuccessHandler} class provided by Spring Security.
+ */
 @Component
 public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
@@ -25,8 +29,16 @@ public class DatabaseLoginSuccessHandler extends SavedRequestAwareAuthentication
     }
 
 
-    // this method is called when a user successfully logs in with an authentication method
-    // It updates the customer's authentication type to DATABASE
+    /**
+     * This method is called when a user successfully logs in with an authentication method
+     * It updates the customer's authentication type to DATABASE.
+     *
+     * @param request - the HttpServletRequest object
+     * @param response - the HttpServletResponse object
+     * @param authentication - the Authentication object representing the logged-in user
+     * @throws ServletException - a ServletException is thrown when there is an issue with the servlet
+     * @throws IOException - an IOException is thrown when there is an issue with I/O
+     */
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
         CustomerUserDetails userDetails = (CustomerUserDetails) authentication.getPrincipal();
