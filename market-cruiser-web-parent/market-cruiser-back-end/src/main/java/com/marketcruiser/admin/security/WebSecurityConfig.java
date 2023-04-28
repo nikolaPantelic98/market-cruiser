@@ -12,23 +12,32 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * Configuration class for Spring Security to secure the MarketCruiser application.
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // used to load data by username (in this case email address)
+    /**
+     * Returns an instance of the {@link MarketCruiserUserDetailsService} to be used to load user details by email address.
+     */
     @Bean
     public UserDetailsService userDetailsService() {
         return new MarketCruiserUserDetailsService();
     }
 
-    // used to encode and verify passwords
+    /**
+     * Returns an instance of the {@link BCryptPasswordEncoder} to be used to encode and verify passwords.
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // used to authenticate users based on their credentials
+    /**
+     * Returns an instance of the {@link DaoAuthenticationProvider} to be used to authenticate users based on their credentials.
+     */
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
         authProvider.setUserDetailsService(userDetailsService());
@@ -37,13 +46,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return authProvider;
     }
 
-    // configures the authentication manager which is responsible for authenticating users based on their credentials
+    /**
+     * Configures the AuthenticationManagerBuilder to use the DaoAuthenticationProvider to authenticate users.
+     * @param auth The AuthenticationManagerBuilder to be configured.
+     * @throws Exception if there is an error during configuration.
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
 
-    // configures the security for HTTPS requests
+    /**
+     * Configures the HttpSecurity to secure HTTPS requests to the application.
+     *
+     * @param http The HttpSecurity to be configured.
+     * @throws Exception if there is an error during configuration.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -88,7 +106,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
     }
 
-    // configures web security
+    /**
+     * This method configures the WebSecurity object to ignore certain URLs from security filtering.
+     *
+     * @param web the WebSecurity object to configure
+     * @throws Exception if an error occurs during configuration
+     */
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/images/**", "/js/**", "/webjars/**");

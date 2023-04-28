@@ -13,9 +13,18 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * This class exports a list of users to a PDF file and sends it to the client.
+ */
 public class UserPdfExporter extends AbstractExporter {
 
-    // exports a list of users to a PDF file and sends it to the client
+    /**
+     * Exports a list of users to a PDF file and sends it to the client.
+     *
+     * @param listUsers a List of User objects to export to PDF
+     * @param response  the HttpServletResponse object to send the PDF to
+     * @throws IOException if there is an error writing to the response stream
+     */
     public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
         super.setResponseHeader(response, "application/pdf", ".pdf", "users_");
 
@@ -46,7 +55,12 @@ public class UserPdfExporter extends AbstractExporter {
         document.close();
     }
 
-    // writes the data for the list of users to the given PDF file
+    /**
+     * Writes the data for the list of users to the given PDF file.
+     *
+     * @param table     the PdfPTable object to write the data to
+     * @param listUsers a List of User objects to write to the table
+     */
     private void writeTableData(PdfPTable table, List<User> listUsers) {
         for (User user : listUsers) {
             table.addCell(String.valueOf(user.getUserId()));
@@ -58,7 +72,11 @@ public class UserPdfExporter extends AbstractExporter {
         }
     }
 
-    // writes the header row for the PDF file
+    /**
+     * Writes the header row for the PDF file.
+     *
+     * @param table the PdfPTable object to write the header row to
+     */
     private void writeTableHeader(PdfPTable table) {
         PdfPCell cell = new PdfPCell();
         cell.setBackgroundColor(Color.ORANGE);

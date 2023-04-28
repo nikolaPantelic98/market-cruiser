@@ -13,9 +13,17 @@ import java.nio.file.Paths;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * The ProductSaveHelper class is a helper class for saving and updating product entities in the database.
+ */
 public class ProductSaveHelper {
 
-    // sets the name of the main image for a product based on the uploaded file
+    /**
+     * Sets the name of the main image for a product based on the uploaded file.
+     *
+     * @param mainImageMultipart The multipart file containing the main image.
+     * @param product The product entity to be updated.
+     */
     static void setMainImageName(MultipartFile mainImageMultipart, Product product) {
         if (!mainImageMultipart.isEmpty()) {
             String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
@@ -23,7 +31,12 @@ public class ProductSaveHelper {
         }
     }
 
-    // sets the names of the extra images for a product based on the uploaded files
+    /**
+     * Sets the names of the extra images for a product based on the uploaded files.
+     *
+     * @param extraImageMultiparts The array of multipart files containing the extra images.
+     * @param product The product entity to be updated.
+     */
     static void setNewExtraImageNames(MultipartFile[] extraImageMultiparts, Product product) {
         if (extraImageMultiparts.length > 0) {
             for (MultipartFile multipartFile : extraImageMultiparts) {
@@ -38,7 +51,14 @@ public class ProductSaveHelper {
         }
     }
 
-    // Saves the uploaded main image and extra images to disk
+    /**
+     * Saves the uploaded main image and extra images to disk.
+     *
+     * @param mainImageMultipart The multipart file containing the main image.
+     * @param extraImageMultiparts The array of multipart files containing the extra images.
+     * @param savedProduct The saved product entity.
+     * @throws IOException If there is an error saving the images to disk.
+     */
     static void saveUploadedImages(MultipartFile mainImageMultipart, MultipartFile[] extraImageMultiparts, Product savedProduct) throws IOException {
         if (!mainImageMultipart.isEmpty()) {
             String fileName = StringUtils.cleanPath(mainImageMultipart.getOriginalFilename());
@@ -60,7 +80,13 @@ public class ProductSaveHelper {
         }
     }
 
-    // helper method that sets the product details for the given product based on the provided arrays of names and values
+    /**
+     * Helper method that sets the product details for the given product based on the provided arrays of names and values.
+     * @param detailIDs The array of detail IDs.
+     * @param detailNames The array of detail names.
+     * @param detailValues The array of detail values.
+     * @param product The product entity to be updated.
+     */
     static void setProductDetails(String[] detailIDs, String[] detailNames, String[] detailValues, Product product) {
         if (detailNames == null || detailNames.length == 0) return;
 
@@ -77,7 +103,13 @@ public class ProductSaveHelper {
         }
     }
 
-    // sets the names for the existing extra images for a product
+    /**
+     * Sets the names for the existing extra images for a product.
+     *
+     * @param imageIDs The array of image IDs.
+     * @param imageNames The array of image names.
+     * @param product The product entity to be updated.
+     */
     static void setExistingExtraImageNames(String[] imageIDs, String[] imageNames, Product product) {
         if (imageIDs == null || imageIDs.length == 0) return;
 
@@ -91,7 +123,11 @@ public class ProductSaveHelper {
         product.setImages(images);
     }
 
-    // deletes the extra images that were removed on the form
+    /**
+     * Deletes the extra images that were removed on the form.
+     *
+     * @param product The product entity to be updated.
+     */
     static void deleteExtraImagesWereRemovedOnForm(Product product) {
         String extraImageDir = "../product-images/" + product.getProductId() + "/extras";
         Path dirPath = Paths.get(extraImageDir);

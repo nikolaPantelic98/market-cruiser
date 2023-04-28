@@ -10,9 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The UserCsvExporter class exports a list of users to a CSV file and sends it to the client.
+ */
 public class UserCsvExporter extends AbstractExporter {
 
-    // method that exports a list of users to a CSV file and sends it to the client
+    /**
+     * Exports a list of users to a CSV file and sends it to the client.
+     *
+     * @param listUsers the list of users to export
+     * @param response the HTTP servlet response object to send the CSV file
+     * @throws IOException if there is an error writing to the response output stream
+     */
     public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
         super.setResponseHeader(response, "text/csv", ".csv", "users_");
 

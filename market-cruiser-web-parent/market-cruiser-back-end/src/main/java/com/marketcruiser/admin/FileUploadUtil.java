@@ -9,9 +9,19 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
+/**
+ * A utility class for handling file upload and directory operations.
+ */
 public class FileUploadUtil {
 
-    // saves the given image file to the specified upload directory
+    /**
+     * Saves the given image file to the specified upload directory.
+     *
+     * @param uploadDir The directory path to save the file to.
+     * @param fileName The name to save the file as.
+     * @param multipartFile The file to be saved.
+     * @throws IOException if there is an error saving the file.
+     */
     public static void saveFile(String uploadDir, String fileName, MultipartFile multipartFile) throws IOException {
         Path uploadPath = Paths.get(uploadDir);
 
@@ -27,7 +37,11 @@ public class FileUploadUtil {
         }
     }
 
-    // deletes old user profile photo after newest upload under the directory
+    /**
+     * Deletes old user profile photo after newest upload under the directory.
+     *
+     * @param dir The directory path to clean.
+     */
     public static void cleanDir(String dir) {
         Path dirPath = Paths.get(dir);
 
@@ -46,7 +60,11 @@ public class FileUploadUtil {
         }
     }
 
-    // removes the specified directory and all its contents
+    /**
+     * Removes the specified directory and all its contents.
+     *
+     * @param dir The directory path to remove.
+     */
     public static void removeDir(String dir) {
         cleanDir(dir);
 

@@ -1,5 +1,9 @@
 package com.marketcruiser.admin.brand;
 
+/**
+ * A DTO (Data Transfer Object) class that represents a category, used for transferring data between layers.
+ * It has two properties, categoryId and name.
+ */
 public class CategoryDTO {
 
     private Long categoryId;

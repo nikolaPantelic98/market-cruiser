@@ -10,9 +10,18 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The CategoryCsvExporter class exports a list of categories to a CSV file and sends it to the client.
+ */
 public class CategoryCsvExporter extends AbstractExporter {
 
-    // method that exports a list of categories to a CSV file and sends it to the client
+    /**
+     * Exports a list of categories to a CSV file and sends it to the client.
+     *
+     * @param listCategories the list of categories to export
+     * @param response the HTTP servlet response object to send the CSV file
+     * @throws IOException if there is an error writing to the response output stream
+     */
     public void export(List<Category> listCategories, HttpServletResponse response) throws IOException {
         super.setResponseHeader(response, "text/csv", ".csv", "categories_");
 

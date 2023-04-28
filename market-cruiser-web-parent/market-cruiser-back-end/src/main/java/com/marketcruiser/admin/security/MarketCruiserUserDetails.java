@@ -11,6 +11,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * The MarketCruiserUserDetails class implements the {@link  UserDetails} interface from Spring Security,
+ * which represents an authenticated user's details.
+ * It contains methods to retrieve user details such as the user's username, password,
+ * roles, full name, as well as methods to modify the user's first name and last name.
+ */
 public class MarketCruiserUserDetails implements UserDetails {
 
     private static final long serialVersionUID = 1L;

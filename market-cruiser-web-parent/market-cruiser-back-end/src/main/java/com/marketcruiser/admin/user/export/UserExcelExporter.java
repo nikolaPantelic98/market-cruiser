@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * An implementation of an Excel exporter for a list of users.
+ */
 public class UserExcelExporter extends AbstractExporter {
     private XSSFWorkbook workbook;
     private XSSFSheet sheet;
@@ -20,7 +23,9 @@ public class UserExcelExporter extends AbstractExporter {
     }
 
 
-    // method that writes the header row to the sheet in the workbook
+    /**
+     * Private helper method to write the header row to the sheet in the workbook.
+     */
     private void writeHeaderLine() {
         sheet = workbook.createSheet("Users");
         XSSFRow row = sheet.createRow(0);
@@ -39,7 +44,14 @@ public class UserExcelExporter extends AbstractExporter {
         createCell(row, 5, "Enabled", cellStyle);
     }
 
-    // method that creates a new cell in the given row at the specified column index and sets its value and style
+    /**
+     * Private helper method to create a new cell in the given row at the specified column index and sets its value and style.
+     *
+     * @param row the row where the cell will be created
+     * @param columnIndex the index of the column where the cell will be created
+     * @param value the value to be set in the cell
+     * @param style the style to be applied to the cell
+     */
     private void createCell(XSSFRow row, int columnIndex, Object value, CellStyle style) {
         XSSFCell cell = row.createCell(columnIndex);
         sheet.autoSizeColumn(columnIndex);
@@ -57,7 +69,13 @@ public class UserExcelExporter extends AbstractExporter {
         cell.setCellStyle(style);
     }
 
-    // method that exports the given list of users to an Excel file
+    /**
+     * Exports the given list of users to an Excel file.
+     *
+     * @param listUsers the list of users to be exported
+     * @param response the HTTP response to which the Excel file will be written
+     * @throws IOException if an error occurs while writing the file
+     */
     public void export(List<User> listUsers, HttpServletResponse response) throws IOException {
         super.setResponseHeader(response, "application/octet-stream", ".xlsx", "users_");
 
@@ -70,7 +88,11 @@ public class UserExcelExporter extends AbstractExporter {
         outputStream.close();
     }
 
-    // method that writes the data rows for the given list of users to the sheet in the workbook
+    /**
+     * Private helper method to write the data rows for the given list of users to the sheet in the workbook.
+     *
+     * @param listUsers the list of users to be written
+     */
     private void writeDataLines(List<User> listUsers) {
         int rowIndex = 1;
 
