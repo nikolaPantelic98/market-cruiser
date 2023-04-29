@@ -19,6 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * CategoryController handles requests related to categories including pagination,
+ * creating, editing, and deleting categories. It communicates with the {@link CategoryServiceImpl}
+ * to perform CRUD operations.
+ */
 @Controller
 public class CategoryController {
     private final CategoryServiceImpl categoryService;
@@ -28,13 +33,27 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    // shows a first page of categories
+    /**
+     * Returns the first page of categories using the specified sort direction.
+     *
+     * @param sortDir - A String representing the sort direction, "asc" or "desc".
+     * @param model - A Model object used to pass attributes to the view.
+     * @return A String representing the name of the view that should be rendered.
+     */
     @GetMapping("/categories")
     public String showFirstPageOfCategories(@Param("sortDir") String sortDir, Model model) {
         return showPageOfCategories(1, sortDir, model, null);
     }
 
-    // shows a list of all categories using pagination
+    /**
+     * Returns a specified page of categories using the specified sort direction and search keyword.
+     *
+     * @param pageNum - An int representing the page number to return.
+     * @param sortDir - A String representing the sort direction, "asc" or "desc".
+     * @param model - A Model object used to pass attributes to the view.
+     * @param keyword - A String representing the search keyword.
+     * @return A String representing the name of the view that should be rendered.
+     */
     @GetMapping("/categories/page/{pageNum}")
     public String showPageOfCategories(@PathVariable int pageNum, @Param("sortDir") String sortDir, Model model, @Param("keyword") String keyword) {
         if (sortDir == null || sortDir.isEmpty()) {
@@ -70,7 +89,12 @@ public class CategoryController {
         return "categories/categories";
     }
 
-    // shows a form for creating a new category
+    /**
+     * Show the form for creating a new category
+     *
+     * @param model the Model object used to pass data to the view
+     * @return the view name for the category form
+     */
     @GetMapping("/categories/new")
     public String showFormForCreatingCategory(Model model) {
         Category category = new Category();
@@ -83,7 +107,15 @@ public class CategoryController {
         return "categories/category_form";
     }
 
-    // saves a new category with image file or updates an existing one
+    /**
+     * Save a category and its image file
+     *
+     * @param category the Category object to be saved
+     * @param multipartFile the image file to be uploaded
+     * @param redirectAttributes the RedirectAttributes object used to pass flash attributes
+     * @return the view name for redirecting to the categories page
+     * @throws IOException if there is an error with the file upload
+     */
     @PostMapping("/categories/save")
     public String saveCategory(Category category, @RequestParam("fileImage")    MultipartFile multipartFile,
                                RedirectAttributes redirectAttributes) throws IOException {
@@ -104,7 +136,14 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    // form for updating/editing already existing category with exception handler
+    /**
+     * Show the form for editing an existing category
+     *
+     * @param categoryId the ID of the category to be edited
+     * @param model the Model object used to pass data to the view
+     * @param redirectAttributes the RedirectAttributes object used to pass flash attributes
+     * @return the view name for the category form, or the categories page if the category is not found
+     */
     @GetMapping("/categories/edit/{categoryId}")
     public String showFormForEditingCategory(@PathVariable Long categoryId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -122,7 +161,14 @@ public class CategoryController {
         }
     }
 
-    // method that disables or enables the category
+    /**
+     * Update the enabled status of a category
+     *
+     * @param categoryId the ID of the category to be updated
+     * @param enabled the new enabled status of the category
+     * @param redirectAttributes the RedirectAttributes object used to pass flash attributes
+     * @return the view name for redirecting to the categories page
+     */
     @GetMapping("/categories/{categoryId}/enabled/{status}")
     public String updateCategoryEnabledStatus(@PathVariable Long categoryId, @PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
         categoryService.updateCategoryEnabledStatus(categoryId, enabled);
@@ -133,7 +179,14 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    // method that deletes category
+    /**
+     * This method handles the deletion of a category and its associated image directory.
+     *
+     * @param categoryId the ID of the category to be deleted.
+     * @param model the model object for the view.
+     * @param redirectAttributes the redirect attributes for the flash message.
+     * @return the redirect path to the categories page.
+     */
     @GetMapping("/categories/delete/{categoryId}")
     public String deleteCategory(@PathVariable Long categoryId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -149,7 +202,12 @@ public class CategoryController {
         return "redirect:/categories";
     }
 
-    // method that exports the entire table of categories to a CSV file
+    /**
+     * This method exports the entire table of categories to a CSV file.
+     *
+     * @param response the HttpServletResponse object.
+     * @throws IOException if there is an error writing to the response.
+     */
     @GetMapping("/categories/export/csv")
     public void exportToCSV(HttpServletResponse response) throws IOException {
         List<Category> listCategories = categoryService.listCategoriesUsedInForm();

@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
+/**
+ * Controller for searching and displaying products in the order section.
+ */
 @Controller
 public class ProductSearchController {
 
@@ -25,16 +28,38 @@ public class ProductSearchController {
     }
 
 
+    /**
+     * Displays the search product page.
+     *
+     * @return The name of the view that will be rendered.
+     */
     @GetMapping("/orders/search_product")
     public String showSearchProductPage() {
         return "orders/search_product";
     }
 
+    /**
+     * Searches for products based on a keyword.
+     *
+     * @param keyword The keyword to search for.
+     * @param model The model to be used in the view.
+     * @return The name of the view that will be rendered.
+     */
     @PostMapping("/orders/search_product")
     public String searchProducts(String keyword, Model model) {
         return searchProductsByPage(1, model, "name", "asc", keyword);
     }
 
+    /**
+     * Searches for products based on a keyword and the specified sorting parameters.
+     *
+     * @param pageNumber The current page number.
+     * @param model The model to be used in the view.
+     * @param sortField The field to sort the results by.
+     * @param sortDir The direction to sort the results in.
+     * @param keyword The keyword to search for.
+     * @return The name of the view that will be rendered.
+     */
     @GetMapping("/orders/search_product/page/{pageNumber}")
     public String searchProductsByPage(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                        @Param("sortDir") String sortDir, @Param("keyword") String keyword) {

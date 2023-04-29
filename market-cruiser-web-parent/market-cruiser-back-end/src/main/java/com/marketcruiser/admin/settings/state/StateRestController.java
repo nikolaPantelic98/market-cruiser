@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class provides REST API endpoints for managing states.
+ */
 @RestController
 public class StateRestController {
 
@@ -20,7 +23,12 @@ public class StateRestController {
     }
 
 
-    // retrieves a list of states for the specified country ID and returns it as a list of StateDTO objects
+    /**
+     * Retrieves a list of states for the specified country ID and returns it as a list of StateDTO objects
+     *
+     * @param countryId The ID of the country to retrieve states for
+     * @return A list of StateDTO objects representing the states of the specified country
+     */
     @GetMapping("/states/list_by_country/{countryId}")
     public List<StateDTO> listStatesByCountry(@PathVariable Long countryId) {
         List<State> listStates = stateRepository.findByCountryOrderByNameAsc(new Country(countryId));
@@ -33,14 +41,23 @@ public class StateRestController {
         return result;
     }
 
-    // method that saves state
+    /**
+     * Saves the provided state entity
+     *
+     * @param state The State entity to be saved
+     * @return The ID of the saved state entity
+     */
     @PostMapping("/states/save")
     public String saveState(@RequestBody State state) {
         State savedState = stateRepository.save(state);
         return String.valueOf(savedState.getStateId());
     }
 
-    // method that deletes state
+    /**
+     * Deletes the state entity with the specified ID
+     *
+     * @param stateId The ID of the state entity to be deleted
+     */
     @DeleteMapping("/states/delete/{stateId}")
     public void deleteState(@PathVariable Long stateId) {
         stateRepository.deleteById(stateId);

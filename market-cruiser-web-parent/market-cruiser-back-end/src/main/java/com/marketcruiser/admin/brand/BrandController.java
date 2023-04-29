@@ -20,6 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * BrandController handles requests related to brands including pagination,
+ * creating, editing, and deleting brands. It communicates with the {@link BrandServiceImpl}
+ * and {@link CategoryServiceImpl} to perform CRUD operations.
+ */
 @Controller
 public class BrandController {
 
@@ -33,13 +38,29 @@ public class BrandController {
     }
 
 
-    // shows a first page of brands
+    /**
+     * Show the first page of brands sorted by name in ascending order.
+     *
+     * @param model - the UI Model object to add model attributes
+     * @return - a String that is the name of the HTML page to display
+     */
     @GetMapping("/brands")
     public String showFirstPageOfBrands(Model model) {
         return showPageOfBrands(1, model, "name", "asc", null);
     }
 
-    // shows a list of all brands using pagination
+    /**
+     * Show a page of brands based on the given page number, sort field, sort direction, and keyword.
+     * This method communicates with the {@link BrandServiceImpl} to get a Page object and adds model attributes
+     * to the UI Model object for pagination and displaying the list of brands.
+     *
+     * @param pageNumber - the page number to display
+     * @param model      - the UI Model object to add model attributes
+     * @param sortField  - the field to sort by
+     * @param sortDir    - the sort direction, either "asc" or "desc"
+     * @param keyword    - the keyword to search for in the brand name or category name
+     * @return - a String that is the name of the HTML page to display
+     */
     @GetMapping("/brands/page/{pageNumber}")
     public String showPageOfBrands(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                   @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
@@ -70,7 +91,15 @@ public class BrandController {
         return "brands/brands";
     }
 
-    // shows a form for creating a new brand
+    /**
+     * This method is responsible for displaying a form that allows the user to create a new brand.
+     * It retrieves the list of categories that are used in the brand creation form from the category service and
+     * creates a new brand object. It then adds the list of categories and the brand object to the model and
+     * returns the brand form view template.
+     *
+     * @param model the model object that is used to pass data to the view template
+     * @return the brand form view template
+     */
     @GetMapping("/brands/new")
     public String showFormForCreatingBrand(Model model) {
         List<Category> listCategories = categoryService.listCategoriesUsedInForm();
@@ -83,7 +112,21 @@ public class BrandController {
         return "brands/brand_form";
     }
 
-    // saves a new brand with logo or updates an existing one
+    /**
+     * This method is responsible for saving a new brand with its logo or updating an existing one.
+     * If a logo is provided, it saves the logo file to the appropriate directory and sets the brand object's logo
+     * field to the file name. The brand object is then saved to the database using the brand service.
+     * If no logo is provided, the brand object is simply saved to the database. The method then adds a flash attribute
+     * to the redirect attributes object, indicating that the brand has been saved successfully,
+     * and returns the redirect view template to the brands page.
+     *
+     * @param brand the brand object that is being saved or updated
+     * @param multipartFile the logo file that is being uploaded
+     * @param redirectAttributes the redirect attributes object that is used to pass data to the redirected view template
+     * @return the redirect view template to the brands page
+
+     @throws IOException
+     */
     @PostMapping("/brands/save")
     public String saveBrand(Brand brand, @RequestParam("fileImage") MultipartFile multipartFile,
                                RedirectAttributes redirectAttributes) throws IOException {
@@ -104,7 +147,19 @@ public class BrandController {
         return "redirect:/brands";
     }
 
-    // form for updating/editing already existing brand with exception handler
+    /**
+     * This method is responsible for displaying a form that allows the user to edit an already existing brand.
+     * It retrieves the brand object with the specified brand ID from the brand service and the list of categories
+     * that are used in the brand creation form from the category service. It then adds the brand object,
+     * list of categories, and page title to the model and returns the brand form view template.
+     * If the specified brand ID is not found, it catches the BrandNotFoundException
+     * and redirects the user to the brands page with an error message.
+     *
+     * @param brandId the brand ID of the brand object that is being edited
+     * @param model the model object that is used to pass data to the view template
+     * @param redirectAttributes the redirect attributes object that is used to pass data to the redirected view template
+     * @return the brand form view template if the brand object is found, the redirect view template to the brands page if the brand object is not found
+     */
     @GetMapping("/brands/edit/{brandId}")
     public String showFormForEditingBrand(@PathVariable Long brandId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -122,7 +177,14 @@ public class BrandController {
         }
     }
 
-    // method that deletes brand
+    /**
+     * Deletes a brand.
+     *
+     * @param brandId The ID of the brand to be deleted
+     * @param model The Spring Model object
+     * @param redirectAttributes The Spring RedirectAttributes object
+     * @return The name of the view to be rendered
+     */
     @GetMapping("/brands/delete/{brandId}")
     public String deleteBrand(@PathVariable Long brandId, Model model, RedirectAttributes redirectAttributes) {
         try {

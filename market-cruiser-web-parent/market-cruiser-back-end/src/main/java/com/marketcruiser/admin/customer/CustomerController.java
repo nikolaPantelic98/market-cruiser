@@ -15,6 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * The CustomerController class represents the controller for handling customer-related HTTP requests.
+ * It is responsible for managing customer-related views and mapping URLs to corresponding
+ * methods that manipulate customer data.
+ */
 @Controller
 public class CustomerController {
 
@@ -26,12 +31,27 @@ public class CustomerController {
     }
 
 
+    /**
+     * Displays the first page of the customer list using pagination.
+     *
+     * @param model the model object to pass attributes to the view
+     * @return the customers view
+     */
     @GetMapping("/customers")
     public String showFirstPageOfCustomers(Model model) {
         return showPageOfCustomers(model, 1, "firstName", "asc", null);
     }
 
-    // shows a list of all customers using pagination
+    /**
+     * Displays a page of the customer list using pagination.
+     *
+     * @param model the model object to pass attributes to the view
+     * @param pageNumber the number of the page to display
+     * @param sortField the field to sort the list by
+     * @param sortDir the direction to sort the list
+     * @param keyword a search keyword
+     * @return the customers view
+     */
     @GetMapping("/customers/page/{pageNumber}")
     public String showPageOfCustomers(Model model, @PathVariable int pageNumber, @Param("sortField") String sortField,
                                       @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
@@ -61,7 +81,14 @@ public class CustomerController {
         return "customers/customers";
     }
 
-    // method that disables or enables the customer
+    /**
+     * Toggles the enabled/disabled status of a customer.
+     *
+     * @param customerId the ID of the customer to modify
+     * @param enabled the new status of the customer
+     * @param redirectAttributes used to add flash attributes to a redirect view
+     * @return a redirect to the customers view
+     */
     @GetMapping("/customers/{customerId}/enabled/{status}")
     public String updateCustomerEnabledStatus(@PathVariable Long customerId, @PathVariable("status") boolean enabled,
                                               RedirectAttributes redirectAttributes) {
@@ -73,7 +100,17 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    // views details of chosen customer
+
+
+    /**
+     * Retrieves and displays the details of a chosen customer.
+     *
+     * @param customerId the ID of the customer to be viewed
+     * @param model the Spring model object
+     * @param redirectAttributes the Spring redirect attributes object
+     * @return the name of the view for displaying the customer's details
+     * @throws CustomerNotFoundException if no customer with the given ID exists
+     */
     @GetMapping("/customers/detail/{customerId}")
     public String viewCustomer(@PathVariable Long customerId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -87,7 +124,15 @@ public class CustomerController {
         }
     }
 
-    // updates an already existing customer
+    /**
+     * Retrieves and displays a form for editing an existing customer.
+     *
+     * @param customerId the ID of the customer to be edited
+     * @param model the Spring model object
+     * @param redirectAttributes the Spring redirect attributes object
+     * @return the name of the view for displaying the customer form
+     * @throws CustomerNotFoundException if no customer with the given ID exists
+     */
     @GetMapping("/customers/edit/{customerId}")
     public String editCustomer(@PathVariable Long customerId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -106,7 +151,14 @@ public class CustomerController {
         }
     }
 
-    // saves a new customer
+    /**
+     * Saves a new or updated customer.
+     *
+     * @param customer the customer object to be saved or updated
+     * @param model the Spring model object
+     * @param redirectAttributes the Spring redirect attributes object
+     * @return a redirect to the customers list view
+     */
     @PostMapping("/customers/save")
     public String saveCustomer(Customer customer, Model model, RedirectAttributes redirectAttributes) {
         customerService.saveCustomer(customer);
@@ -114,7 +166,13 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
-    // method that deletes customer
+    /**
+     * Deletes a customer.
+     *
+     * @param customerId the ID of the customer to be deleted
+     * @param redirectAttributes the Spring redirect attributes object
+     * @return a redirect to the customers list view
+     */
     @GetMapping("/customers/delete/{customerId}")
     public String deleteCustomer(@PathVariable Long customerId, RedirectAttributes redirectAttributes) {
         try {

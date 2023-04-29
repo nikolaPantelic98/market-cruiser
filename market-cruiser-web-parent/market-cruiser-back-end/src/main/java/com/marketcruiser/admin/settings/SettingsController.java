@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The SettingsController class handles HTTP requests for managing the settings.
+ */
 @Controller
 public class SettingsController {
 
@@ -31,7 +34,12 @@ public class SettingsController {
     }
 
 
-    // method that retrieves all the settings
+    /**
+     * Retrieves all the settings.
+     *
+     * @param model the model to hold the view data.
+     * @return the settings view.
+     */
     @GetMapping("/settings")
     public String listAllSettings(Model model) {
         List<Settings> listSettings = settingsService.listAllSettings();
@@ -46,7 +54,15 @@ public class SettingsController {
         return "settings/settings";
     }
 
-    // method that saves general settings
+    /**
+     * Saves general settings.
+     *
+     * @param multipartFile        the file representing the site logo.
+     * @param request              the HTTP request.
+     * @param redirectAttributes   the attributes to be added to the redirect.
+     * @return the settings view.
+     * @throws IOException if there is an error handling the site logo file.
+     */
     @PostMapping("/settings/save_general")
     public String saveGeneralSettings(@RequestParam("fileImage")MultipartFile multipartFile,
                                       HttpServletRequest request, RedirectAttributes redirectAttributes) throws IOException {
@@ -63,7 +79,13 @@ public class SettingsController {
         return "redirect:/settings";
     }
 
-    // private method to save the site logo
+    /**
+     * Saves the site logo.
+     *
+     * @param multipartFile the file representing the site logo.
+     * @param settingsBag   the bag to hold the settings.
+     * @throws IOException if there is an error handling the site logo file.
+     */
     private void saveSiteLogo(MultipartFile multipartFile, GeneralSettingsBag settingsBag) throws IOException {
         if (!multipartFile.isEmpty()) {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
@@ -76,7 +98,12 @@ public class SettingsController {
         }
     }
 
-    // private method to save the currency symbol
+    /**
+     * Saves the currency symbol.
+     *
+     * @param request      the HTTP request.
+     * @param settingsBag  the bag to hold the settings.
+     */
     private void saveCurrencySymbol(HttpServletRequest request, GeneralSettingsBag settingsBag) {
         Long currencyId = Long.parseLong(request.getParameter("CURRENCY_ID"));
         Optional<Currency> findByIdResult = currencyRepository.findById(currencyId);
@@ -87,7 +114,12 @@ public class SettingsController {
         }
     }
 
-    // updates the values of all settings in the list from the request parameters
+    /**
+     * Updates the values of all settings in the list from the request parameters.
+     *
+     * @param request the HttpServletRequest object containing the request parameters
+     * @param listSettings the list of Settings objects to be updated
+     */
     private void updateSettingsValuesFromForm(HttpServletRequest request, List<Settings> listSettings) {
         for (Settings settings : listSettings) {
             String value = request.getParameter(settings.getKey());
@@ -99,7 +131,13 @@ public class SettingsController {
         settingsService.saveAllSettings(listSettings);
     }
 
-    // saves mail server settings from the form data
+    /**
+     * Saves mail server settings from the form data.
+     *
+     * @param request the HttpServletRequest object containing the form data
+     * @param redirectAttributes the RedirectAttributes object used to set flash attributes
+     * @return a String representing the URL to redirect to after saving the settings
+     */
     @PostMapping("/settings/save_mail_server")
     public String saveMailServerSettings(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         List<Settings> mailServerSettings = settingsService.getMailServerSettings();
@@ -110,7 +148,13 @@ public class SettingsController {
         return "redirect:/settings";
     }
 
-    // saves mail template settings from the form data
+    /**
+     * Saves mail template settings from the form data.
+     *
+     * @param request the HttpServletRequest object containing the form data
+     * @param redirectAttributes the RedirectAttributes object used to set flash attributes
+     * @return a String representing the URL to redirect to after saving the settings
+     */
     @PostMapping("/settings/save_mail_templates")
     public String saveMailTemplateSettings(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         List<Settings> mailTemplateSettings = settingsService.getMailTemplateSettings();
@@ -121,7 +165,13 @@ public class SettingsController {
         return "redirect:/settings";
     }
 
-    // saves payment settings from the form data
+    /**
+     * Saves payment settings from the form data.
+     *
+     * @param request the HttpServletRequest object containing the form data
+     * @param redirectAttributes the RedirectAttributes object used to set flash attributes
+     * @return a String representing the URL to redirect to after saving the settings
+     */
     @PostMapping("/settings/save_payment")
     public String savePaymentSettings(HttpServletRequest request, RedirectAttributes redirectAttributes) {
         List<Settings> paymentSettings = settingsService.getPaymentSettings();

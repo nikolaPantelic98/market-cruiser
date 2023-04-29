@@ -27,6 +27,11 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * OrderController handles requests related to orders including pagination,
+ * creating, editing, and deleting orders. It communicates with the {@link OrderServiceImpl}
+ * and {@link SettingsServiceImpl} to perform CRUD operations.
+ */
 @Controller
 public class OrderController {
 
@@ -40,13 +45,28 @@ public class OrderController {
     }
 
 
-    // returns the first page of orders
+    /**
+     * Redirects to the first page of orders
+     *
+     * @return the URL of the first page of orders
+     */
     @GetMapping("/orders")
     public String showFirstPageOfOrders() {
         return "redirect:/orders/page/1?sortField=orderTime&sortDir=desc";
     }
 
-    // shows a page of orders
+    /**
+     * Displays a page of orders
+     *
+     * @param pageNumber - the number of the page to display
+     * @param model - the Model object used to store attributes to be used for rendering the view
+     * @param sortField - the field to sort by
+     * @param sortDir - the direction to sort in (asc/desc)
+     * @param keyword - the keyword to search for in the orders
+     * @param request - the HttpServletRequest object used to load the currency settings
+     * @param loggedUser - the MarketCruiserUserDetails object representing the currently logged in user
+     * @return the URL of the view to be displayed
+     */
     @GetMapping("/orders/page/{pageNumber}")
     public String showPageOfOrders(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                    @Param("sortDir") String sortDir, @Param("keyword") String keyword ,
@@ -85,7 +105,11 @@ public class OrderController {
         return "orders/orders";
     }
 
-    // this method loads the currency settings into the request attribute for displaying on the page
+    /**
+     * Loads currency settings to the request object.
+     *
+     * @param request the HttpServletRequest object to load the settings into.
+     */
     private void loadCurrencySettings(HttpServletRequest request) {
         List<Settings> currencySettings = settingsService.getCurrencySettings();
 
@@ -94,7 +118,16 @@ public class OrderController {
         }
     }
 
-    // displays the details of a single order in a modal dialog
+    /**
+     * Displays the details of an order with the given ID.
+     *
+     * @param orderId the ID of the order to display.
+     * @param model the Model object to store attributes in.
+     * @param redirectAttributes the RedirectAttributes object to add flash attributes to.
+     * @param request the HttpServletRequest object.
+     * @param loggedUser the currently logged in user.
+     * @return the name of the view to render.
+     */
     @GetMapping("/orders/detail/{orderId}")
     public String viewOrderDetails(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes,
                                    HttpServletRequest request, @AuthenticationPrincipal MarketCruiserUserDetails loggedUser) {
@@ -118,7 +151,14 @@ public class OrderController {
         }
     }
 
-    // method that deletes order
+    /**
+     * Deletes an order with the given ID.
+     *
+     * @param orderId the ID of the order to delete.
+     * @param model the Model object to store attributes in.
+     * @param redirectAttributes the RedirectAttributes object to add flash attributes to.
+     * @return the name of the view to render.
+     */
     @GetMapping("/orders/delete/{orderId}")
     public String deleteOrder(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -131,7 +171,15 @@ public class OrderController {
         return "redirect:/orders";
     }
 
-    // displays the form for editing an order
+    /**
+     * Displays a form to edit an order with the given ID.
+     *
+     * @param orderId the ID of the order to edit.
+     * @param model the Model object to store attributes in.
+     * @param redirectAttributes the RedirectAttributes object to add flash attributes to.
+     * @param request the HttpServletRequest object.
+     * @return the name of the view to render.
+     */
     @GetMapping("/orders/edit/{orderId}")
     public String editOrder(@PathVariable Long orderId, Model model, RedirectAttributes redirectAttributes, HttpServletRequest request) {
         try {
@@ -151,7 +199,14 @@ public class OrderController {
         }
     }
 
-    // saves an order
+    /**
+     * This method saves an Order object and updates the product details and order tracks associated with it.
+     *
+     * @param order the Order object to be save
+     * @param request the HttpServletRequest object
+     * @param redirectAttributes the RedirectAttributes object
+     * @return a String that redirects to the orders page
+     */
     @PostMapping("/order/save")
     public String saveOrder(Order order, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         String countryName = request.getParameter("countryName");
@@ -168,7 +223,12 @@ public class OrderController {
         return "redirect:/orders";
     }
 
-    // updates the product details for an order
+    /**
+     * This method updates the product details of an Order object using the parameters in the HttpServletRequest object.
+     *
+     * @param order the Order object to be updated
+     * @param request the HttpServletRequest object containing the parameters to update the Order object
+     */
     private void updateProductDetails(Order order, HttpServletRequest request) {
         String[] detailIds = request.getParameterValues("detailId");
         String[] productIds = request.getParameterValues("productId");
@@ -207,7 +267,14 @@ public class OrderController {
         }
     }
 
-    // updates the order tracks for an order
+    /**
+     * This method updates the order tracks for an order. It receives the Order object and a HttpServletRequest object
+     * with the updated track data. The track data is extracted from the request parameters
+     * and the OrderTrack objects are created and added to the Order's tracks list.
+     *
+     * @param order the order for which to update the tracks
+     * @param request the HTTP servlet request object containing the tracks to be updated
+     */
     private void updateOrderTracks(Order order, HttpServletRequest request) {
         String[] trackIds = request.getParameterValues("trackId");
         String[] trackStatuses = request.getParameterValues("trackStatus");

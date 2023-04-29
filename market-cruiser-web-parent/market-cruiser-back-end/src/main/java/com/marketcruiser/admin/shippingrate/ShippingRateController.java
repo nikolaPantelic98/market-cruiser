@@ -15,6 +15,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+/**
+ * ShippingRateController handles requests related to shipping rates including pagination,
+ * creating, editing, and deleting shipping rates. It communicates with the {@link ShippingRateServiceImpl}
+ * to perform CRUD operations.
+ */
 @Controller
 public class ShippingRateController {
 
@@ -26,13 +31,27 @@ public class ShippingRateController {
     }
 
 
-    // returns the first page of shipping rates
+    /**
+     * This method returns the first page of shipping rates.
+     *
+     * @param model - the model used to populate the view
+     * @return - the shipping rates view
+     */
     @GetMapping("/shipping_rates")
     public String showFirstPageOfShippingRates(Model model) {
         return showPageOfShippingRates(1, model, "country", "asc", null );
     }
 
-    // shows a page of shipping rates
+    /**
+     * This method shows a page of shipping rates.
+     *
+     * @param pageNumber - the page number to show
+     * @param model - the model used to populate the view
+     * @param sortField - the field to sort by
+     * @param sortDir - the direction to sort
+     * @param keyword - the keyword to search for
+     * @return - the shipping rates view
+     */
     @GetMapping("/shipping_rates/page/{pageNumber}")
     public String showPageOfShippingRates(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                           @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
@@ -64,7 +83,12 @@ public class ShippingRateController {
         return "shipping_rates/shipping_rates";
     }
 
-    // displays the form for creating a new shipping rate
+    /**
+     * This method displays the form for creating a new shipping rate.
+     *
+     * @param model - the model used to populate the view
+     * @return - the shipping rate form view
+     */
     @GetMapping("/shipping_rates/new")
     public String showFormForCreatingShippingRate(Model model) {
         List<Country> listCountries = shippingRateService.listAllCountries();
@@ -76,7 +100,13 @@ public class ShippingRateController {
         return "shipping_rates/shipping_rate_form";
     }
 
-    // handles the submission of a new shipping rate
+    /**
+     * Handles the submission of a new shipping rate.
+     *
+     * @param rate The shipping rate to be saved.
+     * @param redirectAttributes The redirect attributes to store the message for the user.
+     * @return A string representing the redirect URL to the shipping_rates page.
+     */
     @PostMapping("/shipping_rates/save")
     public String saveRate(ShippingRate rate, RedirectAttributes redirectAttributes) {
         try {
@@ -89,7 +119,14 @@ public class ShippingRateController {
         return "redirect:/shipping_rates";
     }
 
-    // displays the form for editing an existing shipping rate
+    /**
+     * Displays the form for editing an existing shipping rate.
+     *
+     * @param shippingRateId The ID of the shipping rate to be edited.
+     * @param model The model to store the shipping rate data for the view.
+     * @param redirectAttributes The redirect attributes to store the message for the user.
+     * @return A string representing the view name for the shipping rate form.
+     */
     @GetMapping("/shipping_rates/edit/{shippingRateId}")
     public String editRate(@PathVariable Long shippingRateId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -107,7 +144,15 @@ public class ShippingRateController {
         }
     }
 
-    // updates the cash on delivery (COD) support for a given shipping rate
+    /**
+     * Updates the cash on delivery (COD) support for a given shipping rate.
+     *
+     * @param shippingRateId The ID of the shipping rate to be updated.
+     * @param supported The boolean value indicating whether COD support is enabled or disabled.
+     * @param model The model to store the message for the view.
+     * @param redirectAttributes The redirect attributes to store the message for the user.
+     * @return A string representing the redirect URL to the shipping_rates page.
+     */
     @GetMapping("/shipping_rates/cod/{shippingRateId}/enabled/{supported}")
     public String updateCODSupport(@PathVariable Long shippingRateId, @PathVariable Boolean supported,
                                    Model model, RedirectAttributes redirectAttributes) {
@@ -121,7 +166,14 @@ public class ShippingRateController {
         return "redirect:/shipping_rates";
     }
 
-    // deletes a shipping rate
+    /**
+     * Deletes a shipping rate.
+     *
+     * @param shippingRateId The ID of the shipping rate to be deleted.
+     * @param model The model to store the message for the view.
+     * @param redirectAttributes The redirect attributes to store the message for the user.
+     * @return A string representing the redirect URL to the shipping_rates page.
+     */
     @GetMapping("/shipping_rates/delete/{shippingRateId}")
     public String deleteRate(@PathVariable Long shippingRateId, Model model, RedirectAttributes redirectAttributes) {
         try {

@@ -1,6 +1,7 @@
 package com.marketcruiser.admin.user.controller;
 
 import com.marketcruiser.admin.FileUploadUtil;
+import com.marketcruiser.admin.category.CategoryServiceImpl;
 import com.marketcruiser.admin.user.UserNotFoundException;
 import com.marketcruiser.admin.user.UserServiceImpl;
 import com.marketcruiser.admin.user.export.UserCsvExporter;
@@ -25,6 +26,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * CategoryController handles requests related to users including pagination,
+ * creating, editing, and deleting users. It communicates with the {@link UserServiceImpl}
+ * to perform CRUD operations.
+ */
 @Controller
 public class UserController {
 
@@ -36,13 +42,23 @@ public class UserController {
     }
 
 
-    // shows a first page of users
+    /**
+     * Returns a view displaying the first page of users.
+     *
+     * @param model a Spring MVC Model
+     * @return the view displaying the first page of users
+     */
     @GetMapping("/users")
     public String showFirstPageOfUsers(Model model) {
         return showPageOfUsers(1, model, "firstName", "asc", null);
     }
 
-    // shows a list of all users using pagination
+    /**
+     * Returns a view displaying the first page of users.
+     *
+     * @param model a Spring MVC Model
+     * @return the view displaying the first page of users
+     */
     @GetMapping("/users/page/{pageNumber}")
     public String showPageOfUsers(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                   @Param("sortDir") String sortDir, @Param("keyword") String keyword) {
@@ -75,7 +91,12 @@ public class UserController {
         return "users/users";
     }
 
-    // form for creating a new user
+    /**
+     * Shows the form for creating a new user.
+     *
+     * @param model the Spring Model object
+     * @return the user form template
+     */
     @GetMapping("/users/new")
     public String showFormForCreatingUser(Model model) {
         List<Role> listRoles = userService.getAllRoles();
@@ -90,7 +111,15 @@ public class UserController {
         return "users/user_form";
     }
 
-    // saves a new user with image file or updates an existing one
+    /**
+     * Saves a new user with image file or updates an existing one.
+     *
+     * @param user the User object to be saved or updated
+     * @param redirectAttributes the Spring RedirectAttributes object
+     * @param multipartFile the uploaded MultipartFile object containing user's image
+     * @return the redirect URL to the affected user
+     * @throws IOException if there is an I/O error while saving the image file
+     */
     @PostMapping("/users/save")
     public String saveUser(User user, RedirectAttributes redirectAttributes, @RequestParam("image")MultipartFile multipartFile) throws IOException {
         if (!multipartFile.isEmpty()) {
@@ -113,13 +142,25 @@ public class UserController {
         return getRedirectURLToAffectedUser(user);
     }
 
-    // method used to be returned in createNewUser() method due to readability
+    /**
+     * Gets the redirect URL to the affected user after saving or updating a user.
+     *
+     * @param user the User object
+     * @return the redirect URL to the affected user
+     */
     private String getRedirectURLToAffectedUser(User user) {
         String firstPartOfEmailAddress = user.getEmailAddress().split("@")[0];
         return "redirect:/users/page/1?sortField=userId&sortDir=asc&keyword=" + firstPartOfEmailAddress;
     }
 
-    // form for updating/editing already existing user with exception handler
+    /**
+     * Shows the form for updating/editing already existing user with exception handler.
+     *
+     * @param userId the ID of the user to be edited
+     * @param redirectAttributes the Spring RedirectAttributes object
+     * @param model the Spring Model object
+     * @return the user form template or redirect URL to the users page
+     */
     @GetMapping("/users/edit/{userId}")
     public String showFormForEditingUser(@PathVariable Long userId, RedirectAttributes redirectAttributes, Model model) {
         try {
@@ -137,7 +178,13 @@ public class UserController {
         }
     }
 
-    // method that deletes user
+    /**
+     * Deletes a user with the specified ID.
+     *
+     * @param userId the ID of the user to be deleted
+     * @param redirectAttributes the Spring RedirectAttributes object
+     * @return the redirect URL to the users page
+     */
     @GetMapping("/users/delete/{userId}")
     public String deleteUser(@PathVariable Long userId, RedirectAttributes redirectAttributes) {
         try {
@@ -153,7 +200,14 @@ public class UserController {
         return "redirect:/users";
     }
 
-    // method that disables or enables the user
+    /**
+     * Updates the enabled status of a user.
+     *
+     * @param userId The ID of the user to update.
+     * @param enabled The new enabled status of the user.
+     * @param redirectAttributes Redirect attributes to set a flash message on success.
+     * @return A redirect to the /users endpoint.
+     */
     @GetMapping("/users/{userId}/enabled/{status}")
     public String updateUserEnabledStatus(@PathVariable Long userId, @PathVariable("status") boolean enabled, RedirectAttributes redirectAttributes) {
         userService.updateUserEnabledStatus(userId, enabled);
@@ -164,7 +218,12 @@ public class UserController {
         return "redirect:/users";
     }
 
-    // method that exports the entire table of users to a CSV file
+    /**
+     * Exports the entire table of users to a CSV file.
+     *
+     * @param response The HTTP response to write the CSV file to.
+     * @throws IOException If there is an error writing the CSV file.
+     */
     @GetMapping("/users/export/csv")
     public void exportToCSV(HttpServletResponse response) throws IOException {
         List<User> listUsers = userService.getAllUsersSortedByFirstName();
@@ -172,7 +231,12 @@ public class UserController {
         exporter.export(listUsers, response);
     }
 
-    // method that exports the entire table of users to XLSX file
+    /**
+     * Exports the entire table of users to an XLSX file.
+     *
+     * @param response The HTTP response to write the XLSX file to.
+     * @throws IOException If there is an error writing the XLSX file.
+     */
     @GetMapping("/users/export/excel")
     public void exportToExcel(HttpServletResponse response) throws IOException {
         List<User> listUsers = userService.getAllUsersSortedByFirstName();
@@ -180,13 +244,16 @@ public class UserController {
         exporter.export(listUsers, response);
     }
 
-    // method that exports the entire table of users to PDF file
+    /**
+     * Exports the entire table of users to a PDF file.
+     *
+     * @param response The HTTP response to write the PDF file to.
+     * @throws IOException If there is an error writing the PDF file.
+     */
     @GetMapping("/users/export/pdf")
     public void exportToPdf(HttpServletResponse response) throws IOException {
         List<User> listUsers = userService.getAllUsersSortedByFirstName();
         UserPdfExporter exporter = new UserPdfExporter();
         exporter.export(listUsers, response);
     }
-
-
 }

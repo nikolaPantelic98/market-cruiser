@@ -24,6 +24,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * The ProductController class represents the controller for managing the products in the admin section.
+ * It handles all the HTTP requests related to products management.
+ * It provides methods for listing products, creating new products, updating and deleting existing ones.
+ */
 @Controller
 public class ProductController {
 
@@ -39,12 +44,28 @@ public class ProductController {
     }
 
 
+    /**
+     * Shows the first page of the list of all products using pagination.
+     *
+     * @param model a Model instance
+     * @return the products template
+     */
     @GetMapping("/products")
     public String showFirstPageOfProducts(Model model) {
         return showPageOfProducts(1, model, "name", "asc", null, 0L);
     }
 
-    // shows a list of all products using pagination
+    /**
+     * Shows a page of the list of all products using pagination.
+     *
+     * @param pageNumber an integer representing the number of the page to show
+     * @param model a Model instance
+     * @param sortField a string representing the name of the field to sort by
+     * @param sortDir a string representing the sorting direction (ascending or descending)
+     * @param keyword a string representing the keyword to search by
+     * @param categoryId a Long representing the ID of the category to filter by
+     * @return the products template
+     */
     @GetMapping("/products/page/{pageNumber}")
     public String showPageOfProducts(@PathVariable int pageNumber, Model model, @Param("sortField") String sortField,
                                    @Param("sortDir") String sortDir, @Param("keyword") String keyword,
@@ -81,7 +102,15 @@ public class ProductController {
         return "products/products";
     }
 
-    // shows a form for creating a new product
+    /**
+     * This method displays a form for creating a new product.
+     * It populates the Model with a list of all existing brands,
+     * creates a new Product instance with default enabled and inStock values,
+     * and adds it to the model along with other necessary attributes for rendering the view.
+     *
+     * @param model - the Model object to which attributes for rendering the view are added
+     * @return the name of the view template for rendering the product form
+     */
     @GetMapping("/products/new")
     public String showFormForCreatingProduct(Model model) {
         List<Brand> listBrands = brandService.getAllBrands();
@@ -98,7 +127,26 @@ public class ProductController {
         return "products/product_form";
     }
 
-    // saves a new product
+    /**
+     * This method saves a new product.
+     * <p>It receives a Product object and other request parameters (optional image and detail parameters),
+     * sets the necessary fields of the product, saves it using the ProductService,
+     * and redirects to the /products page with a success message in the flash attributes.
+     * If the logged-in user has the "Salesperson" role, it also saves the product price.</p>
+     *
+     * @param product - the new product to be saved
+     * @param redirectAttributes - the RedirectAttributes object for adding flash attributes
+     * @param mainImageMultipart - the main image file uploaded by the user
+     * @param extraImageMultiparts - an array of extra image files uploaded by the user
+     * @param detailIDs - an array of detail IDs submitted by the user
+     * @param detailNames - an array of detail names submitted by the user
+     * @param detailValues - an array of detail values submitted by the user
+     * @param imageIDs - an array of image IDs submitted by the user
+     * @param imageNames - an array of image names submitted by the user
+     * @param loggedUser - the currently logged-in user
+     * @return the name of the view template for rendering the product form
+     * @throws IOException - if there is an I/O error while saving the uploaded images
+     */
     @PostMapping("/products/save")
     public String saveProduct(Product product, RedirectAttributes redirectAttributes,
                               @RequestParam(value = "fileImage", required = false) MultipartFile mainImageMultipart,
@@ -132,7 +180,14 @@ public class ProductController {
 
 
 
-    // method that disables or enables the product
+    /**
+     * Updates the enabled status of a product
+     *
+     * @param productId the ID of the product to be updated
+     * @param enabled the new enabled status of the product
+     * @param redirectAttributes the RedirectAttributes object to add flash attribute for message
+     * @return a string representing the URL to redirect to after updating the product
+     */
     @GetMapping("/products/{productId}/enabled/{status}")
     public String updateCategoryEnabledStatus(@PathVariable Long productId, @PathVariable("status") boolean enabled,
                                               RedirectAttributes redirectAttributes) {
@@ -144,7 +199,14 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    // method that deletes product
+    /**
+     * Deletes a product by ID and its associated images
+     *
+     * @param productId the ID of the product to be deleted
+     * @param model the Model object to add attributes to
+     * @param redirectAttributes the RedirectAttributes object to add flash attribute for message
+     * @return a string representing the URL to redirect to after deleting the product
+     */
     @GetMapping("/products/delete/{productId}")
     public String deleteProduct(@PathVariable Long productId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -163,7 +225,14 @@ public class ProductController {
         return "redirect:/products";
     }
 
-    // updates an already existing product
+    /**
+     * Edits an existing product
+     *
+     * @param productId the ID of the product to be edited
+     * @param model the Model object to add attributes to
+     * @param redirectAttributes the RedirectAttributes object to add flash attribute for message
+     * @return a string representing the name of the product form view template
+     */
     @GetMapping("/products/edit/{productId}")
     public String editProduct(@PathVariable Long productId, Model model, RedirectAttributes redirectAttributes) {
         try {
@@ -184,7 +253,14 @@ public class ProductController {
         }
     }
 
-    // views details of chosen product
+    /**
+     * Views the details of a product
+     *
+     * @param productId the ID of the product to view details for
+     * @param model the Model object to add attributes to
+     * @param redirectAttributes the RedirectAttributes object to add flash attribute for message
+     * @return a string representing the name of the product detail modal view template
+     */
     @GetMapping("/products/detail/{productId}")
     public String viewProductDetails(@PathVariable Long productId, Model model, RedirectAttributes redirectAttributes) {
         try {

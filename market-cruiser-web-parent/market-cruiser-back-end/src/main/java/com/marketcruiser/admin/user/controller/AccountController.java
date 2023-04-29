@@ -17,6 +17,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
+/**
+ * This class represents the AccountController, which is responsible for handling requests related to a user's account.
+ * It provides methods for viewing and updating the user's account details in the database.
+ */
 @Controller
 public class AccountController {
 
@@ -28,7 +32,13 @@ public class AccountController {
     }
 
 
-    // this method retrieves the currently logged-in user
+    /**
+     * Retrieves the currently logged-in user and displays their account details.
+     *
+     * @param loggedUser the user that is currently logged in
+     * @param model      the model used to pass data to the view
+     * @return the account_form.html page with the user's details
+     */
     @GetMapping("/account")
     public String viewDetails(@AuthenticationPrincipal MarketCruiserUserDetails loggedUser, Model model) {
         String emailAddress = loggedUser.getUsername();
@@ -39,7 +49,16 @@ public class AccountController {
         return "users/account_form";
     }
 
-    // this method updates the user's account details in the database and handles the uploading of the user's profile photo
+    /**
+     * Updates the user's account details in the database and handles the uploading of the user's profile photo.
+     *
+     * @param user                the user whose account details are being updated
+     * @param redirectAttributes the attributes used to pass messages between requests
+     * @param multipartFile      the user's profile photo
+     * @param loggedUser          the user that is currently logged in
+     * @return a redirect to the account page with a success message
+     * @throws IOException if there is an error while uploading the profile photo
+     */
     @PostMapping("/account/update")
     public String saveDetails(User user, RedirectAttributes redirectAttributes, @RequestParam("image") MultipartFile multipartFile,
                               @AuthenticationPrincipal MarketCruiserUserDetails loggedUser) throws IOException {
