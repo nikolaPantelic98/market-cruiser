@@ -4,7 +4,14 @@
 * Backend using Spring Boot and frontend using Thymeleaf, JQuery and AJAX.
 * MySQL.
 
-## Info: What we have done so far
+## Table of Contents
+
+* [Info](https://github.com/nikolaPantelic98/market-cruiser#info)
+* [Requirements](https://github.com/nikolaPantelic98/market-cruiser#requirements)
+* [Launching a web application step by step](https://github.com/nikolaPantelic98/market-cruiser#launching-a-web-application-step-by-step)
+* [Some Images](https://github.com/nikolaPantelic98/market-cruiser#some-images)
+
+## Info
 
 * This is a multi-module Maven project
 * The project is divided into two parts: `market-cruiser-back-end` (server side) & `market-cruiser-front-end` (client side). Both exist under the `market-cruiser-web-parent`. `market-cruiser-common` is used for the common code in both directories.
