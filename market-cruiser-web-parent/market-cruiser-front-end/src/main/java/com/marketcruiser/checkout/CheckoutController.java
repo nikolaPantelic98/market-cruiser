@@ -214,6 +214,8 @@ public class CheckoutController {
         CurrencySettingsBag currencySettings = settingsService.getCurrencySettings();
         String totalAmount = Utility.formatCurrency(order.getTotal(), currencySettings);
 
+        String verifyURL = Utility.getSiteURL(request) + "/orders/page/1?sortField=orderTime&sortDir=desc";
+
         content = content.replace("[[name]]", order.getCustomer().getFullName());
         content = content.replace("[[orderId]]", String.valueOf(order.getOrderId()));
         content = content.replace("[[orderTime]]", orderTime);
@@ -222,6 +224,7 @@ public class CheckoutController {
         content = content.replace("[[postCodeAndPhoneNumber]]", order.getCustomerPostCodeAndPhoneNumber());
         content = content.replace("[[total]]", totalAmount);
         content = content.replace("[[paymentMethod]]", order.getPaymentMethod().toString());
+        content = content.replace("[[URL]]", verifyURL);
 
         helper.setText(content, true);
         mailSender.send(message);
