@@ -1,7 +1,7 @@
 # MarketCruiser (project in progress)
 
 * MarketCruiser is an online eCommerce marketplace.
-* Backend using Spring Boot and frontend using Thymeleaf, Bootstrap, and JQuery.
+* Backend using Spring Boot and frontend using Thymeleaf, JQuery and AJAX.
 * MySQL.
 
 ## Info: What we have done so far
@@ -112,12 +112,29 @@
   - Customer can specify which address is default.
   - All CRUD operations are enabled, so customer can create, read, update or delete his addresses.
 
-* Order Management Module:
+* Order Management Module (1/2):
   - Order Management Module added.
   - Order listing page is created.
   - Admin can see the entire customer order and change its status.
   - The option to delete orders has been added.
   - Pagination and sorting for orders have been implemented, starting from the latest date to the oldest.
+  
+* Checkout Module:
+  - Checkout Module added.
+  - Checkout page created.
+  - COD (Cash on Delivery) option added, so customer can purchase the product that way.
+  - Order Confirmation EMail coded.
+  - PayPal API added, so the customer can finish the purchase via PayPal.
+  
+* Order Management Module (2/2):
+  - Order Tracking Information added.
+  - Edit Order Form updated (Overview, Shipping, Products, Track Records).
+  - Order Management for Shipper Role added (some actions are read-only).
+  - Order Management for Customer added.
+  - Order listing page for customers added.
+  - The Customer can see details for every order.
+  - Return order function is implemented, so the customer can submit the request to return the order.
+  
 
 ## Requirements
 
@@ -142,9 +159,12 @@
 
 ## Some Images
 
-![marketcruiser1](https://user-images.githubusercontent.com/109813536/213311356-f289c9d4-aced-4b95-9a2d-1d5b7c3bdb13.png)
-![marketcruiser2](https://user-images.githubusercontent.com/109813536/213311432-5b810dff-041e-4de1-a213-7e8cab577566.png)
-![marketcruiser3](https://user-images.githubusercontent.com/109813536/213311445-ae4a8627-88d2-47e6-b638-c5996b850600.png)
-![marketcruiser4](https://user-images.githubusercontent.com/109813536/213311450-fa557e20-604b-40ac-9fd1-f36cbe537c69.png)
-![marketcruiser5](https://user-images.githubusercontent.com/109813536/213311456-f522fc1f-6047-423c-9fb1-1e2b3f946e40.png)
-![marketcruiser6](https://user-images.githubusercontent.com/109813536/213311469-e938c0a6-68d2-41a9-8a22-b774ae7a80d6.png)
+![marketcruiser1](https://user-images.githubusercontent.com/109813536/235348277-aa3a3396-b230-48af-a5a1-3a166e1770d1.png)
+![marketcruiser2](https://user-images.githubusercontent.com/109813536/235348283-572f66c4-b94e-49d0-86f3-48dc6f766bed.png)
+![marketcruiser3](https://user-images.githubusercontent.com/109813536/235348287-dd2a67cf-746e-40bd-a29c-079663f1ea91.png)
+![marketcruiser4](https://user-images.githubusercontent.com/109813536/235348293-991540cd-146b-414a-a69a-aac029b74055.png)
+![marketcruiser5](https://user-images.githubusercontent.com/109813536/235348297-a15b9003-6f6b-4fbd-a313-06abb480fd29.png)
+![marketcruiser6](https://user-images.githubusercontent.com/109813536/235348299-67f79aae-9e26-4381-8f3a-a8d62909a20d.png)
+![marketcruiser7](https://user-images.githubusercontent.com/109813536/235348302-7a749466-e16a-4123-8e93-609adb8f308b.png)
+![marketcruiser8](https://user-images.githubusercontent.com/109813536/235348306-1102dc5a-6c1a-4a6e-b359-e5632a460d74.png)
+
