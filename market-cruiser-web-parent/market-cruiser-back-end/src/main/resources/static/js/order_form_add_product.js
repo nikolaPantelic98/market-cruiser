@@ -1,5 +1,10 @@
 var productDetailCount;
 
+/**
+ * Executes when the document is ready. Initializes the productDetailCount variable
+ * and adds an event listener to the "Add Product" link, which opens a modal with a URL
+ * for adding a new product. When the modal is shown, the URL is loaded in an iframe
+ */
 $(document).ready(function () {
     productDetailCount = $(".hiddenProductId").length;
 
@@ -16,10 +21,20 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Calls the getShippingCost function with the given productId parameter
+ * @param {number} productId - The ID of the product being added
+ * @param {string} productName - The name of the product being added
+ */
 function addProduct(productId, productName) {
     getShippingCost(productId);
 }
 
+
+/**
+ * Calculates the shipping cost for a given product and updates its information in the product list.
+ * @param {number} productId - The ID of the product for which the shipping cost needs to be calculated.
+ */
 function getShippingCost(productId) {
     selectedCountry = $("#country option:selected");
     countryId = selectedCountry.val();
@@ -51,6 +66,11 @@ function getShippingCost(productId) {
     });
 }
 
+/**
+ * Gets the product information from the server and generates HTML code for the product in the product list.
+ * @param {number} productId - The ID of the product for which the shipping cost was calculated.
+ * @param {number} shippingCost - The calculated shipping cost for the product.
+ */
 function getProductInfo(productId, shippingCost) {
     requestURL = contextPath + "products/get/" + productId;
     $.get(requestURL, function (productJson) {
@@ -70,6 +90,18 @@ function getProductInfo(productId, shippingCost) {
     });
 }
 
+
+/**
+ * Generates the HTML code for a single product detail row in a shopping cart.
+ *
+ * @param {string} productId - The ID of the product.
+ * @param {string} productName - The name of the product.
+ * @param {string} mainImagePath - The URL of the main image for the product.
+ * @param {number} productCost - The cost of the product.
+ * @param {number} productPrice - The selling price of the product.
+ * @param {number} shippingCost - The shipping cost of the product.
+ * @returns {string} The HTML code for the product detail row.
+ */
 function generateProductCode(productId, productName, mainImagePath, productCost, productPrice, shippingCost) {
     nextCount = productDetailCount + 1;
     productDetailCount++;
@@ -159,6 +191,13 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
     return htmlCode;
 }
 
+
+/**
+ * Checks whether a product with the given productId has already been added to the shopping cart.
+ *
+ * @param {number} productId - The ID of the product to check.
+ * @returns {boolean} - True if a product with the given productId has already been added to the cart, false otherwise.
+ */
 function isProductAlreadyAdded(productId) {
     productExists = false;
     $(".hiddenProductId").each(function (e) {

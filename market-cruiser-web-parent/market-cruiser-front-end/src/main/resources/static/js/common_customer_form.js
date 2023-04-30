@@ -13,6 +13,10 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * This function retrieves a list of states for a selected country using an AJAX GET request.
+ * It populates a dropdown list with the retrieved states.
+ */
 function loadStatesForCountry() {
     selectedCountry = $("#country option:selected");
     countryId = selectedCountry.val();
@@ -30,6 +34,12 @@ function loadStatesForCountry() {
     });
 }
 
+/**
+ * This function checks whether the entered password and confirmation password match.
+ * It sets a custom validation message on the confirmation password input field based on the result.
+ * This function is called on the "input" event of the confirmation password input field.
+ * @param {HTMLInputElement} confirmPassword - The confirmation password input field element
+ */
 function checkPasswordMatch(confirmPassword) {
     if (confirmPassword.value != $("#password").val()) {
         confirmPassword.setCustomValidity("Passwords do not match!");

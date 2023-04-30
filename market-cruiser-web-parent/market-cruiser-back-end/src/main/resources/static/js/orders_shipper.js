@@ -9,6 +9,9 @@ var confirmModalDialog;
 var yesButton;
 var noButton;
 
+/**
+ * Initializes the confirmation modal and sets event handlers for relevant buttons.
+ */
 $(document).ready(function() {
     confirmText = $("#confirmText");
     confirmModalDialog = $("#confirmModal");
@@ -24,6 +27,10 @@ $(document).ready(function() {
     addEventHandlerForYesButton();
 });
 
+/**
+ * Displays a confirmation modal dialog to confirm the user's intention to update the status of an order.
+ * @param {jQuery} link - The link element that was clicked to initiate the update.
+ */
 function showUpdateConfirmModal(link) {
     noButton.text("No");
     yesButton.show();
@@ -38,6 +45,9 @@ function showUpdateConfirmModal(link) {
     confirmModalDialog.modal();
 }
 
+/**
+ * Adds an event handler for the "Yes" button in the confirmation modal dialog.
+ */
 function addEventHandlerForYesButton() {
     yesButton.click(function (e) {
         e.preventDefault();
@@ -45,6 +55,10 @@ function addEventHandlerForYesButton() {
     });
 }
 
+/**
+ * Sends an AJAX request to update the status of an order.
+ * @param {jQuery} button - The button element that was clicked to initiate the update.
+ */
 function sendRequestToUpdateOrderStatus(button) {
     requestURL = button.attr("href");
 
@@ -63,11 +77,20 @@ function sendRequestToUpdateOrderStatus(button) {
     })
 }
 
+/**
+ * Updates the status icon color of an order based on the new status.
+ * @param {string} orderId - The ID of the order.
+ * @param {string} status - The new status of the order.
+ */
 function updateStatusIconColor(orderId, status) {
     link = $("#link" + status + orderId);
     link.replaceWith("<i class='fas " + iconNames[status] + " fa-2x icon-orange'></i>")
 }
 
+/**
+ * Displays a modal with a message to the user.
+ * @param {string} message - The message to display in the modal.
+ */
 function showMessageModal(message) {
     noButton.text("Close");
     yesButton.hide();

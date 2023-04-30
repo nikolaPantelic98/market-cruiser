@@ -46,6 +46,13 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * This function is used to delete a state by sending an AJAX DELETE request to the server.
+ * It gets the value of the selected state ID from a dropdown, constructs the URL for the DELETE request,
+ * and sends the request with the CSRF token included in the header.
+ * If the request is successful, the corresponding option in the dropdown is removed and a success toast message is displayed.
+ * If the request fails, an error toast message is displayed.
+ */
 function deleteState() {
     stateId = dropDownStates.val();
 
@@ -66,6 +73,13 @@ function deleteState() {
     });
 }
 
+/**
+ * This function is used to update a state by sending an AJAX POST request to the server with JSON data.
+ * It first validates the form input, then constructs the URL for the POST request, and prepares the JSON data to be sent.
+ * The AJAX request includes the CSRF token in the header and the JSON data in the request body.
+ * If the request is successful, the corresponding option in the dropdown is updated with the new state name, the form state is changed to "New", and a success toast message is displayed.
+ * If the request fails, an error toast message is displayed.
+ */
 function updateState() {
     if (!validateFormState()) return;
 
@@ -96,6 +110,14 @@ function updateState() {
     });
 }
 
+/**
+ * Adds a new state to the system.
+ *
+ * This function first validates the state form using the `validateFormState()` function.
+ * It then sends an AJAX POST request to the server with the state name and country ID and name.
+ * If the request is successful, the `selectNewlyAddedState()` function is called to select the newly added state.
+ * Otherwise, a message is displayed to indicate that there was an error.
+ */
 function addState() {
     if (!validateFormState()) return;
 
@@ -125,6 +147,11 @@ function addState() {
 
 }
 
+/**
+ * Validates the state form to ensure that all required fields have been filled out
+ *
+ * @return {boolean} - Returns true if the form is valid, false otherwise
+ */
 function validateFormState() {
     formState = document.getElementById("formState");
     if (!formState.checkValidity()) {
@@ -135,6 +162,12 @@ function validateFormState() {
     return true;
 }
 
+/**
+ * Adds a new state to the drop-down list and selects it.
+ *
+ * @param {number} stateId - The ID of the newly added state.
+ * @param {string} stateName - The name of the newly added state.
+ */
 function selectNewlyAddedState(stateId, stateName) {
     $("<option>").val(stateId).text(stateName).appendTo(dropDownStates);
 
@@ -143,6 +176,10 @@ function selectNewlyAddedState(stateId, stateName) {
     fieldStateName.val("").focus();
 }
 
+/**
+ * Changes the state form to a new state, clearing the input field and disabling
+ * the update and delete buttons.
+ */
 function changeFormStateToNew() {
     buttonAddState.val("Add");
     labelStateName.text("State/Province Name:");
@@ -153,6 +190,10 @@ function changeFormStateToNew() {
     fieldStateName.val("").focus();
 }
 
+/**
+ * Changes the state form to a selected state, filling in the input field with the
+ * name of the selected state and enabling the update and delete buttons.
+ */
 function changeFormStateToSelectedState() {
     buttonAddState.prop("value", "New");
     buttonUpdateState.prop("disabled", false);
@@ -165,6 +206,11 @@ function changeFormStateToSelectedState() {
 
 }
 
+/**
+ * Loads all states for the currently selected country in the state form.
+ * Empties the drop-down list of states and populates it with the states for the selected country.
+ * Displays a toast message indicating success or failure.
+ */
 function loadStates4Country() {
     selectedCountry = $("#dropDownCountriesForStates option:selected");
     countryId = selectedCountry.val();
@@ -185,6 +231,11 @@ function loadStates4Country() {
     });
 }
 
+/**
+ * Loads all countries for the state form.
+ * Empties the drop-down list of countries and populates it with the available countries.
+ * Displays a toast message indicating success or failure.
+ */
 function loadCountries4States() {
     url = contextPath + "countries/list";
     $.get(url, function(responseJSON) {
@@ -202,6 +253,9 @@ function loadCountries4States() {
     });
 }
 
+/**
+ * Displays a toast message with the specified message.
+ */
 function showToastMessageState(message) {
     $("#toastMessageState").text(message);
     $(".toast").toast('show');

@@ -15,6 +15,11 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Decreases the quantity of a product in the cart by 1 and updates the cart subtotal and total.
+ *
+ * @param {jQuery} link - The jQuery object for the link element that was clicked.
+ */
 function decreaseQuantity(link) {
     productId = link.attr("pid");
     quantityInput = $("#quantity" + productId);
@@ -28,6 +33,11 @@ function decreaseQuantity(link) {
     }
 }
 
+/**
+ * Increases the quantity of a product in the cart by 1 and updates the cart subtotal and total.
+ *
+ * @param {jQuery} link - The jQuery object for the link element that was clicked.
+ */
 function increaseQuantity(link) {
     productId = link.attr("pid");
     quantityInput = $("#quantity" + productId);
@@ -41,6 +51,12 @@ function increaseQuantity(link) {
     }
 }
 
+/**
+ * Updates the quantity of a product in the cart on the server and updates the cart subtotal and total.
+ *
+ * @param {number} productId - The ID of the product to update.
+ * @param {number} quantity - The new quantity for the product.
+ */
 function updateQuantity(productId, quantity) {
     url = contextPath + "cart/update/" + productId + "/" + quantity;
 
@@ -58,11 +74,20 @@ function updateQuantity(productId, quantity) {
     });
 }
 
+/**
+ * Updates the subtotal of a product in the shopping cart.
+ *
+ * @param {number} updatedSubtotal - The new subtotal of the product.
+ * @param {number} productId - The ID of the product whose subtotal is being updated.
+ */
 function updateSubtotal(updatedSubtotal, productId) {
     formattedSubtotal = $.number(updatedSubtotal, 2);
     $("#subtotal" + productId).text(formattedSubtotal);
 }
 
+/**
+ * Updates the total amount of the shopping cart.
+ */
 function updateTotal() {
     total = 0.0;
     productCount = 0;
@@ -80,11 +105,18 @@ function updateTotal() {
     }
 }
 
+/**
+ * Shows a message indicating that the shopping cart is empty.
+ */
 function showEmptyShoppingCart() {
     $("#section-total").hide();
     $("#section-empty-cart-message").removeClass("d-none");
 }
 
+/**
+ * Sends a request to remove a product from the shopping cart
+ * @param {object} link - The link to remove the product
+ */
 function removeProduct(link) {
     url = link.attr("href");
 
@@ -107,11 +139,18 @@ function removeProduct(link) {
     });
 }
 
+/**
+ * Removes the HTML elements for a product from the shopping cart
+ * @param {number} rowNumber - The row number of the product to remove
+ */
 function removeProductHTML(rowNumber) {
     $("#row" + rowNumber).remove();
     $("#blank-line" + rowNumber).remove();
 }
 
+/**
+ * Updates the count numbers for the products in the shopping cart
+ */
 function updateCountNumbers() {
     $(".div-count").each(function (index, element) {
         element.innerHTML = "" + (index + 1);

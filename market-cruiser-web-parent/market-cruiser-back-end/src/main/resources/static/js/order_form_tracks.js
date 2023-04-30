@@ -1,5 +1,8 @@
 var trackRecordCount;
 
+/**
+ * Sets up event listeners and handlers for various actions related to a track list.
+ */
 $(document).ready(function() {
     trackRecordCount = $(".hiddenTrackId").length;
 
@@ -24,23 +27,40 @@ $(document).ready(function() {
     });
 });
 
+/**
+ * Deletes a track record and empty line from the form.
+ * @param {jQuery} link - The link element that was clicked to delete the track record.
+ */
 function deleteTrack(link) {
     rowNumber = link.attr('rowNumber');
     $("#rowTrack" + rowNumber).remove();
     $("#emptyLine" + rowNumber).remove();
 }
 
+/**
+ * Updates the track count numbers displayed in the form.
+ * This should be called after a track record has been added or deleted.
+ */
 function updateTrackCountNumbers() {
     $(".divCountTrack").each(function (index, element) {
         element.innerHTML = "" + (index + 1);
     });
 }
 
+/**
+ * Adds a new track record to the form.
+ * This function generates the HTML code for the new track record and appends it to the "trackList" element.
+ */
 function addNewTrackRecord() {
     htmlCode = generateTrackCode();
     $("#trackList").append(htmlCode);
 }
 
+
+/**
+ * Generates HTML code for a new track record.
+ * @returns {string} HTML code for a new track record.
+ */
 function generateTrackCode() {
     nextCount = trackRecordCount + 1;
     trackRecordCount++;
@@ -100,6 +120,10 @@ function generateTrackCode() {
     return htmlCode;
 }
 
+/**
+ * Returns the current date and time in a standardized format of "YYYY-MM-DDTHH:MM:SS".
+ * @returns {string} The formatted current date and time.
+ */
 function formatCurrentDateTime() {
     date = new Date();
     year = date.getFullYear();

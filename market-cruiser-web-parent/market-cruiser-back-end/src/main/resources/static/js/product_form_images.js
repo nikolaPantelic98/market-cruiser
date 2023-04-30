@@ -16,6 +16,12 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Shows the thumbnail preview of the extra image file selected by the user and updates the file name in the hidden field.
+ *
+ * @param {Object} fileInput - The input element of type "file" for selecting the extra image file.
+ * @param {number} index - The index of the extra image section to which the selected file belongs.
+ */
 function showExtraImageThumbnail(fileInput, index) {
     var file = fileInput.files[0];
 
@@ -37,6 +43,7 @@ function showExtraImageThumbnail(fileInput, index) {
         addNextExtraImageSection(index + 1);
     }
 }
+
 
 function addNextExtraImageSection(index) {
     htmlExtraImage = `
