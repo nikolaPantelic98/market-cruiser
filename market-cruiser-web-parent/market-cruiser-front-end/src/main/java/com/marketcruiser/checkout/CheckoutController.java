@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -135,7 +136,7 @@ public class CheckoutController {
      * @throws UnsupportedEncodingException if there is an issue encoding the confirmation email content
      */
     @PostMapping("/place_order")
-    public String placeOrder(HttpServletRequest request) throws MessagingException, UnsupportedEncodingException {
+    public String placeOrder(HttpServletRequest request, RedirectAttributes redirectAttributes) throws MessagingException, UnsupportedEncodingException {
         String paymentType = request.getParameter("paymentMethod");
         PaymentMethod paymentMethod = PaymentMethod.valueOf(paymentType);
 
@@ -156,6 +157,27 @@ public class CheckoutController {
         Order createdOrder = orderService.createOrder(customer, defaultAddress, cartItems, paymentMethod, checkoutInfo);
         shoppingCartService.deleteProductByCustomer(customer);
         sendOrderConfirmationEmail(request, createdOrder);
+
+        redirectAttributes.addFlashAttribute("orderId", createdOrder.getOrderId());
+
+        return "redirect:/checkout/order_completed";
+    }
+
+
+    /**
+     * This method handles the GET request for the order completed page.
+     * It retrieves the orderId from the flash attribute and passes it to the view.
+     * The view for the order completed page is then returned.
+     * This method is Post/Redirect/Get (PRG) pattern for handling the confirmation of the order.
+     *
+     * @param model a Model object which is used to add attributes to the model for use in the view
+     * @return the view name for the order completed page
+     */
+    @GetMapping("/checkout/order_completed")
+    public String showOrderCompletedPage(Model model) {
+        Long orderId = (Long) model.getAttribute("orderId");
+
+        model.addAttribute("orderId", orderId);
 
         return "checkout/order_completed";
     }
@@ -218,14 +240,14 @@ public class CheckoutController {
      * @throws MessagingException if there is a problem with sending an email
      */
     @PostMapping("/process_paypal_order")
-    public String processPayPalOrder(HttpServletRequest request, Model model) throws UnsupportedEncodingException, MessagingException {
+    public String processPayPalOrder(HttpServletRequest request, Model model, RedirectAttributes redirectAttributes) throws UnsupportedEncodingException, MessagingException {
         String orderId = request.getParameter("orderId");
         String pageTitle = "Checkout Failure";
         String message = null;
 
         try {
             if (payPalService.validateOrder(orderId)) {
-                return placeOrder(request);
+                return placeOrder(request, redirectAttributes);
             } else {
                 pageTitle = "Checkout Failure";
                 message = "ERROR: Transaction could not be completed because order information is invalid";
