@@ -9,7 +9,7 @@
     <br>
 
     <div>
-        <img th:src="@{/images/marketcruiser123.png}" style="width: 350px; height: 175px"/>
+        <img th:src="@{${S3_BASE_URI} + '/images-frontend/marketcruiser123.png'}" style="width: 350px; height: 175px"/>
     </div>
     <br>
 
@@ -46,11 +46,11 @@
     <br>
 
     <div style="color: #0c9669">
-        or <a class="a-orange-to-lightgreen" th:href="@{/forgot_password}">Forgot Password</a>
+        or <a class="a-orange-to-lightgreen text-orange" th:href="@{/forgot_password}">Forgot Password</a>
     </div>
     <br>
     <div style="color: #0c9669">
-        Don't have account? <a class="a-orange-to-lightgreen" th:href="@{/register}"><b>Sign up</b></a>
+        Don't have account? <a class="a-orange-to-lightgreen text-orange" th:href="@{/register}"><b>Sign up</b></a>
     </div>
 
     <br>

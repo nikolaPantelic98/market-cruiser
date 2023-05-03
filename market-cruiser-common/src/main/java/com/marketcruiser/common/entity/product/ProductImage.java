@@ -1,5 +1,6 @@
 package com.marketcruiser.common.entity.product;
 
+import com.marketcruiser.common.entity.Constants;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -48,6 +49,6 @@ public class ProductImage {
      */
     @Transient
     public String getImagePath() {
-        return "/product-images/" + product.getProductId() + "/extras/" + this.name;
+        return Constants.S3_BASE_URI + "/product-images/" + product.getProductId() + "/extras/" + this.name;
     }
 }

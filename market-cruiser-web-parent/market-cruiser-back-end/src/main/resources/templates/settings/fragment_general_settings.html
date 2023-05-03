@@ -21,7 +21,7 @@
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label text-white">Site Logo:</label>
                 <div class="col-sm-8">
-                    <img id="thumbnail" alt="Logo preview" th:src="@{${SITE_LOGO}}" width="140" height="70"/>
+                    <img id="thumbnail" alt="Logo preview" th:src="@{${S3_BASE_URI + SITE_LOGO}}" width="140" height="70"/>
                     <input type="file" id="fileImage" name="fileImage" accept="image/png, image/jpeg"/>
                 </div>
             </div>

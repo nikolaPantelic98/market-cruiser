@@ -111,7 +111,7 @@ public class User {
     public String getPhotosImagePath() {
         if (userId == null || photo == null) return "/images/default-user.png";
 
-        return "/user-photos/" + this.userId + "/" + this.photo;
+        return Constants.S3_BASE_URI + "/user-photos/" + this.userId + "/" + this.photo;
     }
 
     /**

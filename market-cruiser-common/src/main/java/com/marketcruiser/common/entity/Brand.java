@@ -76,6 +76,6 @@ public class Brand {
     public String getLogoPath() {
         if (this.brandId == null) return "/images/image-thumbnail.png";
 
-        return "/brand-logos/" + this.brandId + "/" + this.logo;
+        return Constants.S3_BASE_URI + "/brand-logos/" + this.brandId + "/" + this.logo;
     }
 }

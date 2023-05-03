@@ -2,6 +2,7 @@ package com.marketcruiser.common.entity.product;
 
 import com.marketcruiser.common.entity.Brand;
 import com.marketcruiser.common.entity.Category;
+import com.marketcruiser.common.entity.Constants;
 import lombok.*;
 
 import javax.persistence.*;
@@ -165,7 +166,7 @@ public class Product {
     public String getMainImagePath() {
         if (productId == null || mainImage == null) return "/images/image-thumbnail.png";
 
-        return "/product-images/" + this.productId + "/" + this.mainImage;
+        return Constants.S3_BASE_URI + "/product-images/" + this.productId + "/" + this.mainImage;
     }
 
     /**

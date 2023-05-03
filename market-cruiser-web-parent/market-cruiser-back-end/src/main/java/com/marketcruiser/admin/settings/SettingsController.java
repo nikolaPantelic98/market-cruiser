@@ -1,6 +1,7 @@
 package com.marketcruiser.admin.settings;
 
 import com.marketcruiser.admin.FileUploadUtil;
+import com.marketcruiser.common.entity.Constants;
 import com.marketcruiser.common.entity.Currency;
 import com.marketcruiser.common.entity.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,8 @@ public class SettingsController {
         for (Settings settings : listSettings) {
             model.addAttribute(settings.getKey(), settings.getValue());
         }
+
+        model.addAttribute("S3_BASE_URI", Constants.S3_BASE_URI);
 
         return "settings/settings";
     }

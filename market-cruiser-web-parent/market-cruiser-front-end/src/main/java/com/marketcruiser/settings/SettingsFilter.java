@@ -1,5 +1,6 @@
 package com.marketcruiser.settings;
 
+import com.marketcruiser.common.entity.Constants;
 import com.marketcruiser.common.entity.settings.Settings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -48,6 +49,8 @@ public class SettingsFilter implements Filter {
         generalSettings.forEach(settings -> {
             request.setAttribute(settings.getKey(), settings.getValue());
         });
+
+        request.setAttribute("S3_BASE_URI", Constants.S3_BASE_URI);
 
         chain.doFilter(request, response);
     }

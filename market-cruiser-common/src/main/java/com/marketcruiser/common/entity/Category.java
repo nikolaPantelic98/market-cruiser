@@ -161,7 +161,7 @@ public class Category {
     public String getImagePath() {
         if (this.categoryId == null) return "/images/image-thumbnail.png";
 
-        return "/category-images/" + this.categoryId + "/" + this.image;
+        return Constants.S3_BASE_URI + "/category-images/" + this.categoryId + "/" + this.image;
     }
 
     /**

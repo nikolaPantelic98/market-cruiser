@@ -60,7 +60,7 @@ public class ForgotPasswordController {
         String email = request.getParameter("email");
         try {
             String token = customerService.updateRestPasswordToken(email);
-            String link = Utility.getSiteURL(request) + "/reset-password?token=" + token;
+            String link = Utility.getSiteURL(request) + "/reset_password?token=" + token;
             sendEmail(link, email);
 
             model.addAttribute("message", "We have sent a reset password link to the email. Please check.");
@@ -87,7 +87,7 @@ public class ForgotPasswordController {
         JavaMailSenderImpl mailSender = Utility.prepareMailSender(emailSettings);
 
         String toAddress = email;
-        String subject = "Link to reset yoru password";
+        String subject = "Link to reset your password";
 
         String content = "<p>You have requested to reset your password.</p>"
                 + "<p>Click the link below to change your password:</p>"
