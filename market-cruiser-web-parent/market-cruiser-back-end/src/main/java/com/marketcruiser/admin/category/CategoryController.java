@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.category;
 
+import com.marketcruiser.admin.AmazonS3Util;
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.common.entity.Category;
 import com.marketcruiser.common.exception.CategoryNotFoundException;
@@ -124,10 +125,10 @@ public class CategoryController {
             category.setImage(fileName);
 
             Category savedCategory = categoryService.saveCategory(category);
-            String uploadDir = "../category-images/" + savedCategory.getCategoryId();
+            String uploadDir = "category-images/" + savedCategory.getCategoryId();
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            AmazonS3Util.removeFolder(uploadDir);
+            AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
         } else {
             categoryService.saveCategory(category);
         }
@@ -191,8 +192,8 @@ public class CategoryController {
     public String deleteCategory(@PathVariable Long categoryId, Model model, RedirectAttributes redirectAttributes) {
         try {
             categoryService.deleteCategory(categoryId);
-            String categoryDir = "../category-images/" + categoryId;
-            FileUploadUtil.removeDir(categoryDir);
+            String categoryDir = "category-images/" + categoryId;
+            AmazonS3Util.removeFolder(categoryDir);
 
             redirectAttributes.addFlashAttribute("message", "The category ID " + categoryId + " has been deleted successfully");
         } catch (CategoryNotFoundException exception) {

@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.brand;
 
+import com.marketcruiser.admin.AmazonS3Util;
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.admin.category.CategoryServiceImpl;
 import com.marketcruiser.common.entity.Brand;
@@ -135,10 +136,10 @@ public class BrandController {
             brand.setLogo(fileName);
 
             Brand savedBrand = brandService.saveBrand(brand);
-            String uploadDir = "../brand-logos/" + savedBrand.getBrandId();
+            String uploadDir = "brand-logos/" + savedBrand.getBrandId();
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            AmazonS3Util.removeFolder(uploadDir);
+            AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
         } else {
             brandService.saveBrand(brand);
         }
@@ -190,7 +191,7 @@ public class BrandController {
         try {
             brandService.deleteBrand(brandId);
             String brandDir = "../brand-logos/" + brandId;
-            FileUploadUtil.removeDir(brandDir);
+            AmazonS3Util.removeFolder(brandDir);
 
             redirectAttributes.addFlashAttribute("message", "The category ID " + brandId + " has been deleted successfully");
         } catch (BrandNotFoundException exception) {

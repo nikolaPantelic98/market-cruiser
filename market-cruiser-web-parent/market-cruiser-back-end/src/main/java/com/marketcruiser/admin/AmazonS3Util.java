@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * The AmazonS3Util class provides utility methods for interacting with Amazon S3.
+ * It allows listing folders, uploading files, deleting files, and removing folders.
+ */
 public class AmazonS3Util {
 
     private static final String BUCKET_NAME;
@@ -18,6 +22,12 @@ public class AmazonS3Util {
         BUCKET_NAME = System.getenv("AWS_BUCKET_NAME");
     }
 
+    /**
+     * Lists all keys (file names) in a specific folder of the S3 bucket.
+     *
+     * @param folderName The name of the folder in the S3 bucket.
+     * @return A list of file names in the specified folder.
+     */
     public static List<String> listFolder(String folderName) {
         S3Client client = S3Client.builder().build();
         ListObjectsRequest listRequest = ListObjectsRequest.builder()
@@ -39,6 +49,14 @@ public class AmazonS3Util {
         return listKeys;
     }
 
+    /**
+     * Uploads a file to the specified folder in the S3 bucket.
+     *
+     * @param folderName   The name of the folder in the S3 bucket.
+     * @param fileName     The name of the file to be uploaded.
+     * @param inputStream The input stream of the file to be uploaded.
+     * @throws IOException If an I/O error occurs during the upload process.
+     */
     public static void uploadFile(String folderName, String fileName, InputStream inputStream) throws IOException {
         S3Client client = S3Client.builder().build();
 
@@ -52,6 +70,11 @@ public class AmazonS3Util {
         }
     }
 
+    /**
+     * Deletes a file from the S3 bucket.
+     *
+     * @param fileName The name of the file to be deleted.
+     */
     public static void deleteFile(String fileName) {
         S3Client client = S3Client.builder().build();
 
@@ -60,6 +83,12 @@ public class AmazonS3Util {
         client.deleteObject(request);
     }
 
+    /**
+     * Removes a folder and all its contents from the S3 bucket.
+     * This method deletes all files within the specified folder.
+     *
+     * @param folderName The name of the folder to be removed.
+     */
     public static void removeFolder(String folderName) {
         S3Client client = S3Client.builder().build();
         ListObjectsRequest listRequest = ListObjectsRequest.builder()

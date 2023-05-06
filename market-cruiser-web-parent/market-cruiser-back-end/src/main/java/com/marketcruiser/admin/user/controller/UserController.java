@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.user.controller;
 
+import com.marketcruiser.admin.AmazonS3Util;
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.admin.category.CategoryServiceImpl;
 import com.marketcruiser.admin.user.UserNotFoundException;
@@ -129,8 +130,8 @@ public class UserController {
 
             String uploadDir = "user-photos/" + savedUser.getUserId();
 
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            AmazonS3Util.removeFolder(uploadDir);
+            AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
 
         } else {
             if (user.getPhoto().isEmpty()) user.setPhoto(null);
@@ -190,7 +191,7 @@ public class UserController {
         try {
             userService.deleteUser(userId);
             String userDir = "user-photos/" + userId;
-            FileUploadUtil.removeDir(userDir);
+            AmazonS3Util.removeFolder(userDir);
 
             redirectAttributes.addFlashAttribute("message", "The user with ID " + userId + " has been deleted successfully");
         } catch (UserNotFoundException exception) {

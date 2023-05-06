@@ -1,5 +1,6 @@
 package com.marketcruiser.admin.settings;
 
+import com.marketcruiser.admin.AmazonS3Util;
 import com.marketcruiser.admin.FileUploadUtil;
 import com.marketcruiser.common.entity.Constants;
 import com.marketcruiser.common.entity.Currency;
@@ -95,9 +96,9 @@ public class SettingsController {
             String value = "/site-logo/" + fileName;
             settingsBag.updateSiteLogo(value);
 
-            String uploadDir = "../site-logo/";
-            FileUploadUtil.cleanDir(uploadDir);
-            FileUploadUtil.saveFile(uploadDir, fileName, multipartFile);
+            String uploadDir = "site-logo";
+            AmazonS3Util.removeFolder(uploadDir);
+            AmazonS3Util.uploadFile(uploadDir, fileName, multipartFile.getInputStream());
         }
     }
 
