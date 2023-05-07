@@ -49,7 +49,7 @@
                     ([[${#numbers.formatDecimal(product.discountPercent, 1, THOUSANDS_POINT_TYPE, DECIMAL_DIGITS, DECIMAL_POINT_TYPE)}]] % OFF)
                 </div>
                 <div>&nbsp;</div>
-                <div th:utext="${product.shortDescription}" style="color: white"></div>
+                <div th:utext="${product.shortDescription}" style="color: white; margin-left: 15px"></div>
                 <div>&nbsp;</div>
                 <div style="text-align: center">
                     <div>
@@ -89,7 +89,7 @@
             <br>
             <br>
             <th:block th:each="detail : ${product.details}">
-            <div style="color: #0c9669">
+            <div style="color: white">
                 <b style="color: #1deba8 !important;">[[${detail.name}]] :</b>
                 <span>[[${detail.value}]]</span>
             </div>

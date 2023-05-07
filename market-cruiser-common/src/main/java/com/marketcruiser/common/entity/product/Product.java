@@ -43,7 +43,7 @@ public class Product {
     private String alias;
     @Column(
             name = "short_description",
-            length = 512,
+            length = 4096,
             nullable = false
     )
     private String shortDescription;
