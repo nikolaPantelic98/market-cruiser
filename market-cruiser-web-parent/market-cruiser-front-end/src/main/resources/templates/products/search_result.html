@@ -21,11 +21,22 @@
         <br>
     </div>
 
-    <div class="row">
-        <th:block th:each="product : ${listResult}">
-        <div th:replace="products/fragment_product_info :: content"></div>
-        </th:block>
+    <div class="full-details">
+        <div class="row">
+            <th:block th:each="product : ${listResult}">
+            <div th:replace="products/fragment_product_info :: content"></div>
+            </th:block>
+        </div>
     </div>
+
+    <div class="less-details">
+        <div class="row">
+            <th:block th:each="product, iterStat : ${listResult}" th:if="${iterStat.index % 2 == 0}">
+                <div th:replace="products/fragment_product_info :: content_small_screens_search"></div>
+            </th:block>
+        </div>
+    </div>
+
     <br>
 
     <div th:replace="fragments :: pagination('/search', 'product')"></div>
