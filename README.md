@@ -119,24 +119,21 @@ Ensure you have these dependencies installed and properly configured before proc
 
 To run the web application locally, follow these steps:
 
-1. Download and install the Java Development Kit (JDK).
-2. Download and install IntelliJ IDEA (Ultimate edition preferred).
-3. Set up MySQL Workbench.
-4. Create a new database named market_cruiser_db.
-5. Modify the application.properties file located at market-cruiser-back-end/src/main/resources/application.properties, if needed, to update the database connection properties. Update the values for `spring.datasource.username` and `spring.datasource.password` with your MySQL Workbench username and password.
-6. Launch the application locally by following these steps:
-   - Open IntelliJ IDEA and select "File" > "Open" to open the project.
-   - Select the market-cruiser-back-end module and run the MarketCruiserBackEnd configuration.
-   - The application will start running on localhost:8080.
-
-7. Initialize the first admin user by executing the testCreateFirstUserAdmin() method located in the MainTest class. To do this:
-   - Go to market-cruiser-web-parent/market-cruiser-back-end/src/test/MainTest.java.
-   - Right-click on the MainTest class and select "Run 'MainTest'".
-
-8. Access the application by opening a web browser and navigating to localhost:8080.
-   - Use the following credentials to log in as the admin user:
-     - Email: admin@gmail.com
-     - Password: admin123
+1. Ensure you have the following dependencies installed on your system:
+  - Java Development Kit (JDK)
+  - MySQL Workbench
+  - Apache Maven
+2. Clone the repository to your local machine by running the following command: `git clone https://github.com/nikolaPantelic98/market-cruiser`
+3. Open a command line or terminal window and navigate to the project directory: `cd market-cruiser`
+4. Create a new database named `market_cruiser_db` in MySQL Workbench.
+5. Modify the `application.properties` file located at `market-cruiser-back-end/src/main/resources/application.properties`, if needed, to update the database connection properties. Update the values for `spring.datasource.username` and `spring.datasource.password` with your MySQL Workbench username and password.
+6. Build the application by running the following command: `./mvnw clean install`
+7. Launch the application locally by running the following command: `./mvnw spring-boot:run -pl market-cruiser-back-end`
+8. Once the application is running, access it by opening a web browser and navigating to `http://localhost:8080`.
+9. Initialize the first admin user by executing the `testCreateFirstUserAdmin()` method located in the `MainTest` class. To do this, open a new command line or terminal window, navigate to the project directory, and run the following command: `./mvnw test -pl market-cruiser-back-end`
+10. You can now log in as the admin user with the following credentials:
+ - Email: admin@gmail.com
+ - Password: admin123
 
 ## Contributing
 
