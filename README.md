@@ -1,4 +1,4 @@
-# MarketCruiser (project in progress)
+# MarketCruiser
 
 * MarketCruiser is an online eCommerce marketplace.
 * Backend using Spring Boot and frontend using Thymeleaf, JQuery and AJAX.
@@ -141,6 +141,9 @@
   - Order listing page for customers added.
   - The Customer can see details for every order.
   - Return order function is implemented, so the customer can submit the request to return the order.
+  
+* All Images and Files migrated to AWS Amazon S3.
+* 2 Apps are deployed on Heroku (server side and client side).
   
 
 ## Requirements
