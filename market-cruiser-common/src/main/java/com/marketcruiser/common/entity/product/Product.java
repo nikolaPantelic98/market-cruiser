@@ -30,14 +30,14 @@ public class Product {
     @Column(
             name = "name",
             unique = true,
-            length = 256,
+            length = 255,
             nullable = false
     )
     private String name;
     @Column(
             name = "alias",
             unique = true,
-            length = 256,
+            length = 255,
             nullable = false
     )
     private String alias;
