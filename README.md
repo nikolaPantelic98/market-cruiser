@@ -14,7 +14,7 @@ MarketCruiser is an online eCommerce shop built with a combination of Java, Spri
 
 ## Introduction
 
-MarketCruiser is a multi-module Maven project that consists of the following modules: market-cruiser-back-end (server-side), market-cruiser-front-end (client-side), and market-cruiser-common (common code). The project provides an eCommerce platform with features such as user management, category management, brand management, product management, customer management, order management, and more.
+MarketCruiser is a multi-module Maven project that consists of the following modules: `market-cruiser-back-end` (server-side), `market-cruiser-front-end` (client-side), and `market-cruiser-common` (common code). The project provides an eCommerce platform with features such as user management, category management, brand management, product management, customer management, order management, and more.
 
 ## Features
 
@@ -112,7 +112,7 @@ MarketCruiser is a multi-module Maven project that consists of the following mod
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
 * [Java IDE (IntelliJ Ultimate preferred)](https://www.jetbrains.com/idea/download/#section=windows)
 * [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
-* Apache Maven
+* [Apache Maven](https://maven.apache.org/download.cgi)
 
 Ensure you have these dependencies installed and properly configured before proceeding with the installation steps.
 
