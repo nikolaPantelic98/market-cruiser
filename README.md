@@ -1,137 +1,96 @@
 # MarketCruiser
 
-* MarketCruiser is an online eCommerce marketplace.
-* Backend using Spring Boot and frontend using Thymeleaf, JQuery and AJAX.
-* MySQL.
+MarketCruiser is an online eCommerce shop built with a combination of Java, Spring, Spring Boot, Spring Security, Thymeleaf, jQuery, AJAX, and MySQL.
+* [www.marketcruiser.com](https://marketcruiser.herokuapp.com)
 
 ## Table of Contents
 
-* [Info](https://github.com/nikolaPantelic98/market-cruiser#info)
+* [Introduction](https://github.com/nikolaPantelic98/market-cruiser#introduction)
+* [Features](https://github.com/nikolaPantelic98/market-cruiser#features)
 * [Requirements](https://github.com/nikolaPantelic98/market-cruiser#requirements)
-* [Launching a web application step by step](https://github.com/nikolaPantelic98/market-cruiser#launching-a-web-application-step-by-step)
+* [Installation](https://github.com/nikolaPantelic98/market-cruiser#installation)
+* [Contributing](https://github.com/nikolaPantelic98/market-cruiser#contributing)
 * [Some Images](https://github.com/nikolaPantelic98/market-cruiser#some-images)
 
-## Info
+## Introduction
 
-* This is a multi-module Maven project
-* The project is divided into two parts: `market-cruiser-back-end` (server side) & `market-cruiser-front-end` (client side). Both exist under the `market-cruiser-web-parent`. `market-cruiser-common` is used for the common code in both directories.
+MarketCruiser is a multi-module Maven project that consists of the following modules: `market-cruiser-back-end` (server-side), `market-cruiser-front-end` (client-side), and `market-cruiser-common` (common code). The project provides an eCommerce platform with features such as user management, category management, brand management, product management, customer management, order management, and more.
 
-* User Management Module:
-  - In the market-cruiser-backend we made User Management Module - a module that manages users.
-  - There are 5 roles: Admin, Salesperson, Editor, Assistant, and Shipper.
-  - Users listing page created.
-  - A user can be created (first name, last name, password, email, photo, role, enabled) and a role can be assigned to him.
-  - All CRUD operations for users are enabled.
-  - Pagination and sorting for users are implemented.
-  - Filter function for user is implemented.
-  - Table content of the users can be exported & downloaded in CSV, Excel and PDF.
+## Features
 
-* User Authentication and Autorization (Spring Security):
-  - Spring Security is implemented.
-  - The login page has been created. The user can now log in and log out.
-  - The user can change his data now (excluding email and roles).
-  - From now on, each user can access links only with permission, depending on the role.
-  - Custom Error pages added (403, 404, and 500)
+* User Management:
+  - User roles: Admin, Salesperson, Editor, Assistant, and Shipper.
+  - CRUD operations for users, pagination, sorting, and filtering.
+  - Exporting user data to CSV, Excel, and PDF formats.
 
-* Category Management Module:
-  - Category Module added. 
-  - Categories listing page created.
-  - Categories now can be created, as well as subcategories under the parent category.
-  - All CRUD operations for categories are enabled.
-  - Pagination and Sorting for categories are implemented.
-  - Filter function for categories is implemented.
-  - Table content of the categories can be exported & downloaded in CSV.
+* User Authentication and Authorization:
+  - Implemented with Spring Security.
+  - Login and logout functionality.
+  - User data update (excluding email and roles).
+  - Role-based access control.
 
-* Brand Management Module:
-  - Brand Module added.
-  - Brands listing page created.
-  - Brands now can be created and the categories can be assigned to brand.
-  - All CRUD operations for brands are enabled.
-  - Pagination and Sorting for brands are implemented.
-  - Filter function for brands is implemented.
+* Category Management:
+  - CRUD operations for categories, including subcategories. 
+  - Pagination, sorting, and filtering.
+  - Exporting category data to CSV.
 
-* Product Management Module:
-  - Product Module added.
-  - Products listing page created.
-  - Products now can be created, separated into 5 sections:
-    - Overview - basic information about the product,
-    - Description - short description and full description with the possibility to format the text,
-    - Images - one main image and multiple additional images,
-    - Details - arbitrary addition of product details/components,
-    - Shipping - all necessary information about shipping.
-  - All CRUD operations for products are enabled.
-  - Pagination and Sorting for products are implemented.
-  - Filter function for products is implemented.
-  - Product management depending on the role
+* Brand Management:
+  - CRUD operations for brands, with category assignment.
+  - Pagination, sorting, and filtering.
 
-* Listing Products to Customers:
-  - Home Page
-  - Listing categories and products
-  - Search function
+* Product Management:
+  - CRUD operations for products.
+  - Product sections: Overview, Description, Images, Details, and Shipping.
+  - Pagination, sorting, and filtering.
 
 * Settings Module:
-  - Settings Module added, separated into 5 sections:
-    - General - management of basic settings (site name, logo, footer, currencies, decimal digits etc.),
-    - Countries - setting countries,
-    - States - setting states/provinces within the countries,
-    - Mail Server - *upcoming*,
-    - Mail Template - *upcoming*,
-    - Payment - *upcoming*.
-  - All CRUD operations for countries and states.
-  - Module done with AJAX, without the need to refresh the page.
+  - General settings for site management.
+  - Country and state/province management.
+  - Mail server and mail template settings.
+  - Payment settings.
 
 * Customer Registration:
-  - Customer Registration Form created.
-  - E-Mail settings added to Settings module:
-    - Mail Server,
-    - Mail Template.
-  - Verification mail for customer registration implemented and the customer must be verified now.
+  - Registration form for customers.
+  - Email verification for customer registration:
 
-* Customer Management Module:
-  - Customer Module added.
-  - Customers listing page created.
-  - All CRUD operations for customers are enabled.
-  - Pagination and Sorting for customers are implemented.
+* Customer Management:
+  - CRUD operations for customers.
+  - Pagination, sorting, and filtering.
 
 * Customer Authentication:
-  - A login page for customers has been created, as well as a logout option.
-  - Two types of authentication have been created for customers: DATABASE and GOOGLE.
-  - Mandatory verification of the user who registered in the application was created.
-  - The ability of the customer to log in to the application via gmail has been created.
-  - A Forgot Password option was created, through which the customer can reset the password via email.
+  - Customer login and logout.
+  - Authentication types: DATABASE and GOOGLE.
+  - Email verification for registered customers.
+  - Login via Gmail.
+  - Password reset via email.
 
-* Shopping Cart Module:
-  - Shopping Cart Module added.
-  - The customer can add the product to the cart.
-  - The customer can determine how many of the same products will be in the cart (quantity).
-  - The cart shows the total price of all products.
-
-* Shipping Rates Management Module:
-  - Shipping Rates Management Module added.
-  - Shipping rates listing page is created.
-  - Shipping rates can now be created to determine the cost of postage to a specific country.
-  - All CRUD operations for shipping rates are enabled.
-  - Pagination and Sorting for shipping rates are implemented.
-
-* Address Book Module:
-  - Address Book Module added.
-  - Customer can add several different addresses and specify to which address he wants to buy the product.
-  - Customer can specify which address is default.
-  - All CRUD operations are enabled, so customer can create, read, update or delete his addresses.
-
-* Order Management Module (1/2):
-  - Order Management Module added.
-  - Order listing page is created.
-  - Admin can see the entire customer order and change its status.
-  - The option to delete orders has been added.
-  - Pagination and sorting for orders have been implemented, starting from the latest date to the oldest.
+* Shopping Cart:
+  - Adding products to the cart.
+  - Quantity selection and total price calculation.
   
-* Checkout Module:
-  - Checkout Module added.
-  - Checkout page created.
-  - COD (Cash on Delivery) option added, so customer can purchase the product that way.
-  - Order Confirmation EMail coded.
-  - PayPal API added, so the customer can finish the purchase via PayPal.
+* Shipping Rates Management:
+  - CRUD operations for shipping rates.
+  - Pagination, sorting, and filtering.
+
+* Address Book:
+  - Managing customer addresses.
+  - Default address selection.
+  - CRUD operations for addresses.
+
+* Order Management:
+  - Admin view of customer orders and order status management.
+  - Order deletion.
+  - Pagination and sorting.
+  - Order tracking information.
+  - Customer order management and returns.
+  - Order listing for customers.
+  
+* Checkout:
+  - Added a Checkout module to facilitate the purchasing process.
+  - Created a dedicated checkout page.
+  - Implemented the option for Cash on Delivery (COD), allowing customers to make purchases and pay upon delivery.
+  - Developed functionality for sending order confirmation emails to customers.
+  - Integrated PayPal API to enable customers to complete purchases using PayPal as a payment method.
   
 * Order Management Module (2/2):
   - Order Tracking Information added.
@@ -143,7 +102,9 @@
   - Return order function is implemented, so the customer can submit the request to return the order.
   
 * All Images and Files migrated to AWS Amazon S3.
-* 2 Apps are deployed on Heroku (server side and client side).
+
+* Deployment:
+  - Server-side and client-side applications deployed on Heroku.
   
 
 ## Requirements
@@ -151,21 +112,42 @@
 * [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/downloads/)
 * [Java IDE (IntelliJ Ultimate preferred)](https://www.jetbrains.com/idea/download/#section=windows)
 * [MySQL Workbench](https://dev.mysql.com/downloads/workbench/)
+* [Apache Maven](https://maven.apache.org/download.cgi)
 
-### Launching a web application step by step
+Ensure you have these dependencies installed and properly configured before proceeding with the installation steps.
 
-* Download JDK.
-* Download IntelliJ IDEA.
-* From the main menu, select **File | Project Structure | Project Settings | Project**.
-* If the necessary JDK is already defined in IntelliJ IDEA, select it from the **SDK** list.
-* If the JDK is installed on your computer, but not defined in the IDE, select **Add SDK | JDK**, and specify the path to the JDK home directory (for example,  **/Library/Java/JavaVirtualMachines/jdk-12.0.1.jdk**).
-* Apply the changes and close the dialog.
-* Download MySQL Workbench.
-* Create new database - `CREATE database market_cruiser_db;`
-* Modify `application.properties` under the `market-cruiser-back-end` **(market-cruiser-web-parent | market-cruiser-back-end | src | main | resources | application.properties)** if needed - `spring.datasource.username` and `spring.datasource.password` with your username and password from MySQL Workbench.
-* Run the application on localhost:8080 - `MarketCruiserBackEnd`.
-* Go to **market-cruiser-web-parent | market-cruiser-back-end | src | test | MainTest** and run the method `testCreateFirstUserAdmin()`.
-* Run the application on localhost:8080 - `MarketCruiserBackEnd` again and log in (email: admin@gmail.com; password: admin123).
+## Installation
+
+To run the web application locally, follow these steps:
+
+1. Ensure you have the following dependencies installed on your system:
+  - Java Development Kit (JDK)
+  - MySQL Workbench
+  - Apache Maven
+2. Clone the repository to your local machine by running the following command: `git clone https://github.com/nikolaPantelic98/market-cruiser`
+3. Open a command line or terminal window and navigate to the project directory: `cd market-cruiser`
+4. Create a new database named `market_cruiser_db` in MySQL Workbench.
+5. Modify the `application.properties` file located at `market-cruiser-back-end/src/main/resources/application.properties`, if needed, to update the database connection properties. Update the values for `spring.datasource.username` and `spring.datasource.password` with your MySQL Workbench username and password.
+6. Build the application by running the following command: `./mvnw clean install`
+7. Launch the application locally by running the following command: `./mvnw spring-boot:run -pl market-cruiser-back-end`
+8. Once the application is running, access it by opening a web browser and navigating to `http://localhost:8080`.
+9. Initialize the first admin user by executing the `testCreateFirstUserAdmin()` method located in the `MainTest` class. To do this, open a new command line or terminal window, navigate to the project directory, and run the following command: `./mvnw test -pl market-cruiser-back-end`
+10. You can now log in as the admin user with the following credentials:
+ - Email: admin@gmail.com
+ - Password: admin123
+
+## Contributing
+
+We welcome contributions to improve the MarketCruiser application. To contribute, please follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix.
+3. Make the necessary changes in your branch.
+4. Test your changes thoroughly.
+5. Commit your changes and push them to your forked repository.
+6. Submit a pull request, providing a clear description of your changes.
+
+Our team will review the pull request and work with you to merge the changes into the main repository if they meet the project's guidelines and standards.
 
 ## Some Images
 
