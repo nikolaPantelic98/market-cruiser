@@ -67,7 +67,7 @@
 
     <div th:fragment="delete(entityName, entityId, deleteURL, visible)" th:remove="tag">
         <th:block th:if="${visible}">
-        <a class="a-icon-lightgreen fas fa-trash fa-2x icon-red link-delete"
+        <a class="a-icon-lightgreen fas fa-trash fa-2x icon-orange link-delete"
            th:href="@{${deleteURL}}"
            th:entityId = "${entityId}"
            th:title="'Delete ' + ${entityName}"></a>

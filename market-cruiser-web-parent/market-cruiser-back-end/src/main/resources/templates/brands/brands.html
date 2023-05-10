@@ -75,7 +75,7 @@
                 <img th:src="@{${brand.logoPath}}" style="width: 100px" class="img-fluid" />
             </div>
             <div class="col-8">
-                <div>[[${brand.name}]]</div>
+                <div style="color: #FFFFFF">[[${brand.name}]]</div>
                 <div class="mt-2">
                     <div th:replace="fragments :: edit('brand', '/brands/edit/' + ${brand.brandId})"></div>
                     &nbsp;

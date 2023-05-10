@@ -74,11 +74,11 @@
     <div class="less-details">
         <div th:each="customer: ${listCustomers}" class="row m-1">
             <div class="col-4">
-                <span><b>[[${customer.fullName}]]</b></span>
+                <span><b style="color: #FFFFFF">[[${customer.fullName}]]</b></span>
             </div>
             <div class="col-8">
                 <div class="mb-1">
-                    <span>[[${customer.country.name}]]</span>
+                    <span style="color: #bfbfbf">[[${customer.country.name}]]</span>
                 </div>
                 <div>
                     <div th:replace="fragments :: status(${customer.enabled}, 'customer', '/customers/' + ${customer.customerId})"></div>

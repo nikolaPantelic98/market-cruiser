@@ -75,13 +75,16 @@
     <div class="less-details">
         <th:block th:each="order : ${listOrders}">
             <div class="row m-1">
-                <div class="col-2">
+                <div class="col-2" style="color: #0c9669">
                     [[${order.orderId}]]
                 </div>
                 <div class="col-10">
-                    <div>[[${order.customer.fullName}]], [[${order.country}]]</div>
-                    <div><small>[[${order.orderTime}]] - [[${order.status}]]</small></div>
-                    <div><div th:replace="fragments :: format_currency(${order.total})">Total</div> - [[${order.paymentMethod}]]</div>
+                    <div style="color: #FFFFFF">[[${order.customer.fullName}]], [[${order.country}]]</div>
+                    <div><small style="color: #bfbfbf">[[${order.orderTime}]] - [[${order.status}]]</small></div>
+                    <div class="mb-3 mt-2">
+                        <span style="color: #FFFFFF"><div th:replace="fragments :: format_currency(${order.total})">
+                            Total
+                        </div></span><span style="color: #bfbfbf"> - [[${order.paymentMethod}]]</span></div>
                     <div>
                         <a class="a-icon-lightgreen fas fa-file-alt fa-2x icon-lightgreen link-order-detail"
                            th:href="@{'/orders/detail/' + ${order.orderId}}"

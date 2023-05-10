@@ -94,6 +94,22 @@ a.a-orange-to-lightgreen:hover {
     font-weight: bold;
 }
 
+a.a-white-to-lightgreen:link {
+    transition: all 0.3s ease;
+    color: #FFFFFF;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a.a-white-to-lightgreen:hover {
+    transform: scale(1.2);
+    color: #1deba8;
+    background-color: transparent;
+    text-decoration: none;
+    font-weight: bold;
+}
+
 a.a-icon-lightgreen {transition: all 0.3s ease;}
 
 a.a-icon-lightgreen:hover {color: #097853;}
