@@ -115,22 +115,18 @@
             [[${message}]]
         </div>
 
-        <form class="form-inline" th:action="@{${moduleURL} + '/page/1'}" method="get">
-            <input type="hidden" name="sortField" th:value="${sortField}" />
-            <input type="hidden" name="sortDir" th:value="${sortDir}" />
-            <div class="search-box">
-                <span class="search-button">
-                    <button class="btn-search"><i class="fas fa-search"></i></button>
-                </span>
-
+        <div class="search-box">
+            <span class="search-button">
+                <button class="btn-search"><i class="fas fa-search"></i></button>
+            </span>
+            <form class="form-inline" th:action="@{${moduleURL} + '/page/1'}" method="get">
+                <input type="hidden" name="sortField" th:value="${sortField}" />
+                <input type="hidden" name="sortDir" th:value="${sortDir}" />
                 <input type="text" name="keyword" class="input-search"
-                       required="required"
                        th:value="${keyword}"
                        placeholder="Type to Search...">
-            </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="button" value="Clear" class="btn btn-outline-orange" onclick="clearFilter()" />
-        </form>
+            </form>
+        </div>
     </div>
 
     <div th:fragment="format_currency(amount)" th:remove="tag">
