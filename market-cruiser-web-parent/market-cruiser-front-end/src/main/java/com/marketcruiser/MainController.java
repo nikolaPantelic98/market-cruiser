@@ -53,4 +53,9 @@ public class MainController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/coming_soon")
+    public String comingSoon() {
+        return "coming_soon";
+    }
 }
