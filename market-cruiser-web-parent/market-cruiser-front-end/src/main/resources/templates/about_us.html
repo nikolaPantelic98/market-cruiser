@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments :: page_head('About Us - Market Cruiser', 'none')">
+
+</head>
+<body>
+<div class="container-fluid">
+    <div th:replace="fragment_navigation :: header_menu">
+
+    </div>
+    <br>
+
+    <div>
+        <h1>About Us</h1>
+    </div>
+    <br>
+
+    <div class="m-3">
+        <h2 style="color: #FFFFFF">Dear Visitor,</h2>
+    </div>
+    <div class="m-3">
+        <h3 style="color: white">Welcome to MarketCruiser</h3>
+    </div>
+    <div class="m-3">
+        <h5 style="color: #1deba8">Since this is my personal project and not an actual online store (yet), I would like to share with you the details of this project.</h5>
+    </div>
+    <div class="m-3">
+        <p style="color: white">MarketCruiser is an eCommerce project developed using Java, Spring, Spring Boot, Spring Security, Thymeleaf, jQuery, AJAX, and MySQL. It aimed to provide a comprehensive online shopping platform with user management, category and brand management, product management, customer management, order management, and more.</p>
+    </div>
+    <div class="m-3">
+        <h5 style="color: #1deba8">Highlights:</h5>
+    </div>
+    <div class="m-3">
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Developed a multi-module Maven project, comprising server-side, client-side, and common code modules, ensuring modularity and scalability of the application.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Implemented robust user authentication and authorization using Spring Security, ensuring secure access to the system and role-based permissions for different user roles.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Designed and developed efficient category and brand management features, enabling administrators to perform CRUD operations, manage subcategories, and export category data to CSV format, facilitating seamless organization and navigation of products.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Developed the product management module, enabling administrators to efficiently manage product information, including CRUD operations, pagination, sorting, and filtering, resulting in improved product catalog management.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Implemented customer registration and authentication functionalities, incorporating email verification for secure account creation, password reset via email, and support for login via Gmail, streamlining the customer onboarding process.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Developed a dynamic shopping cart system, allowing customers to add products, adjust quantities, and calculate total prices accurately, enhancing the overall shopping experience and facilitating smooth checkout processes.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Implemented comprehensive order management features for both administrators and customers, including order tracking, order status management, returns, and order listing, ensuring efficient handling of orders.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Integrated multiple payment methods, such as Cash on Delivery (COD) and PayPal, providing customers with flexible and secure payment options.</p>
+        <p style="color: white">&#x2022;&nbsp;&nbsp;Successfully deployed the server-side and client-side applications on Heroku, ensuring high availability and scalability of the platform, while effectively managing the migration of images and files to AWS Amazon S3 for optimized performance and storage.</p>
+    </div>
+    <div class="m-3">
+        <h3 style="color: white">Thank you for visiting!</h3>
+    </div>
+
+    <div th:replace="fragment_navigation :: footer_menu"></div>
+</div>
+</body>
+</html>

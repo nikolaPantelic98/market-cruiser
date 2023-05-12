@@ -55,7 +55,12 @@ public class MainController {
     }
 
     @GetMapping("/coming_soon")
-    public String comingSoon() {
+    public String viewComingSoon() {
         return "coming_soon";
+    }
+
+    @GetMapping("/about_us")
+    public String viewAboutUs() {
+        return "about_us";
     }
 }
