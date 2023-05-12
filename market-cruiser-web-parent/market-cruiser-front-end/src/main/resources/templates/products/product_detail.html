@@ -30,6 +30,7 @@
                 </th:block>
             </div>
         </div>
+        <div>&nbsp;&nbsp;</div>
         <div class="col-sm">
             <div>
                 <h2 style="color: #1deba8">[[${product.name}]]</h2>
@@ -68,34 +69,64 @@
         </div>
     </div>
 
-    <div class="row mb-4" style="border-top: solid 1px #075a3e">
-        <div class="col-12">
-            <div><hr/></div>
-            <div>
-                <h3 style="color: #1deba8">Product Description</h3>
+    <div class="full-details">
+        <div class="row mb-4" style="border-top: solid 1px #075a3e">
+            <div class="col-6">
+                <div><hr/></div>
+                <div>
+                    <h3 class="text-center" style="color: #1deba8">Product Description</h3>
+                </div>
+                <br>
+                <br>
+                <div th:utext="${product.fullDescription}" style="color: white"></div>
             </div>
-            <br>
-            <br>
-            <div th:utext="${product.fullDescription}" style="color: white"></div>
+            <div class="col-6">
+                <div><hr/></div>
+                <div>
+                    <h3 class="text-center" style="color: #1deba8">Product Details</h3>
+                </div>
+                <br>
+                <br>
+                <th:block th:each="detail : ${product.details}">
+                    <div class="center-div" style="color: white">
+                        <b style="color: #1deba8 !important;">&#x2022;&nbsp;&nbsp;[[${detail.name}]] :</b>
+                        <span>[[${detail.value}]]</span>
+                    </div>
+                </th:block>
+            </div>
         </div>
     </div>
 
-    <div class="row" style="border-top: solid 1px #075a3e">
-        <div class="col-12">
-            <div><hr/></div>
-            <div>
-                <h3 style="color: #1deba8">Product Details</h3>
+    <div class="less-details">
+        <div class="row mb-4" style="border-top: solid 1px #075a3e">
+            <div class="col-12">
+                <div><hr/></div>
+                <div>
+                    <h3 class="text-center" style="color: #1deba8">Product Description</h3>
+                </div>
+                <br>
+                <br>
+                <div th:utext="${product.fullDescription}" style="color: white; margin-left: 20px"></div>
             </div>
-            <br>
-            <br>
-            <th:block th:each="detail : ${product.details}">
-            <div style="color: white">
-                <b style="color: #1deba8 !important;">[[${detail.name}]] :</b>
-                <span>[[${detail.value}]]</span>
+        </div>
+        <div class="row" style="border-top: solid 1px #075a3e">
+            <div class="col-12">
+                <div><hr/></div>
+                <div>
+                    <h3 class="text-center" style="color: #1deba8">Product Details</h3>
+                </div>
+                <br>
+                <br>
+                <th:block th:each="detail : ${product.details}">
+                    <div style="color: white; margin-left: 20px">
+                        <b style="color: #1deba8 !important;">[[${detail.name}]] :</b>
+                        <span>[[${detail.value}]]</span>
+                    </div>
+                </th:block>
             </div>
-            </th:block>
         </div>
     </div>
+
 
 
     <div th:replace="products/fragment_images_carousel :: content"></div>
