@@ -97,7 +97,7 @@
                         <div class="col-sm-8">
                             <select class="clean-slide" th:field="*{country}" id="country">
                                 <th:block th:each="country : ${listCountries}">
-                                <option th:value="${country.countryId}">[[${country.name}]]</option>
+                                <option th:value="${country.countryId}" th:text="${country.name}"></option>
                                 </th:block>
                             </select>
                             <label for="country">Country</label>
