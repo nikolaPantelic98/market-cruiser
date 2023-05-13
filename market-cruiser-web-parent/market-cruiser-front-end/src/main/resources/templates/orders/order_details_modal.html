@@ -55,82 +55,152 @@
         <div class="content">
             <section>
                 <h2>Overview</h2>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Order ID:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.orderId}" readonly />
+                <div class="full-details">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Order ID:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.orderId}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Customer:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.customer.fullName}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Subtotal:</label>
+                        <div class="col-sm-10 center-div">
+                            <div th:replace="fragments :: currency_input(${order.subtotal})">Subtotal</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Shipping Cost:</label>
+                        <div class="col-sm-10 center-div">
+                            <div th:replace="fragments :: currency_input(${order.shippingCost})">Shipping cost</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Tax:</label>
+                        <div class="col-sm-10 center-div">
+                            <div th:replace="fragments :: currency_input(${order.tax})">Tax</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Total:</label>
+                        <div class="col-sm-10 center-div">
+                            <div th:replace="fragments :: currency_input(${order.total})">Total</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white"></label>
+                        <div class="col-sm-10 text-white center-div">
+                            TOTAL = Subtotal + Shipping Cost + Tax
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Payment Method:</label>
+                        <div class="col-sm-10 center-div">
+                            <span class="text-white">[[${order.paymentMethod}]]</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Order Time:</label>
+                        <div class="col-sm-10 center-div">
+                            <div th:replace="fragments :: format_time(${order.orderTime})"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Customer:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.customer.fullName}" readonly />
+                <div class="less-details">
+                    <div>&nbsp;&nbsp;</div>
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Order ID:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.orderId}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Customer:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.customer.fullName}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Subtotal:</label>
+                        <div class="col-sm-6">
+                            <div th:replace="fragments :: currency_input(${order.subtotal})">Subtotal</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Shipping Cost:</label>
+                        <div class="col-sm-6">
+                            <div th:replace="fragments :: currency_input(${order.shippingCost})">Shipping cost</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Tax:</label>
+                        <div class="col-sm-6">
+                            <div th:replace="fragments :: currency_input(${order.tax})">Tax</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Total:</label>
+                        <div class="col-sm-6">
+                            <div th:replace="fragments :: currency_input(${order.total})">Total</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white"></label>
+                        <div class="col-sm-6 text-white">
+                            TOTAL = Subtotal + Shipping Cost + Tax
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Payment Method:</label>
+                        <div class="col-sm-6">
+                            <span class="text-white">[[${order.paymentMethod}]]</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Order Time:</label>
+                        <div class="col-sm-6">
+                            <div th:replace="fragments :: format_time(${order.orderTime})"></div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Subtotal:</label>
-                    <div class="col-sm-10 center-div">
-                        <div th:replace="fragments :: currency_input(${order.subtotal})">Subtotal</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Shipping Cost:</label>
-                    <div class="col-sm-10 center-div">
-                        <div th:replace="fragments :: currency_input(${order.shippingCost})">Shipping cost</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Tax:</label>
-                    <div class="col-sm-10 center-div">
-                        <div th:replace="fragments :: currency_input(${order.tax})">Tax</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Total:</label>
-                    <div class="col-sm-10 center-div">
-                        <div th:replace="fragments :: currency_input(${order.total})">Total</div>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white"></label>
-                    <div class="col-sm-10 text-white center-div">
-                        TOTAL = Subtotal + Shipping Cost + Tax
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Payment Method:</label>
-                    <div class="col-sm-10 center-div">
-                        <span class="text-white">[[${order.paymentMethod}]]</span>
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Order Time:</label>
-                    <div class="col-sm-10 center-div">
-                        <div th:replace="fragments :: format_time(${order.orderTime})"></div>
-                    </div>
-                </div>
             </section>
 
             <section>
                 <h2>Products</h2>
                 <th:block th:each="detail, status : ${order.orderDetails}">
-                    <div class="row border rounded p-1" th:with="product = ${detail.product}">
-                        <div class="col-sm-1 center-div">
-                            <div class="div-count text-white">[[${status.count}]]</div>
-                        </div>
-                        <div class="col-sm-3"><img th:src="@{${product.mainImagePath}}" class="img-fluid" /></div>
-                        <div class="col-sm-8 center-div">
-                            <div class="text-wrap">
-                                <b class="text-white">[[${product.name}]]</b>
+                    <div class="full-details">
+                        <div class="row border rounded p-1" th:with="product = ${detail.product}">
+                            <div class="col-sm-1 center-div">
+                                <div class="div-count text-white">[[${status.count}]]</div>
                             </div>
+                            <div class="col-sm-3"><img th:src="@{${product.mainImagePath}}" class="img-fluid" /></div>
+                            <div class="col-sm-8 center-div">
+                                <div class="text-wrap">
+                                    <b class="text-white">[[${product.name}]]</b>
+                                </div>
 
                                 <div class="text-white">
                                     Subtotal: [[${detail.quantity}]] x
@@ -141,88 +211,197 @@
                                 <div class="text-white">
                                     Shipping Cost: <div th:replace="fragments :: format_currency(${detail.shippingCost})"></div>
                                 </div>
+                            </div>
                         </div>
                     </div>
-                    <br>
+
+                    <div class="less-details">
+                        <div>&nbsp;&nbsp;</div>
+                        <div class="row border rounded p-1" th:with="product = ${detail.product}">
+                            <div class="col-sm-1">
+                                <div class="div-count text-white">[[${status.count}]]</div>
+                            </div>
+                            <div class="col-sm-3"><img th:src="@{${product.mainImagePath}}" class="img-fluid" /></div>
+                            <div class="col-sm-8">
+                                <div class="text-wrap">
+                                    <b class="text-white">[[${product.name}]]</b>
+                                </div>
+
+                                <div class="text-white">
+                                    Subtotal: [[${detail.quantity}]] x
+                                    <div th:replace="fragments :: format_currency(${detail.unitPrice})"></div>
+                                    =
+                                    <div th:replace="fragments :: format_currency(${detail.subtotal})"></div>
+                                </div>
+                                <div class="text-white">
+                                    Shipping Cost: <div th:replace="fragments :: format_currency(${detail.shippingCost})"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+
                 </th:block>
             </section>
 
             <section>
                 <h2>Shipping</h2>
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Deliver Days:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.deliverDays}" readonly />
+                <div class="full-details">
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Deliver Days:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.deliverDays}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Expected Deliver Date:</label>
+                        <div class="col-sm-10 center-div">
+                            <span style="color: white" th:text="${#dates.format(order.deliverDate, 'E, dd MM yyyy')}"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">First Name:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.firstName}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Last Name:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.lastName}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Phone Number:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.phoneNumber}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Address Line 1:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.addressLine1}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Address Line 2:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.addressLine2}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">City:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.city}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">State:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.state}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Country:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.country}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label text-white">Post Code:</label>
+                        <div class="col-sm-10 center-div">
+                            <input type="text" class="form-control" th:value="${order.postCode}" readonly />
+                        </div>
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Expected Deliver Date:</label>
-                    <div class="col-sm-10 center-div">
-                        <span style="color: white" th:text="${#dates.format(order.deliverDate, 'E, dd MM yyyy')}"></span>
+                <div class="less-details">
+                    <div>&nbsp;&nbsp;</div>
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Deliver Days:</label>
+                        <div class="col-sm-6">
+                            <input style="width: 100%" type="text" class="form-control" th:value="${order.deliverDays}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">First Name:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.firstName}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Expected Deliver Date:</label>
+                        <div class="col-sm-6">
+                            <span style="color: white" th:text="${#dates.format(order.deliverDate, 'E, dd MM yyyy')}"></span>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Last Name:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.lastName}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">First Name:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.firstName}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Phone Number:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.phoneNumber}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Last Name:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.lastName}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Address Line 1:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.addressLine1}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Phone Number:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.phoneNumber}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Address Line 2:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.addressLine2}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Address Line 1:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.addressLine1}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">City:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.city}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Address Line 2:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.addressLine2}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">State:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.state}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">City:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.city}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Country:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.country}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">State:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.state}" readonly />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group row">
-                    <label class="col-sm-2 col-form-label text-white">Post Code:</label>
-                    <div class="col-sm-10 center-div">
-                        <input type="text" class="form-control" th:value="${order.postCode}" readonly />
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Country:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.country}" readonly />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-6 col-form-label text-white">Post Code:</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control" th:value="${order.postCode}" readonly />
+                        </div>
                     </div>
                 </div>
             </section>
@@ -249,12 +428,13 @@
                 </div>
 
                 <div class="less-details">
+                    <div>&nbsp;&nbsp;</div>
                     <th:block th:each="track : ${order.orderTracks}">
                         <div class="row p-1">
-                            <span>[[${track.updatedTime}]]</span>
+                            <span style="color: #b3b3b3">[[${track.updatedTime}]]</span>
                         </div>
                         <div class="row p-1 ml-3">
-                            <span>&nbsp;&nbsp;<b>[[${track.status}]]</b>: <i>[[${track.notes}]]</i></span>
+                            <span>&nbsp;&nbsp;<b style="color: #FFFFFF">[[${track.status}]]</b>: <i style="color: #FFFFFF">[[${track.notes}]]</i></span>
                         </div>
                         <div class="row">&nbsp;</div>
                     </th:block>
