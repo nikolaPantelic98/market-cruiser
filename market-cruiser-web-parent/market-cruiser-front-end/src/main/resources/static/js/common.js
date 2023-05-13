@@ -18,3 +18,29 @@ $('.search-button').click(function(){
 $('.btn-search').click(function () {
     $('.input-search').focus();
 });
+
+$(document).ready(function() {
+    $('#buttonAddToCart').click(function(e) {
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        var productImage = $('#bigImage');
+        var cloneImage = productImage.clone().css({
+            position: 'absolute',
+            top: productImage.offset().top,
+            left: productImage.offset().left
+        });
+
+        $('body').append(cloneImage);
+
+        cloneImage.animate({
+            top: '5%',
+            left: '57%',
+            opacity: 0,
+            width: '50px',  // Adjust the desired smaller width
+            height: '50px'  // Adjust the desired smaller height
+        }, 1000, function() {
+            cloneImage.remove();
+            // Perform the desired action after the animation (e.g., show a success message)
+        });
+    });
+});
