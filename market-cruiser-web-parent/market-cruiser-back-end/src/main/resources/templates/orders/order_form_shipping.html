@@ -4,87 +4,175 @@
 
 <div th:fragment="content" th:remove="tag">
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Deliver Days:</label>
-        <div class="col-sm-10">
-            <input type="number" step="1" class="form-control" th:field="*{deliverDays}" required />
+    <div class="full-details">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Deliver Days:</label>
+            <div class="col-sm-10 center-div">
+                <input type="number" step="1" class="form-control" th:field="*{deliverDays}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Expected Deliver Date:</label>
+            <div class="col-sm-10 center-div">
+                <input type="date" class="form-control" th:field="*{deliverDateOnForm}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">First Name:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{firstName}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Last Name:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{lastName}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Phone Number:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{phoneNumber}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Address Line 1:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{addressLine1}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Address Line 2:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{addressLine2}" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">City:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{city}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Country:</label>
+            <div class="col-sm-10 center-div">
+                <input type="hidden" name="countryName" id="countryName" th:value="${order.country}" />
+                <select class="form-control" id="country">
+                    <option th:each="aCountry : ${listCountries}" th:value="${aCountry.countryId}" th:selected="${aCountry.name == order.country}">[[${aCountry.name}]]</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">State:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{state}" list="listStates"/>
+                <datalist id="listStates">
+
+                </datalist>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label text-white">Post Code:</label>
+            <div class="col-sm-10 center-div">
+                <input type="text" class="form-control" th:field="*{postCode}" required />
+            </div>
         </div>
     </div>
 
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Expected Deliver Date:</label>
-        <div class="col-sm-10">
-            <input type="date" class="form-control" th:field="*{deliverDateOnForm}" required />
+
+    <div class="less-details">
+        <div>&nbsp;&nbsp;</div>
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Deliver Days:</label>
+            <div class="col-sm-6">
+                <input type="number" step="1" class="form-control" th:field="*{deliverDays}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Expected Deliver Date:</label>
+            <div class="col-sm-6">
+                <input type="date" class="form-control" th:field="*{deliverDateOnForm}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">First Name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{firstName}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Last Name:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{lastName}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Phone Number:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{phoneNumber}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Address Line 1:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{addressLine1}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Address Line 2:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{addressLine2}" />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">City:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{city}" required />
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Country:</label>
+            <div class="col-sm-6">
+                <input type="hidden" name="countryName" id="countryName" th:value="${order.country}" />
+                <select class="form-control" id="country">
+                    <option th:each="aCountry : ${listCountries}" th:value="${aCountry.countryId}" th:selected="${aCountry.name == order.country}">[[${aCountry.name}]]</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">State:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{state}" list="listStates"/>
+                <datalist id="listStates">
+
+                </datalist>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-sm-6 col-form-label text-white">Post Code:</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" th:field="*{postCode}" required />
+            </div>
         </div>
     </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">First Name:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{firstName}" required />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Last Name:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{lastName}" required />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Phone Number:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{phoneNumber}" required />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Address Line 1:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{addressLine1}" required />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Address Line 2:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{addressLine2}" />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">City:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{city}" required />
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Country:</label>
-        <div class="col-sm-10">
-            <input type="hidden" name="countryName" id="countryName" th:value="${order.country}" />
-            <select class="form-control" id="country">
-                <option th:each="aCountry : ${listCountries}" th:value="${aCountry.countryId}" th:selected="${aCountry.name == order.country}">[[${aCountry.name}]]</option>
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">State:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{state}" list="listStates"/>
-            <datalist id="listStates">
-
-            </datalist>
-        </div>
-    </div>
-
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label text-white">Post Code:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{postCode}" required />
-        </div>
-    </div>
-
 </div>

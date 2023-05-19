@@ -219,7 +219,7 @@
         height: 1.5em;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .tabs_three ul li label {
         padding: 5px;
         border-radius: 5px;
@@ -235,5 +235,9 @@
     }
     .tabs_three .content section h2 {
         display: block;
+    }
+
+    .tabs_three {
+        width: 100%;
     }
 }

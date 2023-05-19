@@ -124,7 +124,7 @@ function generateProductCode(productId, productName, mainImagePath, productCost,
                     <img src="${mainImagePath}" class="img-fluid" width="200px" />
                 </div>
                 <div class="col-3" style="display: flex; align-items: center; justify-content: center">
-                    <div><a class="a-icon-lightgreen fas fa-trash icon-red fa-2x link-remove" href="" rowNumber="${nextCount}"></a></div>
+                    <div><a class="a-icon-lightgreen fas fa-trash icon-orange fa-2x link-remove" href="" rowNumber="${nextCount}"></a></div>
                 </div>
             </div>
 

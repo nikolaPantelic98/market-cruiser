@@ -237,7 +237,7 @@
         height: 1.5em;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .tabs ul li label {
         padding: 5px;
         border-radius: 5px;
@@ -253,5 +253,9 @@
     }
     .tabs .content section h2 {
         display: block;
+    }
+
+    .tabs {
+        width: 100%;
     }
 }

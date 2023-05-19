@@ -107,7 +107,7 @@ function generateTrackCode() {
 				  
 				  <div>
                     <div class="mt-1" style="margin-left: 30px">
-                      <a class="a-icon-lightgreen fas fa-trash icon-red fa-2x linkRemoveTrack" href="" rowNumber="${nextCount}"></a>
+                      <a class="a-icon-lightgreen fas fa-trash icon-orange fa-2x linkRemoveTrack" href="" rowNumber="${nextCount}"></a>
                     </div>
                       <br>
                   </div>

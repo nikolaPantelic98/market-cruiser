@@ -14,14 +14,14 @@
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label text-white">Selected Country:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-10 center-div">
                 <select class="form-control m-2" id="dropDownCountriesForStates">
                 </select>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label text-white">All States/Provinces:</label>
-            <div class="col-sm-10">
+            <div class="col-sm-10 center-div">
                 <select class="form-control m-2" style="height: 300px" size="3" id="dropDownStates">
                 </select>
             </div>
@@ -30,13 +30,15 @@
         <form id="formState">
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label mt-2 text-white" id="labelStateName">State/Province Name:</label>
-                <div class="col-sm-6">
+                <div class="col-sm-4 center-div">
                     <input type="text" class="form-control mt-2" id="fieldStateName"
                            required minlength="3" maxlength="45" />
                 </div>
-                <div class="col-lg-4 mt-2">
+                <div class="col-lg-6 mt-2">
                     <input type="button" id="buttonAddState" value="New" class="btn btn-outline-green" />
+                    &nbsp;
                     <input type="button" id="buttonUpdateState" value="Update" class="btn btn-outline-green" disabled="disabled" />
+                    &nbsp;
                     <input type="button" id="buttonDeleteState" value="Delete" class="btn btn-outline-orange" disabled="disabled" />
                 </div>
             </div>

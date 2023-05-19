@@ -256,7 +256,7 @@
         height: 1.5em;
     }
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .tabs_six ul li label {
         padding: 5px;
         border-radius: 5px;
@@ -272,5 +272,9 @@
     }
     .tabs_six .content section h2 {
         display: block;
+    }
+
+    .tabs_six {
+        width: 100%;
     }
 }
