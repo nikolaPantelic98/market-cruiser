@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
+import java.util.List;
+
 /**
  * The OrderRepository interface defines the methods to interact with the {@link Order} entity in the database.
  */
@@ -37,4 +40,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
      * @return The number of orders with the given orderId
      */
     Long countByOrderId(Long orderId);
+
+    @Query("SELECT NEW com.marketcruiser.common.entity.order.Order(o.orderId, o.orderTime, o.productCost, o.subtotal, " +
+            "o.total) FROM Order o WHERE o.orderTime BETWEEN ?1 AND ?2 ORDER BY o.orderTime ASC")
+    List<Order> findByOrderTimeBetween(Date startTime, Date endTime);
 }

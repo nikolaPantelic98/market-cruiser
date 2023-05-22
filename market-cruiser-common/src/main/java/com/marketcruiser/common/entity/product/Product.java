@@ -138,6 +138,10 @@ public class Product {
         this.productId = productId;
     }
 
+    public Product(String name) {
+        this.name = name;
+    }
+
 
     @Override
     public String toString() {

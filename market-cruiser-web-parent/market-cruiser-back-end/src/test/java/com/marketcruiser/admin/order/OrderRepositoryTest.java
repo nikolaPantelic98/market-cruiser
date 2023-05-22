@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.annotation.Rollback;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -139,5 +142,21 @@ public class OrderRepositoryTest {
         Order updatedOrder = orderRepository.save(order);
 
         assertThat(updatedOrder.getOrderTracks()).hasSizeGreaterThan(1);
+    }
+
+    @Test
+    public void testFindByOrderTimeBetween() throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        Date startTime = dateFormatter.parse("01-04-2023 00:00:00");
+        Date endTime = dateFormatter.parse("30-04-2023 23:59:59");
+
+        List<Order> listOrders = orderRepository.findByOrderTimeBetween(startTime, endTime);
+
+        assertThat(listOrders.size()).isGreaterThan(0);
+
+        for (Order order : listOrders) {
+            System.out.printf("%s | %s | %.2f | %.2f | %.2f \n",
+                    order.getOrderId(), order.getOrderTime(), order.getProductCost(), order.getSubtotal(), order.getTotal());
+        }
     }
 }

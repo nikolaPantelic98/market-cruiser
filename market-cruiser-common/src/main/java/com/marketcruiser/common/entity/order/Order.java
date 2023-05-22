@@ -123,6 +123,14 @@ public class Order {
     private List<OrderTrack> orderTracks = new ArrayList<>();
 
 
+    public Order(Long orderId, Date orderTime, float productCost, float subtotal, float total) {
+        this.orderId = orderId;
+        this.orderTime = orderTime;
+        this.productCost = productCost;
+        this.subtotal = subtotal;
+        this.total = total;
+    }
+
     /**
      * Copies the address details of the customer to the order instance.
      * Used for setting the order address details to be the same as the customer's address.
