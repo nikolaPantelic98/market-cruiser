@@ -108,22 +108,75 @@ function customizeChart(period) {
     chartOptions = {
         title: getChartTitle(period),
         'height': 360,
-        legend: {position: 'top'},
+        backgroundColor: 'transparent', // Set the background color to transparent
+
+        legend: {
+            position: 'top',
+            textStyle: {
+                color: '#ffffff' // Set the legend text color to white
+            }
+        },
 
         series: {
-            0: {targetAxisIndex: 0,},
-            1: {targetAxisIndex: 0,},
-            2: {targetAxisIndex: 1,},
+            0: {
+                targetAxisIndex: 0,
+                color: '#3a9140' // Set the color for series 0 (lines) to #1deba8
+            },
+            1: {
+                targetAxisIndex: 0,
+                color: '#3a9191' // Set the color for series 1 (lines) to #1deba8
+            },
+            2: {
+                targetAxisIndex: 1
+            }
         },
 
         vAxes: {
-            0: {title: 'Sales Amount', format: 'currency'},
-            1: {title: 'Number of Orders'}
+            0: {
+                title: 'Sales Amount',
+                format: 'currency',
+                textStyle: {
+                    color: '#ffffff' // Set the vertical axis labels color to white
+                },
+                titleTextStyle: {
+                    color: '#1deba8' // Set the title color to white
+                },
+                gridlines: {
+                    color: '#ffffff',
+                    count: 4
+                }
+            },
+            1: {
+                title: 'Number of Orders',
+                textStyle: {
+                    color: '#ffffff' // Set the vertical axis labels color to white
+                },
+                titleTextStyle: {
+                    color: '#1deba8' // Set the title color to white
+                },
+                gridlines: {
+                    color: 'transparent'
+                }
+            }
+        },
+
+        hAxis: {
+            textStyle: {
+                color: '#ffffff' // Set the horizontal axis labels color to white
+            }
+        },
+
+        chartArea: {
+            backgroundColor: 'transparent' // Set the chart area background color to transparent
+        },
+
+        titleTextStyle: {
+            color: '#d79e12'
         }
     };
 
     var formatter = new google.visualization.NumberFormat({
-       prefix: '$'
+        prefix: '$'
     });
 
     formatter.format(data, 1);
