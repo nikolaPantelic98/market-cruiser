@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+    <div th:fragment="content" th:remove="tag">
+        <div>
+            <button period="last_7_days" class="btn btn-outline-green m-2 button-sales-by-date">Last 7 Days</button>
+            <button period="last_28_days" class="btn btn-outline-light m-2 button-sales-by-date">Last 28 Days</button>
+            <button period="last_6_months" class="btn btn-outline-light m-2 button-sales-by-date">Last 6 Months</button>
+            <button period="last_1_year" class="btn btn-outline-light m-2 button-sales-by-date">Last 1 Year</button>
+            <button class="btn btn-outline-light m-2 button-sales-by-date">Custom Date</button>
+        </div>
+
+        <form>
+            <div id="divCustomDateRange" class="d-none">
+                <span class="text-white">From date:</span> <input type="date" id="startDate"> &nbsp;
+                <span class="text-white">To date:</span> <input type="date" id="endDate"> &nbsp;
+                <button type="button" class="btn btn-outline-orange" id="buttonViewReportByDateRange">View</button>
+            </div>
+        </form>
+
+        <div id="chart_sales_by_date" class="justify-content-center mt-3">
+
+        </div>
+
+        <br>
+
+        <div class="row justify-content-center">
+            <div class="col-2-sm mr-2">
+                <div class="card bg-orange">
+                    <div class="card-header"><b>Total Gross Sales</b></div>
+                    <div class="card-body">
+                        <span class="h3" id="textTotalGrossSales"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2-sm">
+                <div class="card bg-orange mr-2">
+                    <div class="card-header"><b>Total Net Sales</b></div>
+                    <div class="card-body">
+                        <span class="h3" id="textTotalNetSales"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2-sm">
+                <div class="card bg-orange mr-2">
+                    <div class="card-header"><b>Avg. Gross Sales</b></div>
+                    <div class="card-body">
+                        <span class="h3" id="textAvgGrossSales"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2-sm">
+                <div class="card bg-orange mr-2">
+                    <div class="card-header"><b>Avg. Net Sales</b></div>
+                    <div class="card-body">
+                        <span class="h3" id="textAvgNetSales"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-2-sm">
+                <div class="card bg-orange">
+                    <div class="card-header"><b>Orders</b></div>
+                    <div class="card-body">
+                        <span class="h3" id="textTotalOrders"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

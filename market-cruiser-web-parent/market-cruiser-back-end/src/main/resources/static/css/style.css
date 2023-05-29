@@ -38,6 +38,26 @@
     border-bottom: solid 1px #1deba8;
 }
 
+.bg-orange {
+    background-color: transparent;
+    color: black;
+}
+
+.bg-orange .card-header {
+    background-color: #d79e12;
+    border-top: solid 2px black;
+    border-bottom: solid 2px black;
+    border-left: solid 2px #d79e12;
+    border-right: solid 2px #d79e12;
+}
+
+.bg-orange .card-body {
+    color: white;
+    border-bottom: solid 2px #d79e12;
+    border-left: solid 2px #d79e12;
+    border-right: solid 2px #d79e12;
+}
+
 /*borders*/
 
 .border-lightgreen {
@@ -161,6 +181,16 @@ a.a-icon-orange:hover {color: #d79e12;}
     background-color: #d79e12;
     color: #302c54;
     border: 3px solid #d79e12;
+}
+
+*.btn-outline-light {
+    color: #1deba8;
+    font-weight: 700;
+}
+
+*.btn-outline-light:hover {
+    color: #302c54;
+    background-color: #1deba8;
 }
 
 /*management*/

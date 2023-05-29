@@ -5,6 +5,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -20,7 +24,31 @@ public class OrderReportRestController {
 
     @GetMapping("/reports/sales_by_date/{period}")
     public List<ReportItem> getReportDataByDatePeriod(@PathVariable String period) {
-        System.out.println("Report period: " + period);
-        return orderReportService.getReportDataLast7Days();
+
+        switch (period) {
+            case "last_7_days":
+                return orderReportService.getReportDataLast7Days();
+
+            case "last_28_days":
+                return orderReportService.getReportDataLast28Days();
+
+            case "last_6_months":
+                return orderReportService.getReportDataLast6Months();
+
+            case "last_1_year":
+                return orderReportService.getReportDataLast1Year();
+
+            default:
+                return orderReportService.getReportDataLast7Days();
+        }
+    }
+
+    @GetMapping("/reports/sales_by_date/{startDate}/{endDate}")
+    public List<ReportItem> getReportDataByDatePeriod(@PathVariable String startDate, @PathVariable String endDate) throws ParseException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date startTime = dateFormatter.parse(startDate);
+        Date endTime = dateFormatter.parse(endDate);
+
+        return orderReportService.getReportDataByDateRange(startTime, endTime);
     }
 }
