@@ -1,3 +1,8 @@
+/**
+ * The Sales Report JavaScript code handles the generation and display of sales reports on a web page.
+ * It utilizes the Google Charts library to create charts and fetches sales report data from the server.
+ */
+
 var data;
 var chartOptions;
 var totalGrossSales;
@@ -37,6 +42,9 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Validates the selected date range and loads the sales report if the range is valid.
+ */
 function validateDateRange() {
     days = calculateDays();
 
@@ -50,6 +58,11 @@ function validateDateRange() {
     }
 }
 
+/**
+ * Calculates the number of days between the selected start and end dates.
+ *
+ * @return the number of days between the selected dates
+ */
 function calculateDays() {
     startDate = startDateField.valueAsDate;
     endDate = endDateField.valueAsDate;
@@ -59,6 +72,9 @@ function calculateDays() {
     return differenceInMilliseconds / MILLISECONDS_A_DAY;
 }
 
+/**
+ * Initializes the custom date range input fields.
+ */
 function initCustomDateRange() {
     toDate = new Date();
     endDateField.valueAsDate = toDate;
@@ -68,6 +84,11 @@ function initCustomDateRange() {
     startDateField.valueAsDate = fromDate;
 }
 
+/**
+ * Loads the sales report for the specified period or custom date range.
+ *
+ * @param period the period or "custom" for a custom date range
+ */
 function loadSalesReportByDate(period) {
     if (period == "custom") {
         startDate = $("#startDate").val();
@@ -85,6 +106,11 @@ function loadSalesReportByDate(period) {
     });
 }
 
+/**
+ * Prepares the sales report data received from the server for chart visualization.
+ *
+ * @param responseJSON the sales report data received from the server
+ */
 function prepareChartData(responseJSON) {
     data = new google.visualization.DataTable();
     data.addColumn('string', 'Date');
@@ -104,6 +130,11 @@ function prepareChartData(responseJSON) {
     });
 }
 
+/**
+ * Customizes the chart options based on the selected period.
+ *
+ * @param period the selected period
+ */
 function customizeChart(period) {
     chartOptions = {
         title: getChartTitle(period),
@@ -187,6 +218,11 @@ function customizeChart(period) {
     formatter.format(data, 2);
 }
 
+/**
+ * Draws the sales chart on the web page.
+ *
+ * @param period the selected period
+ */
 function drawChart(period) {
     var salesChart = new google.visualization.ColumnChart(document.getElementById('chart_sales_by_date'));
     salesChart.draw(data, chartOptions);
@@ -201,11 +237,23 @@ function drawChart(period) {
     $("#textTotalOrders").text(totalOrders);
 }
 
+/**
+ * Formats an amount as currency with the specified formatting options.
+ *
+ * @param amount the amount to format
+ * @return the formatted currency string
+ */
 function formatCurrency(amount) {
     formattedAmount = $.number(amount, decimalDigits, decimalPointType, thousandsPointType);
     return prefixCurrencySymbol + formattedAmount + suffixCurrencySymbol;
 }
 
+/**
+ * Retrieves the chart title based on the selected period.
+ *
+ * @param period the selected period
+ * @return the chart title
+ */
 function getChartTitle(period) {
     if (period == "last_7_days") return "Sales in Last 7 Days";
     if (period == "last_28_days") return "Sales in Last 28 Days";
@@ -216,6 +264,12 @@ function getChartTitle(period) {
     return "";
 }
 
+/**
+ * Retrieves the denominator for average sales calculation based on the selected period.
+ *
+ * @param period the selected period
+ * @return the denominator
+ */
 function getDenominator(period) {
     if (period == "last_7_days") return 7;
     if (period == "last_28_days") return 28;

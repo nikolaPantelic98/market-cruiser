@@ -11,6 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * The OrderReportRestController class is a REST controller responsible for handling requests related to order reports.
+ * It interacts with the {@link OrderReportServiceImpl} to retrieve sales report data based on different date periods.
+ */
 @RestController
 public class OrderReportRestController {
 
@@ -22,6 +26,12 @@ public class OrderReportRestController {
     }
 
 
+    /**
+     * Retrieves the sales report data for the specified date period.
+     *
+     * @param period the period for which to retrieve the sales report data
+     * @return a list of ReportItem objects representing the sales report data
+     */
     @GetMapping("/reports/sales_by_date/{period}")
     public List<ReportItem> getReportDataByDatePeriod(@PathVariable String period) {
 
@@ -43,6 +53,14 @@ public class OrderReportRestController {
         }
     }
 
+    /**
+     * Retrieves the sales report data for the specified date range.
+     *
+     * @param startDate the start date of the date range in the format "yyyy-MM-dd"
+     * @param endDate   the end date of the date range in the format "yyyy-MM-dd"
+     * @return a list of {@link ReportItem} objects representing the sales report data
+     * @throws ParseException if the start date or end date is not in the correct format
+     */
     @GetMapping("/reports/sales_by_date/{startDate}/{endDate}")
     public List<ReportItem> getReportDataByDatePeriod(@PathVariable String startDate, @PathVariable String endDate) throws ParseException {
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
