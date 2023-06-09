@@ -134,6 +134,10 @@ public class Product {
     )
     private List<ProductDetails> details = new ArrayList<>();
 
+    private int reviewCount;
+    private float averageRating;
+
+
     public Product(Long productId) {
         this.productId = productId;
     }
