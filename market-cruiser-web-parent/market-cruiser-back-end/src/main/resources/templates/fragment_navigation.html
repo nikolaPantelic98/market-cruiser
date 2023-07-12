@@ -63,6 +63,12 @@
                             </li>
                         </th:block>
 
+                        <th:block sec:authorize="hasAnyAuthority('Admin', 'Assistant')">
+                            <li class="menu-item">
+                                <a th:href="@{/reviews}">Reviews</a>
+                            </li>
+                        </th:block>
+
                         <th:block sec:authorize="hasAnyAuthority('Admin', 'Editor')">
                             <li class="menu-item">
                                 <a th:href="@{/articles}">Articles</a>
